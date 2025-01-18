@@ -4,4 +4,15 @@ from django.http import HttpResponse
 
 # Create your views here.
 def contact_page(request):
-    return HttpResponse("This is the contact page.")
+    """
+    Display the about page
+
+    **Template:**
+
+    :template:`contact/contact.html`
+    """
+
+    return render(
+        request,
+        "contact/contact.html",
+    )

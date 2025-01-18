@@ -4,4 +4,15 @@ from django.http import HttpResponse
 
 # Create your views here.
 def resident_dashboard(request):
-    return HttpResponse("This is your resident dashboard.")
+    """
+    Display the about page
+
+    **Template:**
+
+    :template:`dashboard/resident_space.html`
+    """
+
+    return render(
+        request,
+        "dashboard/resident_space.html",
+    )

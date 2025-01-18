@@ -1,4 +1,7 @@
 {% url 'home' as home_url %}
+{% url 'about' as about_url %}
+{% url 'contact' as contact_url %}
+{% url 'dashboard' as dashboard_url %}
 
 <!DOCTYPE html>
 <html class="h-100" lang="en">
@@ -23,7 +26,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         
         <!-- Logo -->
-        <a class="navbar-brand" href="#">SharedSpaces</a>
+        <a class="navbar-brand" href="{{ home_url }}">SharedSpaces</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -32,21 +35,28 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link {% if request.path == home_url %}active" aria-current="page{% endif %}" href="{{ home_url }}">
+                    Home {% if request.path == home_url %}<span class="sr-only">(current)</span>{% endif %}
+                </a>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.path == about_url %}active" aria-current="page{% endif %}" href="{{ about_url }}">
+                        About {% if request.path == about_url %}<span class="sr-only">(current)</span>{% endif %}
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">About</a>
+                    <a class="nav-link {% if request.path == contact_url %}active" aria-current="page{% endif %}" href="{{ contact_url }}">
+                        Contact {% if request.path == contact_url %}<span class="sr-only">(current)</span>{% endif %}
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Contact</a>
+                    <a class="nav-link {% if request.path == dashboard_url %}active" aria-current="page{% endif %}" href="{{ dashboard_url }}">
+                        Resident Space {% if request.path == dashboard_url %}<span class="sr-only">(current)</span>{% endif %}
+                    </a>
                 </li>
 
                 <!-- Dropdown menu item -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Resident Space
-                    </a>
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="#">Login</a>
                         <a class="dropdown-item" href="#">Logout</a>

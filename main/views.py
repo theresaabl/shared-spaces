@@ -19,4 +19,15 @@ def home_page(request):
 
 
 def about_page(request):
-    return HttpResponse("This is the about page.")
+    """
+    Display the about page
+
+    **Template:**
+
+    :template:`main/about.html`
+    """
+
+    return render(
+        request,
+        "main/about.html",
+    )
