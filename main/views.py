@@ -3,8 +3,8 @@ from django.http import HttpResponse
 
 
 # Create your views here.
-def home(request):
+def home_page(request):
     return HttpResponse("This is the homepage.")
 
-def about(request):
+def about_page(request):
     return HttpResponse("This is the about page.")
