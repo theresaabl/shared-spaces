@@ -55,6 +55,8 @@ INSTALLED_APPS = [
 SITE_ID = 1
 LOGIN_REDIRECT_URL = '/dashboard'
 LOGOUT_REDIRECT_URL = '/'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_FORMS = {'signup': 'dashboard.forms.MyCustomSignupForm'}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
