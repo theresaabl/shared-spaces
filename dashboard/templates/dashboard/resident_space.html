@@ -2,6 +2,7 @@
 
 {% block content %}
 
+{% if user.is_authenticated %}
 <!-- resident_space.html content starts here -->
 <div class="container-fluid">
     <div class="row">
@@ -12,6 +13,20 @@
             
     </div>
 </div>
+
+{% else %}
+
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="col-12 mt-3 left">
+            <h2>To access the Resident Space <a class="link" href="{{ login_url }}">sign in</a> first!</h2>
+        </div>
+            
+    </div>
+</div>
+
+{% endif %}
 
 <!-- resident_space.html content ends here -->
 {% endblock content %}
