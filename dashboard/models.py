@@ -22,7 +22,6 @@ class EventSpace(models.Model):
     notes = models.TextField(blank=True)
 
     def __str__(self):
-        # return f"{self.type} '{self.name}' in building '{self.building}'"
         return self.name
 
 
