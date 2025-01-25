@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+<!-- event_space_booking.html content starts here -->
+<div class="container-fluid">
+
+    <!-- Title Row -->
+    <div class="row">
+        <div class="col-12 text-center">
+            <h2>Event Space Booking</h2>
+        </div>
+    </div>
+
+</div>
+
+
+{% else %}
+
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="col-12 mt-3 left">
+            <h2>To access the Resident Space <a class="link" href="{{ login_url }}">sign in</a> first!</h2>
+        </div>
+            
+    </div>
+</div>
+
+{% endif %}
+
+<!-- event_space_booking.html content ends here -->
+{% endblock content %}
