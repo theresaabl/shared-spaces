@@ -1,5 +1,5 @@
 from . import views
-from django.urls import path
+from django.urls import path, include
 
 urlpatterns = [
     path('', views.resident_dashboard, name='dashboard'),
