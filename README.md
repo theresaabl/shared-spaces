@@ -1,6 +1,8 @@
 # SharedSpaces
 
-A website for a community living space called SharedSpaces.
+A website for a community living space called SharedSpaces. 
+
+Live Site - [SharedSpaces](https://shared-spaces-f588831ae867.herokuapp.com/)
 
 ## Models
 
