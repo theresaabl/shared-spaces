@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from .forms import BookingForm
 
 
 # Create your views here.
@@ -25,9 +25,19 @@ def event_space_booking(request):
     **Template:**
 
     :template:`dashboard/event_space_booking.html`
+
+    **Context:**
+
+    ``booking_form``
+    An instance of :form:`blog.BookingForm`
     """
+
+    booking_form = BookingForm()
 
     return render(
         request,
         "dashboard/event_space_booking.html",
+        {
+            "booking_form": booking_form,
+        }
     )

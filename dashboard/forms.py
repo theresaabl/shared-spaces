@@ -1,5 +1,6 @@
 from django import forms
 from allauth.account.forms import SignupForm
+from .models import EventSpaceBooking
 
 
 class MyCustomSignupForm(SignupForm):
@@ -43,3 +44,9 @@ class MyCustomSignupForm(SignupForm):
 
         # You must return the original result.
         return user
+
+
+class BookingForm(forms.ModelForm):
+    class Meta:
+        model = EventSpaceBooking
+        fields = ('event_space', 'occasion', 'date', 'start', 'end', 'notes',)

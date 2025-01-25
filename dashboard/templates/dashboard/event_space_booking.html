@@ -1,5 +1,8 @@
 {% extends "base.html" %}
 
+{% load static %}
+{% load crispy_forms_tags %}
+
 {% block content %}
 
 {% if user.is_authenticated %}
@@ -11,6 +14,36 @@
         <div class="col-12 text-center">
             <h2>Event Space Booking</h2>
         </div>
+    </div>
+
+    <!-- Event Space Booking Form -->
+    <div class="row justify-content-center">
+        <div class="col-md-4 card mb-4 mt-3">
+
+            <!-- Booking Card -->
+            <div class="card-body">
+
+                <p>Click to see <a href="#">list of event spaces</a><p>
+
+                <!-- Booking Form -->
+                <form id="bookingForm" method="post" style="margin-top: 1.3em;">
+                    {{ booking_form | crispy }}
+                    {% csrf_token %}
+                    <button id="BookingsubmitButton" type="reset" class="btn btn-secondary btn-lg">Reset</button>
+                    <button id="BookingresetButton" type="submit" class="btn btn-secondary btn-lg">Submit</button>
+                    
+                </form>
+
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-auto">
+                <a href="{% url 'dashboard' %}" class="btn btn-primary">Return to Resident Space</a>
+            </div>
+        </div>
+
     </div>
 
 </div>
