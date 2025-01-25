@@ -18,3 +18,6 @@ class EventSpace(models.Model):
     childrens_play_area = models.BooleanField()
     piano = models.BooleanField()
     notes = models.TextField(blank=True)
+
+    def __str__(self):
+        return f"{self.type} '{self.name}' in building '{self.building}'"
