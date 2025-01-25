@@ -5,13 +5,117 @@
 {% if user.is_authenticated %}
 <!-- resident_space.html content starts here -->
 <div class="container-fluid">
+
+    <!-- Title Row -->
+    <div class="row">
+        <div class="col-12 text-center">
+            <h2>Welcome to Your Resident Space <span class="text-capitalize">{{ user.username }}</span>!</h2>
+        </div>
+    </div>
+
+    <!-- Card Row -->
     <div class="row">
 
-        <div class="col-12 mt-3 left">
-            <h2>This is your resident dashboard {{ user.username }} !</h2>
+        <!-- Empty column for alignment -->
+        <div class="col-0 col-xl-2 col-xxl-3"></div>
+
+        <div class="col-12 col-md-6 col-xl-4 col-xxl-3">
+
+            <!-- Event Space Booking Card -->
+            <div class="card border-primary d-flex justify-content-center">
+                <img src="..." class="card-img-top" alt="...">
+
+                <div class="card-body">
+                    <h5 class="card-title">Event Space Bookings</h5>
+                    <p class="card-text">Here you can view and book any of the available shared event spaces in the living community.</p>
+                    <a href="#" class="btn btn-primary">Book a Space</a>
+                </div>
+
+            </div>
+
         </div>
+
+        <div class="col-12 col-md-6 col-xl-4 col-xxl-3">
+
+            <!-- Maintenance Request Card -->
+            <div class="card border-primary d-flex justify-content-center">
+                <img src="..." class="card-img-top" alt="...">
+
+                <div class="card-body">
+                    <h5 class="card-title">Maintenance Requests and Messages</h5>
+                    <p class="card-text">Here you can send a maintenance request or any other request or suggestion to the community administrators.</p>
+                    <a href="#" class="btn btn-primary">Submit a Request</a>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Empty column for alignment -->
+        <div class="col-0 col-xl-2 col-xxl-3"></div>
             
     </div>
+
+    <!-- Data Title Row -->
+    <div class="row">
+
+        <!-- Empty column for alignment -->
+        <div class="col-0 col-xl-2 col-xxl-3"></div>        
+
+        <div class="col-12 col-md-6 col-xl-4 col-xxl-3">
+            <h3>Your Bookings</h3>
+        </div>
+
+        <div class="col-12 col-md-6 col-xl-4 col-xxl-3">
+            <h3>Your Requests</h3>
+        </div>
+
+        <!-- Empty column for alignment -->
+        <div class="col-0 col-xl-2 col-xxl-3"></div>
+            
+    </div>
+
+    <!-- Data Rows -->
+    <div class="row">
+
+        <!-- Empty column for alignment -->
+        <div class="col-0 col-xl-2 col-xxl-3"></div>
+
+        <div class="col-12 col-md-6 col-xl-4 col-xxl-3">
+
+            <!-- Bookings Data Card -->
+            <div class="card">
+
+                <div class="card-body">
+                    <p class="card-text">booking data</p>
+                    <a href="#" class="btn btn-sm btn-secondary">Edit</a>
+                    <a href="#" class="btn btn-sm btn-secondary">Delete</a>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-12 col-md-6 col-xl-4 col-xxl-3">
+
+            <!-- Requests Data Card -->
+            <div class="card">
+
+                <div class="card-body">
+                    <p class="card-text">requests data</p>
+                    <a href="#" class="btn btn-sm btn-secondary">Edit</a>
+                    <a href="#" class="btn btn-sm btn-secondary">Delete</a>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Empty column for alignment -->
+        <div class="col-0 col-xl-2 col-xxl-3"></div>
+            
+    </div>
+
 </div>
 
 {% else %}
