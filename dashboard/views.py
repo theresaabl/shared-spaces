@@ -183,11 +183,13 @@ def event_spaces_list(request):
     """
 
     event_spaces = EventSpace.objects.all()
+    event_spaces_values = event_spaces.values()
 
     return render(
         request,
         "dashboard/event_spaces_list.html",
         {
             "event_spaces": event_spaces,
+            "event_spaces_values": event_spaces_values,
         }
     )

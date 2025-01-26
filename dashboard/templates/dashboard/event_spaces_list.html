@@ -23,7 +23,7 @@
         <div class="col-12 col-md-6 col-xl-5 col-xxl-4">
 
             <!-- Loop through all event spaces -->
-            {% for space in event_spaces %}
+            {% for space in event_spaces_values %}
 
             <!-- Row and Column for each space -->
             <div class="row justify-content-center">
@@ -41,6 +41,18 @@
                                     <li>Capacity: {{ space.capacity }}</li>
                                     <li>Number of Tables: {{ space.number_of_tables }} </li>
                                     <li>Number of Chairs: {{ space.number_of_chairs }} </li>
+                                    <li>
+                                        Amenities:
+                                        <!-- Loop through all Boolean Fields -->
+                                        <ul>
+                                            {% for key, value in space.items  %}
+                                                {% if value is True %}
+                                                <li class="replace-underscore">{{ key }}</li>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </ul>
+
+                                    </li>
 
                                     {% if space.notes %}
                                     <li>Notes: {{ space.notes }}</li>
@@ -92,3 +104,8 @@
 
 <!-- event_spaces_list.html content ends here -->
 {% endblock content %}
+
+<!-- Script block -->
+{% block extras %}
+<script src="{% static 'js/event_spaces.js' %}"></script>
+{% endblock %}
