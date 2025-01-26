@@ -26,7 +26,7 @@
 
                 <div class="card-body">
                     <h3 class="card-title">Event Space Bookings</h5>
-                    <p class="card-text">Here you can view and book any of the available shared event spaces in the living community. {{ booking_url }}</p>
+                    <p class="card-text">Here you can view and book any of the <a href="{% url 'event_spaces' %}">available shared event spaces</a> in the living community. {{ booking_url }}</p>
                     <a href="{% url 'booking' %}" class="btn btn-primary">Book a Space</a>
                 </div>
 
@@ -82,23 +82,23 @@
                     <div class="card">
 
                         <div class="card-body">
-                            <p class="card-text"> 
-                            <ul>
-                                <!-- Remove Resident line before release!!!!!!! -->
-                                <li>For Testing: Resident: {{ booking.resident }}</li>
-                                <li>Event Space: {{ booking.event_space }}</li>
-                                <li>Occasion: {{ booking.occasion }}</li>
-                                <li>Date: {{ booking.date }}</li>
-                                <li>Time: {{ booking.start }} - {{ booking.end }}</li>
+                            <div class="card-text">
+                                <h5>{{ booking.event_space }}</h5>
+                                <ul>
+                                    <!-- Remove Resident line before release!!!!!!! -->
+                                    <li>For Testing: Resident: {{ booking.resident }}</li>
+                                    <li>Occasion: {{ booking.occasion }}</li>
+                                    <li>Date: {{ booking.date }}</li>
+                                    <li>Time: {{ booking.start }} - {{ booking.end }}</li>
 
-                                {% if booking.notes %}
-                                <li>Notes: {{ booking.notes }}</li>
-                                {% endif %}
-                                
-                                <li>Created on: {{ booking.created_on }}</li>
-                                <li>Status: {{ booking.get_status_display }}  </li>
-                            </ul>    
-                            </p>
+                                    {% if booking.notes %}
+                                    <li>Notes: {{ booking.notes }}</li>
+                                    {% endif %}
+                                    
+                                    <li>Created on: {{ booking.created_on }}</li>
+                                    <li>Status: {{ booking.get_status_display }}  </li>
+                                </ul>    
+                            </div>
                             <a class="btn btn-sm btn-secondary btn-edit" href="{% url 'booking_edit' booking.id %}">Edit</a>
                             <button class="btn btn-sm btn-secondary btn-delete" booking_id="{{ booking.id }}">Delete</button>
                         </div>

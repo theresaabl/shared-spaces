@@ -33,9 +33,9 @@
                     <div class="card">
 
                         <div class="card-body">
-                            <p class="card-text"> 
+                            <div class="card-text"> 
+                                <h4>Name: {{ space.name }}</h4>
                                 <ul>
-                                    <li>Name: {{ space.name }}</li>
                                     <li>Type: {{ space.type }}</li>
                                     <li>Building: {{ space.building }}</li>
                                     <li>Capacity: {{ space.capacity }}</li>
@@ -47,7 +47,7 @@
                                     {% endif %}
 
                                 </ul>    
-                            </p>
+                            </div>
                             <!-- Button to book this event space, include space.id -->
                             <a class="btn btn-sm btn-secondary" href="{% url 'space_booking' space.id %}">Book this Space</a>
 
