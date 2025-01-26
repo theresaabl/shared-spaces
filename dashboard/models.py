@@ -2,8 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
 
-BOOKING_STATUS = ((0, "Pending"), (1, "Approved"), (2, "Denied"))
-
 
 class EventSpace(models.Model):
     name = models.CharField(max_length=200, unique=True)
@@ -26,6 +24,16 @@ class EventSpace(models.Model):
 
 
 class EventSpaceBooking(models.Model):
+    """
+    Code inspiration to display integer choices labels:
+    https://medium.com/@alex.kirkup/integerchoices-in-django-models-working-seamlessly-from-the-backend-and-the-frontend-using-labels-a3e77b86d419  # noqa
+    """
+
+    class Status(models.IntegerChoices):
+        PENDING = 0, "Pending"
+        APPROVED = 1, "Approved"
+        DENIED = 2, "Denied"
+
     resident = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
@@ -42,7 +50,10 @@ class EventSpaceBooking(models.Model):
     end = models.TimeField()
     notes = models.TextField(blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
-    status = models.IntegerField(choices=BOOKING_STATUS, default=0)
+    status = models.IntegerField(
+        choices=Status.choices,
+        default=Status.PENDING
+        )
 
     def __str__(self):
-        return f"Booking by {self.resident} for '{self.event_space}' on {self.date}"  # noqa
+        return f"Booking by {self.resident} for '{self.event_space}' on {self.date} is {self.get_status_display()}"  # noqa

@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.contrib import messages
+from .models import EventSpaceBooking
 from .forms import BookingForm
 
 
@@ -8,14 +9,26 @@ def resident_dashboard(request):
     """
     Display the resident space page
 
+        **Context**
+
+    ``event_space_booking``
+        An instance of :model:`blog.EventSpaceBooking`.
+
     **Template:**
 
     :template:`dashboard/resident_space.html`
     """
 
+    # get all event space bookings for the current user
+    # to do: order by date
+    event_space_bookings = EventSpaceBooking.objects.filter(resident=request.user)  # noqa
+
     return render(
         request,
         "dashboard/resident_space.html",
+        {
+            "event_space_bookings": event_space_bookings,
+        }
     )
 
 
