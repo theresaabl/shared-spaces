@@ -90,12 +90,20 @@ def booking_edit(request, booking_id):
             booking = booking_form.save(commit=False)
             booking.status = 0
             booking.save()
-            messages.add_message(request, messages.SUCCESS, 'Event space booking successfully updated! Waiting for approval.')
+            messages.add_message(
+                request,
+                messages.SUCCESS,
+                'Event space booking successfully updated! Waiting for approval.'
+            )
         else:
-            messages.add_message(request, messages.ERROR, 'Error updating event space booking!')
+            messages.add_message(
+                request,
+                messages.ERROR,
+                'Error updating event space booking!'
+            )
 
         return HttpResponseRedirect(reverse('dashboard'))
-    
+
     else:
         booking_form = BookingForm(instance=booking)
 
@@ -106,3 +114,20 @@ def booking_edit(request, booking_id):
                 "booking_form": booking_form,
             }
         )
+
+
+def booking_delete(request, booking_id):
+    """
+    view to delete booking
+    """
+    queryset = EventSpaceBooking.objects.filter(resident=request.user)
+    booking = get_object_or_404(queryset, pk=booking_id)
+
+    booking.delete()
+    messages.add_message(
+        request,
+        messages.SUCCESS,
+        'Event Space Booking successfully deleted!'
+    )
+
+    return HttpResponseRedirect(reverse('dashboard'))
