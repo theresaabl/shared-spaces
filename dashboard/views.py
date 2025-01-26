@@ -88,6 +88,8 @@ def event_space_booking(request, space_id=None):
                     f"""If the status of your booking is still pending in 3 working days, please feel free to <a href="{contact_url}">contact us</a>."""
                 )
 
+                return HttpResponseRedirect(reverse('dashboard'))
+
     booking_form = BookingForm()
 
     # If user wants to book a specific room (when coming from event space list page)
