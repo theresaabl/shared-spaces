@@ -65,46 +65,61 @@
             
     </div>
 
-    <!-- Data Rows -->
+    <!-- Data Row -->
     <div class="row justify-content-center">
 
-        {% for booking in event_space_bookings %}
-
+        <!-- Bookings for this User -->
         <div class="col-10 col-md-5 col-xl-4 col-xxl-3">
 
-            <!-- Bookings Data Card -->
-            <div class="card">
+            <!-- Loop through all event space bookings for this user -->
+            {% for booking in event_space_bookings %}
 
-                <div class="card-body">
-                    <p class="card-text"> 
-                    <ol>
-                        <li>Resident: {{ booking.resident }}</li>
-                        <li>Event Space: {{ booking.event_space }}</li>
-                        <li>Occasion: {{ booking.occasion }}</li>
-                        <li>Date: {{ booking.date }}</li>
-                        <li>Time: {{ booking.start }} - {{ booking.end }}</li>
+            <!-- Row and Column for each booking -->
+            <div class="row justify-content-center">
+                <div class="col">
 
-                        {% if booking.notes %}
-                        <li>Notes: {{ booking.notes }}</li>
-                        {% endif %}
-                        
-                        <li>Created on: {{ booking.created_on }}</li>
-                        <li>Status: {{ booking.get_status_display }}  </li>
-                    </ol>    
-                    </p>
-                    <a href="#" class="btn btn-sm btn-secondary">Edit</a>
-                    <a href="#" class="btn btn-sm btn-secondary">Delete</a>
+                    <!-- Booking Card -->
+                    <div class="card">
+
+                        <div class="card-body">
+                            <p class="card-text"> 
+                            <ul>
+                                <!-- Remove Resident line before release!!!!!!! -->
+                                <li>For Testing: Resident: {{ booking.resident }}</li>
+                                <li>Event Space: {{ booking.event_space }}</li>
+                                <li>Occasion: {{ booking.occasion }}</li>
+                                <li>Date: {{ booking.date }}</li>
+                                <li>Time: {{ booking.start }} - {{ booking.end }}</li>
+
+                                {% if booking.notes %}
+                                <li>Notes: {{ booking.notes }}</li>
+                                {% endif %}
+                                
+                                <li>Created on: {{ booking.created_on }}</li>
+                                <li>Status: {{ booking.get_status_display }}  </li>
+                            </ul>    
+                            </p>
+                            <a href="#" class="btn btn-sm btn-secondary">Edit</a>
+                            <a href="#" class="btn btn-sm btn-secondary">Delete</a>
+                        </div>
+
+                    </div>
+                    <!-- End Booking Card -->
+
                 </div>
-
             </div>
+            <!-- End col and row for each booking -->
+
+            {% endfor %}
+            <!-- End Loop -->
 
         </div>
+        <!-- End Bookings for this User -->
 
-        {% endfor %}
-<!-- 
+
         <div class="col-10 col-md-5 col-xl-4 col-xxl-3">
 
-            Requests Data Card
+            <!-- Requests Data Card -->
             <div class="card">
 
                 <div class="card-body">
@@ -115,7 +130,7 @@
 
             </div>
 
-        </div> -->
+        </div>
             
     </div>
 

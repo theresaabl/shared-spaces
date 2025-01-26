@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.contrib import messages
+from django.urls import reverse
 from .models import EventSpaceBooking
 from .forms import BookingForm
 
@@ -51,12 +52,15 @@ def event_space_booking(request):
             booking = booking_form.save(commit=False)
             booking.resident = request.user
             booking.save()
+
+            contact_url = reverse('contact')
+
             messages.add_message(
                 request,
                 messages.SUCCESS,
                 "You successfully sent a booking request. "
                 "The request is pending and requires approval by the community administrators. "
-                """If the status of your booking is still pending in 3 working days, please feel free to <a href="#">contact us</a>."""
+                f"""If the status of your booking is still pending in 3 working days, please feel free to <a href="{contact_url}">contact us</a>."""
             )
 
     booking_form = BookingForm()
