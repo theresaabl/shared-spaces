@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% load static %}
+
 {% block content %}
 
 {% if user.is_authenticated %}
@@ -16,11 +18,11 @@
     <!-- Card Row -->
     <div class="row justify-content-center">
 
-        <div class="col-12 col-md-6 col-xl-4 col-xxl-3">
+        <div class="col-10 col-md-5 col-xl-4 col-xxl-3 d-flex align-items-stretch">
 
             <!-- Event Space Booking Card -->
-            <div class="card border-primary text-center">
-                <img src="..." class="card-img-top" alt="...">
+            <div class="card border-primary text-center d-flex">
+                <img src="{% static 'images/event_space_example.webp' %}" class="card-img-top img-fluid dashboard-image" alt="Empty seminar room">
 
                 <div class="card-body">
                     <h3 class="card-title">Event Space Bookings</h5>
@@ -32,11 +34,11 @@
 
         </div>
 
-        <div class="col-12 col-md-6 col-xl-4 col-xxl-3">
+        <div class="col-10 col-md-5 col-xl-4 col-xxl-3 d-flex align-items-stretch">
 
             <!-- Maintenance Request Card -->
             <div class="card border-primary text-center">
-                <img src="..." class="card-img-top" alt="...">
+                <img src="{% static 'images/maintenance_example.webp' %}" class="card-img-top img-fluid dashboard-image" alt="Tools">
 
                 <div class="card-body">
                     <h3 class="card-title">Maintenance Requests and Messages</h5>
@@ -53,11 +55,11 @@
     <!-- Data Title Row -->
     <div class="row justify-content-center">      
 
-        <div class="col-12 col-md-6 col-xl-4 col-xxl-3">
+        <div class="col-10 col-md-5 col-xl-4 col-xxl-3">
             <h4>Your Bookings</h4>
         </div>
 
-        <div class="col-12 col-md-6 col-xl-4 col-xxl-3">
+        <div class="col-10 col-md-5 col-xl-4 col-xxl-3">
             <h4>Your Requests</h4>
         </div>
             
@@ -66,7 +68,7 @@
     <!-- Data Rows -->
     <div class="row justify-content-center">
 
-        <div class="col-12 col-md-6 col-xl-4 col-xxl-3">
+        <div class="col-10 col-md-5 col-xl-4 col-xxl-3">
 
             <!-- Bookings Data Card -->
             <div class="card">
@@ -81,7 +83,7 @@
 
         </div>
 
-        <div class="col-12 col-md-6 col-xl-4 col-xxl-3">
+        <div class="col-10 col-md-5 col-xl-4 col-xxl-3">
 
             <!-- Requests Data Card -->
             <div class="card">
