@@ -33,9 +33,11 @@ def resident_dashboard(request):
     )
 
 
-def event_space_booking(request):
+def event_space_booking(request, space_id=None):
     """
     Display the event space booking page
+
+    Optional space_id parameter: if included: book specific event space
 
     **Template:**
 
@@ -87,6 +89,16 @@ def event_space_booking(request):
                 )
 
     booking_form = BookingForm()
+
+    # If user wants to book a specific room (when coming from event space list page)
+    if space_id:
+        # get instance of event space with given id
+        event_space = get_object_or_404(EventSpace, id=space_id)
+
+        booking = booking_form.save(commit=False)
+        booking.event_space = event_space
+        # prefill the event space field
+        booking_form = BookingForm(instance=booking)
 
     return render(
         request,
