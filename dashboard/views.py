@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.contrib import messages
 from django.urls import reverse
 from django.http import HttpResponseRedirect
-from .models import EventSpaceBooking
+from .models import EventSpaceBooking, EventSpace
 from .forms import BookingForm
 
 
@@ -13,7 +13,7 @@ def resident_dashboard(request):
         **Context**
 
     ``event_space_booking``
-        An instance of :model:`blog.EventSpaceBooking`.
+        An instance of :model:`dashboard.EventSpaceBooking`.
 
     **Template:**
 
@@ -44,7 +44,7 @@ def event_space_booking(request):
     **Context:**
 
     ``booking_form``
-    An instance of :form:`blog.BookingForm`
+    An instance of :form:`dashboard.BookingForm`
     """
 
     if request.method == "POST":
@@ -154,3 +154,28 @@ def booking_delete(request, booking_id):
     )
 
     return HttpResponseRedirect(reverse('dashboard'))
+
+
+def event_spaces_list(request):
+    """
+    Display a page with a list of event spaces
+
+    **Context**
+
+    ``event_spaces``
+        An instance of :model:`dashboard.EventSpace`.
+
+    **Template:**
+
+    :template:`dashboard/event_spaces_list.html`
+    """
+
+    event_spaces = EventSpace.objects.all()
+
+    return render(
+        request,
+        "dashboard/event_spaces_list.html",
+        {
+            "event_spaces": event_spaces,
+        }
+    )

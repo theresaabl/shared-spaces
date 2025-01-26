@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+<!-- event_spaces_list.html content starts here -->
+<div class="container-fluid">
+
+    <!-- Title Row -->
+    <div class="row">
+        <div class="col-12 text-center">
+            <h2>SharedSpaces Event Spaces</h2>
+            <p>These event spaces are available <a href="{% url 'booking' %}">to book</a> for SharedSpaces residents.</p>
+        </div>
+    </div>
+
+    <!-- Data Row -->
+    <div class="row justify-content-center">
+
+        <!-- List of Event Spaces -->
+        <div class="col-12 col-md-6 col-xl-5 col-xxl-4">
+
+            <!-- Loop through all event spaces -->
+            {% for space in event_spaces %}
+
+            <!-- Row and Column for each space -->
+            <div class="row justify-content-center">
+                <div class="col">
+
+                    <!-- Event Space Card -->
+                    <div class="card">
+
+                        <div class="card-body">
+                            <p class="card-text"> 
+                                <ul>
+                                    <li>Name: {{ space.name }}</li>
+                                    <li>Type: {{ space.type }}</li>
+                                    <li>Building: {{ space.building }}</li>
+                                    <li>Capacity: {{ space.capacity }}</li>
+                                    <li>Number of Tables: {{ space.number_of_tables }} </li>
+                                    <li>Number of Chairs: {{ space.number_of_chairs }} </li>
+
+                                    {% if space.notes %}
+                                    <li>Notes: {{ space.notes }}</li>
+                                    {% endif %}
+
+                                </ul>    
+                            </p>
+
+                        </div>
+
+                    </div>
+                    <!-- End Booking Card -->
+
+                </div>
+            </div>
+            <!-- End col and row for each booking -->
+
+            {% endfor %}
+            <!-- End Loop -->
+
+        </div>
+        <!-- End Bookings for this User -->
+            
+    </div>
+
+    <div class="row">
+        <div class="col-auto">
+            <a href="{% url 'booking' %}" class="btn btn-primary">Return to Event Space Booking</a>
+        </div>
+    </div>
+
+</div>
+
+{% else %}
+
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="col-12 mt-3 left">
+            <h2>To access the Resident Space <a class="link" href="{{ login_url }}">sign in</a> first!</h2>
+        </div>
+            
+    </div>
+</div>
+
+{% endif %}
+
+<!-- event_spaces_list.html content ends here -->
+{% endblock content %}
