@@ -46,22 +46,45 @@ def event_space_booking(request):
     ``booking_form``
     An instance of :form:`blog.BookingForm`
     """
+
     if request.method == "POST":
         booking_form = BookingForm(data=request.POST)
         if booking_form.is_valid():
             booking = booking_form.save(commit=False)
             booking.resident = request.user
-            booking.save()
 
-            contact_url = reverse('contact')
+            # check whether room already booked on that day
+            same_day_bookings = EventSpaceBooking.objects.filter(event_space=booking.event_space, date=booking.date)
 
-            messages.add_message(
-                request,
-                messages.SUCCESS,
-                "You successfully sent a booking request. "
-                "The request is pending and requires approval by the community administrators. "
-                f"""If the status of your booking is still pending in 3 working days, please feel free to <a href="{contact_url}">contact us</a>."""
-            )
+            if same_day_bookings:
+                messages.add_message(
+                    request,
+                    messages.ERROR,
+                    'This event space is already booked on the requested day! Please choose another date.'
+                )
+                # Prefill form but leave date empty
+                booking.date = ""
+                booking_form = BookingForm(instance=booking)
+                return render(
+                            request,
+                            "dashboard/event_space_booking.html",
+                            {
+                                "booking_form": booking_form,
+                            }
+                        )
+
+            else:
+                booking.save()
+
+                contact_url = reverse('contact')
+
+                messages.add_message(
+                    request,
+                    messages.SUCCESS,
+                    "You successfully sent a booking request. "
+                    "The request is pending and requires approval by the community administrators. "
+                    f"""If the status of your booking is still pending in 3 working days, please feel free to <a href="{contact_url}">contact us</a>."""
+                )
 
     booking_form = BookingForm()
 
