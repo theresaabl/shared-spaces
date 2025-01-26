@@ -29,8 +29,8 @@
                 <form id="bookingForm" method="post" style="margin-top: 1.3em;">
                     {{ booking_form | crispy }}
                     {% csrf_token %}
-                    <button id="BookingsubmitButton" type="reset" class="btn btn-secondary btn-lg">Reset</button>
-                    <button id="BookingresetButton" type="submit" class="btn btn-secondary btn-lg">Submit</button>
+                    <button id="bookingResetButton" type="reset" class="btn btn-secondary btn-lg">Reset</button>
+                    <button id="bookingSubmitButton" type="submit" class="btn btn-secondary btn-lg">Submit</button>
                     
                 </form>
 
@@ -65,3 +65,8 @@
 
 <!-- event_space_booking.html content ends here -->
 {% endblock content %}
+
+<!-- Script block -->
+{% block extras %}
+<script src="{% static 'js/bookings.js' %}"></script>
+{% endblock %}
