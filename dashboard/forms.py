@@ -37,7 +37,11 @@ class MyCustomSignupForm(SignupForm):
         # .save() returns a User object.
         user = super(MyCustomSignupForm, self).save(request)
 
-        user.full_name = self.cleaned_data['full_name']
+        full_name_list = self.cleaned_data['full_name'].rsplit(" ", 1)
+        user.first_name = full_name_list[0]
+        user.last_name = full_name_list[1]
+
+        # set user to inactive each time a new user signs up
         user.is_active = False
 
         user.save()
