@@ -20,5 +20,5 @@ urlpatterns = [
         views.booking_delete,
         name='booking_delete'
         ),
-    path('submit_request/', views.submit_request, name='request'),
+    path('submit_request/', views.submit_request, name='resident_request'),
 ]
