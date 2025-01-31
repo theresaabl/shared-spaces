@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+<!-- submit_request.html content starts here -->
+<div class="container-fluid">
+
+    <!-- Title Row -->
+    <div class="row">
+        <div class="col-12 text-center">
+            <h2 id="resident-request-title">Submit a Request</h2>
+        </div>
+    </div>
+
+    <!-- Resident Request Form -->
+    <div class="row justify-content-center">
+        <div class="col-md-4 card mb-4 mt-3">
+
+            <!-- Request Card -->
+            <div class="card-body">
+
+                <!-- Resident Request Form -->
+                <form id="resident-request-form" method="post" style="margin-top: 1.3em;">
+                    {{ resident_request_form | crispy }}
+                    {% csrf_token %}
+                    <button id="resident-request-reset-button" type="reset" class="btn btn-secondary btn-lg">Reset</button>
+                    <button id="resident-request-submit-button" type="submit" class="btn btn-secondary btn-lg">Submit</button>
+                    
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-auto">
+            <a href="{% url 'dashboard' %}" class="btn btn-primary">Return to Resident Space</a>
+        </div>
+    </div>
+
+</div>
+
+
+{% else %}
+
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="col-12 mt-3 left">
+            <h2>To access the Resident Space <a class="link" href="{{ login_url }}">sign in</a> first!</h2>
+        </div>
+            
+    </div>
+</div>
+
+{% endif %}
+
+<!-- submit_request.html content ends here -->
+{% endblock content %}
+
+<!-- Script block -->
+{% block extras %}
+<!-- <script src="{% static 'js/edit_requests.js' %}"></script> -->
+{% endblock %}
