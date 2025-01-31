@@ -58,6 +58,7 @@ def event_space_booking(request, space_id=None):
 
     if request.method == "POST":
         booking_form = BookingForm(data=request.POST)
+
         if booking_form.is_valid():
             booking = booking_form.save(commit=False)
             booking.resident = request.user
@@ -96,6 +97,16 @@ def event_space_booking(request, space_id=None):
                 )
 
                 return HttpResponseRedirect(reverse('dashboard'))
+
+        # booking form not valid:
+        else:
+            messages.add_message(
+                request,
+                messages.ERROR,
+                'There was an error in your form. Please fill in again and make sure your input is valid.'
+            )
+
+            return HttpResponseRedirect(reverse('booking'))
 
     booking_form = BookingForm()
 
