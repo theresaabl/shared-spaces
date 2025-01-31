@@ -31,10 +31,12 @@ if (URL.includes('edit_booking')){
 * - Displays a confirmation modal (`deleteModal`) to prompt 
 * the user for confirmation before deletion.
 */
-for (let button of deleteButtons) {
-    button.addEventListener("click", (e) => {
-      let bookingId = e.target.getAttribute("booking_id");
-      deleteConfirm.href = `delete_booking/${bookingId}`;
-      deleteModal.show();
-    });
-  }
+addEventListener("DOMContentLoaded", (e) => {
+    for (let button of deleteButtons) {
+        button.addEventListener("click", (e) => {
+            let bookingId = e.target.getAttribute("booking_id");
+            deleteConfirm.href = `delete_booking/${bookingId}`;
+            deleteModal.show();
+        });
+    }
+});

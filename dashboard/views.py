@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 from .models import EventSpaceBooking, EventSpace
@@ -22,7 +23,12 @@ def resident_dashboard(request):
 
     # get all event space bookings for the current user
     # to do: order by date
-    event_space_bookings = EventSpaceBooking.objects.filter(resident=request.user)  # noqa
+    # check whether user is logged in or not before database request of bookings
+    # do not user login_required decorator here because want to display content from resident_space template
+    if request.user.is_authenticated:
+        event_space_bookings = EventSpaceBooking.objects.filter(resident=request.user)  # noqa
+    else:
+        event_space_bookings = ""
 
     return render(
         request,
@@ -33,6 +39,7 @@ def resident_dashboard(request):
     )
 
 
+@login_required
 def event_space_booking(request, space_id=None):
     """
     Display the event space booking page
@@ -111,6 +118,7 @@ def event_space_booking(request, space_id=None):
     )
 
 
+@login_required
 def booking_edit(request, booking_id):
     """
     View to edit event space bookings
@@ -125,6 +133,7 @@ def booking_edit(request, booking_id):
 
         if booking_form.is_valid():
             booking = booking_form.save(commit=False)
+            # add logic: if all you change is notes: status can stay, if change date, time or space: reset
             booking.status = 0
             booking.save()
             messages.add_message(
@@ -153,6 +162,7 @@ def booking_edit(request, booking_id):
         )
 
 
+@login_required
 def booking_delete(request, booking_id):
     """
     view to delete booking
@@ -170,6 +180,7 @@ def booking_delete(request, booking_id):
     return HttpResponseRedirect(reverse('dashboard'))
 
 
+@login_required
 def event_spaces_list(request):
     """
     Display a page with a list of event spaces

@@ -26,7 +26,7 @@
 
                 <div class="card-body">
                     <h3 class="card-title">Event Space Bookings</h5>
-                    <p class="card-text">Here you can view and book any of the <a href="{% url 'event_spaces' %}">available shared event spaces</a> in the living community. {{ booking_url }}</p>
+                    <p class="card-text">Here you can view and book any of the <a href="{% url 'event_spaces' %}">available shared event spaces</a> in the living community.</p>
                     <a href="{% url 'booking' %}" class="btn btn-primary">Book a Space</a>
                 </div>
 
@@ -142,7 +142,7 @@
     <div class="row">
 
         <div class="col-12 mt-3 left">
-            <h2>To access the Resident Space <a class="link" href="{{ login_url }}">sign in</a> first!</h2>
+            <h2>To access the Resident Space <a class="link" href="{% url 'account_login' %}">sign in</a> first!</h2>
         </div>
             
     </div>
