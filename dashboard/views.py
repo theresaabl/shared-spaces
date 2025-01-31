@@ -3,8 +3,8 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.http import HttpResponseRedirect
-from .models import EventSpaceBooking, EventSpace
-from .forms import BookingForm
+from .models import EventSpaceBooking, EventSpace, ResidentRequest
+from .forms import BookingForm, ResidentRequestForm
 
 
 def resident_dashboard(request):
@@ -129,6 +129,7 @@ def event_space_booking(request, space_id=None):
                 }
             )
 
+    # if request.method == GET
     booking_form = BookingForm()
 
     # If user wants to book a specific room (when coming from event space list page)
@@ -265,5 +266,68 @@ def event_spaces_list(request):
         "dashboard/event_spaces_list.html",
         {
             "event_spaces_values": event_spaces_values,
+        }
+    )
+
+
+@login_required
+def submit_request(request):
+    """
+    Display the resident request submission page
+
+    **Template:**
+
+    :template:`dashboard/submit_request.html`
+
+    **Context:**
+
+    ``resident_request_form``
+    An instance of :form:`dashboard.ResidentRequestForm`
+    """
+
+    if request.method == "POST":
+        resident_request_form = ResidentRequestForm(data=request.POST)
+
+        if resident_request_form.is_valid():
+            resident_request = resident_request_form.save(commit=False)
+            resident_request.resident = request.user
+
+            resident_request.save()
+
+            contact_url = reverse('contact')
+
+            messages.add_message(
+                request,
+                messages.SUCCESS,
+                f"You successfully sent a {'maintenance request' if resident_request.purpose == 0 else 'message'}. "
+                f"""If you do not hear back within 3 working days, please feel free to <a href="{contact_url}">contact us</a>."""
+            )
+
+            return HttpResponseRedirect(reverse('dashboard'))
+
+        # booking form not valid:
+        else:
+            messages.add_message(
+                request,
+                messages.ERROR,
+                'There was an error in your form. Please fill in again.'
+            )
+
+            return render(
+                request,
+                "dashboard/submit_request.html",
+                {
+                    "resident_request_form": resident_request_form,
+                }
+            )
+
+    # if request.method == GET
+    resident_request_form = ResidentRequestForm()
+
+    return render(
+        request,
+        "dashboard/submit_request.html",
+        {
+            "resident_request_form": resident_request_form,
         }
     )
