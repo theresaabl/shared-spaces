@@ -41,8 +41,13 @@ def resident_dashboard(request):
 
 
 def check_for_duplicate_bookings(booking, request):
-    # check whether room already booked on that day,
-    # before current booking is saved to db
+    """
+    Helper function for event_space_booking and booking_edit
+    check whether room already booked on that day,
+    before current booking is saved to db
+    if there is a duplicate booking:
+    return message and render prefilled form with empty date field
+    """
     duplicate_bookings = EventSpaceBooking.objects.filter(
                             event_space=booking.event_space,
                             date=booking.date
@@ -150,9 +155,19 @@ def booking_edit(request, booking_id):
     """
     View to edit event space bookings
     """
+    # get booking with requested id
+    booking = get_object_or_404(EventSpaceBooking, pk=booking_id)
 
-    queryset = EventSpaceBooking.objects.filter(resident=request.user)
-    booking = get_object_or_404(queryset, pk=booking_id)
+    # check whether request.user is the user who made the booking
+    if not request.user == booking.resident:
+        messages.add_message(
+            request,
+            messages.ERROR,
+            'You do not have access to this booking.'
+        )
+
+        return HttpResponseRedirect(reverse('dashboard'))
+
 
     if request.method == "POST":
 
@@ -205,8 +220,18 @@ def booking_delete(request, booking_id):
     """
     view to delete booking
     """
-    queryset = EventSpaceBooking.objects.filter(resident=request.user)
-    booking = get_object_or_404(queryset, pk=booking_id)
+    # get booking with requested id
+    booking = get_object_or_404(EventSpaceBooking, pk=booking_id)
+
+    # check whether request.user is the user who made the booking
+    if not request.user == booking.resident:
+        messages.add_message(
+            request,
+            messages.ERROR,
+            'You do not have access to this booking.'
+        )
+
+        return HttpResponseRedirect(reverse('dashboard'))
 
     booking.delete()
     messages.add_message(
@@ -232,15 +257,13 @@ def event_spaces_list(request):
 
     :template:`dashboard/event_spaces_list.html`
     """
-
-    event_spaces = EventSpace.objects.all()
-    event_spaces_values = event_spaces.values()
+    # get key value pairs for all fields of all event spaces
+    event_spaces_values = EventSpace.objects.all().values()
 
     return render(
         request,
         "dashboard/event_spaces_list.html",
         {
-            "event_spaces": event_spaces,
             "event_spaces_values": event_spaces_values,
         }
     )
