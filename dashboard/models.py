@@ -57,3 +57,37 @@ class EventSpaceBooking(models.Model):
 
     def __str__(self):
         return f"Booking by {self.resident} for '{self.event_space}' on {self.date} is {self.get_status_display()}"  # noqa
+
+
+class ResidentRequest(models.Model):
+    """
+    """
+
+    class Purpose(models.IntegerChoices):
+        MAINTENANCE = 0, "Submit a maintenance request"
+        MESSAGE = 1, "Message the community administrators"
+
+    class Status(models.IntegerChoices):
+        OPEN = 0, "Open"
+        PROGRESS = 1, "In Progress"
+        CLOSED = 2, "Closed"
+
+    resident = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name="resident_requests_by_user"
+        )
+    purpose = models.IntegerField(
+        choices=Purpose.choices,
+        default=Purpose.MAINTENANCE
+        )
+    urgent = models.BooleanField()
+    content = models.TextField()
+    created_on = models.DateTimeField(auto_now_add=True)
+    status = models.IntegerField(
+        choices=Status.choices,
+        default=Status.OPEN
+        )
+
+    def __str__(self):
+        return f"{'Urgent' if self.urgent else ""} {'Maintenance Request' if self.purpose == 0 else 'Message'} by {self.resident}"  # noqa
