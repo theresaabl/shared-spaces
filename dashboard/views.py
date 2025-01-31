@@ -28,6 +28,7 @@ def resident_dashboard(request):
     if request.user.is_authenticated:
         event_space_bookings = EventSpaceBooking.objects.filter(resident=request.user)  # noqa
     else:
+        # empty when user is not logged in, because still need to render template
         event_space_bookings = ""
 
     return render(
@@ -37,6 +38,34 @@ def resident_dashboard(request):
             "event_space_bookings": event_space_bookings,
         }
     )
+
+
+def check_for_duplicate_bookings(booking, request):
+    # check whether room already booked on that day,
+    # before current booking is saved to db
+    duplicate_bookings = EventSpaceBooking.objects.filter(
+                            event_space=booking.event_space,
+                            date=booking.date
+                            )
+
+    if duplicate_bookings:
+        messages.add_message(
+            request,
+            messages.ERROR,
+            'This event space is already booked on the requested day! '
+            'Please choose another date.'
+        )
+        # Prefill form but leave date empty
+        booking.date = ""
+        booking_form = BookingForm(instance=booking)
+        return render(
+                    request,
+                    "dashboard/event_space_booking.html",
+                    {
+                        "booking_form": booking_form,
+                    }
+                )
+    return None
 
 
 @login_required
@@ -64,26 +93,7 @@ def event_space_booking(request, space_id=None):
             booking.resident = request.user
 
             # check whether room already booked on that day
-            same_day_bookings = EventSpaceBooking.objects.filter(event_space=booking.event_space, date=booking.date)
-
-            if same_day_bookings:
-                messages.add_message(
-                    request,
-                    messages.ERROR,
-                    'This event space is already booked on the requested day! Please choose another date.'
-                )
-                # Prefill form but leave date empty
-                booking.date = ""
-                booking_form = BookingForm(instance=booking)
-                return render(
-                            request,
-                            "dashboard/event_space_booking.html",
-                            {
-                                "booking_form": booking_form,
-                            }
-                        )
-
-            else:
+            if not check_for_duplicate_bookings(booking, request):
                 booking.save()
 
                 contact_url = reverse('contact')
@@ -103,10 +113,16 @@ def event_space_booking(request, space_id=None):
             messages.add_message(
                 request,
                 messages.ERROR,
-                'There was an error in your form. Please fill in again and make sure your input is valid.'
+                'There was an error in your form. Please fill in again.'
             )
 
-            return HttpResponseRedirect(reverse('booking'))
+            return render(
+                request,
+                "dashboard/event_space_booking.html",
+                {
+                    "booking_form": booking_form,
+                }
+            )
 
     booking_form = BookingForm()
 
@@ -144,14 +160,19 @@ def booking_edit(request, booking_id):
 
         if booking_form.is_valid():
             booking = booking_form.save(commit=False)
-            # add logic: if all you change is notes: status can stay, if change date, time or space: reset
-            booking.status = 0
-            booking.save()
-            messages.add_message(
-                request,
-                messages.SUCCESS,
-                'Event space booking successfully updated! Waiting for approval.'
-            )
+
+            if not check_for_duplicate_bookings(booking, request):
+
+                # add logic: if all you change is notes: status can stay, if change date, time or space: reset
+                booking.status = 0
+                booking.save()
+                messages.add_message(
+                    request,
+                    messages.SUCCESS,
+                    'Event space booking successfully updated! Waiting for approval.'
+                )
+
+                return HttpResponseRedirect(reverse('dashboard'))
         else:
             messages.add_message(
                 request,
@@ -159,7 +180,13 @@ def booking_edit(request, booking_id):
                 'Error updating event space booking!'
             )
 
-        return HttpResponseRedirect(reverse('dashboard'))
+            return render(
+                request,
+                "dashboard/event_space_booking.html",
+                {
+                    "booking_form": booking_form,
+                }
+            )
 
     else:
         booking_form = BookingForm(instance=booking)
