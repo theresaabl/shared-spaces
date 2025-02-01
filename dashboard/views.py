@@ -17,26 +17,32 @@ def resident_dashboard(request):
     ``event_space_booking``
         An instance of :model:`dashboard.EventSpaceBooking`.
 
+    ``resident_request``
+        An instance of :model:`dashboard.ResidentRequest`.
+
     **Template:**
 
     :template:`dashboard/resident_space.html`
     """
 
     # get all event space bookings for the current user
-    # to do: order by date
-    # check whether user is logged in or not before database request of bookings
+    # to do: order by date #############
+    # check whether user is logged in or not before database request of bookings and resident requests
     # do not user login_required decorator here because want to display content from resident_space template
     if request.user.is_authenticated:
         event_space_bookings = EventSpaceBooking.objects.filter(resident=request.user)  # noqa
+        resident_requests = ResidentRequest.objects.filter(resident=request.user)  # noqa
     else:
         # empty when user is not logged in, because still need to render template
         event_space_bookings = ""
+        resident_requests = ""
 
     return render(
         request,
         "dashboard/resident_space.html",
         {
             "event_space_bookings": event_space_bookings,
+            "resident_requests": resident_requests,
         }
     )
 
