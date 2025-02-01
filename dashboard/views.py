@@ -5,7 +5,7 @@ from django.urls import reverse
 from django.http import HttpResponseRedirect
 from .models import EventSpaceBooking, EventSpace, ResidentRequest
 from .forms import BookingForm, ResidentRequestForm
-from .utils import check_for_duplicate_bookings
+from .utils import check_for_duplicate_bookings, resident_request_type
 
 
 def resident_dashboard(request):
@@ -143,7 +143,6 @@ def booking_edit(request, booking_id):
 
         return HttpResponseRedirect(reverse('dashboard'))
 
-
     if request.method == "POST":
 
         booking_form = BookingForm(data=request.POST, instance=booking)
@@ -273,8 +272,10 @@ def submit_request(request):
             messages.add_message(
                 request,
                 messages.SUCCESS,
-                f"You successfully sent a {'maintenance request' if resident_request.purpose == 0 else 'message'}. "
-                f"""If you do not hear back within 3 working days, please feel free to <a href="{contact_url}">contact us</a>."""
+                'You successfully sent a '
+                f'{resident_request_type(resident_request.purpose).lower()}. '
+                'If you do not hear back within 3 working days, please '
+                f"""feel free to <a href="{contact_url}">contact us</a>."""
             )
 
             return HttpResponseRedirect(reverse('dashboard'))
@@ -305,3 +306,107 @@ def submit_request(request):
             "resident_request_form": resident_request_form,
         }
     )
+
+
+@login_required
+def resident_request_edit(request, resident_request_id):
+    """
+    View to edit resident requests
+    """
+    # get resident request with requested id
+    resident_request = get_object_or_404(
+                            ResidentRequest,
+                            pk=resident_request_id
+                        )
+
+    # check whether request.user is the user who made the resident request
+    if not request.user == resident_request.resident:
+        messages.add_message(
+            request,
+            messages.ERROR,
+            'You do not have access to this '
+            f'{resident_request_type(resident_request.purpose).lower()}.'
+        )
+
+        return HttpResponseRedirect(reverse('dashboard'))
+
+    if request.method == "POST":
+
+        resident_request_form = ResidentRequestForm(
+                                    data=request.POST,
+                                    instance=resident_request
+                                )
+
+        if resident_request_form.is_valid():
+            resident_request = resident_request_form.save(commit=False)
+
+            resident_request.status = 0
+            resident_request.save()
+            messages.add_message(
+                request,
+                messages.SUCCESS,
+                f'{resident_request_type(resident_request.purpose)} '
+                'successfully updated! Waiting for approval.'
+            )
+
+            return HttpResponseRedirect(reverse('dashboard'))
+
+        else:
+            messages.add_message(
+                request,
+                messages.ERROR,
+                'Error updating '
+                f'{resident_request_type(resident_request.purpose).lower()}.'
+            )
+
+            return render(
+                request,
+                "dashboard/submit_request.html",
+                {
+                    "resident_request_form": resident_request_form,
+                }
+            )
+
+    else:
+        resident_request_form = ResidentRequestForm(instance=resident_request)
+
+        return render(
+            request,
+            "dashboard/event_space_booking.html",
+            {
+                "resident_request_form": resident_request_form,
+            }
+        )
+
+
+@login_required
+def resident_request_delete(request, resident_request_id):
+    """
+    view to delete resident request
+    """
+    # get resident request with requested id
+    resident_request = get_object_or_404(
+                            ResidentRequest,
+                            pk=resident_request_id
+                        )
+
+    # check whether request.user is the user who made the resident request
+    if not request.user == resident_request.resident:
+        messages.add_message(
+            request,
+            messages.ERROR,
+            'You do not have access to this '
+            f'{resident_request_type(resident_request.purpose).lower()}.'
+        )
+
+        return HttpResponseRedirect(reverse('dashboard'))
+
+    resident_request.delete()
+    messages.add_message(
+        request,
+        messages.SUCCESS,
+        f'{resident_request_type(resident_request.purpose)} '
+        'successfully deleted!'
+    )
+
+    return HttpResponseRedirect(reverse('dashboard'))

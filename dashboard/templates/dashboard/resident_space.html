@@ -133,7 +133,7 @@
                                     <li>Status: {{ resident_request.get_status_display }}  </li>
                                 </ul>    
                             </div>
-                            <a class="btn btn-sm btn-secondary btn-edit" href="#">Edit</a>
+                            <a class="btn btn-sm btn-secondary btn-edit" href="{% url 'resident_request_edit' resident_request.id %}">Edit</a>
                             <button class="btn btn-sm btn-secondary btn-delete" resident_request_id="{{ resident_request.id }}">Delete</button>
                         </div>
 

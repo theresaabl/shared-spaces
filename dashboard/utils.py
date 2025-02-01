@@ -35,3 +35,11 @@ def check_for_duplicate_bookings(booking, request):
                     }
                 )
     return None
+
+
+def resident_request_type(purpose):
+    """
+    Helper function for edit_resident_request and delete_resident_request views
+    Returns whether the resident request is of type request or message
+    """
+    return "Maintenance request" if purpose == 0 else "Message"
