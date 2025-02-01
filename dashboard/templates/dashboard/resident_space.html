@@ -52,24 +52,13 @@
             
     </div>
 
-    <!-- Data Title Row -->
-    <div class="row justify-content-center">      
-
-        <div class="col-10 col-md-5 col-xl-4 col-xxl-3">
-            <h4>Your Bookings</h4>
-        </div>
-
-        <div class="col-10 col-md-5 col-xl-4 col-xxl-3">
-            <h4>Your Requests</h4>
-        </div>
-            
-    </div>
-
     <!-- Data Row -->
     <div class="row justify-content-center">
 
         <!-- Bookings for this User -->
         <div class="col-10 col-md-5 col-xl-4 col-xxl-3">
+
+            <h4>Your Bookings</h4>
 
             <!-- Loop through all event space bookings for this user -->
             {% for booking in event_space_bookings %}
@@ -117,20 +106,49 @@
         <!-- End Bookings for this User -->
 
 
+        <!-- Requests for this User -->
         <div class="col-10 col-md-5 col-xl-4 col-xxl-3">
 
-            <!-- Requests Data Card -->
-            <div class="card">
+            <h4>Your Requests</h4>
 
-                <div class="card-body">
-                    <p class="card-text">requests data</p>
-                    <a href="#" class="btn btn-sm btn-secondary">Edit</a>
-                    <a href="#" class="btn btn-sm btn-secondary">Delete</a>
+            <!-- Loop through all requests for this user -->
+            {% for resident_request in resident_requests %}
+
+            <!-- Row and Column for each request -->
+            <div class="row justify-content-center">
+                <div class="col">
+
+                    <!-- Resident Request Card -->
+                    <div class="card">
+
+                        <div class="card-body">
+                            <div class="card-text">
+                                <h5>{% if resident_request.purpose == 0 %}Maintenance Request{% else %}Message{% endif %}</h5>
+                                <ul>
+                                    <!-- Remove Resident line before release!!!!!!! -->
+                                    <li>For Testing: Resident: {{ resident_request.resident }}</li>
+                                    <li>Urgent: {% if resident_request.urgent is True  %}yes {% else %}No {% endif %}   </li>
+                                    <li>{% if resident_request.purpose == 0 %}Request{% else %}Message{% endif %}: {{ resident_request.content }}</li>
+                                    <li>Created on: {{ resident_request.created_on }}</li>
+                                    <li>Status: {{ resident_request.get_status_display }}  </li>
+                                </ul>    
+                            </div>
+                            <a class="btn btn-sm btn-secondary btn-edit" href="#">Edit</a>
+                            <button class="btn btn-sm btn-secondary btn-delete" resident_request_id="{{ resident_request.id }}">Delete</button>
+                        </div>
+
+                    </div>
+                    <!-- End Resident Request Card -->
+
                 </div>
-
             </div>
+            <!-- End col and row for each resident request -->
+
+            {% endfor %}
+            <!-- End Loop -->
 
         </div>
+        <!-- End Resident Requests for this User -->
             
     </div>
 
