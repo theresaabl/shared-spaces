@@ -5,6 +5,7 @@ from django.urls import reverse
 from django.http import HttpResponseRedirect
 from .models import EventSpaceBooking, EventSpace, ResidentRequest
 from .forms import BookingForm, ResidentRequestForm
+from .utils import check_for_duplicate_bookings
 
 
 def resident_dashboard(request):
@@ -38,39 +39,6 @@ def resident_dashboard(request):
             "event_space_bookings": event_space_bookings,
         }
     )
-
-
-def check_for_duplicate_bookings(booking, request):
-    """
-    Helper function for event_space_booking and booking_edit
-    check whether room already booked on that day,
-    before current booking is saved to db
-    if there is a duplicate booking:
-    return message and render prefilled form with empty date field
-    """
-    duplicate_bookings = EventSpaceBooking.objects.filter(
-                            event_space=booking.event_space,
-                            date=booking.date
-                            )
-
-    if duplicate_bookings:
-        messages.add_message(
-            request,
-            messages.ERROR,
-            'This event space is already booked on the requested day! '
-            'Please choose another date.'
-        )
-        # Prefill form but leave date empty
-        booking.date = ""
-        booking_form = BookingForm(instance=booking)
-        return render(
-                    request,
-                    "dashboard/event_space_booking.html",
-                    {
-                        "booking_form": booking_form,
-                    }
-                )
-    return None
 
 
 @login_required
