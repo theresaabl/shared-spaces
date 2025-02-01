@@ -372,7 +372,7 @@ def resident_request_edit(request, resident_request_id):
 
         return render(
             request,
-            "dashboard/event_space_booking.html",
+            "dashboard/submit_request.html",
             {
                 "resident_request_form": resident_request_form,
             }

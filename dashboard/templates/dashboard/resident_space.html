@@ -89,7 +89,7 @@
                                 </ul>    
                             </div>
                             <a class="btn btn-sm btn-secondary btn-edit" href="{% url 'booking_edit' booking.id %}">Edit</a>
-                            <button class="btn btn-sm btn-secondary btn-delete" booking_id="{{ booking.id }}">Delete</button>
+                            <button class="btn btn-sm btn-secondary btn-delete-bookings" booking_id="{{ booking.id }}">Delete</button>
                         </div>
 
                     </div>
@@ -134,7 +134,7 @@
                                 </ul>    
                             </div>
                             <a class="btn btn-sm btn-secondary btn-edit" href="{% url 'resident_request_edit' resident_request.id %}">Edit</a>
-                            <button class="btn btn-sm btn-secondary btn-delete" resident_request_id="{{ resident_request.id }}">Delete</button>
+                            <button class="btn btn-sm btn-secondary btn-delete-requests" resident_request_id="{{ resident_request.id }}">Delete</button>
                         </div>
 
                     </div>
@@ -168,8 +168,8 @@
 
 {% endif %}
 
-<!-- Delete confirmation modal -->
-<div class="modal fade" id="delete-modal" tabindex="-1" aria-labelledby="delete-modal-label" aria-hidden="true">
+<!-- Delete Bookings confirmation modal -->
+<div class="modal fade" id="delete-bookings-modal" tabindex="-1" aria-labelledby="delete-bookings-modal-label" aria-hidden="true">
 
     <!-- Modal -->
     <div class="modal-dialog">
@@ -179,7 +179,7 @@
 
             <!-- Modal Header -->
             <div class="modal-header">
-                <h5 class="modal-title" id="delete-modal-label">Delete Booking?</h5>
+                <h5 class="modal-title" id="delete-bookings-modal-label">Delete Booking?</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
@@ -191,8 +191,41 @@
             <!-- Modal Footer -->
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <!-- url is set dynamically in bookings.js -->
-                <a id="delete-confirm" href="#" class="btn btn-danger">Delete</a>
+                <!-- url is set dynamically in delete_data.js -->
+                <a id="delete-bookings-confirm" href="#" class="btn btn-danger">Delete</a>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Delete Resident Requests confirmation modal -->
+<div class="modal fade" id="delete-requests-modal" tabindex="-1" aria-labelledby="delete-requests-modal-label" aria-hidden="true">
+
+    <!-- Modal -->
+    <div class="modal-dialog">
+
+        <!-- Modal Content -->
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h5 class="modal-title" id="delete-requests-modal-label">Delete Request?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="modal-body">
+                Are you sure you want to permanently delete this request?
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <!-- url is set dynamically in delete_data.js -->
+                <a id="delete-requests-confirm" href="#" class="btn btn-danger">Delete</a>
             </div>
 
         </div>
@@ -206,5 +239,5 @@
 
 <!-- Script block -->
 {% block extras %}
-<script src="{% static 'js/delete_bookings.js' %}"></script>
+<script src="{% static 'js/delete_data.js' %}"></script>
 {% endblock %}
