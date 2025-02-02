@@ -1,16 +1,53 @@
 {% extends "base.html" %}
 
+{% load crispy_forms_tags %}
+
 {% block content %}
 
 <!-- contact.html content starts here -->
 <div class="container-fluid">
+
+    <!-- Contact Page Content Row -->
     <div class="row">
 
         <div class="col-12 mt-3 left">
             <h2>This is the contact page</h2>
+            <p>Content to come</p>
         </div>
             
     </div>
+
+    <!-- Title Row -->
+    <div class="row">
+        <div class="col-12 text-center">
+            <h3 id="contact-form-title">Send Message</h3>
+        </div>
+    </div>
+
+    <!-- Contact Form Section -->
+    <div class="row justify-content-center">
+
+        <div class="col-md-4 card mb-4 mt-3">
+
+            <!-- Contact Form Card -->
+            <div class="card-body">
+
+                <!-- Contact Form -->
+                <form id="contact-form" method="post">
+                    {{ contact_form | crispy }}
+                    {% csrf_token %}
+                    <button id="contact-reset-button" type="reset" class="btn btn-secondary btn-lg">Reset</button>
+                    <button id="contact-submit-button" type="submit" class="btn btn-secondary btn-lg">Submit</button>
+                    
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+    <!-- End Contact Form -->
+
 </div>
 
 <!-- contact.html content ends here -->

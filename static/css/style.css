@@ -3,3 +3,7 @@
     height: 30vh;
     object-fit: cover;
 }
+
+form {
+    margin-top: 1.3em;
+}

@@ -1,4 +1,6 @@
+import datetime
 from django import forms
+from django.core.validators import MinValueValidator
 from allauth.account.forms import SignupForm
 from .models import EventSpaceBooking, ResidentRequest
 
@@ -54,6 +56,13 @@ class BookingForm(forms.ModelForm):
     class Meta:
         model = EventSpaceBooking
         fields = ('event_space', 'occasion', 'date', 'start', 'end', 'notes',)
+        # choose how input fields are rendered in html, date and time pickers
+        widgets = {
+            # only allow dates from tomorrow on (only bookings in the future)
+            'date': forms.DateInput(attrs={'type': 'date', 'min': (datetime.date.today() + datetime.timedelta(days=1))}),
+            'start': forms.TimeInput(attrs={'type': 'time'}),
+            'end': forms.TimeInput(attrs={'type': 'time'}),
+        }
 
 
 class ResidentRequestForm(forms.ModelForm):

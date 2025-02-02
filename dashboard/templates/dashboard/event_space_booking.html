@@ -26,7 +26,7 @@
                 <p>Click to see <a href="{% url 'event_spaces' %}">list of event spaces</a><p>
 
                 <!-- Booking Form -->
-                <form id="booking-form" method="post" style="margin-top: 1.3em;">
+                <form id="booking-form" method="post">
                     {{ booking_form | crispy }}
                     {% csrf_token %}
                     <button id="booking-reset-button" type="reset" class="btn btn-secondary btn-lg">Reset</button>

@@ -24,7 +24,7 @@
             <div class="card-body">
 
                 <!-- Resident Request Form -->
-                <form id="resident-request-form" method="post" style="margin-top: 1.3em;">
+                <form id="resident-request-form" method="post">
                     {{ resident_request_form | crispy }}
                     {% csrf_token %}
                     <button id="resident-request-reset-button" type="reset" class="btn btn-secondary btn-lg">Reset</button>
