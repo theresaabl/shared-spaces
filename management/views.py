@@ -5,6 +5,7 @@ from django.urls import reverse
 from django.http import HttpResponseRedirect
 
 
+# only for staff members to access admin page
 @staff_member_required
 def management_page(request):
     """
@@ -16,8 +17,14 @@ def management_page(request):
 
     :template:`management/management_page.html`
     """
+
+    users_list = User.objects.all()
+
     # if request.method is GET
     return render(
         request,
         "management/management_page.html",
+        {
+            "users_list": users_list,
+        }
     )
