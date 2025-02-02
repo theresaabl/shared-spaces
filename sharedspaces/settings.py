@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'main',
     'contact',
     'dashboard',
+    'management',
 ]
 
 SITE_ID = 1
