@@ -4,6 +4,7 @@
 {% url 'about' as about_url %}
 {% url 'contact' as contact_url %}
 {% url 'dashboard' as dashboard_url %}
+{% url 'management' as management_url %}
 {% url 'account_login' as login_url %}
 {% url 'account_signup' as signup_url %}
 {% url 'account_logout' as logout_url %}
@@ -62,11 +63,21 @@
                     </a>
                 </li>
 
+                <!-- Link to custom Admin page - only show for staff members (have access to admin panel) -->
+                {% if user.is_staff %}
 
+                <li class="nav-item">
+                    <a class="nav-link {% if request.path == management_url %}active{% endif %}" aria-current="page" href="{{ management_url }}">Admin Space</a>
+                </li>
+
+                {% endif %}
+
+                <!-- show for logged in users -->
                 {% if user.is_authenticated %}
                 <li class="nav-item">
                     <a class="nav-link {% if request.path == logout_url %}active{% endif %}" aria-current="page" href="{{ logout_url }}">Logout</a>
                 </li>
+                <!-- if user is not logged in -->
                 {% else %}
                 <li class="nav-item">
                     <a class="nav-link {% if request.path == signup_url %}active{% endif %}" aria-current="page"
