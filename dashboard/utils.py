@@ -12,29 +12,26 @@ def check_for_duplicate_bookings(booking, request):
     if there is a duplicate booking:
     return message and render prefilled form with empty date field
     """
+    print("check for duplicate bookings")
     duplicate_bookings = EventSpaceBooking.objects.filter(
                             event_space=booking.event_space,
                             date=booking.date
-                            )
+                            ).exclude(id=booking.id)
 
+    print(duplicate_bookings)
     if duplicate_bookings:
+        print("inside if duplicate_bookings")
         messages.add_message(
             request,
             messages.ERROR,
             'This event space is already booked on the requested day! '
             'Please choose another date.'
         )
-        # Prefill form but leave date empty
-        booking.date = ""
-        booking_form = BookingForm(instance=booking)
-        return render(
-                    request,
-                    "dashboard/event_space_booking.html",
-                    {
-                        "booking_form": booking_form,
-                    }
-                )
-    return None
+        print("message added")
+
+        return True
+    print("return none from duplicate bookings")
+    return False
 
 
 def resident_request_type(purpose):

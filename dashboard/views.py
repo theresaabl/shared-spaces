@@ -72,7 +72,20 @@ def event_space_booking(request, space_id=None):
             booking.resident = request.user
 
             # check whether room already booked on that day
-            if not check_for_duplicate_bookings(booking, request):
+            if check_for_duplicate_bookings(booking, request):
+                # Prefill form but leave date empty
+                booking.date = ""
+                booking_form = BookingForm(instance=booking)
+                # render form again
+                return render(
+                    request,
+                    "dashboard/event_space_booking.html",
+                    {
+                        "booking_form": booking_form,
+                    }
+                )
+            # no duplicate bookings
+            else:
                 booking.save()
 
                 contact_url = reverse('contact')
@@ -132,6 +145,8 @@ def booking_edit(request, booking_id):
     """
     # get booking with requested id
     booking = get_object_or_404(EventSpaceBooking, pk=booking_id)
+    # save the original date
+    old_date = booking.date
 
     # check whether request.user is the user who made the booking
     if not request.user == booking.resident:
@@ -148,18 +163,36 @@ def booking_edit(request, booking_id):
         booking_form = BookingForm(data=request.POST, instance=booking)
 
         if booking_form.is_valid():
+            print("booking form is valid")
+
+            print("old date:", old_date)
             booking = booking_form.save(commit=False)
 
-            if not check_for_duplicate_bookings(booking, request):
-
+            if check_for_duplicate_bookings(booking, request):
+                # Prefill form but leave date empty
+                booking.date = old_date
+                booking_form = BookingForm(instance=booking)
+                # render form again
+                return render(
+                    request,
+                    "dashboard/event_space_booking.html",
+                    {
+                        "booking_form": booking_form,
+                    }
+                )
+            # no duplicate bookings on that date
+            else:
+                print("booking not duplicate")
                 # add logic: if all you change is notes: status can stay, if change date, time or space: reset
                 booking.status = 0
                 booking.save()
+                print("booking saved")
                 messages.add_message(
                     request,
                     messages.SUCCESS,
                     'Event space booking successfully updated! Waiting for approval.'
                 )
+                print("message added")
 
                 return HttpResponseRedirect(reverse('dashboard'))
         else:
