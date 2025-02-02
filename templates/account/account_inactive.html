@@ -5,7 +5,32 @@
 {% block head_title %}{% trans "Account Inactive" %}{% endblock head_title %}
 
 {% block content %}
-<h1>{% trans "Account Inactive" %}</h1>
 
-<p>{% trans "This account is inactive." %}</p>
+<!-- account_inactive.html content starts here -->
+<div class="container">
+
+    <!-- Account Inactive Content -->
+    <div class="row">
+        <div class="col-md-8 mt-3 offset-md-2">
+            <h3>{% trans "Account Inactive" %}</h3>
+
+            <p>
+                Your account will be activated as soon as you are confirmed as a resident of the SharedSpaces living community.<br>
+                If your account has not been activated within 3 working days, please feel free to <a href="{% url 'contact' %}">contact us</a>.
+            </p>
+        </div>
+    </div>
+
+    <!-- Return to Home Page -->
+    <div class="row justify-content-center">
+        <div class="col-auto">
+            <a href="{% url 'home' %}" class="btn btn-primary">Return to Home</a>
+        </div>
+    </div>
+
+</div>
+
+
+<!-- account_inactive.html content ends here -->
+
 {% endblock content %}
