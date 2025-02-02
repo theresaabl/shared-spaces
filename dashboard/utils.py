@@ -1,7 +1,5 @@
-from django.shortcuts import render
 from django.contrib import messages
 from .models import EventSpaceBooking
-from .forms import BookingForm
 
 
 def check_for_duplicate_bookings(booking, request):
