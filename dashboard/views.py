@@ -1,11 +1,42 @@
+from allauth.account.views import LoginView
 from django.shortcuts import render, get_object_or_404
 from django.contrib import messages
+from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.hashers import check_password
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 from .models import EventSpaceBooking, EventSpace, ResidentRequest
 from .forms import BookingForm, ResidentRequestForm
 from .utils import check_for_duplicate_bookings, resident_request_type
+
+
+class MyCustomLoginView(LoginView):
+
+    def post(self, request, *args, **kwargs):
+        # Get the login credentials from the form
+        username = request.POST.get('login')
+        password = request.POST.get('password')
+
+        # Check whether user exists
+        try:
+            # Try to get user by username
+            user = User.objects.get(username=username)
+        except User.DoesNotExist:
+            user = None
+
+        # if username exists and the input password matches the stored hash
+        if user and check_password(password, user.password):
+            # if user is not active (yet)
+            if not user.is_active:
+                # If user is authenticated but inactive, show inactive page
+                return render(
+                    request,
+                    "../templates/account/account_inactive.html",
+                    )
+
+        # call the original post method from the LoginView to continue normal login flow
+        return super().post(request, *args, **kwargs)
 
 
 def resident_dashboard(request):

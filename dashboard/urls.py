@@ -1,8 +1,10 @@
 from . import views
 from django.urls import path
+from .views import MyCustomLoginView
 
 urlpatterns = [
     path('', views.resident_dashboard, name='dashboard'),
+    path("accounts/login/", MyCustomLoginView.as_view(), name="account_login"),
     path(
         'edit_booking/<int:booking_id>',
         views.booking_edit,
