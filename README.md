@@ -8,7 +8,7 @@ Live Site - [SharedSpaces](https://shared-spaces-f588831ae867.herokuapp.com/)
 
 First Draft for ERD:
 
-![ERD](/documentation/diagrams/models.drawio.png)
+![ERD](/documentation/diagrams/models.webp)
 
 ## Wireframes
 
