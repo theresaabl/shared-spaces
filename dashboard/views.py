@@ -428,6 +428,7 @@ def resident_request_edit(request, resident_request_id):
 
         return HttpResponseRedirect(reverse('dashboard'))
 
+    # Start request.method is POST conditional
     if request.method == "POST":
 
         resident_request_form = ResidentRequestForm(
@@ -435,36 +436,59 @@ def resident_request_edit(request, resident_request_id):
                                     instance=resident_request
                                 )
 
-        if resident_request_form.is_valid():
-            resident_request = resident_request_form.save(commit=False)
+        # Start if resident_request has changed conditional
+        if resident_request_form.has_changed():
 
-            resident_request.status = 0
-            resident_request.save()
-            messages.add_message(
-                request,
-                messages.SUCCESS,
-                f'{resident_request_type(resident_request.purpose)} '
-                'successfully updated! Waiting for approval.'
-            )
+            # Start form is valid conditional
+            if resident_request_form.is_valid():
+                resident_request = resident_request_form.save(commit=False)
 
-            return HttpResponseRedirect(reverse('dashboard'))
+                resident_request.status = 0
+                resident_request.save()
 
+                contact_url = reverse('contact')
+                messages.add_message(
+                    request,
+                    messages.SUCCESS,
+                    'You successfully updated your '
+                    f'{resident_request_type(resident_request.purpose).lower()}. '
+                    'If you do not hear back within 3 working days, please '
+                    f"""feel free to <a href="{contact_url}">contact us</a>."""
+                )
+
+                return HttpResponseRedirect(reverse('dashboard'))
+
+            # form is not valid
+            else:
+                messages.add_message(
+                    request,
+                    messages.ERROR,
+                    'Error updating '
+                    f'{resident_request_type(resident_request.purpose).lower()}.'
+                )
+
+                return render(
+                    request,
+                    "dashboard/submit_request.html",
+                    {
+                        "resident_request_form": resident_request_form,
+                    }
+                )
+            # End form is valid conditional
+
+        # No fields have changed
         else:
             messages.add_message(
                 request,
-                messages.ERROR,
-                'Error updating '
+                messages.INFO,
+                'No changes were made to your '
                 f'{resident_request_type(resident_request.purpose).lower()}.'
             )
 
-            return render(
-                request,
-                "dashboard/submit_request.html",
-                {
-                    "resident_request_form": resident_request_form,
-                }
-            )
+            return HttpResponseRedirect(reverse('dashboard'))
+        # End form has changed conditional
 
+    # if request.method is GET
     else:
         resident_request_form = ResidentRequestForm(instance=resident_request)
 
@@ -475,6 +499,7 @@ def resident_request_edit(request, resident_request_id):
                 "resident_request_form": resident_request_form,
             }
         )
+    # End request.method is POST conditional
 
 
 @login_required
