@@ -113,3 +113,28 @@ def user_admin_status(request, user_id):
         user.save()
 
     return HttpResponseRedirect(reverse('users'))
+
+
+@staff_member_required
+def user_delete(request, user_id):
+    """
+    view to delete user
+    """
+    # check that request.user is not accidentally deleting their own account
+    if user_id == request.user.id:
+        messages.add_message(
+                    request,
+                    messages.ERROR,
+                    'You cannot delete your own account!'
+                )
+    else:
+        user = get_object_or_404(User, pk=user_id)
+
+        user.delete()
+        messages.add_message(
+            request,
+            messages.SUCCESS,
+            'User account successfully deleted!'
+        )
+
+    return HttpResponseRedirect(reverse('users'))

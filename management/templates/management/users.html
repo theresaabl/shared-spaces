@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% load static %}
+
 {% block content %}
 
 <!-- users.html content starts here -->
@@ -45,11 +47,11 @@
 
                                 <!-- only show buttons for users not the current user, otherwise could accidentally delete or deactivate own account -->
                                 {% if not user_item.id == user.id %}
-                                    <a href="{% url 'user-activation' user_item.id %}" class="btn btn-primary">{% if not user_item.is_active %}Activate{% endif %}{% if user_item.is_active %}Deactivate{%endif%}</a> 
+                                    <a href="{% url 'user-activation' user_item.id %}" class="btn btn-sm btn-primary">{% if not user_item.is_active %}Activate{% endif %}{% if user_item.is_active %}Deactivate{%endif%}</a> 
                                     {% if user_item.is_active %} 
-                                    <a href="{% url 'user-admin-status' user_item.id %}" class="btn btn-secondary">{% if not user_item.is_staff %}Give Admin Status{% endif %}{% if user_item.is_staff %}Remove Admin Status{% endif %}</a>
+                                    <a href="{% url 'user-admin-status' user_item.id %}" class="btn btn-sm btn-secondary">{% if not user_item.is_staff %}Give Admin Status{% endif %}{% if user_item.is_staff %}Remove Admin Status{% endif %}</a>
                                     {% endif %}
-                                    <button class="btn btn-danger">Delete User</button>
+                                    <button class="btn btn-danger btn-sm btn-delete-users" user_id="{{ user_item.id }}">Delete User</button>
                                 {% endif %}
                             </div>
 
@@ -70,5 +72,45 @@
 
     </div>
 
+</div>
+
+<!-- Delete Users confirmation modal -->
+<div class="modal fade" id="delete-users-modal" tabindex="-1" aria-labelledby="delete-users-modal-label" aria-hidden="true">
+
+    <!-- Modal -->
+    <div class="modal-dialog">
+
+        <!-- Modal Content -->
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h5 class="modal-title" id="delete-users-modal-label">Delete User?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="modal-body">
+                Are you sure you want to permanently delete this user account?
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <!-- url is set dynamically in delete_user.js -->
+                <a id="delete-users-confirm" href="#" class="btn btn-danger">Delete</a>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
 <!-- users.html content ends here -->
 {% endblock content %}
+
+<!-- Script block -->
+{% block extras %}
+<script src="{% static 'js/delete_user.js' %}"></script>
+{% endblock %}
