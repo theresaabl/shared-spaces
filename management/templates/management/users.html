@@ -33,15 +33,25 @@
                             <div class="card-text"> 
                                 <h4>{{ user_item.username }}</h4>
                                 <ul>
-                                    {% if user.full_name %}
-                                    <li>Name: {{ user.full_name }}</li>
+                                    {% if user_item.full_name %}
+                                    <li>Name: {{ user_item.full_name }}</li>
                                     {% endif %}
-                                    <li>Email: {{ user.email }} </li>
-                                    <li>Active: {% if user.active %}Yes{% endif %}{% if not user.active %}No{% endif %}</li>
-                                    <li>Community administrator: {% if user.is_staff %}Yes{% endif %}{% if not user.is_staff %}No{% endif %}</li>
-                                    <li>Last Login: {{ user.last_login }} </li>
-                                    <li>Date joined: {{ user.date_joined }} </li>
-                                </ul>    
+                                    <li>Email: {{ user_item.email }} </li>
+                                    <li>Active: {% if user_item.is_active %}Yes{% endif %}{% if not user_item.is_active %}No{% endif %}</li>
+                                    <li>Community administrator: {% if user_item.is_staff %}Yes{% endif %}{% if not user_item.is_staff %}No{% endif %}</li>
+                                    <li>Last Login: {{ user_item.last_login }} </li>
+                                    <li>Date joined: {{ user_item.date_joined }} </li>
+                                </ul>
+                                <a href="{% url 'user-activation' user_item.id %}" class="btn btn-primary">{% if not user_item.is_active %}Activate{% endif %}{% if user_item.is_active %}Deactivate{%endif%}</a>
+                                
+
+                                {% if user_item.is_active and not user_item.is_staff %} 
+                                <a href="" class="btn btn-secondary">Give Admin Status</a>
+                                {% endif %}
+                                {% if user_item.is_active and user_item.is_staff %} 
+                                <a href="" class="btn btn-secondary">Remove Admin Status</a>
+                                {% endif %}
+                                <button class="btn btn-danger">Delete User</button>
                             </div>
 
                         </div>
