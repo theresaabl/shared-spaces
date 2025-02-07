@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.admin.views.decorators import staff_member_required
 from django.urls import reverse
 from django.http import HttpResponseRedirect
-from dashboard.models import EventSpace
+from dashboard.models import EventSpace, EventSpaceBooking
 
 
 # only for staff members to access admin page
@@ -176,5 +176,31 @@ def event_spaces(request):
         "management/event_spaces.html",
         {
             "event_spaces": spaces,
+        }
+    )
+
+
+@staff_member_required
+def event_space_bookings(request):
+    """
+    Display the event space bookings page
+
+    **Context**
+    ``EventSpaceBookings``
+    An instance of :model:`EventSpaceBooking`.
+
+    **Template:**
+
+    :template:`management/event_space_bookings.html`
+    """
+
+    bookings = EventSpaceBooking.objects.all()
+
+    # if request.method is GET
+    return render(
+        request,
+        "management/event_space_bookings.html",
+        {
+            "event_space_bookings": bookings,
         }
     )

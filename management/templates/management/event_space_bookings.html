@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!-- event_space_bookings.html content starts here -->
+<div class="container-fluid">
+    
+    <!-- Title Row -->
+    <div class="row">
+        <div class="col-12 text-center">
+            <h3>Event Space Bookings</h3>
+            <p>Here is a list of all event space bookings.</p>
+        </div>
+    </div>
+
+    <!-- Data Row -->
+    <div class="row justify-content-center">
+
+        <!-- List of Event Space Bookings -->
+        <div class="col-12 col-md-6 col-xl-5 col-xxl-4">
+
+            {% for booking in event_space_bookings %}
+
+            <h4>{{ booking }}</h4>
+
+            {% empty %}
+
+            <p>No bookings found.</p>
+
+            {% endfor %}
+
+        </div>
+        <!-- End Event Space Bookings List -->
+
+    </div>
+
+</div>
+
+
+<!-- event_space_bookings.html content ends here -->
+{% endblock content %}
