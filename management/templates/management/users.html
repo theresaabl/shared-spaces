@@ -43,11 +43,14 @@
                                     <li>Date joined: {{ user_item.date_joined }} </li>
                                 </ul>
 
-                                <a href="{% url 'user-activation' user_item.id %}" class="btn btn-primary">{% if not user_item.is_active %}Activate{% endif %}{% if user_item.is_active %}Deactivate{%endif%}</a> 
-                                {% if user_item.is_active %} 
-                                <a href="{% url 'user-admin-status' user_item.id %}" class="btn btn-secondary">{% if not user_item.is_staff %}Give Admin Status{% endif %}{% if user_item.is_staff %}Remove Admin Status{% endif %}</a>
+                                <!-- only show buttons for users not the current user, otherwise could accidentally delete or deactivate own account -->
+                                {% if not user_item.id == user.id %}
+                                    <a href="{% url 'user-activation' user_item.id %}" class="btn btn-primary">{% if not user_item.is_active %}Activate{% endif %}{% if user_item.is_active %}Deactivate{%endif%}</a> 
+                                    {% if user_item.is_active %} 
+                                    <a href="{% url 'user-admin-status' user_item.id %}" class="btn btn-secondary">{% if not user_item.is_staff %}Give Admin Status{% endif %}{% if user_item.is_staff %}Remove Admin Status{% endif %}</a>
+                                    {% endif %}
+                                    <button class="btn btn-danger">Delete User</button>
                                 {% endif %}
-                                <button class="btn btn-danger">Delete User</button>
                             </div>
 
                         </div>
