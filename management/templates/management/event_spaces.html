@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!-- event_spaces.html content starts here -->
+<div class="container-fluid">
+    
+    <!-- Title Row -->
+    <div class="row">
+        <div class="col-12 text-center">
+            <h3>Event Spaces</h3>
+            <p>Here is a list of all available event spaces in the SharedSpaces community.</p>
+        </div>
+    </div>
+
+    <!-- Data Row -->
+    <div class="row justify-content-center">
+
+        <!-- List of Event Spaces -->
+        <div class="col-12 col-md-6 col-xl-5 col-xxl-4">
+
+            {% for space in event_spaces %}
+
+            <h4>{{ space.name }}</h4>
+
+            {% empty %}
+
+            <p>No event spaces found.</p>
+
+            {% endfor %}
+
+        </div>
+        <!-- End Event Spaces List -->
+
+    </div>
+
+</div>
+
+
+<!-- event_spaces.html content ends here -->
+{% endblock content %}

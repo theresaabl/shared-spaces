@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.admin.views.decorators import staff_member_required
 from django.urls import reverse
 from django.http import HttpResponseRedirect
+from dashboard.models import EventSpace
 
 
 # only for staff members to access admin page
@@ -151,3 +152,29 @@ def user_delete(request, user_id):
         )
 
     return HttpResponseRedirect(reverse('users'))
+
+
+@staff_member_required
+def event_spaces(request):
+    """
+    Display the event spaces page
+
+    **Context**
+    ``EventSpaces``
+    An instance of :model:`EventSpace`.
+
+    **Template:**
+
+    :template:`management/event_spaces.html`
+    """
+
+    spaces = EventSpace.objects.all()
+
+    # if request.method is GET
+    return render(
+        request,
+        "management/event_spaces.html",
+        {
+            "event_spaces": spaces,
+        }
+    )
