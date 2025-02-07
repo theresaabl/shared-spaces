@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!-- users.html content starts here -->
+<div class="container-fluid">
+    
+    <!-- Title Row -->
+    <div class="row">
+        <div class="col-12 text-center">
+            <h3>Users</h3>
+            <p>Here is a list of all registered users of the SharedSpaces website.</p>
+        </div>
+    </div>
+
+    <!-- Data Row -->
+    <div class="row justify-content-center">
+
+        <!-- List of Users -->
+        <div class="col-12 col-md-6 col-xl-5 col-xxl-4">
+
+            <!-- Loop through all users (don't use user since this refers to the currently logged in user)-->
+            {% for user_item in users_list %}
+
+            <!-- Row and Column for each user -->
+            <div class="row justify-content-center">
+                <div class="col">
+
+                    <!-- User Card -->
+                    <div class="card">
+
+                        <div class="card-body">
+                            <div class="card-text"> 
+                                <h4>{{ user_item.username }}</h4>
+                                <ul>
+                                    {% if user.full_name %}
+                                    <li>Name: {{ user.full_name }}</li>
+                                    {% endif %}
+                                    <li>Email: {{ user.email }} </li>
+                                    <li>Active: {% if user.active %}Yes{% endif %}{% if not user.active %}No{% endif %}</li>
+                                    <li>Community administrator: {% if user.is_staff %}Yes{% endif %}{% if not user.is_staff %}No{% endif %}</li>
+                                    <li>Last Login: {{ user.last_login }} </li>
+                                    <li>Date joined: {{ user.date_joined }} </li>
+                                </ul>    
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <!-- End User Card -->
+
+                </div>
+            </div>
+            <!-- End col and row for each user -->
+
+            {% endfor %}
+            <!-- End Loop -->
+
+        </div>
+        <!-- End Users List -->
+
+    </div>
+
+<!-- users.html content ends here -->
+{% endblock content %}
