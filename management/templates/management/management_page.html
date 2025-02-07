@@ -40,7 +40,14 @@
                             <div class="card-text"> 
                                 <h4>{{ user_item.username }}</h4>
                                 <ul>
-                                    <li></li>
+                                    {% if user.full_name %}
+                                    <li>Name: {{ user.full_name }}</li>
+                                    {% endif %}
+                                    <li>Email: {{ user.email }} </li>
+                                    <li>Active: {% if user.active %}Yes{% endif %}{% if not user.active %}No{% endif %}</li>
+                                    <li>Community administrator: {% if user.is_staff %}Yes{% endif %}{% if not user.is_staff %}No{% endif %}</li>
+                                    <li>Last Login: {{ user.last_login }} </li>
+                                    <li>Date joined: {{ user.date_joined }} </li>
                                 </ul>    
                             </div>
 
