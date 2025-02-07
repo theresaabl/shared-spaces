@@ -40,12 +40,25 @@ def user_accounts(request):
 
     users_list = User.objects.all()
 
+    # filter by status
+    staff_users = users_list.filter(is_staff=True).order_by('username')
+    active_users = users_list.filter(is_active=True, is_staff=False).order_by('username')
+    inactive_users = users_list.filter(is_active=False).order_by('username')
+
+    # Debugging output in the terminal
+    print("Staff Users:", staff_users)
+    print("Active Users:", active_users)
+    print("Inactive Users:", inactive_users)
+
+
     # if request.method is GET
     return render(
         request,
         "management/users.html",
         {
-            "users_list": users_list,
+            "staff_users": staff_users,
+            "active_users": active_users,
+            "inactive_users": inactive_users,
         }
     )
 

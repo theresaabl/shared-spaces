@@ -21,51 +21,10 @@
         <!-- List of Users -->
         <div class="col-12 col-md-6 col-xl-5 col-xxl-4">
 
-            <!-- Loop through all users (don't use user since this refers to the currently logged in user)-->
-            {% for user_item in users_list %}
-
-            <!-- Row and Column for each user -->
-            <div class="row justify-content-center">
-                <div class="col">
-
-                    <!-- User Card -->
-                    <div class="card">
-
-                        <div class="card-body">
-                            <div class="card-text"> 
-                                <h4>{{ user_item.username }}</h4>
-                                <ul>
-                                    {% if user_item.full_name %}
-                                    <li>Name: {{ user_item.full_name }}</li>
-                                    {% endif %}
-                                    <li>Email: {{ user_item.email }} </li>
-                                    <li>Active: {% if user_item.is_active %}Yes{% endif %}{% if not user_item.is_active %}No{% endif %}</li>
-                                    <li>Community administrator: {% if user_item.is_staff %}Yes{% endif %}{% if not user_item.is_staff %}No{% endif %}</li>
-                                    <li>Last Login: {{ user_item.last_login }} </li>
-                                    <li>Date joined: {{ user_item.date_joined }} </li>
-                                </ul>
-
-                                <!-- only show buttons for users not the current user, otherwise could accidentally delete or deactivate own account -->
-                                {% if not user_item.id == user.id %}
-                                    <a href="{% url 'user-activation' user_item.id %}" class="btn btn-sm btn-primary">{% if not user_item.is_active %}Activate{% endif %}{% if user_item.is_active %}Deactivate{%endif%}</a> 
-                                    {% if user_item.is_active %} 
-                                    <a href="{% url 'user-admin-status' user_item.id %}" class="btn btn-sm btn-secondary">{% if not user_item.is_staff %}Give Admin Status{% endif %}{% if user_item.is_staff %}Remove Admin Status{% endif %}</a>
-                                    {% endif %}
-                                    <button class="btn btn-danger btn-sm btn-delete-users" user_id="{{ user_item.id }}">Delete User</button>
-                                {% endif %}
-                            </div>
-
-                        </div>
-
-                    </div>
-                    <!-- End User Card -->
-
-                </div>
-            </div>
-            <!-- End col and row for each user -->
-
-            {% endfor %}
-            <!-- End Loop -->
+            <!-- Include partial templates -->
+            {% include "management/partials/user_list.html" with title="Community Administrators" users_list=staff_users %}
+            {% include "management/partials/user_list.html" with title="Active Users (Confirmed Shared Spaces Residents)" users_list=active_users %}
+            {% include "management/partials/user_list.html" with title="Inactive Users" users_list=inactive_users %}
 
         </div>
         <!-- End Users List -->
