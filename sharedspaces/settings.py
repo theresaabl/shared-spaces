@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
+from django.contrib.messages import constants as messages
 import dj_database_url
 if os.path.isfile("env.py"):
   import env
@@ -153,12 +154,19 @@ USE_TZ = True
 
 # Date and time input field format
 DATE_INPUT_FORMATS = [
-    "%d/%m/%Y",  # '25/01/2025'
+    "%Y-%m-%d",  # HTML5 default format for date picker
+    "%d/%m/%Y",  # custom format '25/01/2025'
 ]
 
 TIME_INPUT_FORMATS = [
     "%H:%M",  # '13:50'
 ]
+
+MESSAGE_TAGS = {
+  messages.SUCCESS: 'alert-success',
+  messages.ERROR: 'alert-danger',
+  messages.INFO: 'alert-info',
+}
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
