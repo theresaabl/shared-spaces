@@ -42,14 +42,10 @@
                                     <li>Last Login: {{ user_item.last_login }} </li>
                                     <li>Date joined: {{ user_item.date_joined }} </li>
                                 </ul>
-                                <a href="{% url 'user-activation' user_item.id %}" class="btn btn-primary">{% if not user_item.is_active %}Activate{% endif %}{% if user_item.is_active %}Deactivate{%endif%}</a>
-                                
 
-                                {% if user_item.is_active and not user_item.is_staff %} 
-                                <a href="" class="btn btn-secondary">Give Admin Status</a>
-                                {% endif %}
-                                {% if user_item.is_active and user_item.is_staff %} 
-                                <a href="" class="btn btn-secondary">Remove Admin Status</a>
+                                <a href="{% url 'user-activation' user_item.id %}" class="btn btn-primary">{% if not user_item.is_active %}Activate{% endif %}{% if user_item.is_active %}Deactivate{%endif%}</a> 
+                                {% if user_item.is_active %} 
+                                <a href="{% url 'user-admin-status' user_item.id %}" class="btn btn-secondary">{% if not user_item.is_staff %}Give Admin Status{% endif %}{% if user_item.is_staff %}Remove Admin Status{% endif %}</a>
                                 {% endif %}
                                 <button class="btn btn-danger">Delete User</button>
                             </div>

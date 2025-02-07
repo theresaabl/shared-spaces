@@ -54,10 +54,6 @@ def user_activation(request, user_id):
     """
     Activate and deactivate user accounts
 
-    **Context**
-    ``users``
-    An instance of :model:`User`.
-
     **Template:**
 
     :template:`management/users.html`
@@ -72,6 +68,31 @@ def user_activation(request, user_id):
     else:
         print("User is inavtive, activate")
         user.is_active = True
+
+    user.save()
+
+    return HttpResponseRedirect(reverse('users'))
+
+
+@staff_member_required
+def user_admin_status(request, user_id):
+    """
+    Give and Remove Admin status to user
+
+    **Template:**
+
+    :template:`management/users.html`
+    """
+
+    user = get_object_or_404(User, pk=user_id)
+
+    print("user id:", user.id, user_id)
+    if user.is_staff:
+        print("User is staff, remove")
+        user.is_staff = False
+    else:
+        print("User is not staff, give admin")
+        user.is_staff = True
 
     user.save()
 
