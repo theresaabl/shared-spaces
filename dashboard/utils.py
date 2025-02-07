@@ -23,7 +23,7 @@ def check_for_duplicate_bookings(booking, request):
             request,
             messages.ERROR,
             'This event space is already booked on the requested day! '
-            'Please choose another date.'
+            'Please choose another room or date.'
         )
         print("message added")
 
@@ -38,3 +38,10 @@ def resident_request_type(purpose):
     Returns whether the resident request is of type request or message
     """
     return "Maintenance request" if purpose == 0 else "Message"
+
+
+def convert_date(booking_date):
+    """
+    Convert date to 'YYYY-MM-DD' for proper display in date picker
+    """
+    return booking_date.strftime("%Y-%m-%d")

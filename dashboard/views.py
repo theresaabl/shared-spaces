@@ -8,7 +8,7 @@ from django.urls import reverse
 from django.http import HttpResponseRedirect
 from .models import EventSpaceBooking, EventSpace, ResidentRequest
 from .forms import BookingForm, ResidentRequestForm
-from .utils import check_for_duplicate_bookings, resident_request_type
+from .utils import check_for_duplicate_bookings, resident_request_type, convert_date
 
 
 class MyCustomLoginView(LoginView):
@@ -176,8 +176,9 @@ def booking_edit(request, booking_id):
     """
     # get booking with requested id
     booking = get_object_or_404(EventSpaceBooking, pk=booking_id)
+
     # save the original date and event space in case of duplicate booking after edit
-    old_date = booking.date
+    old_date = convert_date(booking.date)
     old_event_space = booking.event_space
 
     # check whether request.user is the user who made the booking
@@ -238,6 +239,7 @@ def booking_edit(request, booking_id):
                             print("inside check for duplicate bookings loop in views")
                             # Prefill form but leave original event space
                             booking.event_space = old_event_space
+                            booking.date = convert_date(booking.date)
                             booking_form = BookingForm(instance=booking)
                             # render form again
                             return render(
@@ -306,6 +308,8 @@ def booking_edit(request, booking_id):
 
     # If request.method is GET
     else:
+        # convert date to proper format for HTML date picker
+        booking.date = convert_date(booking.date)
         booking_form = BookingForm(instance=booking)
 
         return render(
