@@ -5,6 +5,7 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 from dashboard.models import EventSpace, EventSpaceBooking, ResidentRequest
+from contact.models import ContactMessage
 
 
 # only for staff members to access admin page
@@ -31,7 +32,9 @@ def user_accounts(request):
     Display the user accounts page
 
     **Context**
-    ``users``
+    ``staff_users``
+    ``active_users``
+    ``inactive_users``
     An instance of :model:`User`.
 
     **Template:**
@@ -50,7 +53,6 @@ def user_accounts(request):
     print("Staff Users:", staff_users)
     print("Active Users:", active_users)
     print("Inactive Users:", inactive_users)
-
 
     # if request.method is GET
     return render(
@@ -160,7 +162,7 @@ def event_spaces(request):
     Display the event spaces page
 
     **Context**
-    ``EventSpaces``
+    ``event_spaces``
     An instance of :model:`EventSpace`.
 
     **Template:**
@@ -186,7 +188,7 @@ def event_space_bookings(request):
     Display the event space bookings page
 
     **Context**
-    ``EventSpaceBookings``
+    ``event_space_bookings``
     An instance of :model:`EventSpaceBooking`.
 
     **Template:**
@@ -212,7 +214,7 @@ def resident_requests(request):
     Display the resident requests page
 
     **Context**
-    ``ResidentRequests``
+    ``resident_requests``
     An instance of :model:`ResidentRequest`.
 
     **Template:**
@@ -228,5 +230,31 @@ def resident_requests(request):
         "management/resident_requests.html",
         {
             "resident_requests": res_requests,
+        }
+    )
+
+
+@staff_member_required
+def contact_messages(request):
+    """
+    Display the contact messages page
+
+    **Context**
+    ``contact_messages``
+    An instance of :model:`ContactMessage`.
+
+    **Template:**
+
+    :template:`management/contact_messages.html`
+    """
+
+    messages = ContactMessage.objects.all()
+
+    # if request.method is GET
+    return render(
+        request,
+        "management/contact_messages.html",
+        {
+            "contact_messages": messages,
         }
     )
