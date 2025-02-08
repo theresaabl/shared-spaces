@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!-- resident_requests.html content starts here -->
+<div class="container-fluid">
+    
+    <!-- Title Row -->
+    <div class="row">
+        <div class="col-12 text-center">
+            <h3>Resident Requests</h3>
+            <p>Here is a list of all maintenance requests and messages by SharedSpaces residents.</p>
+        </div>
+    </div>
+
+    <!-- Data Row -->
+    <div class="row justify-content-center">
+
+        <!-- List of Requests -->
+        <div class="col-12 col-md-6 col-xl-5 col-xxl-4">
+
+            {% for resident_request in resident_requests %}
+
+            <h4>{{ resident_request }}</h4>
+
+            {% empty %}
+
+            <p>No requests found.</p>
+
+            {% endfor %}
+
+        </div>
+        <!-- End Requests List -->
+
+    </div>
+
+</div>
+
+
+<!-- resident_requests.html content ends here -->
+{% endblock content %}

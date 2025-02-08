@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.admin.views.decorators import staff_member_required
 from django.urls import reverse
 from django.http import HttpResponseRedirect
-from dashboard.models import EventSpace, EventSpaceBooking
+from dashboard.models import EventSpace, EventSpaceBooking, ResidentRequest
 
 
 # only for staff members to access admin page
@@ -202,5 +202,31 @@ def event_space_bookings(request):
         "management/event_space_bookings.html",
         {
             "event_space_bookings": bookings,
+        }
+    )
+
+
+@staff_member_required
+def resident_requests(request):
+    """
+    Display the resident requests page
+
+    **Context**
+    ``ResidentRequests``
+    An instance of :model:`ResidentRequest`.
+
+    **Template:**
+
+    :template:`management/resident_requests.html`
+    """
+
+    res_requests = ResidentRequest.objects.all()
+
+    # if request.method is GET
+    return render(
+        request,
+        "management/resident_requests.html",
+        {
+            "resident_requests": res_requests,
         }
     )
