@@ -14,13 +14,13 @@
                 <div class="card-text"> 
                     <h5>{{ user_item.username }}</h5>
                     <ul>
-                        {% if user_item.full_name %}
-                        <li>Name: {{ user_item.full_name }}</li>
+                        {% if user_item.first_name or user_item.last_name %}
+                        <li>Name:{% if user_item.first_name %} {{ user_item.first_name }}{% endif %}{% if user_item.last_name %} {{ user_item.last_name }}{% endif %}</li>
                         {% endif %}
                         <li>Email: {{ user_item.email }} </li>
                         <li>Active: {% if user_item.is_active %}Yes{% endif %}{% if not user_item.is_active %}No{% endif %}</li>
                         <li>Community administrator: {% if user_item.is_staff %}Yes{% endif %}{% if not user_item.is_staff %}No{% endif %}</li>
-                        <li>Last Login: {{ user_item.last_login }} </li>
+                        <li>Last Login: {% if user_item.last_login %}{{ user_item.last_login }}{% else %}Never{% endif %} </li>
                         <li>Date joined: {{ user_item.date_joined }} </li>
                     </ul>
 

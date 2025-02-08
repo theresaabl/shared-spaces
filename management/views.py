@@ -170,14 +170,14 @@ def event_spaces(request):
     :template:`management/event_spaces.html`
     """
 
-    spaces = EventSpace.objects.all()
+    spaces_values = EventSpace.objects.all().values()
 
     # if request.method is GET
     return render(
         request,
         "management/event_spaces.html",
         {
-            "event_spaces": spaces,
+            "event_spaces_values": spaces_values,
         }
     )
 

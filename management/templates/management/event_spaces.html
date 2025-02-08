@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% load static %}
+
 {% block content %}
 
 <!-- event_spaces.html content starts here -->
@@ -19,15 +21,82 @@
         <!-- List of Event Spaces -->
         <div class="col-12 col-md-6 col-xl-5 col-xxl-4">
 
-            {% for space in event_spaces %}
+            <!-- Loop through all event spaces-->
+            {% for space in event_spaces_values %}
 
-            <h4>{{ space.name }}</h4>
+            <!-- Row and Column for each event_space -->
+            <div class="row justify-content-center">
+                <div class="col">
 
+                    <!-- Event Space Card -->
+                    <div class="card">
+
+                        <div class="card-body">
+                            <div class="card-text"> 
+                                <h5>{{ space.name }}</h5>
+                                <ul>
+                                    <li>Type: {{ space.type }}</li>
+                                    <li>Building: {{ space.building }}</li>
+                                    <li>Capacity: {{ space.capacity }}</li>
+                                    <li>Number of Tables: {{ space.number_of_tables }} </li>
+                                    <li>Number of Chairs: {{ space.number_of_chairs }} </li>
+                                    <li>
+                                        Amenities:
+                                        <!-- Loop through all Boolean Fields -->
+                                        <ul>
+                                            {% for key, value in space.items  %}
+                                                {% if value is True %}
+                                                <li class="replace-underscore">{{ key }}</li>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </ul>
+
+                                    </li>
+
+                                    {% if space.notes %}
+                                    <li>Notes: {{ space.notes }}</li>
+                                    {% endif %}
+
+                                </ul>
+                                {% comment %}
+                                <a href="{% url 'mgmt-edit-booking' space.id %}" class="btn btn-sm btn-primary">Edit</a>
+                                <button class="btn btn-danger btn-sm btn-delete-event-space" event_space_id="{{ space.id }}">Delete</button>
+                                {% endcomment %}
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <!-- End Event Space Card -->
+
+                </div>
+            </div>
+            <!-- End col and row for each space -->
             {% empty %}
 
-            <p>No event spaces found.</p>
+            <!-- Row and Column for empty list -->
+            <div class="row justify-content-center">
+                <div class="col">
+
+                    <!-- No Space Card -->
+                    <div class="card">
+
+                        <div class="card-body">
+                            <div class="card-text"> 
+                                <h5>No Event Spaces found.</h5>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <!-- End No Space Card -->
+
+                </div>
+            </div>
 
             {% endfor %}
+            <!-- End Loop -->
 
         </div>
         <!-- End Event Spaces List -->
@@ -48,3 +117,8 @@
 
 <!-- event_spaces.html content ends here -->
 {% endblock content %}
+
+<!-- Script block -->
+{% block extras %}
+<script src="{% static 'js/event_spaces_list.js' %}"></script>
+{% endblock %}
