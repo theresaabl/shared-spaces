@@ -96,7 +96,7 @@ def user_activation(request, user_id):
 
         user.save()
 
-    return HttpResponseRedirect(reverse('users'))
+    return HttpResponseRedirect(reverse('mgmt-users'))
 
 
 @staff_member_required
@@ -128,7 +128,7 @@ def user_admin_status(request, user_id):
 
         user.save()
 
-    return HttpResponseRedirect(reverse('users'))
+    return HttpResponseRedirect(reverse('mgmt-users'))
 
 
 @staff_member_required
@@ -153,7 +153,7 @@ def user_delete(request, user_id):
             'User account successfully deleted!'
         )
 
-    return HttpResponseRedirect(reverse('users'))
+    return HttpResponseRedirect(reverse('mgmt-users'))
 
 
 @staff_member_required

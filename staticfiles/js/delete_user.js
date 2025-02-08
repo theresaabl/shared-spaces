@@ -19,7 +19,7 @@ addEventListener("DOMContentLoaded", (e) => {
     for (let button of deleteUsersButtons) {
         button.addEventListener("click", (e) => {
             let userId = e.target.getAttribute("user_id");
-            deleteUsersConfirm.href = `delete_user/${userId}`;
+            deleteUsersConfirm.href = `delete-user/${userId}`;
             deleteUsersModal.show();
         });
     }
