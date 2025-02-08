@@ -11,7 +11,14 @@
     <div class="row">
         <div class="col-12 text-center">
             <h3>Event Spaces</h3>
-            <p>Here is a list of all available event spaces in the SharedSpaces community.</p>
+            <p>Here is a list of all available event spaces in the SharedSpaces community. You can add new event spaces, and edit or delete existing ones.</p>
+        </div>
+    </div>
+
+    <!-- Add New Event Space -->
+    <div class="row justify-content-center">
+        <div class="col-auto">
+            <a href="{% url 'mgmt-add-event-space' %}" class="btn btn-lg btn-primary">Add New Event Space</a>
         </div>
     </div>
 
@@ -59,9 +66,9 @@
 
                                 </ul>
                                 {% comment %}
-                                <a href="{% url 'mgmt-edit-booking' space.id %}" class="btn btn-sm btn-primary">Edit</a>
-                                <button class="btn btn-danger btn-sm btn-delete-event-space" event_space_id="{{ space.id }}">Delete</button>
+                                <a href="{% url 'mgmt-edit-event-space' space.id %}" class="btn btn-sm btn-secondary">Edit</a>
                                 {% endcomment %}
+                                <button class="btn btn-danger btn-sm btn-delete-event-space" event_space_id="{{ space.id }}">Delete</button>
 
                             </div>
 
@@ -121,4 +128,5 @@
 <!-- Script block -->
 {% block extras %}
 <script src="{% static 'js/event_spaces_list.js' %}"></script>
+<script src="{% static 'js/delete-event-space.js' %}"></script>
 {% endblock %}

@@ -6,6 +6,7 @@ from django.urls import reverse
 from django.http import HttpResponseRedirect
 from dashboard.models import EventSpace, EventSpaceBooking, ResidentRequest
 from contact.models import ContactMessage
+from .forms import EventSpaceForm
 
 
 # only for staff members to access admin page
@@ -256,5 +257,84 @@ def contact_messages(request):
         "management/contact_messages.html",
         {
             "contact_messages": messages,
+        }
+    )
+
+
+@staff_member_required
+def add_event_space(request):
+    """
+    Display the add new event space page
+
+    **Template:**
+
+    :template:`management/mange_event_spaces.html`
+
+    **Context:**
+
+    ``event_space_form``
+    An instance of :form:`management.EventSpaceForm`
+    """
+
+    # if request.method == "POST":
+        # booking_form = BookingForm(data=request.POST)
+
+        # if booking_form.is_valid():
+        #     booking = booking_form.save(commit=False)
+        #     booking.resident = request.user
+
+        #     # check whether room already booked on that day
+        #     if check_for_duplicate_bookings(booking, request):
+        #         # Prefill form but leave date empty
+        #         booking.date = ""
+        #         booking_form = BookingForm(instance=booking)
+        #         # render form again
+        #         return render(
+        #             request,
+        #             "dashboard/event_space_booking.html",
+        #             {
+        #                 "booking_form": booking_form,
+        #             }
+        #         )
+        #     # no duplicate bookings
+        #     else:
+        #         booking.save()
+
+        #         contact_url = reverse('contact')
+
+        #         messages.add_message(
+        #             request,
+        #             messages.SUCCESS,
+        #             "You successfully sent a booking request. "
+        #             "The request is pending and requires approval by the community administrators. "
+        #             f"""If the status of your booking is still pending in 3 working days, please feel free to <a href="{contact_url}">contact us</a>."""
+        #         )
+
+        #         return HttpResponseRedirect(reverse('dashboard'))
+
+        # # booking form not valid:
+        # else:
+        #     messages.add_message(
+        #         request,
+        #         messages.ERROR,
+        #         'There was an error in your form. Please fill in again.'
+        #     )
+
+        #     return render(
+        #         request,
+        #         "dashboard/event_space_booking.html",
+        #         {
+        #             "booking_form": booking_form,
+        #         }
+        #     )
+
+    # if request.method == GET
+    event_space_form = EventSpaceForm()
+
+    return render(
+        request,
+        "management/manage_event_spaces.html",
+        {
+            "event_space_form": event_space_form,
         }
     )

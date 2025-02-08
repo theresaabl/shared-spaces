@@ -14,7 +14,7 @@ class EventSpaceForm(forms.ModelForm):
             'number_of_tables',
             'number_of_chairs',
             'kitchen',
-            'tea_and_coffemaker',
+            'tea_and_coffeemaker',
             'projector',
             'audio_equipment',
             'childrens_play_area',
