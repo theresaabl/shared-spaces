@@ -184,84 +184,6 @@ def event_spaces(request):
 
 
 @staff_member_required
-def event_space_bookings(request):
-    """
-    Display the event space bookings page
-
-    **Context**
-    ``event_space_bookings``
-    An instance of :model:`EventSpaceBooking`.
-
-    **Template:**
-
-    :template:`management/event_space_bookings.html`
-    """
-
-    bookings = EventSpaceBooking.objects.all()
-
-    # if request.method is GET
-    return render(
-        request,
-        "management/event_space_bookings.html",
-        {
-            "event_space_bookings": bookings,
-        }
-    )
-
-
-@staff_member_required
-def resident_requests(request):
-    """
-    Display the resident requests page
-
-    **Context**
-    ``resident_requests``
-    An instance of :model:`ResidentRequest`.
-
-    **Template:**
-
-    :template:`management/resident_requests.html`
-    """
-
-    res_requests = ResidentRequest.objects.all()
-
-    # if request.method is GET
-    return render(
-        request,
-        "management/resident_requests.html",
-        {
-            "resident_requests": res_requests,
-        }
-    )
-
-
-@staff_member_required
-def contact_messages(request):
-    """
-    Display the contact messages page
-
-    **Context**
-    ``contact_messages``
-    An instance of :model:`ContactMessage`.
-
-    **Template:**
-
-    :template:`management/contact_messages.html`
-    """
-
-    messages = ContactMessage.objects.all()
-
-    # if request.method is GET
-    return render(
-        request,
-        "management/contact_messages.html",
-        {
-            "contact_messages": messages,
-        }
-    )
-
-
-@staff_member_required
 def add_event_space(request):
     """
     Display the add new event space page
@@ -281,7 +203,6 @@ def add_event_space(request):
         # add request.FILES to form submission since images can be uploaded
         event_space_form = EventSpaceForm(request.POST, request.FILES)
 
-        print(request.FILES)
         # form is valid:
         if event_space_form.is_valid():
 
@@ -297,7 +218,6 @@ def add_event_space(request):
 
         # event space form not valid:
         else:
-            print(form.errors)
             messages.add_message(
                 request,
                 messages.ERROR,
@@ -356,7 +276,6 @@ def event_space_edit(request, space_id):
 
             # booking form not valid
             else:
-                print(event_space_form.errors)
                 messages.add_message(
                     request,
                     messages.ERROR,
@@ -412,3 +331,147 @@ def event_space_delete(request, space_id):
     )
 
     return HttpResponseRedirect(reverse('mgmt-event-spaces'))
+
+
+@staff_member_required
+def event_space_bookings(request):
+    """
+    Display the event space bookings page
+
+    **Context**
+    ``event_space_bookings``
+    An instance of :model:`EventSpaceBooking`.
+
+    **Template:**
+
+    :template:`management/event_space_bookings.html`
+    """
+
+    bookings = EventSpaceBooking.objects.all().order_by("-created_on")
+
+    # if request.method is GET
+    return render(
+        request,
+        "management/event_space_bookings.html",
+        {
+            "event_space_bookings": bookings,
+        }
+    )
+
+
+@staff_member_required
+def approve_booking(request, booking_id):
+    """
+    Approve booking requests
+
+    **Template:**
+
+    :template:`management/event_space_bookings.html`
+    """
+
+    booking = get_object_or_404(EventSpaceBooking, pk=booking_id)
+
+    # check whether booking is not already approved
+    if booking.status == 1:
+        messages.add_message(
+                    request,
+                    messages.INFO,
+                    'This booking was already approved!'
+                )
+    else:
+        booking.status = 1
+
+        messages.add_message(
+            request,
+            messages.SUCCESS,
+            'Booking successfully approved!'
+        )
+
+        booking.save()
+
+    return HttpResponseRedirect(reverse('mgmt-event-space-bookings'))
+
+
+@staff_member_required
+def deny_booking(request, booking_id):
+    """
+    Deny booking requests
+
+    **Template:**
+
+    :template:`management/event_space_bookings.html`
+    """
+
+    booking = get_object_or_404(EventSpaceBooking, pk=booking_id)
+
+    # check whether booking is not already denied
+    if booking.status == 2:
+        messages.add_message(
+                    request,
+                    messages.INFO,
+                    'This booking was already denied!'
+                )
+    else:
+        booking.status = 2
+
+        messages.add_message(
+                    request,
+                    messages.SUCCESS,
+                    'Booking successfully denied!'
+                )
+
+        booking.save()
+
+    return HttpResponseRedirect(reverse('mgmt-event-space-bookings'))
+
+
+@staff_member_required
+def resident_requests(request):
+    """
+    Display the resident requests page
+
+    **Context**
+    ``resident_requests``
+    An instance of :model:`ResidentRequest`.
+
+    **Template:**
+
+    :template:`management/resident_requests.html`
+    """
+
+    res_requests = ResidentRequest.objects.all()
+
+    # if request.method is GET
+    return render(
+        request,
+        "management/resident_requests.html",
+        {
+            "resident_requests": res_requests,
+        }
+    )
+
+
+@staff_member_required
+def contact_messages(request):
+    """
+    Display the contact messages page
+
+    **Context**
+    ``contact_messages``
+    An instance of :model:`ContactMessage`.
+
+    **Template:**
+
+    :template:`management/contact_messages.html`
+    """
+
+    messages = ContactMessage.objects.all()
+
+    # if request.method is GET
+    return render(
+        request,
+        "management/contact_messages.html",
+        {
+            "contact_messages": messages,
+        }
+    )

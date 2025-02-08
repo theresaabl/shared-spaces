@@ -69,10 +69,12 @@
                                     {% endif %}
 
                                 </ul>
-                                <a href="{% url 'mgmt-edit-event-space' space.id %}" class="btn btn-sm btn-secondary">Edit</a>
-                                <button class="btn btn-danger btn-sm btn-delete-event-space" space_id="{{ space.id }}">Delete</button>
 
                             </div>
+
+                            <!-- Buttons -->
+                            <a href="{% url 'mgmt-edit-event-space' space.id %}" class="btn btn-sm btn-secondary">Edit</a>
+                            <button class="btn btn-danger btn-sm btn-delete-event-space" space_id="{{ space.id }}">Delete</button>
 
                         </div>
 
