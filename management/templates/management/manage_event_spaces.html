@@ -23,7 +23,7 @@
             <div class="card-body">
 
                 <!-- Event Space Form -->
-                <form id="manage-event-spaces-form" method="post">
+                <form id="manage-event-spaces-form" method="post" enctype="multipart/form-data">
                     {{ event_space_form | crispy }}
                     {% csrf_token %}
                     <button id="manage-event-spaces-reset-button" type="reset" class="btn btn-secondary btn-lg">Reset</button>

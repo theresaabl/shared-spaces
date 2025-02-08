@@ -4,7 +4,8 @@ from django.urls import path
 urlpatterns = [
     path('', views.management_page, name='management'),
     path('event-spaces/', views.event_spaces, name='mgmt-event-spaces'),
-    path('event-spaces/manage-event-spaces', views.add_event_space, name='mgmt-add-event-space'),
+    path('event-spaces/add-event-space', views.add_event_space, name='mgmt-add-event-space'),
+    path('event-spaces/edit-event-space/<int:space_id>', views.event_space_edit, name='mgmt-edit-event-space'),
     path('event-space-bookings/', views.event_space_bookings, name='mgmt-event-space-bookings'),
     path('contact-messages/', views.contact_messages, name='mgmt-contact-messages'),
     path('resident-requests/', views.resident_requests, name='mgmt-resident-requests'),

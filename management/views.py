@@ -278,8 +278,10 @@ def add_event_space(request):
 
     # if method is POST
     if request.method == "POST":
-        event_space_form = EventSpaceForm(data=request.POST)
+        # add request.FILES to form submission since images can be uploaded
+        event_space_form = EventSpaceForm(request.POST, request.FILES)
 
+        print(request.FILES)
         # form is valid:
         if event_space_form.is_valid():
 
@@ -295,6 +297,7 @@ def add_event_space(request):
 
         # event space form not valid:
         else:
+            print(form.errors)
             messages.add_message(
                 request,
                 messages.ERROR,
@@ -319,3 +322,76 @@ def add_event_space(request):
             "event_space_form": event_space_form,
         }
     )
+
+
+@staff_member_required
+def event_space_edit(request, space_id):
+    """
+    View to edit event spaces
+    """
+    # get event space with requested id
+    space = get_object_or_404(EventSpace, pk=space_id)
+
+    # Start if request method POST conditional
+    if request.method == "POST":
+
+        event_space_form = EventSpaceForm(request.POST, request.FILES, instance=space)
+
+        # Start if booking has changed conditional
+        if event_space_form.has_changed():
+
+            # Start if booking form is valid conditional
+            if event_space_form.is_valid():
+
+                event_space_form.save()
+
+                # add success message
+                messages.add_message(
+                    request,
+                    messages.SUCCESS,
+                    "Event Space was successfully updated!"
+                )
+
+                return HttpResponseRedirect(reverse('mgmt-event-spaces'))
+
+            # booking form not valid
+            else:
+                print(event_space_form.errors)
+                messages.add_message(
+                    request,
+                    messages.ERROR,
+                    'Error updating event space!'
+                )
+
+                return render(
+                    request,
+                    "management/manage_event_spaces.html",
+                    {
+                        "event_space_form": event_space_form,
+                    }
+                )
+            # End event space form valid conditional
+
+        # No fields have changed
+        else:
+            messages.add_message(
+                request,
+                messages.INFO,
+                'No changes were made to the event space.'
+            )
+
+            return HttpResponseRedirect(reverse('mgmt-event-spaces'))
+        # End event space form changed conditional
+
+    # If request.method is GET
+    else:
+        event_space_form = EventSpaceForm(instance=space)
+
+        return render(
+            request,
+            "management/manage_event_spaces.html",
+            {
+                "event_space_form": event_space_form,
+            }
+        )
+    # End request.method POST conditional
