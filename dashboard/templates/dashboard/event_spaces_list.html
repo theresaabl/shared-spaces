@@ -33,6 +33,13 @@
                     <div class="card">
 
                         <div class="card-body">
+                            <div class="image-container">
+                                {% if "placeholder" in space.image.url %}
+                                <img class="card-img-top" src="{% static 'images/event_space_example.webp' %}" alt="placeholder image">
+                                {% else %}
+                                <img class="card-img-top" src=" {{ space.image.url }}" alt="{{ space.name }}">
+                                {% endif %}
+                            </div>
                             <div class="card-text"> 
                                 <h4>{{ space.name }}</h4>
                                 <ul>

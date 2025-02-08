@@ -276,59 +276,40 @@ def add_event_space(request):
     An instance of :form:`management.EventSpaceForm`
     """
 
-    # if request.method == "POST":
-        # booking_form = BookingForm(data=request.POST)
+    # if method is POST
+    if request.method == "POST":
+        event_space_form = EventSpaceForm(data=request.POST)
 
-        # if booking_form.is_valid():
-        #     booking = booking_form.save(commit=False)
-        #     booking.resident = request.user
+        # form is valid:
+        if event_space_form.is_valid():
 
-        #     # check whether room already booked on that day
-        #     if check_for_duplicate_bookings(booking, request):
-        #         # Prefill form but leave date empty
-        #         booking.date = ""
-        #         booking_form = BookingForm(instance=booking)
-        #         # render form again
-        #         return render(
-        #             request,
-        #             "dashboard/event_space_booking.html",
-        #             {
-        #                 "booking_form": booking_form,
-        #             }
-        #         )
-        #     # no duplicate bookings
-        #     else:
-        #         booking.save()
+            event_space_form.save()
 
-        #         contact_url = reverse('contact')
+            messages.add_message(
+                request,
+                messages.SUCCESS,
+                "You successfully added a new event space. "
+            )
 
-        #         messages.add_message(
-        #             request,
-        #             messages.SUCCESS,
-        #             "You successfully sent a booking request. "
-        #             "The request is pending and requires approval by the community administrators. "
-        #             f"""If the status of your booking is still pending in 3 working days, please feel free to <a href="{contact_url}">contact us</a>."""
-        #         )
+            return HttpResponseRedirect(reverse('mgmt-event-spaces'))
 
-        #         return HttpResponseRedirect(reverse('dashboard'))
+        # event space form not valid:
+        else:
+            messages.add_message(
+                request,
+                messages.ERROR,
+                'There was an error in your form. Please fill in again.'
+            )
 
-        # # booking form not valid:
-        # else:
-        #     messages.add_message(
-        #         request,
-        #         messages.ERROR,
-        #         'There was an error in your form. Please fill in again.'
-        #     )
+            return render(
+                request,
+                "management/manage_event_spaces.html",
+                {
+                    "event_space_form": event_space_form,
+                }
+            )
 
-        #     return render(
-        #         request,
-        #         "dashboard/event_space_booking.html",
-        #         {
-        #             "booking_form": booking_form,
-        #         }
-        #     )
-
-    # if request.method == GET
+    # if request.method is GET
     event_space_form = EventSpaceForm()
 
     return render(
