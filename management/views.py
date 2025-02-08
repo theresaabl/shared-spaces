@@ -171,7 +171,7 @@ def event_spaces(request):
     :template:`management/event_spaces.html`
     """
 
-    spaces_values = EventSpace.objects.all().values()
+    spaces_values = EventSpace.objects.all().values().order_by('name')
 
     # if request.method is GET
     return render(
@@ -395,3 +395,20 @@ def event_space_edit(request, space_id):
             }
         )
     # End request.method POST conditional
+
+
+@staff_member_required
+def event_space_delete(request, space_id):
+    """
+    view to delete event space
+    """
+    space = get_object_or_404(EventSpace, pk=space_id)
+    space.delete()
+
+    messages.add_message(
+        request,
+        messages.SUCCESS,
+        'Event Space successfully deleted!'
+    )
+
+    return HttpResponseRedirect(reverse('mgmt-event-spaces'))

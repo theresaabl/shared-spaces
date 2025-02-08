@@ -26,7 +26,7 @@
     <div class="row justify-content-center">
 
         <!-- List of Event Spaces -->
-        <div class="col-12 col-md-6 col-xl-5 col-xxl-4">
+        <div class="col-10 col-sm-8 col-md-6 col-xl-5 col-xxl-4">
 
             <!-- Loop through all event spaces-->
             {% for space in event_spaces_values %}
@@ -37,15 +37,12 @@
 
                     <!-- Event Space Card -->
                     <div class="card">
-
+                        {% if "placeholder" in space.image.url %}
+                        <img class="card-img-top img-fluid event-space-image" src="{% static 'images/event_space_example.webp' %}" alt="placeholder image">
+                        {% else %}
+                        <img class="card-img-top img-fluid event-space-image" src=" {{ space.image.url }}" alt="{{ space.name }}">
+                        {% endif %}
                         <div class="card-body">
-                            <div class="image-container">
-                                {% if "placeholder" in space.image.url %}
-                                <img class="card-img-top" src="{% static 'images/event_space_example.webp' %}" alt="placeholder image">
-                                {% else %}
-                                <img class="card-img-top" src=" {{ space.image.url }}" alt="{{ space.name }}">
-                                {% endif %}
-                            </div>
                             <div class="card-text"> 
                                 <h5>{{ space.name }}</h5>
                                 <ul>
@@ -73,7 +70,7 @@
 
                                 </ul>
                                 <a href="{% url 'mgmt-edit-event-space' space.id %}" class="btn btn-sm btn-secondary">Edit</a>
-                                <button class="btn btn-danger btn-sm btn-delete-event-space" event_space_id="{{ space.id }}">Delete</button>
+                                <button class="btn btn-danger btn-sm btn-delete-event-space" space_id="{{ space.id }}">Delete</button>
 
                             </div>
 
@@ -127,11 +124,45 @@
 </div>
 
 
+<!-- Delete Event Spaces confirmation modal -->
+<div class="modal fade" id="delete-event-space-modal" tabindex="-1" aria-labelledby="delete-event-space-modal-label" aria-hidden="true">
+
+    <!-- Modal -->
+    <div class="modal-dialog">
+
+        <!-- Modal Content -->
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h5 class="modal-title" id="delete-event-space-modal-label">Delete Event Space?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="modal-body">
+                Are you sure you want to permanently delete this event space?
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <!-- url is set dynamically in mgmt_delete_event_space.js -->
+                <a id="delete-event-space-confirm" href="#" class="btn btn-danger">Delete</a>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
 <!-- event_spaces.html content ends here -->
 {% endblock content %}
 
 <!-- Script block -->
 {% block extras %}
 <script src="{% static 'js/event_spaces_list.js' %}"></script>
-<script src="{% static 'js/delete-event-space.js' %}"></script>
+<script src="{% static 'js/mgmt_delete_event_space.js' %}"></script>
 {% endblock %}

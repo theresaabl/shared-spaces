@@ -365,7 +365,7 @@ def event_spaces_list(request):
     :template:`dashboard/event_spaces_list.html`
     """
     # get key value pairs for all fields of all event spaces
-    event_spaces_values = EventSpace.objects.all().values()
+    event_spaces_values = EventSpace.objects.all().values().order_by('name')
 
     return render(
         request,
