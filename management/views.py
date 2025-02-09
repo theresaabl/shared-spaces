@@ -391,6 +391,16 @@ def approve_booking(request, booking_id):
 
     booking = get_object_or_404(EventSpaceBooking, pk=booking_id)
 
+    # check whether booking.date is not in the past
+    if booking.date < date.today():
+        messages.add_message(
+            request,
+            messages.ERROR,
+            'You cannot change the status of past bookings!'
+        )
+
+        return HttpResponseRedirect(reverse('mgmt-event-space-bookings'))
+
     # check whether booking is not already approved
     if booking.status == 1:
         messages.add_message(
@@ -423,6 +433,16 @@ def deny_booking(request, booking_id):
     """
 
     booking = get_object_or_404(EventSpaceBooking, pk=booking_id)
+
+    # check whether booking.date is not in the past
+    if booking.date < date.today():
+        messages.add_message(
+            request,
+            messages.ERROR,
+            'You cannot change the status of past bookings!'
+        )
+
+        return HttpResponseRedirect(reverse('mgmt-event-space-bookings'))
 
     # check whether booking is not already denied
     if booking.status == 2:
