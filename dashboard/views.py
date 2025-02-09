@@ -224,6 +224,16 @@ def booking_edit(request, booking_id):
 
         return HttpResponseRedirect(reverse('dashboard'))
 
+    # check whether booking.date is not in the past
+    if booking.date < date.today():
+        messages.add_message(
+            request,
+            messages.ERROR,
+            'You cannot edit past bookings.'
+        )
+
+        return HttpResponseRedirect(reverse('dashboard'))
+
     # Start if request method POST conditional
     if request.method == "POST":
 
@@ -373,6 +383,17 @@ def booking_delete(request, booking_id):
 
         return HttpResponseRedirect(reverse('dashboard'))
 
+    # check whether booking.date is not in the past
+    if booking.date < date.today():
+        messages.add_message(
+            request,
+            messages.ERROR,
+            'You cannot delete past bookings.'
+        )
+
+        return HttpResponseRedirect(reverse('dashboard'))
+
+    # continue here if correct user and booking in the future
     booking.delete()
     messages.add_message(
         request,
