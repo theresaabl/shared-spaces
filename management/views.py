@@ -349,12 +349,19 @@ def event_space_bookings(request):
 
     bookings = EventSpaceBooking.objects.all().order_by("-created_on")
 
+    # sort bookings by status
+    pending_bookings = bookings.filter(status=0)
+    approved_bookings = bookings.filter(status=1)
+    denied_bookings = bookings.filter(status=2)
+
     # if request.method is GET
     return render(
         request,
         "management/event_space_bookings.html",
         {
-            "event_space_bookings": bookings,
+            "pending_bookings": pending_bookings,
+            "approved_bookings": approved_bookings,
+            "denied_bookings": denied_bookings,
         }
     )
 
