@@ -439,6 +439,23 @@ def deny_booking(request, booking_id):
 
 
 @staff_member_required
+def booking_delete(request, booking_id):
+    """
+    view to delete event space booking
+    """
+    booking = get_object_or_404(EventSpaceBooking, pk=booking_id)
+    booking.delete()
+
+    messages.add_message(
+        request,
+        messages.SUCCESS,
+        'Booking successfully deleted!'
+    )
+
+    return HttpResponseRedirect(reverse('mgmt-event-space-bookings'))
+
+
+@staff_member_required
 def resident_requests(request):
     """
     Display the resident requests page

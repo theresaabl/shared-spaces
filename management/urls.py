@@ -10,6 +10,11 @@ urlpatterns = [
     path('event-space-bookings/', views.event_space_bookings, name='mgmt-event-space-bookings'),
     path('event-space-bookings/approve-booking/<int:booking_id>', views.approve_booking, name='mgmt-booking-approve'),
     path('event-space-bookings/deny-booking/<int:booking_id>', views.deny_booking, name='mgmt-booking-deny'),
+    path(
+        'event-space-bookings/delete-booking/<int:booking_id>',
+        views.booking_delete,
+        name='mgmt-booking-delete'
+        ),
     path('contact-messages/', views.contact_messages, name='mgmt-contact-messages'),
     path('resident-requests/', views.resident_requests, name='mgmt-resident-requests'),
     path('user-accounts/', views.user_accounts, name='mgmt-users'),

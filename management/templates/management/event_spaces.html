@@ -149,7 +149,7 @@
             <!-- Modal Footer -->
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <!-- url is set dynamically in mgmt_delete_event_space.js -->
+                <!-- url is set dynamically in mgmt_delete_data.js -->
                 <a id="delete-event-space-confirm" href="#" class="btn btn-danger">Delete</a>
             </div>
 
@@ -166,5 +166,5 @@
 <!-- Script block -->
 {% block extras %}
 <script src="{% static 'js/event_spaces_list.js' %}"></script>
-<script src="{% static 'js/mgmt_delete_event_space.js' %}"></script>
+<script src="{% static 'js/mgmt_delete_data.js' %}"></script>
 {% endblock %}
