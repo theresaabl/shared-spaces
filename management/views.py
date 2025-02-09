@@ -586,17 +586,20 @@ def resident_request_delete(request, resident_request_id):
     """
     view to delete resident request
     """
-    # booking = get_object_or_404(EventSpaceBooking, pk=booking_id)
-    # booking.delete()
+    resident_request = get_object_or_404(
+                            ResidentRequest,
+                            pk=resident_request_id
+                            )
+    resident_request.delete()
 
-    # messages.add_message(
-    #     request,
-    #     messages.SUCCESS,
-    #     'Booking successfully deleted!'
-    # )
+    messages.add_message(
+        request,
+        messages.SUCCESS,
+        f"{resident_request_type(resident_request.purpose)} "
+        "successfully deleted!"
+    )
 
-    # return HttpResponseRedirect(reverse('mgmt-event-space-bookings'))
-    return None
+    return HttpResponseRedirect(reverse('mgmt-resident-requests'))
 
 
 @staff_member_required
