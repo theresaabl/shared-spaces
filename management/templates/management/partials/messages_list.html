@@ -1,0 +1,64 @@
+<h5>{{ title }}</h5>
+
+<!-- Loop through all contact messages-->
+{% for message in contact_messages %}
+
+<!-- Row and Column for each message -->
+<div class="row justify-content-center">
+    <div class="col">
+
+        <!-- Contact Message Card -->
+        <div class="card w-100">
+
+            <div class="card-body">
+                <div class="card-text {% if message.processed %}text-muted{% endif %}">
+                    <h4>From: {{ message.name }}</h4>
+                    <ul>
+                        <li>Interest to join: {% if message.interest_to_join %}Yes{% else %}No{% endif %}</li>
+                        <li>Email: {{ message.email }}</li>
+                        <li>Message: {{ message.message }}</li>
+                        <li>Sent On: {{ message.sent_on }}</li>
+                        <li>Processed: {% if message.processed %}Yes{% else %}No{% endif %}</li>                        
+                        <li>For testing: Id: {{ message.id }}</li>
+                    </ul>    
+
+                </div>
+
+                <!-- Buttons -->
+                {% if not message.processed %}
+                <a href="{% url 'mgmt-message-processed' message.id %}" class="btn btn-sm btn-success">Processed</a>
+                {% endif %}
+                <button class="btn btn-danger btn-sm btn-mgmt-delete-message" message_id="{{ message.id }}">Delete</button>
+
+            </div>
+
+        </div>
+        <!-- End Message Card -->
+
+    </div>
+</div>
+<!-- End col and row for each message -->
+{% empty %}
+
+<!-- Row and Column for empty list -->
+<div class="row justify-content-center">
+    <div class="col">
+
+        <!-- No Message Card -->
+        <div class="card">
+
+            <div class="card-body">
+                <div class="card-text"> 
+                    <p>No messages found.</p>
+                </div>
+
+            </div>
+
+        </div>
+        <!-- End No Message Card -->
+
+    </div>
+</div>
+
+{% endfor %}
+<!-- End Loop -->

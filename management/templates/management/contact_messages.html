@@ -19,15 +19,9 @@
         <!-- List of Messages -->
         <div class="col-12 col-md-6 col-xl-5 col-xxl-4">
 
-            {% for message in contact_messages %}
-
-            <h4>{{ message }}</h4>
-
-            {% empty %}
-
-            <p>No messages found.</p>
-
-            {% endfor %}
+            <!-- Include partial templates -->
+            {% include "management/partials/messages_list.html" with title="Open" contact_messages=open_contact_messages %}
+            {% include "management/partials/messages_list.html" with title="Processed" contact_messages=processed_contact_messages %}
 
         </div>
         <!-- End Messages List -->

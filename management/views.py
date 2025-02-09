@@ -608,21 +608,84 @@ def contact_messages(request):
     Display the contact messages page
 
     **Context**
-    ``contact_messages``
-    An instance of :model:`ContactMessage`.
+    ``open_contact_messages``
+    An instance of :model:`ContactMessage` with processed False.
+    ``processed_contact_messages``
+    An instance of :model:`ContactMessage` with processed True.
 
     **Template:**
 
     :template:`management/contact_messages.html`
     """
 
-    messages = ContactMessage.objects.all()
+    messages = ContactMessage.objects.all().order_by("-sent_on")
+
+    # sort by whether processed or not
+    open_messages = messages.filter(processed=False)
+    processed_messages = messages.filter(processed=True)
 
     # if request.method is GET
     return render(
         request,
         "management/contact_messages.html",
         {
-            "contact_messages": messages,
+            "open_contact_messages": open_messages,
+            "processed_contact_messages": processed_messages,
         }
     )
+
+
+@staff_member_required
+def message_processed(request, message_id):
+    """
+    Set contact message status to processed
+
+    **Template:**
+
+    :template:`management/contact_messages.html`
+    """
+    print("processed")
+
+    message = get_object_or_404(ContactMessage, pk=message_id)
+
+    # check whether message is not already processed
+    if message.processed:
+        messages.add_message(
+                    request,
+                    messages.INFO,
+                    f"This message was already processed!"  # noqa
+                )
+    else:
+        message.processed = True
+
+        messages.add_message(
+            request,
+            messages.SUCCESS,
+            "The message was successfully set to 'Processed'!"
+        )
+
+        message.save()
+
+    return HttpResponseRedirect(reverse('mgmt-contact-messages'))
+
+
+@staff_member_required
+def message_delete(request, message_id):
+    """
+    view to delete resident request
+    """
+    print("delete")
+    # resident_request = get_object_or_404(
+    #                         ResidentRequest,
+    #                         pk=resident_request_id
+    #                         )
+    # resident_request.delete()
+
+    # messages.add_message(
+    #     request,
+    #     messages.SUCCESS,
+    #     f"{resident_request_type(resident_request.purpose)} "
+    #     "successfully deleted!"
+    # )
+
+    return HttpResponseRedirect(reverse('mgmt-contact-messages'))

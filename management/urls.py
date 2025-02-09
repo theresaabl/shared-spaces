@@ -29,14 +29,14 @@ urlpatterns = [
 
     # Contact messages list
     path('contact-messages/', views.contact_messages, name='mgmt-contact-messages'),
-    # Change status of a message
-    # path('contact-messages/change-message-status/<int:message_id>', views.message_status, name='mgmt-message-change-status'),
-    # # Delete a request
-    # path(
-    #     'contact-messages/delete-message/<int:message_id>',
-    #     views.message_delete,
-    #     name='mgmt-message-delete'
-    #     ),
+    # Set message status to processed
+    path('contact-messages/message-processed/<int:message_id>', views.message_processed, name='mgmt-message-processed'),
+    # Delete a request
+    path(
+        'contact-messages/delete-message/<int:message_id>',
+        views.message_delete,
+        name='mgmt-message-delete'
+        ),
 
     # Resident Requests list
     path('resident-requests/', views.resident_requests, name='mgmt-resident-requests'),
