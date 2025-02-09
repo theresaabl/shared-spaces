@@ -1,17 +1,30 @@
 {% extends "base.html" %}
 
+{% load static %}
+
 {% block content %}
 
 <!-- index.html content starts here -->
-<div class="container-fluid">
-    <div class="row">
 
-        <div class="col-12 mt-3 left">
-            <h2>This is the home page</h2>
+ <!--Hero section-->
+ <section>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <img src="{% static 'images/hero-image.webp' %}" alt="hero-image" id="hero-image" class="img-fluid">
+            </div>
         </div>
-            
+        <div class="row row-margin">
+            <div class="col-12 text-center" id="cover-text">
+                <h2>SharedSpaces</h2>
+                <h3>Community Living</h3>
+            </div>
+        </div>
+                
     </div>
-</div>
+
+ </section>
 
 <!-- index.html content ends here -->
 {% endblock content %}
