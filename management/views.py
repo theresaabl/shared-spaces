@@ -672,20 +672,18 @@ def message_processed(request, message_id):
 @staff_member_required
 def message_delete(request, message_id):
     """
-    view to delete resident request
+    view to delete contact message
     """
-    print("delete")
-    # resident_request = get_object_or_404(
-    #                         ResidentRequest,
-    #                         pk=resident_request_id
-    #                         )
-    # resident_request.delete()
+    message = get_object_or_404(
+                            ContactMessage,
+                            pk=message_id
+                            )
+    message.delete()
 
-    # messages.add_message(
-    #     request,
-    #     messages.SUCCESS,
-    #     f"{resident_request_type(resident_request.purpose)} "
-    #     "successfully deleted!"
-    # )
+    messages.add_message(
+        request,
+        messages.SUCCESS,
+        "The message was successfully deleted!"
+    )
 
     return HttpResponseRedirect(reverse('mgmt-contact-messages'))

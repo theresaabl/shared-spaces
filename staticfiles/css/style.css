@@ -7,3 +7,9 @@
 form {
     margin-top: 1.3em;
 }
+
+.event-space-image {
+    width: 100%;
+    height: 40vh;
+    object-fit: cover;
+}
