@@ -8,6 +8,7 @@ from django.http import HttpResponseRedirect
 from dashboard.models import EventSpace, EventSpaceBooking, ResidentRequest
 from contact.models import ContactMessage
 from .forms import EventSpaceForm
+from dashboard.utils import resident_request_type
 
 
 # only for staff members to access admin page
@@ -516,28 +517,30 @@ def resident_request_in_progress(request, resident_request_id):
     :template:`management/resident_requests.html`
     """
 
-    # booking = get_object_or_404(EventSpaceBooking, pk=booking_id)
+    resident_request = get_object_or_404(
+                        ResidentRequest,
+                        pk=resident_request_id
+                        )
 
-    # # check whether booking is not already approved
-    # if booking.status == 1:
-    #     messages.add_message(
-    #                 request,
-    #                 messages.INFO,
-    #                 'This booking was already approved!'
-    #             )
-    # else:
-    #     booking.status = 1
+    # check whether request is not already in progress
+    if resident_request.status == 1:
+        messages.add_message(
+                    request,
+                    messages.INFO,
+                    f"This {resident_request_type(resident_request.purpose).lower()} is already in progress!"  # noqa
+                )
+    else:
+        resident_request.status = 1
 
-    #     messages.add_message(
-    #         request,
-    #         messages.SUCCESS,
-    #         'Booking successfully approved!'
-    #     )
+        messages.add_message(
+            request,
+            messages.SUCCESS,
+            f'{resident_request_type(resident_request.purpose)} in progress!'
+        )
 
-    #     booking.save()
+        resident_request.save()
 
-    # return HttpResponseRedirect(reverse('mgmt-event-space-bookings'))
-    return None
+    return HttpResponseRedirect(reverse('mgmt-resident-requests'))
 
 
 @staff_member_required

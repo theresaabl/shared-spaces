@@ -20,20 +20,19 @@
                         <li>Content: {{ resident_request.content }}</li>
                         <li>Status: {{ resident_request.get_status_display }}</li>
                         <li>Created on: {{ resident_request.created_on }}</li>
+                        <li>For testing: Id: {{ resident_request.id }}</li>
                     </ul>    
 
                 </div>
 
                 <!-- Buttons -->
-                {% comment %}
-                {% if booking.status != 1 and booking.date|date:"Y m d" >= today %}
-                <a href="{% url 'mgmt-booking-approve' booking.id %}" class="btn btn-sm btn-success">Approve</a>
+                {% if resident_request.status != 1 %}
+                <a href="{% url 'mgmt-request-in-progress' resident_request.id %}" class="btn btn-sm btn-warning">{% if resident_request.status == 0 %}In Progress{% elif resident_request.status == 2 %}Reopen{% endif %}</a>
                 {% endif %}
-                {% if booking.status != 2 and booking.date|date:"Y m d" >= today %}
-                <a href="{% url 'mgmt-booking-deny' booking.id %}" class="btn btn-sm btn-secondary">Deny</a>
+                {% if resident_request.status != 2 %}
+                <a href="{% url 'mgmt-request-closed' resident_request.id %}" class="btn btn-sm btn-success">Close</a>
                 {% endif %}
-                <button class="btn btn-danger btn-sm btn-mgmt-delete-booking" booking_id="{{ booking.id }}">Delete</button>
-                {% endcomment %}
+                <button class="btn btn-danger btn-sm btn-mgmt-delete-request" booking_id="{{ resident_request.id }}">Delete</button>
 
             </div>
 
@@ -54,7 +53,7 @@
 
             <div class="card-body">
                 <div class="card-text"> 
-                    <h5>No resident requests found.</h5>
+                    <p>No {% if purpose == 0 %}maintenance request{% else %}messages{% endif %} found.</p>
                 </div>
 
             </div>

@@ -64,3 +64,23 @@ addEventListener("DOMContentLoaded", (e) => {
         });
     }
 });
+
+
+/**
+* Delete Resident Requests
+*/
+
+addEventListener("DOMContentLoaded", (e) => {
+
+    const deleteRequestsButtons = document.getElementsByClassName("btn-mgmt-delete-request");
+    const deleteRequestsModal = new bootstrap.Modal(document.getElementById("mgmt-delete-request-modal"));
+    const deleteRequestsConfirm = document.getElementById("mgmt-delete-request-confirm");
+
+    for (let button of deleteRequestsButtons) {
+        button.addEventListener("click", (e) => {
+            let requestId = e.target.getAttribute("resident_request_id");
+            deleteRequestsConfirm.href = `delete-request/${requestId}`;
+            deleteRequestsModal.show();
+        });
+    }
+});
