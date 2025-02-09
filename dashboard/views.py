@@ -1,3 +1,4 @@
+from datetime import date
 from allauth.account.views import LoginView
 from django.shortcuts import render, get_object_or_404
 from django.contrib import messages
@@ -43,37 +44,70 @@ def resident_dashboard(request):
     """
     Display the resident space page
 
-        **Context**
+    **Context**
 
-    ``event_space_booking``
-        An instance of :model:`dashboard.EventSpaceBooking`.
+    ``pending_bookings``
+    An instance of :model:`EventSpaceBooking` with status 0.
+    ``approved_bookings``
+    An instance of :model:`EventSpaceBooking` with status 1.
+    ``denied_bookings``
+    An instance of :model:`EventSpaceBooking` with status 2.
+    ``past_bookings``
+    An instance of :model:`EventSpaceBooking` with a date in the past.
 
-    ``resident_request``
-        An instance of :model:`dashboard.ResidentRequest`.
+    ``open_requests``
+    An instance of :model:`ResidentRequest` with status 0.
+    ``progress_requests``
+    An instance of :model:`ResidentRequest` with status 1.
+    ``closed_requests``
+    An instance of :model:`ResidentRequest` with status 2.
 
     **Template:**
 
     :template:`dashboard/resident_space.html`
     """
-
-    # get all event space bookings for the current user
-    # to do: order by date #############
     # check whether user is logged in or not before database request of bookings and resident requests
     # do not user login_required decorator here because want to display content from resident_space template
     if request.user.is_authenticated:
-        event_space_bookings = EventSpaceBooking.objects.filter(resident=request.user)  # noqa
-        resident_requests = ResidentRequest.objects.filter(resident=request.user)  # noqa
+        bookings = EventSpaceBooking.objects.filter(resident=request.user).order_by("date")  # noqa
+
+        # sort into past and future bookings
+        past_bookings = bookings.filter(date__lt=date.today())
+        future_bookings = bookings.exclude(date__lt=date.today())
+
+        # sort bookings by status
+        pending_bookings = future_bookings.filter(status=0)
+        approved_bookings = future_bookings.filter(status=1)
+        denied_bookings = future_bookings.filter(status=2)
+
+        res_requests = ResidentRequest.objects.filter(resident=request.user).order_by("created_on")  # noqa
+
+        # requests by status
+        open_requests = res_requests.filter(status=0)
+        progress_requests = res_requests.filter(status=1)
+        closed_requests = res_requests.filter(status=2)
+
     else:
         # empty when user is not logged in, because still need to render template
-        event_space_bookings = ""
-        resident_requests = ""
+        pending_bookings = ""
+        approved_bookings = ""
+        denied_bookings = ""
+        past_bookings = ""
+        open_requests = ""
+        progress_requests = ""
+        closed_requests = ""
 
     return render(
         request,
         "dashboard/resident_space.html",
         {
-            "event_space_bookings": event_space_bookings,
-            "resident_requests": resident_requests,
+            "pending_bookings": pending_bookings,
+            "approved_bookings": approved_bookings,
+            "denied_bookings": denied_bookings,
+            "past_bookings": past_bookings,
+            "open_requests": open_requests,
+            "progress_requests": progress_requests,
+            "closed_requests": closed_requests,
         }
     )
 
@@ -94,7 +128,6 @@ def event_space_booking(request, space_id=None):
     ``booking_form``
     An instance of :form:`dashboard.BookingForm`
     """
-
     if request.method == "POST":
         booking_form = BookingForm(data=request.POST)
 

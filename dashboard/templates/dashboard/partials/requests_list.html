@@ -1,0 +1,62 @@
+<h4>{{ title }}</h4>
+
+<!-- Loop through all resident requests-->
+{% for resident_request in resident_requests %}
+
+<!-- Row and Column for each request -->
+<div class="row justify-content-center">
+    <div class="col">
+
+        <!-- Resident Request Card -->
+        <div class="card w-100">
+
+            <div class="card-body">
+                <div class="card-text {% if resident_request.status == 2 %}text-muted{% endif %}">
+                    <h5>{% if resident_request.purpose == 0 %}Maintenance Request{% else %}Message{% endif %}</h5>
+                    {% if resident_request.urgent %}
+                    <p class="fw-bold text-danger">Urgent!</p>
+                    {% endif %}
+                    <ul>
+                        <li>Content: {{ resident_request.content }}</li>
+                        <li>Status: {{ resident_request.get_status_display }}</li>
+                        <li>Created on: {{ resident_request.created_on }}</li>
+                    </ul>    
+
+                </div>
+
+                <!-- Buttons -->
+                <a class="btn btn-sm btn-secondary btn-edit btn-primary" href="{% url 'resident_request_edit' resident_request.id %}">Edit</a>
+                <button class="btn btn-sm btn-secondary btn-delete-requests btn-danger" resident_request_id="{{ resident_request.id }}">Delete</button>
+
+            </div>
+
+        </div>
+        <!-- End Request Card -->
+
+    </div>
+</div>
+<!-- End col and row for each request -->
+{% empty %}
+
+<!-- Row and Column for empty list -->
+<div class="row justify-content-center">
+    <div class="col">
+
+        <!-- No Request Card -->
+        <div class="card">
+
+            <div class="card-body">
+                <div class="card-text"> 
+                    <p>No requests found.</p>
+                </div>
+
+            </div>
+
+        </div>
+        <!-- End No Request Card -->
+
+    </div>
+</div>
+
+{% endfor %}
+<!-- End Loop -->

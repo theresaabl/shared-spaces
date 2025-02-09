@@ -16,7 +16,6 @@
                 <div class="card-text {% if booking.date|date:'Y m d' < today %}text-muted{% endif %}"> 
                         <h5>{{ booking.event_space }}</h5>
                         <ul>
-                            <li>Resident: {{ booking.resident }}</li>
                             <li>Occasion: {{ booking.occasion }}</li>
                             <li>Date: {{ booking.date }}</li>
                             <li>Time: {{ booking.start }} - {{ booking.end }}</li>
@@ -32,14 +31,11 @@
                 </div>
 
                 <!-- Buttons -->
-                <!-- Can only approve or deny bookings in the future -->
-                {% if booking.status != 1 and booking.date|date:"Y m d" >= today %}
-                <a href="{% url 'mgmt-booking-approve' booking.id %}" class="btn btn-sm btn-success">Approve</a>
+                <!-- Cannot edit past bookings and only Admin can delete past bookings in admin space -->
+                {% if booking.date|date:"Y m d" >= today %}
+                <a class="btn btn-sm btn-secondary btn-edit btn-primary" href="{% url 'booking_edit' booking.id %}">Edit</a>
+                <button class="btn btn-sm btn-secondary btn-delete-bookings btn-danger" booking_id="{{ booking.id }}">Delete</button>
                 {% endif %}
-                {% if booking.status != 2 and booking.date|date:"Y m d" >= today %}
-                <a href="{% url 'mgmt-booking-deny' booking.id %}" class="btn btn-sm btn-secondary">Deny</a>
-                {% endif %}
-                <button class="btn btn-danger btn-sm btn-mgmt-delete-booking" booking_id="{{ booking.id }}">Delete</button>
 
             </div>
 

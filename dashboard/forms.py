@@ -59,7 +59,7 @@ class BookingForm(forms.ModelForm):
         widgets = {
             # only allow dates from tomorrow on (only bookings in the future)
             'date': forms.DateInput(
-                attrs={'type': 'date', 'min': (datetime.date.today() + datetime.timedelta(days=1))},
+                attrs={'type': 'date', 'min': (datetime.date.today() + datetime.timedelta(days=1)), 'id': 'booking-date'},
                 format="%d/%m/%Y"  # This is how date is rendered
                 ),
             'start': forms.TimeInput(attrs={'type': 'time'}),

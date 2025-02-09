@@ -341,8 +341,14 @@ def event_space_bookings(request):
     Display the event space bookings page
 
     **Context**
-    ``event_space_bookings``
-    An instance of :model:`EventSpaceBooking`.
+    ``pending_bookings``
+    An instance of :model:`EventSpaceBooking` with status 0.
+    ``approved_bookings``
+    An instance of :model:`EventSpaceBooking` with status 1.
+    ``denied_bookings``
+    An instance of :model:`EventSpaceBooking` with status 2.
+    ``past_bookings``
+    An instance of :model:`EventSpaceBooking` with a date in the past.
 
     **Template:**
 

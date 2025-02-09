@@ -59,49 +59,13 @@
         <!-- Bookings for this User -->
         <div class="col-10 col-md-5 col-xl-4 col-xxl-3">
 
-            <h4>Your Bookings</h4>
+            <h3>Your Bookings</h3>
 
-            <!-- Loop through all event space bookings for this user -->
-            {% for booking in event_space_bookings %}
-
-            <!-- Row and Column for each booking -->
-            <div class="row justify-content-center">
-                <div class="col">
-
-                    <!-- Booking Card -->
-                    <div class="card">
-
-                        <div class="card-body">
-                            <div class="card-text">
-                                <h5>{{ booking.event_space }}</h5>
-                                <ul>
-                                    <!-- Remove Resident line before release!!!!!!! -->
-                                    <li>For Testing: Resident: {{ booking.resident }}</li>
-                                    <li>Occasion: {{ booking.occasion }}</li>
-                                    <li>Date: {{ booking.date }}</li>
-                                    <li>Time: {{ booking.start }} - {{ booking.end }}</li>
-
-                                    {% if booking.notes %}
-                                    <li>Notes: {{ booking.notes }}</li>
-                                    {% endif %}
-                                    
-                                    <li>Created on: {{ booking.created_on }}</li>
-                                    <li>Status: {{ booking.get_status_display }}  </li>
-                                </ul>    
-                            </div>
-                            <a class="btn btn-sm btn-secondary btn-edit" href="{% url 'booking_edit' booking.id %}">Edit</a>
-                            <button class="btn btn-sm btn-secondary btn-delete-bookings" booking_id="{{ booking.id }}">Delete</button>
-                        </div>
-
-                    </div>
-                    <!-- End Booking Card -->
-
-                </div>
-            </div>
-            <!-- End col and row for each booking -->
-
-            {% endfor %}
-            <!-- End Loop -->
+            <!-- Include partial templates -->
+            {% include "dashboard/partials/bookings_list.html" with title="Pending" event_space_bookings=pending_bookings %}
+            {% include "dashboard/partials/bookings_list.html" with title="Approved" event_space_bookings=approved_bookings %}
+            {% include "dashboard/partials/bookings_list.html" with title="Denied" event_space_bookings=denied_bookings %}
+            {% include "dashboard/partials/bookings_list.html" with title="Past Bookings" event_space_bookings=past_bookings %}
 
         </div>
         <!-- End Bookings for this User -->
@@ -110,44 +74,12 @@
         <!-- Requests for this User -->
         <div class="col-10 col-md-5 col-xl-4 col-xxl-3">
 
-            <h4>Your Requests</h4>
+            <h3>Your Requests</h3>
 
-            <!-- Loop through all requests for this user -->
-            {% for resident_request in resident_requests %}
-
-            <!-- Row and Column for each request -->
-            <div class="row justify-content-center">
-                <div class="col">
-
-                    <!-- Resident Request Card -->
-                    <div class="card">
-
-                        <div class="card-body">
-                            <div class="card-text">
-                                <h5>{% if resident_request.purpose == 0 %}Maintenance Request{% else %}Message{% endif %}</h5>
-                                <ul>
-                                    <!-- Remove Resident line before release!!!!!!! -->
-                                    <li>For Testing: Resident: {{ resident_request.resident }}</li>
-                                    <li>Urgent: {% if resident_request.urgent is True  %}yes {% else %}No {% endif %}   </li>
-                                    <li>{% if resident_request.purpose == 0 %}Request{% else %}Message{% endif %}: {{ resident_request.content }}</li>
-                                    <li>Created on: {{ resident_request.created_on }}</li>
-                                    <li>Status: {{ resident_request.get_status_display }}  </li>
-                                </ul>    
-                            </div>
-                            <a class="btn btn-sm btn-secondary btn-edit" href="{% url 'resident_request_edit' resident_request.id %}">Edit</a>
-                            <button class="btn btn-sm btn-secondary btn-delete-requests" resident_request_id="{{ resident_request.id }}">Delete</button>
-                        </div>
-
-                    </div>
-                    <!-- End Resident Request Card -->
-
-                </div>
-            </div>
-            <!-- End col and row for each resident request -->
-
-            {% endfor %}
-            <!-- End Loop -->
-
+            <!-- Include partial templates -->
+            {% include "dashboard/partials/requests_list.html" with title="Open" resident_requests=open_requests %}
+            {% include "dashboard/partials/requests_list.html" with title="In Progress" resident_requests=progress_requests %}
+            {% include "dashboard/partials/requests_list.html" with title="Closed" resident_requests=closed_requests %}
         </div>
         <!-- End Resident Requests for this User -->
             
