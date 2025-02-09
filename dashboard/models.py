@@ -90,4 +90,4 @@ class ResidentRequest(models.Model):
         )
 
     def __str__(self):
-        return f"{'Urgent' if self.urgent else ""} {'Maintenance Request' if self.purpose == 0 else 'Message'} by {self.resident}"  # noqa
+        return f"{'Urgent' if self.urgent else ""} {'Maintenance Request' if self.purpose == 0 else 'Message'} by {self.resident} - {'Open' if self.status == 0 else 'In Progress' if self.status == 1 else 'Closed'}"  # noqa

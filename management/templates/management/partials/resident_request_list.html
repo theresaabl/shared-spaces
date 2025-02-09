@@ -1,0 +1,69 @@
+<h5>{{ title }}</h5>
+
+<!-- Loop through all resident requests-->
+{% for resident_request in resident_requests %}
+
+<!-- Row and Column for each request -->
+<div class="row justify-content-center">
+    <div class="col">
+
+        <!-- Resident Request Card -->
+        <div class="card w-100">
+
+            <div class="card-body">
+                <div class="card-text {% if resident_request.status == 2 %}text-muted{% endif %}">
+                    {% if resident_request.urgent %}
+                    <p class="fw-bold text-danger">Urgent!</p>
+                    {% endif %}
+                    <ul>
+                        <li>Resident: {{ resident_request.resident }}</li>
+                        <li>Content: {{ resident_request.content }}</li>
+                        <li>Status: {{ resident_request.get_status_display }}</li>
+                        <li>Created on: {{ resident_request.created_on }}</li>
+                    </ul>    
+
+                </div>
+
+                <!-- Buttons -->
+                {% comment %}
+                {% if booking.status != 1 and booking.date|date:"Y m d" >= today %}
+                <a href="{% url 'mgmt-booking-approve' booking.id %}" class="btn btn-sm btn-success">Approve</a>
+                {% endif %}
+                {% if booking.status != 2 and booking.date|date:"Y m d" >= today %}
+                <a href="{% url 'mgmt-booking-deny' booking.id %}" class="btn btn-sm btn-secondary">Deny</a>
+                {% endif %}
+                <button class="btn btn-danger btn-sm btn-mgmt-delete-booking" booking_id="{{ booking.id }}">Delete</button>
+                {% endcomment %}
+
+            </div>
+
+        </div>
+        <!-- End Request Card -->
+
+    </div>
+</div>
+<!-- End col and row for each request -->
+{% empty %}
+
+<!-- Row and Column for empty list -->
+<div class="row justify-content-center">
+    <div class="col">
+
+        <!-- No Request Card -->
+        <div class="card">
+
+            <div class="card-body">
+                <div class="card-text"> 
+                    <h5>No resident requests found.</h5>
+                </div>
+
+            </div>
+
+        </div>
+        <!-- End No Request Card -->
+
+    </div>
+</div>
+
+{% endfor %}
+<!-- End Loop -->

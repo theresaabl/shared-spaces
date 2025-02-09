@@ -11,7 +11,7 @@
         <div class="card">
 
             <div class="card-body">
-                <div class="card-text"> 
+                <div class="card-text {% if not user_item.is_active %}text-muted{% endif %}"> 
                     <h5>{{ user_item.username }}</h5>
                     <ul>
                         {% if user_item.first_name or user_item.last_name %}

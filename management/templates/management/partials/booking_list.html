@@ -10,8 +10,10 @@
         <!-- Booking Card -->
         <div class="card w-100">
 
+            <!-- get todays date -->
+            {% now "Y m d" as today %}
             <div class="card-body">
-                <div class="card-text"> 
+                <div class="card-text {% if booking.date|date:'Y m d' < today %}text-muted{% endif %}"> 
                         <h5>{{ booking.event_space }}</h5>
                         <ul>
                             <li>Resident: {{ booking.resident }}</li>
@@ -31,7 +33,6 @@
 
                 <!-- Buttons -->
                 <!-- Can only approve or deny bookings in the future -->
-                {% now "Y m d" as today %}
                 {% if booking.status != 1 and booking.date|date:"Y m d" >= today %}
                 <a href="{% url 'mgmt-booking-approve' booking.id %}" class="btn btn-sm btn-success">Approve</a>
                 {% endif %}

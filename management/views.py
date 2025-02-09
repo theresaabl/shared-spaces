@@ -461,24 +461,135 @@ def resident_requests(request):
     Display the resident requests page
 
     **Context**
-    ``resident_requests``
-    An instance of :model:`ResidentRequest`.
+    ``open_maintenance_requests``
+    An instance of :model:`ResidentRequest` with purpose 0 and status 0
+    ``progress_maintenance_requests``
+    An instance of :model:`ResidentRequest` with purpose 0 and status 1
+    ``closed_maintenance_requests``
+    An instance of :model:`ResidentRequest` with purpose 0 and status 2
+    ``open_messages``
+    An instance of :model:`ResidentRequest` with purpose 1 and status 0
+    ``progress_messages``
+    An instance of :model:`ResidentRequest` with purpose 1 and status 1
+    ``closed_messages``
+    An instance of :model:`ResidentRequest` with purpose 1 and status 2
 
     **Template:**
 
     :template:`management/resident_requests.html`
     """
 
-    res_requests = ResidentRequest.objects.all()
+    res_requests = ResidentRequest.objects.all().order_by("created_on")
+
+    # filter maintenance requests and sort by status
+    open_maintenance_requests = res_requests.filter(purpose=0, status=0)
+    progress_maintenance_requests = res_requests.filter(purpose=0, status=1)
+    closed_maintenance_requests = res_requests.filter(purpose=0, status=2)
+
+    # filter messages and sort by status
+    open_messages = res_requests.filter(purpose=1, status=0)
+    progress_messages = res_requests.filter(purpose=1, status=1)
+    closed_messages = res_requests.filter(purpose=1, status=2)
 
     # if request.method is GET
     return render(
         request,
         "management/resident_requests.html",
         {
-            "resident_requests": res_requests,
+            "open_maintenance_requests": open_maintenance_requests,
+            "progress_maintenance_requests": progress_maintenance_requests,
+            "closed_maintenance_requests": closed_maintenance_requests,
+            "open_messages": open_messages,
+            "progress_messages": progress_messages,
+            "closed_messages": closed_messages,
         }
     )
+
+
+@staff_member_required
+def resident_request_in_progress(request, resident_request_id):
+    """
+    Set resident requests status to in progress
+
+    **Template:**
+
+    :template:`management/resident_requests.html`
+    """
+
+    # booking = get_object_or_404(EventSpaceBooking, pk=booking_id)
+
+    # # check whether booking is not already approved
+    # if booking.status == 1:
+    #     messages.add_message(
+    #                 request,
+    #                 messages.INFO,
+    #                 'This booking was already approved!'
+    #             )
+    # else:
+    #     booking.status = 1
+
+    #     messages.add_message(
+    #         request,
+    #         messages.SUCCESS,
+    #         'Booking successfully approved!'
+    #     )
+
+    #     booking.save()
+
+    # return HttpResponseRedirect(reverse('mgmt-event-space-bookings'))
+    return None
+
+
+@staff_member_required
+def resident_request_closed(request, resident_request_id):
+    """
+    Set resident request status to in progress
+
+    **Template:**
+
+    :template:`management/resident_requests.html`
+    """
+
+    # booking = get_object_or_404(EventSpaceBooking, pk=booking_id)
+
+    # # check whether booking is not already denied
+    # if booking.status == 2:
+    #     messages.add_message(
+    #                 request,
+    #                 messages.INFO,
+    #                 'This booking was already denied!'
+    #             )
+    # else:
+    #     booking.status = 2
+
+    #     messages.add_message(
+    #                 request,
+    #                 messages.SUCCESS,
+    #                 'Booking successfully denied!'
+    #             )
+
+    #     booking.save()
+
+    # return HttpResponseRedirect(reverse('mgmt-event-space-bookings'))
+    return None
+
+
+@staff_member_required
+def resident_request_delete(request, resident_request_id):
+    """
+    view to delete resident request
+    """
+    # booking = get_object_or_404(EventSpaceBooking, pk=booking_id)
+    # booking.delete()
+
+    # messages.add_message(
+    #     request,
+    #     messages.SUCCESS,
+    #     'Booking successfully deleted!'
+    # )
+
+    # return HttpResponseRedirect(reverse('mgmt-event-space-bookings'))
+    return None
 
 
 @staff_member_required

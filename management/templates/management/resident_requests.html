@@ -14,25 +14,36 @@
     </div>
 
     <!-- Data Row -->
-    <div class="row justify-content-center">
+    <div class="row justify-content-around">
 
-        <!-- List of Requests -->
+        <!-- List of Maintenance Requests Column -->
         <div class="col-12 col-md-6 col-xl-5 col-xxl-4">
 
-            {% for resident_request in resident_requests %}
+            <h4>Maintenance Requests</h4>
 
-            <h4>{{ resident_request }}</h4>
-
-            {% empty %}
-
-            <p>No requests found.</p>
-
-            {% endfor %}
+            <!-- Include partial templates -->
+            {% include "management/partials/resident_request_list.html" with title="Open" resident_requests=open_maintenance_requests %}
+            {% include "management/partials/resident_request_list.html" with title="In Progress" resident_requests=progress_maintenance_requests %}
+            {% include "management/partials/resident_request_list.html" with title="Closed" resident_requests=closed_maintenance_requests %}
 
         </div>
-        <!-- End Requests List -->
+        <!-- End Maintenance Requests List Column -->
+
+        <!-- List of Messages Column -->
+        <div class="col-12 col-md-6 col-xl-5 col-xxl-4">
+
+            <h4>Messages</h4>
+
+            <!-- Include partial templates -->
+            {% include "management/partials/resident_request_list.html" with title="Open" resident_requests=open_messages %}
+            {% include "management/partials/resident_request_list.html" with title="In Progress" resident_requests=progress_messages %}
+            {% include "management/partials/resident_request_list.html" with title="Closed" resident_requests=closed_messages %}
+
+        </div>
+        <!-- End Messages List Column-->
 
     </div>
+    <!-- End Data Row -->
 
     <!-- Return to Admin Space Button -->
     <div class="row">
