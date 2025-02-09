@@ -1,3 +1,4 @@
+from datetime import date
 from django.shortcuts import render, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.models import User
@@ -347,12 +348,16 @@ def event_space_bookings(request):
     :template:`management/event_space_bookings.html`
     """
 
-    bookings = EventSpaceBooking.objects.all().order_by("-created_on")
+    bookings = EventSpaceBooking.objects.all().order_by("date")
+
+    # sort into past and future bookings
+    past_bookings = bookings.filter(date__lt=date.today())
+    future_bookings = bookings.exclude(date__lt=date.today())
 
     # sort bookings by status
-    pending_bookings = bookings.filter(status=0)
-    approved_bookings = bookings.filter(status=1)
-    denied_bookings = bookings.filter(status=2)
+    pending_bookings = future_bookings.filter(status=0)
+    approved_bookings = future_bookings.filter(status=1)
+    denied_bookings = future_bookings.filter(status=2)
 
     # if request.method is GET
     return render(
@@ -362,6 +367,7 @@ def event_space_bookings(request):
             "pending_bookings": pending_bookings,
             "approved_bookings": approved_bookings,
             "denied_bookings": denied_bookings,
+            "past_bookings": past_bookings,
         }
     )
 

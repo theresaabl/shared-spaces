@@ -31,10 +31,11 @@
 
                 <!-- Buttons -->
 
-                {% if not booking.status == 1 %}
+                {% now "Y m d" as today %}
+                {% if booking.status != 1 and booking.date|date:"Y m d" > today %}
                 <a href="{% url 'mgmt-booking-approve' booking.id %}" class="btn btn-sm btn-success">Approve</a>
                 {% endif %}
-                {% if not booking.status == 2 %}
+                {% if booking.status != 2 and booking.date|date:"Y m d" > today %}
                 <a href="{% url 'mgmt-booking-deny' booking.id %}" class="btn btn-sm btn-secondary">Deny</a>
                 {% endif %}
                 <button class="btn btn-danger btn-sm btn-mgmt-delete-booking" booking_id="{{ booking.id }}">Delete</button>
