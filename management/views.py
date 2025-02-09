@@ -535,7 +535,8 @@ def resident_request_in_progress(request, resident_request_id):
         messages.add_message(
             request,
             messages.SUCCESS,
-            f'{resident_request_type(resident_request.purpose)} in progress!'
+            f"{resident_request_type(resident_request.purpose)} "
+            "successfully set to 'In Progress'!"
         )
 
         resident_request.save()
@@ -546,35 +547,38 @@ def resident_request_in_progress(request, resident_request_id):
 @staff_member_required
 def resident_request_closed(request, resident_request_id):
     """
-    Set resident request status to in progress
+    Set resident request status to closed
 
     **Template:**
 
     :template:`management/resident_requests.html`
     """
 
-    # booking = get_object_or_404(EventSpaceBooking, pk=booking_id)
+    resident_request = get_object_or_404(
+                        ResidentRequest,
+                        pk=resident_request_id
+                        )
 
-    # # check whether booking is not already denied
-    # if booking.status == 2:
-    #     messages.add_message(
-    #                 request,
-    #                 messages.INFO,
-    #                 'This booking was already denied!'
-    #             )
-    # else:
-    #     booking.status = 2
+    # check whether request is not already closed
+    if resident_request.status == 2:
+        messages.add_message(
+                    request,
+                    messages.INFO,
+                    f"This {resident_request_type(resident_request.purpose).lower()} was already closed!"  # noqa
+                )
+    else:
+        resident_request.status = 2
 
-    #     messages.add_message(
-    #                 request,
-    #                 messages.SUCCESS,
-    #                 'Booking successfully denied!'
-    #             )
+        messages.add_message(
+            request,
+            messages.SUCCESS,
+            f"{resident_request_type(resident_request.purpose)} "
+            "successfully closed!"
+        )
 
-    #     booking.save()
+        resident_request.save()
 
-    # return HttpResponseRedirect(reverse('mgmt-event-space-bookings'))
-    return None
+    return HttpResponseRedirect(reverse('mgmt-resident-requests'))
 
 
 @staff_member_required
