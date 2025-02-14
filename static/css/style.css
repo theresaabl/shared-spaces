@@ -181,6 +181,7 @@ form {
 /* Media query: small mobile devices */
 /* To properly display hero section */
 @media screen and (max-width: 550px) {
+    /* Hero Section */
     #hero-image {
         padding: .5rem;
         border-radius: 20px;
@@ -191,6 +192,7 @@ form {
         left: 2rem;
         top: 48vh;
         padding: .5rem;
+        padding-bottom: 0;
         border-radius: 20px;
     }
 
@@ -200,9 +202,31 @@ form {
         border-radius: 20px;
     }
 
+    /* About Section */
+    #about-header-image {
+        padding: .3rem;
+        border-radius: 10px;
+        height: 40vh;
+    }
+
+    #about-cover-text {
+        left: 1rem;
+        bottom: 4rem;
+        padding: .3rem;
+        padding-bottom: 0;
+        border-radius: 10px;
+    }
+
+    #about-cover-text h3 {
+        font-size: 140%;
+        padding: .8rem;
+        border-radius: 10px;
+    }
+
     .about-image {
         max-height: 15rem;
     }
+
 }
 
 
@@ -228,14 +252,41 @@ form {
         border-radius: 10px;
         border-width: 2px;
     }
+
+    /* About Section */
+    #about-header-image {
+        height: 35vh;
+    }
+
+    #about-cover-text {
+        left: .8rem;
+        bottom: 3.5rem;
+        padding: .2rem;
+        padding-bottom: 0;
+    }
+
+    #about-cover-text h3 {
+        font-size: 120%;
+        padding: .6rem;
+    }
 }
 
 @media screen and (max-width: 240px) {
+    /* Hero Section */
     #cover-text {
         left: .3rem;
     }
 
     #cover-text h2 {
         font-size: 80%;
+    }
+
+    /* About Section */
+    #about-cover-text {
+        left: .5rem;
+    }
+
+    #about-cover-text h3 {
+        font-size: 90%;
     }
 }
