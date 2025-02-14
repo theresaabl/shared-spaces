@@ -37,8 +37,11 @@ form {
 /* Hero section */
 #hero-image {
     width: 100%;
-    height: 50vh;
+    height: 60vh;
     object-fit: cover;
+    border-radius: 40px;
+    padding: 1rem;
+    border: 5px solid var(--my-yellow);
 }
 
 .row-margin {
@@ -47,13 +50,20 @@ form {
 }
 
 #cover-text {
-    background-color: var(--my-orange);
     font-size: 130%;
-    padding: 2rem;
+    margin-top: 1rem;
+    padding: 1rem;
+    border: 5px solid var(--my-orange);
+    border-radius: 40px;
+    position: absolute;
+    top: 50vh;
+    left: 5rem;
 }
 
 #cover-text h2 {
-    color: var(--my-night-blue);
+    padding: 2rem;
+    background-color: var(--my-yellow);
+    border-radius: 40px;
 }
 
 /* Resident Space */
@@ -77,15 +87,60 @@ form {
 /* Media queries */
 
 /* Media query: small mobile devices */
-/* To properly display hero section text */
-@media screen and (max-width: 310px) {
+/* To properly display hero section */
+@media screen and (max-width: 550px) {
+    #hero-image {
+        padding: .5rem;
+        border-radius: 20px;
+        height: 50vh;
+    }
+
+    #cover-text {
+        left: 2rem;
+        top: 48vh;
+        padding: .5rem;
+        border-radius: 20px;
+    }
+
     #cover-text h2 {
         font-size: 120%;
+        padding: 1rem;
+        border-radius: 20px;
+    }
+}
+
+
+@media screen and (max-width: 310px) {
+    #hero-image {
+        padding: .3rem;
+        border-radius: 10px;
+        border-width: 2px;
+        height: 50vh;
+    }
+
+    #cover-text {
+        left: 1rem;
+        top: 50vh;
+        padding: .3rem;
+        border-radius: 10px;
+        border-width: 2px;
+    }
+
+    #cover-text h2 {
+        font-size: 100%;
+        padding: .5rem;
+        border-radius: 10px;
+        border-width: 2px;
     }
 }
 
 @media screen and (max-width: 240px) {
+    #cover-text {
+        left: .3rem;
+    }
+
     #cover-text h2 {
         font-size: 80%;
     }
 }
+
