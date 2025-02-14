@@ -27,7 +27,8 @@
 
 </section> -->
 
-<section>
+<!-- margin bottom of hero-section is dynamically set in home.js -->
+<section id="hero-section">
 
     <div class="container-fluid">
         <div class="row">
@@ -48,9 +49,16 @@
 <section>
 
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-12">
-
+        <div class="row justify-content-center">
+            <div class="col-10 col-sm-6 col-md-4 text-center highlights-text">
+                <h3>A Place to Live</h3>
+            </div>
+            <div class="col-10 col-sm-6 col-md-4 text-center highlights-text">
+                <h3>A Place to Work</h3>
+            </div>
+            <div class="col-10 col-sm-6 col-md-4 text-center highlights-text">
+                <h3>A Place to Find Community</h3>
+            </div>
         </div>
                 
     </div>
@@ -72,3 +80,8 @@
 
 <!-- index.html content ends here -->
 {% endblock content %}
+
+<!-- Script block -->
+{% block extras %}
+<script src="{% static 'js/home.js' %}"></script>
+{% endblock %}
