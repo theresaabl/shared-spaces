@@ -37,8 +37,8 @@
                 <!-- Buttons -->
                 <!-- Cannot edit past bookings and only Admin can delete past bookings in admin space -->
                 {% if booking.date|date:"Y m d" >= today %}
-                <a class="btn btn-sm btn-blue btn-edit" href="{% url 'booking_edit' booking.id %}">Edit</a>
-                <button class="btn btn-sm btn-secondary btn-delete-bookings btn-danger" booking_id="{{ booking.id }}">Delete</button>
+                <a class="btn btn-sm btn-blue btn-edit me-2 mb-1" href="{% url 'booking_edit' booking.id %}">Edit</a>
+                <button class="btn btn-sm btn-secondary btn-delete-bookings btn-danger mb-1" booking_id="{{ booking.id }}">Delete</button>
                 {% endif %}
 
             </div>
