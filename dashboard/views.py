@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import date, timedelta
 from allauth.account.views import LoginView
 from django.shortcuts import render, get_object_or_404
 from django.contrib import messages
@@ -211,8 +211,11 @@ def booking_edit(request, booking_id):
     booking = get_object_or_404(EventSpaceBooking, pk=booking_id)
 
     # save the original date and event space in case of duplicate booking after edit
+    # save old time in case of start and end time error
     old_date = convert_date(booking.date)
     old_event_space = booking.event_space
+    old_start_time = booking.start
+    old_end_time = booking.end
 
     # check whether request.user is the user who made the booking
     if not request.user == booking.resident:
@@ -244,22 +247,38 @@ def booking_edit(request, booking_id):
 
             # Start if booking form is valid conditional
             if booking_form.is_valid():
-                print("booking form is valid")
 
-                print("old date:", old_date)
                 booking = booking_form.save(commit=False)
+                
+                # check that start time is before end time
+                if booking.start > booking.end:
+                    messages.add_message(
+                        request,
+                        messages.ERROR,
+                        'Please enter a valid start and end time!'
+                    )
+                    booking.date = convert_date(booking.date)
+                    booking.start = old_start_time
+                    booking.end = old_end_time
+                    
+                    booking_form = BookingForm(instance=booking)
 
-                print("booking form has changed", booking_form.has_changed())
+                    return render(
+                        request,
+                        "dashboard/event_space_booking.html",
+                        {
+                            "booking_form": booking_form,
+                        }
+                    )
+                # End start time before end time conditional
 
                 # Save which fields have changed
                 changed_fields = booking_form.changed_data
-                print("changed fields:", changed_fields)
 
                 # Start if date has changed conditional
                 if 'date' in changed_fields:
                     # Start if date has changed and check for duplicate bookings conditional
                     if check_for_duplicate_bookings(booking, request):
-                        print("inside check for duplicate bookings loop in views")
                         # Prefill form but leave original date
                         booking.date = old_date
                         booking_form = BookingForm(instance=booking)
@@ -279,7 +298,6 @@ def booking_edit(request, booking_id):
                     if 'event_space' in changed_fields:
                         # Start if event space has changed and check for duplicate bookings conditional
                         if check_for_duplicate_bookings(booking, request):
-                            print("inside check for duplicate bookings loop in views")
                             # Prefill form but leave original event space
                             booking.event_space = old_event_space
                             booking.date = convert_date(booking.date)
@@ -307,7 +325,6 @@ def booking_edit(request, booking_id):
                 else:
                     booking_edited_success_message = "Your booking was successfully updated!"
 
-                print("booking saved")
                 # save edited booking
                 booking.save()
                 # add success message
@@ -316,7 +333,6 @@ def booking_edit(request, booking_id):
                     messages.SUCCESS,
                     booking_edited_success_message
                 )
-                print("message added")
 
                 return HttpResponseRedirect(reverse('dashboard'))
 

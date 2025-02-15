@@ -21,6 +21,22 @@ main {
     padding-bottom: 1rem;
 }
 
+.messages-row {
+    position: relative;
+    top: 95px;
+}
+
+.messages-row a {
+    text-decoration: none;
+    color: var(--my-blue);
+    font-size: 120%;
+}
+
+.messages-row a:active, .messages-row a:hover {
+    text-decoration: underline;
+    color: var(--my-blue-active);
+}
+
 .sharedspaces {
     font-family: 'Alumni Sans Pinstripe', sans-serif;
     font-weight: 600;
