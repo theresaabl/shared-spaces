@@ -12,5 +12,5 @@ urlpatterns = [
     path('dashboard/', include('dashboard.urls'), name='dashboard-urls'),
     path('management/', include('management.urls'), name='management-urls'),
     path('', include('main.urls'), name='main-urls'),
-    path('404', TemplateView.as_view(template_name="404.html"), name='error'),
+    # path('404', TemplateView.as_view(template_name="404.html"), name='error'),
 ]

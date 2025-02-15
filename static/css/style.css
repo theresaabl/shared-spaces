@@ -451,6 +451,38 @@ input[type="checkbox"] + label {
         padding: .8rem;
     }
 
+    /* Error Page */
+
+    #error-header-image {
+        padding: .5rem;
+        border-radius: 20px;
+        height: 40vh;
+    }
+
+    #error-cover-text {
+        left: 2rem;
+        bottom: 4rem;
+        padding: .3rem;
+        padding-bottom: 0;
+        border-radius: 10px;
+    }
+
+    #error-cover-text h3 {
+        font-size: 200%;
+        padding: 1rem;
+        border-radius: 10px;
+    }
+
+    .error-text {
+        margin-top: -3.5rem;
+        font-size: 80%;
+    }
+
+    .btn-home {
+        padding: .8rem;
+        font-size: 150%;
+    }
+
     /* default .lead font size: 1.25rem */
     .lead {
         font-size: 1.1rem;
