@@ -1,54 +1,70 @@
 {% extends "base.html" %}
 
+{% load static %}
+
 {% load crispy_forms_tags %}
 
 {% block content %}
 
 <!-- contact.html content starts here -->
-<div class="container-fluid">
 
-    <!-- Contact Page Content Row -->
-    <div class="row">
 
-        <div class="col-12 mt-3 left">
-            <h2>This is the contact page</h2>
-            <p>Content to come</p>
+<!--Contact Header section-->
+<section">
+
+    <div class="container-fluid">
+
+        <!-- Header for Contact Page -->
+        <div class="row me-md-1">
+            <!-- Contact header image -->
+            <div class="col-12">
+                <img src="{% static 'images/contact-image.webp' %}" alt="contact-image" id="contact-header-image" class="img-fluid section-header-image">
+            </div>
+            <!-- Contact Cover Text -->
+            <div class="col-auto text-center section-cover-text" id="contact-cover-text">
+                <h3 class="display-5">Contact Us</h3>
+            </div>
         </div>
-            
     </div>
+</section>
 
-    <!-- Title Row -->
-    <div class="row">
-        <div class="col-12 text-center">
-            <h3 id="contact-form-title">Send Message</h3>
-        </div>
-    </div>
 
-    <!-- Contact Form Section -->
+<!-- Contact Form Section -->
+<section>
+
     <div class="row justify-content-center">
+        <div class="col-auto">
+            <h3>Leave Us a Message:</h3>
+        </div>
+    </div>
 
-        <div class="col-md-4 card mb-4 mt-3">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
 
-            <!-- Contact Form Card -->
-            <div class="card-body">
+            <div class="col-md-4 card mb-4 mt-3">
 
-                <!-- Contact Form -->
-                <form id="contact-form" method="post">
-                    {{ contact_form | crispy }}
-                    {% csrf_token %}
-                    <button id="contact-reset-button" type="reset" class="btn btn-secondary btn-lg">Reset</button>
-                    <button id="contact-submit-button" type="submit" class="btn btn-secondary btn-lg">Submit</button>
-                    
-                </form>
+                <!-- Contact Form Card -->
+                <div class="card-body">
+
+                    <!-- Contact Form -->
+                    <form id="contact-form" method="post">
+                        {{ contact_form | crispy }}
+                        {% csrf_token %}
+                        <button id="contact-reset-button" type="reset" class="btn btn-secondary btn-lg">Reset</button>
+                        <button id="contact-submit-button" type="submit" class="btn btn-secondary btn-lg">Submit</button>
+                        
+                    </form>
+
+                </div>
 
             </div>
 
         </div>
+        <!-- End Contact Form -->
 
     </div>
-    <!-- End Contact Form -->
 
-</div>
+</section>
 
 <!-- contact.html content ends here -->
 {% endblock content %}
