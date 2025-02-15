@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 
 
 # Create your views here.
@@ -27,7 +27,4 @@ def about_page(request):
     :template:`main/about.html`
     """
 
-    return render(
-        request,
-        "main/about.html",
-    )
+    return HttpResponseRedirect('/#about-section')
