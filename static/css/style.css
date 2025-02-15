@@ -1,6 +1,7 @@
 /* Define Colors */
 :root {
     --my-blue: #324495;
+    --my-blue-active: #24316b;
     --my-yellow: #f6ae2d;
     --my-orange: #f26419;
     --my-orange-active: #d16023;
@@ -38,6 +39,26 @@ form {
     padding: 0
 }
 
+.resident-nav-link {
+    font-size: 120%;
+    line-height: 2rem;
+    color: var(--my-blue);
+    border: 1px solid var(--my-blue);
+    border-radius: 10px;
+    display: inline-block;
+    padding: .2rem .5rem;
+}
+
+.resident-active {
+    font-size: 120%;
+    line-height: 2rem;
+    color: var(--my-blue-active);
+    border: 1px solid var(--my-blue-active);
+    border-radius: 10px;
+    display: inline-block;
+    padding: .2rem .5rem;
+}
+
 /* Index.html */
 
 /* Hero section */
@@ -68,6 +89,8 @@ form {
     background-color: var(--my-yellow);
     border-radius: 40px;
 }
+
+
 
 /* Highlights section */
 
@@ -146,13 +169,6 @@ form {
     border-radius: 20px;
 }
 
-/* .about-heading {
-    padding: .5rem;
-    padding-bottom: 0;
-    border: 4px solid var(--my-blue);
-    border-radius: 10px;
-} */
-
 .about-heading h3 {
     color: white;
     background-color: var(--my-blue);
@@ -164,10 +180,6 @@ form {
     margin-top: 1rem;
     margin-bottom: 2rem;
     height: auto;
-    /* padding: .5rem;
-    padding-bottom: 0;
-    border: 4px solid var(--my-orange);
-    border-radius: 10px; */
 }
 
 .about-text p {
@@ -199,6 +211,29 @@ form {
     height: 40vh;
     object-fit: cover;
 }
+
+
+
+/* Go to Resident Space Button */
+/* 
+#to-resident-space-button {
+    position: absolute;
+    right: 0;
+}
+
+.btn-resident-space {
+    background-color: var(--my-blue);
+    border: 5px solid var(--my-yellow);
+    color: white;
+}
+
+.btn-resident-space:hover, .btn-resident-space:active {
+    background-color: var(--my-blue-active) !important;
+    border: 5px solid var(--my-yellow) !important;
+    color: white !important;
+} */
+
+
 
 
 /* Media queries */
