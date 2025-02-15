@@ -1,32 +1,35 @@
-<h4>{{ title }}</h4>
+<h4 class="mt-5 fw-bolder">{{ title }}</h4>
 
 <!-- Loop through all bookings-->
 {% for booking in event_space_bookings %}
 
 <!-- Row and Column for each booking -->
-<div class="row justify-content-center">
+<div class="row justify-content-center  my-4">
     <div class="col">
 
         <!-- Booking Card -->
+        <!-- get todays date -->
+        {% now "Y m d" as today %}
+        {% if not booking.date|date:'Y m d' < today %}
+        <div class="card w-100 {% if booking.status == 0 %}card-status-yellow{% elif booking.status == 1 %}card-status-blue{% else %}card-status-orange{% endif %}">
+        {% else %}
         <div class="card w-100">
+        {% endif %}
 
-            <!-- get todays date -->
-            {% now "Y m d" as today %}
             <div class="card-body">
                 <div class="card-text {% if booking.date|date:'Y m d' < today %}text-muted{% endif %}"> 
-                        <h5>{{ booking.event_space }}</h5>
-                        <ul>
-                            <li>Occasion: {{ booking.occasion }}</li>
-                            <li>Date: {{ booking.date }}</li>
-                            <li>Time: {{ booking.start }} - {{ booking.end }}</li>
+                        <h5 class="mb-3">{{ booking.event_space }}</h5>
+                        <ul class="list-unstyled">
+                            <li class="mb-2">Occasion: {{ booking.occasion }}</li>
+                            <li class="mb-2">Date: {{ booking.date|date:"M d, Y" }}</li>
+                            <li class="mb-2">Time: {{ booking.start }} - {{ booking.end }}</li>
 
                             {% if booking.notes %}
-                            <li>Notes: {{ booking.notes }}</li>
+                            <li class="mb-2">Notes: <span class="fst-italic">{{ booking.notes }}</span></li>
                             {% endif %}
                             
-                            <li>Created on: {{ booking.created_on }}</li>
-                            <li>Status: {{ booking.get_status_display }}  </li>
-                            <li> for testing: ID: {{ booking.id }} </li>
+                            <li class="mb-2">Created on: {{ booking.created_on|date:"M d, Y" }}</li>
+                            <!-- <li> for testing: ID: {{ booking.id }} </li> -->
                         </ul>    
 
                 </div>
@@ -34,7 +37,7 @@
                 <!-- Buttons -->
                 <!-- Cannot edit past bookings and only Admin can delete past bookings in admin space -->
                 {% if booking.date|date:"Y m d" >= today %}
-                <a class="btn btn-sm btn-secondary btn-edit btn-primary" href="{% url 'booking_edit' booking.id %}">Edit</a>
+                <a class="btn btn-sm btn-blue btn-edit" href="{% url 'booking_edit' booking.id %}">Edit</a>
                 <button class="btn btn-sm btn-secondary btn-delete-bookings btn-danger" booking_id="{{ booking.id }}">Delete</button>
                 {% endif %}
 
@@ -49,7 +52,7 @@
 {% empty %}
 
 <!-- Row and Column for empty list -->
-<div class="row justify-content-center">
+<div class="row justify-content-center my-4">
     <div class="col">
 
         <!-- No Booking Card -->
@@ -57,7 +60,7 @@
 
             <div class="card-body">
                 <div class="card-text"> 
-                    <p>No event space bookings found.</p>
+                    <p class="pt-2">No bookings found.</p>
                 </div>
 
             </div>

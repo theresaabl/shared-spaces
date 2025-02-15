@@ -9,42 +9,42 @@
 <div class="container-fluid">
 
     <!-- Title Row -->
-    <div class="row">
-        <div class="col-12 text-center">
-            <h2>Welcome to Your Resident Space <span class="text-capitalize">{{ user.username }}</span>!</h2>
+    <div class="row my-3">
+        <div class="col-12 text-center mb-4">
+            <h2>Welcome to Your Resident Space <span class="text-capitalize username-in-title">{{ user.username }}</span> !</h2>
         </div>
     </div>
 
     <!-- Card Row -->
     <div class="row justify-content-center">
 
-        <div class="col-10 col-md-5 col-xl-4 col-xxl-3 d-flex align-items-stretch">
+        <div class="col-10 col-md-6 col-lg-5 col-xxl-4 mb-5 px-md-3 px-lg-0 me-lg-5 d-flex align-items-stretch">
 
             <!-- Event Space Booking Card -->
-            <div class="card border-primary text-center">
+            <div class="card card-status-blue text-center">
                 
                 <img src="{% static 'images/event_space_example.webp' %}" class="card-img-top img-fluid dashboard-image" alt="Empty seminar room">
 
                 <div class="card-body">
-                    <h3 class="card-title">Event Space Bookings</h5>
-                    <p class="card-text">Here you can view and book any of the <a href="{% url 'event_spaces' %}">available shared event spaces</a> in the living community.</p>
-                    <a href="{% url 'booking' %}" class="btn btn-primary">Book a Space</a>
+                    <h3 class="card-title mb-4">Event Space Bookings</h5>
+                    <p class="card-text mb-3">Here you can view and book any of the available <a href="{% url 'event_spaces' %}" class="fs-5">shared event spaces</a> in the living community.</p>
+                    <a href="{% url 'booking' %}" class="btn btn-orange mb-2">Book a Space</a>
                 </div>
 
             </div>
 
         </div>
 
-        <div class="col-10 col-md-5 col-xl-4 col-xxl-3 d-flex align-items-stretch">
+        <div class="col-10 col-md-6 col-lg-5 col-xxl-4 mb-5 px-md-3 px-lg-0 d-flex align-items-stretch">
 
             <!-- Maintenance Request Card -->
-            <div class="card border-primary text-center">
+            <div class="card card-status-blue text-center">
                 <img src="{% static 'images/maintenance_example.webp' %}" class="card-img-top img-fluid dashboard-image" alt="Tools">
 
                 <div class="card-body">
-                    <h3 class="card-title">Maintenance Requests and Messages</h5>
-                    <p class="card-text">Here you can send a maintenance request or any other request or suggestion to the community administrators.</p>
-                    <a href="{% url 'resident_request' %}" class="btn btn-primary">Submit a Request</a>
+                    <h3 class="card-title mb-4">Maintenance Requests and Messages</h5>
+                    <p class="card-text mb-3">Here you can send a maintenance request or any other request or suggestion to the community administrators.</p>
+                    <a href="{% url 'resident_request' %}" class="btn btn-orange mb-2">Submit a Request</a>
                 </div>
 
             </div>
@@ -57,9 +57,9 @@
     <div class="row justify-content-center">
 
         <!-- Bookings for this User -->
-        <div class="col-10 col-md-5 col-xl-4 col-xxl-3">
+        <div class="col-10 col-md-6 col-lg-5 col-xxl-4 mb-5 px-md-3 px-lg-0 me-lg-5">
 
-            <h3>Your Bookings</h3>
+            <h3 class="display-6">Your Bookings:</h3>
 
             <!-- Include partial templates -->
             {% include "dashboard/partials/bookings_list.html" with title="Pending" event_space_bookings=pending_bookings %}
@@ -72,9 +72,9 @@
 
 
         <!-- Requests for this User -->
-        <div class="col-10 col-md-5 col-xl-4 col-xxl-3">
+        <div class="col-10 col-md-6 col-lg-5 col-xxl-4 mb-5 px-md-3 px-lg-0">
 
-            <h3>Your Requests</h3>
+            <h3 class="display-6">Your Requests:</h3>
 
             <!-- Include partial templates -->
             {% include "dashboard/partials/requests_list.html" with title="Open" resident_requests=open_requests %}

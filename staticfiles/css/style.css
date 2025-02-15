@@ -36,26 +36,36 @@ form {
     margin-top: 1rem;
 }
 
-.btn-reset {
+.btn-blue {
     color: white;
     background-color: var(--my-blue);
     border-color: var(--my-blue);
 }
 
-.btn-reset:hover, .btn-reset:active {
-    color: white !important;;
+.btn-blue:hover, .btn-blue:active {
+    color: white !important;
     background-color: var(--my-blue-active) !important;
-    border-color: var(--my-blue) !important;
+    border-color: var(--my-blue-active) !important;
 }
 
-.btn-submit {
+.btn-yellow {
     background-color: var(--my-yellow);
     border-color: var(--my-yellow);
 }
 
-.btn-submit:hover, .btn-submit:active {
+.btn-yellow:hover, .btn-yellow:active {
     background-color: var(--my-yellow-active) !important;
-    border-color: var(--my-yellow) !important;
+    border-color: var(--my-yellow-active) !important;
+}
+
+.btn-orange {
+    background-color: var(--my-orange);
+    border-color: var(--my-orange);
+}
+
+.btn-orange:hover, .btn-orange:active {
+    background-color: var(--my-orange-active) !important;
+    border-color: var(--my-orange-active) !important;
 }
 
 input[type="checkbox"] {
@@ -102,6 +112,11 @@ input[type="checkbox"] + label {
     margin-right: .8rem;
 }
 
+.resident-nav-link:hover {
+    color: var(--my-blue-active) !important;
+    border: 2px solid var(--my-yellow-active) !important;
+}
+
 .resident-active {
     font-size: 120%;
     line-height: 1.9rem;
@@ -121,6 +136,11 @@ input[type="checkbox"] + label {
     border-radius: 10px;
     display: inline-block;
     padding: .2rem .5rem;
+}
+
+.admin-nav-link:hover {
+    color: var(--my-blue-active) !important;
+    border: 2px solid var(--my-orange-active) !important;
 }
 
 .admin-active {
@@ -340,13 +360,51 @@ input[type="checkbox"] + label {
 }
 
 
+/* For Authenticated Users Only */
 /* Resident Space */
+
+.username-in-title {
+    border: 3px solid var(--my-yellow);
+    padding: .5rem;
+    border-radius: 5px;
+}
 
 .dashboard-image {
     width: 100%;
     height: 30vh;
     object-fit: cover;
 }
+
+.urgent-request {
+    font-size: 90%;
+    background-color: var(--my-yellow);
+    padding: .5rem;
+    border-radius: 5px;
+    margin-left: .5rem;
+}
+
+.card-status-yellow {
+    border: 3px solid var(--my-yellow);
+}
+
+.card-status-orange {
+    border: 3px solid var(--my-orange);
+}
+
+.card-status-blue {
+    border: 3px solid var(--my-blue);
+}
+
+.card-text a {
+    text-decoration: none;
+    color: var(--my-blue);
+}
+
+.card-text a:active, .card-text a:hover {
+    text-decoration: underline;
+    color: var(--my-blue-active);
+}
+
 
 /* Event Spaces list */
 
