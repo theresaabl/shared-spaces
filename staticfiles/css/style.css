@@ -3,8 +3,7 @@
     --my-blue: #324495;
     --my-yellow: #f6ae2d;
     --my-orange: #f26419;
-    --my-magnolia: #e8e8f2;
-    --my-night-blue: #121619;
+    --my-orange-active: #d16023;
   }
 
 
@@ -93,6 +92,91 @@ form {
     margin-bottom: 1rem;
 }
 
+
+/* Join SharedSpaces Buttons */
+
+.btn-join {
+    background-color: var(--my-orange);
+    border: 5px solid var(--my-yellow);
+    color: white;
+}
+
+/* for button:active need to override default bootstrap styles */
+.btn-join:hover, .btn-join:active {
+    background-color: var(--my-orange-active) !important;
+    border: 5px solid var(--my-yellow) !important;
+    color: white !important;
+}
+
+
+/* About Section */
+
+#about-header-image {
+    width: 100%;
+    height: 50vh;
+    object-fit: cover;
+    object-position: top right;
+    border-radius: 30px;
+    padding: 1rem;
+    border: 4px solid var(--my-orange);
+}
+
+#about-cover-text {
+    color: white;
+    margin-top: 1rem;
+    padding: .8rem;
+    padding-bottom: .3rem;
+    border: 4px solid var(--my-yellow);
+    border-radius: 20px;
+    position: relative;
+    bottom: 5rem;
+    left: 5rem;
+}
+
+#about-cover-text h3 {
+    padding: 1rem;
+    background-color: var(--my-orange);
+    border-radius: 20px;
+}
+
+/* .about-heading {
+    padding: .5rem;
+    padding-bottom: 0;
+    border: 4px solid var(--my-blue);
+    border-radius: 10px;
+} */
+
+.about-heading h3 {
+    color: white;
+    background-color: var(--my-blue);
+    padding: 1rem;
+    border-radius: 10px;
+}
+
+.about-text {
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    height: auto;
+    /* padding: .5rem;
+    padding-bottom: 0;
+    border: 4px solid var(--my-orange);
+    border-radius: 10px; */
+}
+
+.about-text p {
+    margin: .5rem;
+    margin-bottom: 1rem;
+}
+
+.about-image {
+    height: 100%;
+    width: 100%;
+    max-height: 25rem;
+    object-fit: cover;
+    object-position: center center;
+    border-radius: 30px;    
+}
+
 /* Resident Space */
 
 .dashboard-image {
@@ -115,6 +199,7 @@ form {
 /* Media query: small mobile devices */
 /* To properly display hero section */
 @media screen and (max-width: 550px) {
+    /* Hero Section */
     #hero-image {
         padding: .5rem;
         border-radius: 20px;
@@ -125,6 +210,7 @@ form {
         left: 2rem;
         top: 48vh;
         padding: .5rem;
+        padding-bottom: 0;
         border-radius: 20px;
     }
 
@@ -132,6 +218,41 @@ form {
         font-size: 120%;
         padding: 1rem;
         border-radius: 20px;
+    }
+
+    /* About Section */
+    #about-header-image {
+        padding: .3rem;
+        border-radius: 10px;
+        height: 40vh;
+    }
+
+    #about-cover-text {
+        left: 1rem;
+        bottom: 4rem;
+        padding: .3rem;
+        padding-bottom: 0;
+        border-radius: 10px;
+    }
+
+    #about-cover-text h3 {
+        font-size: 140%;
+        padding: .8rem;
+        border-radius: 10px;
+    }
+
+    .about-image {
+        max-height: 15rem;
+    }
+
+    .about-heading h3 {
+        font-size: 130%;
+        padding: .8rem;
+    }
+
+    /* default .lead font size: 1.25rem */
+    .lead {
+        font-size: 1.1rem;
     }
 }
 
@@ -158,14 +279,71 @@ form {
         border-radius: 10px;
         border-width: 2px;
     }
+
+    /* About Section */
+    #about-header-image {
+        height: 35vh;
+    }
+
+    #about-cover-text {
+        left: .8rem;
+        bottom: 3.5rem;
+        padding: .2rem;
+        padding-bottom: 0;
+    }
+
+    #about-cover-text h3 {
+        font-size: 120%;
+        padding: .6rem;
+    }
+
+    .about-image {
+        max-height: 15rem;
+    }
+
+    .about-heading h3 {
+        font-size: 110%;
+        padding: .5rem;
+    }
+
+    /* default .lead font size: 1.25rem */
+    .lead {
+        font-size: 1rem;
+    }
 }
 
+
+/* When dropdown toggler breaks into newline on very small screens */
+@media screen and (max-width: 252px) {
+    /* Main */
+    main {
+        padding-top: 120px;
+    }
+
+    /* Hero Section */
+    #cover-text {
+        top: 60vh;
+    }
+
+}
+
+
 @media screen and (max-width: 240px) {
+    /* Hero Section */
     #cover-text {
         left: .3rem;
     }
 
     #cover-text h2 {
         font-size: 80%;
+    }
+
+    /* About Section */
+    #about-cover-text {
+        left: .5rem;
+    }
+
+    #about-cover-text h3 {
+        font-size: 90%;
     }
 }
