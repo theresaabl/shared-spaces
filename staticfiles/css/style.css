@@ -21,15 +21,66 @@ main {
     padding-bottom: 1rem;
 }
 
-form {
-    margin-top: 1.3em;
-}
-
 .sharedspaces {
     font-family: 'Alumni Sans Pinstripe', sans-serif;
     font-weight: 600;
     font-size: 140%;
 }
+
+/* General form styles */
+/* .form-card {
+    border: 3px solid var(--my-orange);
+} */
+
+form {
+    margin-top: 1rem;
+}
+
+.btn-reset {
+    color: white;
+    background-color: var(--my-blue);
+    border-color: var(--my-blue);
+}
+
+.btn-reset:hover, .btn-reset:active {
+    color: white !important;;
+    background-color: var(--my-blue-active) !important;
+    border-color: var(--my-blue) !important;
+}
+
+.btn-submit {
+    background-color: var(--my-yellow);
+    border-color: var(--my-yellow);
+}
+
+.btn-submit:hover, .btn-submit:active {
+    background-color: var(--my-yellow-active) !important;
+    border-color: var(--my-yellow) !important;
+}
+
+input[type="checkbox"] {
+    border-color: var(--my-blue) !important;
+}
+
+input[type="checkbox"]:checked {
+    background-color: var(--my-orange) !important;
+    border-color: var(--my-orange) !important;
+}
+
+input:focus {
+    border-color: var(--my-orange) !important;
+    box-shadow: 0 0 3px var(--my-orange) !important;
+}
+
+textarea:focus {
+    border-color: var(--my-orange) !important;
+    box-shadow: 0 0 3px var(--my-orange) !important;      
+}
+
+input[type="checkbox"] + label { 
+    font-size: 110%;
+  }
+
 
 /* Base template */
 
@@ -150,16 +201,14 @@ form {
 /* Join SharedSpaces Buttons */
 
 .btn-join {
-    background-color: var(--my-orange);
-    border: 5px solid var(--my-yellow);
-    color: white;
+    background-color: var(--my-yellow);
+    border: 5px solid var(--my-orange);
 }
 
 /* for button:active need to override default bootstrap styles */
 .btn-join:hover, .btn-join:active {
-    background-color: var(--my-orange-active) !important;
-    border: 5px solid var(--my-yellow) !important;
-    color: white !important;
+    background-color: var(--my-yellow-active) !important;
+    border: 5px solid var(--my-orange) !important;
 }
 
 
@@ -176,7 +225,6 @@ form {
 }
 
 .section-cover-text {
-    color: white;
     margin-top: 1rem;
     padding: .8rem;
     padding-bottom: .3rem;
@@ -233,12 +281,16 @@ form {
 }
 
 /* Contact Page */
+#contact-form-section {
+    margin-top: -2rem;
+}
 
 #contact-header-image {
     border: 4px solid var(--my-blue);
 }
 
 #contact-cover-text {
+    color: white;
     border: 4px solid var(--my-yellow);
 }
 

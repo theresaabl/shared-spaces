@@ -10,7 +10,7 @@
 
 
 <!--Contact Header section-->
-<section">
+<section>
 
     <div class="container-fluid">
 
@@ -30,28 +30,28 @@
 
 
 <!-- Contact Form Section -->
-<section>
-
-    <div class="row justify-content-center">
-        <div class="col-auto">
-            <h3>Leave Us a Message:</h3>
-        </div>
-    </div>
-
+<section id="contact-form-section">
     <div class="container-fluid">
+
+        <div class="row justify-content-center mb-2">
+            <div class="col-auto">
+                <h4>Your message: </h4>
+            </div>
+        </div>
+        
+
+
         <div class="row justify-content-center">
 
-            <div class="col-md-4 card mb-4 mt-3">
-
+            <div class="col-11 col-xs-10 col-sm-8 col-md-6 col-xl-4 mb-4 card form-card">
                 <!-- Contact Form Card -->
                 <div class="card-body">
-
                     <!-- Contact Form -->
                     <form id="contact-form" method="post">
                         {{ contact_form | crispy }}
                         {% csrf_token %}
-                        <button id="contact-reset-button" type="reset" class="btn btn-secondary btn-lg">Reset</button>
-                        <button id="contact-submit-button" type="submit" class="btn btn-secondary btn-lg">Submit</button>
+                        <button id="contact-reset-button" type="reset" class="btn btn-reset btn-lg">Reset</button>
+                        <button id="contact-submit-button" type="submit" class="btn btn-submit btn-lg">Submit</button>
                         
                     </form>
 
