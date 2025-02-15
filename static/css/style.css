@@ -298,6 +298,48 @@ input[type="checkbox"] + label {
     background-color: var(--my-blue);
 }
 
+
+/* Error 404 Page */
+
+#error-header-image {
+    height: 60vh;
+    border: 4px solid var(--my-yellow);
+    object-position: center center;
+}
+
+#error-cover-text {
+    border: 4px solid var(--my-orange);
+    bottom: 10rem;
+}
+
+#error-cover-text h3 {
+    background-color: var(--my-yellow);
+    padding: 3rem;
+}
+
+.error-text {
+    margin-top: -10rem;
+}
+
+.error-text p {
+    font-size: 200%;
+}
+
+.btn-home {
+    color: white;
+    background-color: var(--my-blue);
+    border: 5px solid var(--my-yellow);
+    padding: 1rem;
+    font-size: 200%;
+}
+
+.btn-home:hover, .btn-home:active {
+    color: white !important;
+    background-color: var(--my-blue-active) !important;
+    border: 5px solid var(--my-yellow) !important;
+}
+
+
 /* Resident Space */
 
 .dashboard-image {

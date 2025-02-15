@@ -64,6 +64,11 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="{% url 'error' %}">
+                            Test:error
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link {% if request.path == dashboard_url %} {% if user.is_authenticated %} resident-active {% else %} active{% endif %}" aria-current="page{% endif %} {% if user.is_authenticated %}resident-nav-link{% endif %}" href="{{ dashboard_url }}">
                             Resident Space
                         </a>

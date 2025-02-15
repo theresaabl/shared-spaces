@@ -1,17 +1,50 @@
 {% extends "base.html" %}
 
+{% load static %}
+
 {% block content %}
 
 <!-- 404.html content starts here -->
-<div class="container-fluid">
-    <div class="row">
+<!--Error Page section-->
+<section>
 
-        <div class="col-12 mt-3 left">
-            <h2>Error 404! This space does not exist within the SharedSpaces community!</h2>
+    <div class="container-fluid">
+
+        <!-- Header for Error Page -->
+        <div class="row me-md-1">
+            <!-- Error header image -->
+            <div class="col-12">
+                <img src="{% static 'images/error-404.webp' %}" alt="error-image" id="error-header-image" class="img-fluid section-header-image">
+            </div>
+            <!-- Contact Cover Text -->
+            <div class="col-auto text-center section-cover-text" id="error-cover-text">
+                <h3 class="display-5">
+                    Error
+                </h3>
+            </div>
         </div>
-            
+
+        <div class="row justify-content-center error-text">
+            <div class="col-auto">
+                <p class="lead">
+                    This space does not exist in the <span class="sharedspaces">SharedSpaces</span> community!
+                </p>
+            </div>
+        </div>
+
+        <!-- Go to Home Button -->
+        <div class="row justify-content-center mb-4 mx-2">
+            <div class="col-auto">
+                <a href="{% url 'home' %}" class="btn btn-lg btn-home">Go back home here !</a>
+            </div>
+        </div>
+
+
+
     </div>
-</div>
+
+    
+</section>
 
 <!-- 404.html content ends here -->
 {% endblock content %}
