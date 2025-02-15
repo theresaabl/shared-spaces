@@ -27,6 +27,30 @@ main {
     font-size: 140%;
 }
 
+/* General .card styles */
+.card-body p a {
+    text-decoration: none;
+    color: var(--my-blue);
+}
+
+.card-body p a:active, .card-body p a:hover {
+    text-decoration: underline;
+    color: var(--my-blue-active);
+}
+
+.card-status-yellow {
+    border: 3px solid var(--my-yellow);
+}
+
+.card-status-orange {
+    border: 3px solid var(--my-orange);
+}
+
+.card-status-blue {
+    border: 3px solid var(--my-blue);
+}
+
+
 /* General form styles */
 /* .form-card {
     border: 3px solid var(--my-orange);
@@ -87,9 +111,14 @@ textarea:focus {
     box-shadow: 0 0 3px var(--my-orange) !important;      
 }
 
+select:focus {
+    border-color: var(--my-orange) !important;
+    box-shadow: 0 0 3px var(--my-orange) !important;      
+}
+
 input[type="checkbox"] + label { 
     font-size: 110%;
-  }
+}
 
 
 /* Base template */
@@ -365,7 +394,7 @@ input[type="checkbox"] + label {
 
 .username-in-title {
     border: 3px solid var(--my-yellow);
-    padding: .5rem;
+    padding: .2rem .5rem;
     border-radius: 5px;
 }
 
@@ -373,38 +402,29 @@ input[type="checkbox"] + label {
     width: 100%;
     height: 30vh;
     object-fit: cover;
+    object-position: center 75%;
 }
 
 .urgent-request {
     font-size: 90%;
     background-color: var(--my-yellow);
-    padding: .5rem;
+    padding: .2rem .5rem;
     border-radius: 5px;
     margin-left: .5rem;
 }
 
-.card-status-yellow {
-    border: 3px solid var(--my-yellow);
+.btn-return {
+    color: white;
+    background-color: var(--my-blue);
+    border: 5px solid var(--my-orange);
+    border-radius: 10px;
 }
 
-.card-status-orange {
-    border: 3px solid var(--my-orange);
+.btn-return:hover, .btn-return:active {
+    color: white !important;
+    background-color: var(--my-blue-active) !important;
+    border: 5px solid var(--my-orange) !important;
 }
-
-.card-status-blue {
-    border: 3px solid var(--my-blue);
-}
-
-.card-text a {
-    text-decoration: none;
-    color: var(--my-blue);
-}
-
-.card-text a:active, .card-text a:hover {
-    text-decoration: underline;
-    color: var(--my-blue-active);
-}
-
 
 /* Event Spaces list */
 
