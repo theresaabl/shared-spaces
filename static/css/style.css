@@ -15,7 +15,7 @@ body {
 }
 
 main {
-    padding-top: 75px;
+    padding-top: 90px;
     padding-bottom: 1rem;
 }
 
@@ -23,12 +23,19 @@ form {
     margin-top: 1.3em;
 }
 
+.sharedspaces {
+    font-family: 'Alumni Sans Pinstripe', sans-serif;
+    font-weight: 600;
+    font-size: 140%;
+}
+
 /* Base template */
 
 /* Navbar */
 
 #logo {
-    font-size: 150%;
+    font-size: 250%;
+    padding: 0
 }
 
 /* Index.html */
@@ -314,10 +321,10 @@ form {
 
 
 /* When dropdown toggler breaks into newline on very small screens */
-@media screen and (max-width: 252px) {
+@media screen and (max-width: 260px) {
     /* Main */
     main {
-        padding-top: 120px;
+        padding-top: 130px;
     }
 
     /* Hero Section */
