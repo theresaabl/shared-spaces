@@ -3,6 +3,7 @@
     --my-blue: #324495;
     --my-blue-active: #24316b;
     --my-yellow: #f6ae2d;
+    --my-yellow-active: #cd9326;
     --my-orange: #f26419;
     --my-orange-active: #d16023;
   }
@@ -43,20 +44,43 @@ form {
     font-size: 120%;
     line-height: 2rem;
     color: var(--my-blue);
-    border: 1px solid var(--my-blue);
+    border: 2px solid var(--my-yellow);
     border-radius: 10px;
     display: inline-block;
     padding: .2rem .5rem;
+    margin-right: .8rem;
 }
 
 .resident-active {
     font-size: 120%;
     line-height: 2rem;
     color: var(--my-blue-active);
-    border: 1px solid var(--my-blue-active);
+    border: 2px solid var(--my-yellow-active);
     border-radius: 10px;
     display: inline-block;
     padding: .2rem .5rem;
+    margin-right: .8rem;
+}
+
+.admin-nav-link {
+    font-size: 120%;
+    line-height: 2rem;
+    color: var(--my-blue);
+    border: 2px solid var(--my-orange);
+    border-radius: 10px;
+    display: inline-block;
+    padding: .2rem .5rem;
+}
+
+.admin-active {
+    font-size: 120%;
+    line-height: 2rem;
+    color: var(--my-blue-active);
+    border: 2px solid var(--my-orange-active);
+    border-radius: 10px;
+    display: inline-block;
+    padding: .2rem .5rem;
+    margin-right: .8rem;
 }
 
 /* Index.html */
@@ -237,6 +261,21 @@ form {
 
 
 /* Media queries */
+
+/* When navbar collapses to dropdown menu */
+@media screen and (max-width: 991.5px) {
+    /* resident nav link for authenticated users */
+    .resident-nav-link {
+        margin-bottom: .8rem;
+        margin-right: 0;
+    }
+
+    .resident-active {
+        margin-bottom: .8rem;
+        margin-right: 0;
+    }
+
+}
 
 /* Media query: small mobile devices */
 /* To properly display hero section */
