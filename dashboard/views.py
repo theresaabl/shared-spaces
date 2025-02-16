@@ -2,6 +2,7 @@ from datetime import date, timedelta, datetime
 from allauth.account.views import LoginView
 from django.shortcuts import render, get_object_or_404
 from django.contrib import messages
+from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import check_password
@@ -275,73 +276,8 @@ def booking_edit(request, booking_id):
 
                 booking = booking_form.save(commit=False)
 
-                # convert start and end times to datetime objects, so can add timedelta
-                start_dt = datetime.combine(datetime.today(), booking.start)
-                end_dt = datetime.combine(datetime.today(), booking.end)
-
-                # check that start time is at least 1 hour before end time
-                if start_dt + timedelta(hours=1) > end_dt:
-                    messages.add_message(
-                        request,
-                        messages.ERROR,
-                        'The end time must be at least one hour after the start time. Please enter a valid start and end time!'
-                    )
-                    booking.date = convert_date(booking.date)
-                    booking.start = old_start_time
-                    booking.end = old_end_time
-
-                    booking_form = BookingForm(instance=booking)
-
-                    return render(
-                        request,
-                        "dashboard/event_space_booking.html",
-                        {
-                            "booking_form": booking_form,
-                        }
-                    )
-                # End start time before end time conditional
-
                 # Save which fields have changed
                 changed_fields = booking_form.changed_data
-
-                # Start if date has changed conditional
-                # if 'date' in changed_fields:
-                #     # Start if date has changed and check for duplicate bookings conditional
-                #     if check_for_duplicate_bookings(booking, request):
-                #         # Prefill form but leave original date
-                #         booking.date = old_date
-                #         booking_form = BookingForm(instance=booking)
-                #         # render form again
-                #         return render(
-                #             request,
-                #             "dashboard/event_space_booking.html",
-                #             {
-                #                 "booking_form": booking_form,
-                #             }
-                #         )
-                #     # End if date changed and check for duplicate bookings conditional
-
-                # # if Date has not changed:
-                # else:
-                #     # Start if event space has changed conditional
-                #     if 'event_space' in changed_fields:
-                #         # Start if event space has changed and check for duplicate bookings conditional
-                #         if check_for_duplicate_bookings(booking, request):
-                #             # Prefill form but leave original event space
-                #             booking.event_space = old_event_space
-                #             booking.date = convert_date(booking.date)
-                #             booking_form = BookingForm(instance=booking)
-                #             # render form again
-                #             return render(
-                #                 request,
-                #                 "dashboard/event_space_booking.html",
-                #                 {
-                #                     "booking_form": booking_form,
-                #                 }
-                #             )
-                        # End if event space changed and check for duplicate bookings conditional
-
-                # Continue if date and event space not changed or no duplicate bookings on that date
 
                 # if all you change is notes or occasion: status can stay, if change date, time or space: reset status and wait for approval again.
                 if 'event_space' in changed_fields or 'date' in changed_fields or 'start' in changed_fields or 'end' in changed_fields:
@@ -371,6 +307,32 @@ def booking_edit(request, booking_id):
                     messages.ERROR,
                     'Error updating event space booking!'
                 )
+
+                # get access to validation errors
+                try:
+                    booking.clean()
+                    booking.save()
+                
+                # go through all different validation errors and display specific error message
+                # also render the form in a specific way, depending on which fields need to fill in again
+                except ValidationError as e:
+                    # Add specific error message
+                    messages.add_message(
+                        request,
+                        messages.ERROR,
+                        e.message
+                    )
+                    # depending on error code, prefill form in different way
+                    if e.code == "end_time_invalid" or e.code == "short_duration":
+                        booking.date = convert_date(booking.date)
+                        booking.start = old_start_time
+                        booking.end = old_end_time
+
+                    if e.code == "duplicate_booking":
+                        booking.date = old_date
+                        booking.event_space = old_event_space
+
+                booking_form = BookingForm(instance=booking)
 
                 return render(
                     request,

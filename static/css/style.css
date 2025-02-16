@@ -76,6 +76,12 @@ form {
     margin-top: 1rem;
 }
 
+/* Validation Errors (Remove bullet point) */
+form .alert-block li {
+    display: block;
+}
+
+/* Form Buttons */
 .btn-blue {
     color: white;
     background-color: var(--my-blue);

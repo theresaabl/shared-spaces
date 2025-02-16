@@ -58,16 +58,31 @@ class EventSpaceBooking(models.Model):
         )
 
     def clean(self):
-        """Ensure start_time is before end_time and at least 1 hour apart."""
+        """
+        Ensure that no invalid data is entered into the database
+        Check for:
+        - start time is before end time
+        - end time is at least 1 hour after start time
+        - There are no bookings at the same time in the same room and
+            there is at least 1 hour between bookings
+        """
+        # check that start time is before end time
         if self.start >= self.end:
-            raise ValidationError("End time must be later than start time.")
+            raise ValidationError(
+                "The end time must be later than the start time.",
+                code="end_time_invalid"
+                )
 
+        # Check that there is at least 1 hour between start and end time
         # Convert to datetime for proper time difference calculation
         start_dt = datetime.combine(datetime.today(), self.start)
         end_dt = datetime.combine(datetime.today(), self.end)
 
         if end_dt - start_dt < timedelta(hours=1):
-            raise ValidationError("End time must be at least 1 hour after start time.")
+            raise ValidationError(
+                "The end time must be at least 1 hour after the start time.",
+                code="short_duration"
+                )
 
         duplicate_bookings = EventSpaceBooking.objects.filter(
                             event_space=self.event_space,
@@ -80,10 +95,15 @@ class EventSpaceBooking(models.Model):
             booking_start_dt = datetime.combine(datetime.today(), booking.start) - timedelta(hours=1)
             booking_end_dt = datetime.combine(datetime.today(), booking.end) + timedelta(hours=1)
             if start_dt < booking_end_dt and end_dt > booking_start_dt:
-                raise ValidationError("This event space is already booked for the selected day and time. There must be at least 1 hour between two bookings.")
+                raise ValidationError(
+                    "This event space is already booked for the selected date and time. There must be at least 1 hour between two bookings.",
+                    code="duplicate_booking"
+                    )
 
     def save(self, *args, **kwargs):
-        """Call clean() before saving to enforce validation at the model level."""
+        """
+        Call clean() before saving to enforce validation at the model level.
+        """
         self.clean()
         super().save(*args, **kwargs)
 
