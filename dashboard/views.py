@@ -9,7 +9,7 @@ from django.urls import reverse
 from django.http import HttpResponseRedirect
 from .models import EventSpaceBooking, EventSpace, ResidentRequest
 from .forms import BookingForm, ResidentRequestForm
-from .utils import check_for_duplicate_bookings, resident_request_type, convert_date
+from .utils import resident_request_type, convert_date
 
 
 class MyCustomLoginView(LoginView):
@@ -161,33 +161,33 @@ def event_space_booking(request, space_id=None):
             # End start time before end time conditional
 
             # check whether room already booked on that day
-            if check_for_duplicate_bookings(booking, request):
-                # Prefill form but leave date empty
-                booking.date = ""
-                booking_form = BookingForm(instance=booking)
-                # render form again
-                return render(
-                    request,
-                    "dashboard/event_space_booking.html",
-                    {
-                        "booking_form": booking_form,
-                    }
-                )
-            # no duplicate bookings
-            else:
-                booking.save()
+            # if check_for_duplicate_bookings(booking, request):
+            #     # Prefill form but leave date empty
+            #     booking.date = ""
+            #     booking_form = BookingForm(instance=booking)
+            #     # render form again
+            #     return render(
+            #         request,
+            #         "dashboard/event_space_booking.html",
+            #         {
+            #             "booking_form": booking_form,
+            #         }
+            #     )
+            # # no duplicate bookings
+            # else:
+            booking.save()
 
-                contact_url = reverse('contact')
+            contact_url = reverse('contact')
 
-                messages.add_message(
-                    request,
-                    messages.SUCCESS,
-                    "You successfully sent a booking request. "
-                    "The request is pending and requires approval by the community administrators. "
-                    f"""If the status of your booking is still pending in 3 working days, please feel free to <a href="{contact_url}">contact us</a>."""
-                )
+            messages.add_message(
+                request,
+                messages.SUCCESS,
+                "You successfully sent a booking request. "
+                "The request is pending and requires approval by the community administrators. "
+                f"""If the status of your booking is still pending in 3 working days, please feel free to <a href="{contact_url}">contact us</a>."""
+            )
 
-                return HttpResponseRedirect(reverse('dashboard'))
+            return HttpResponseRedirect(reverse('dashboard'))
 
         # booking form not valid:
         else:
@@ -305,40 +305,40 @@ def booking_edit(request, booking_id):
                 changed_fields = booking_form.changed_data
 
                 # Start if date has changed conditional
-                if 'date' in changed_fields:
-                    # Start if date has changed and check for duplicate bookings conditional
-                    if check_for_duplicate_bookings(booking, request):
-                        # Prefill form but leave original date
-                        booking.date = old_date
-                        booking_form = BookingForm(instance=booking)
-                        # render form again
-                        return render(
-                            request,
-                            "dashboard/event_space_booking.html",
-                            {
-                                "booking_form": booking_form,
-                            }
-                        )
-                    # End if date changed and check for duplicate bookings conditional
+                # if 'date' in changed_fields:
+                #     # Start if date has changed and check for duplicate bookings conditional
+                #     if check_for_duplicate_bookings(booking, request):
+                #         # Prefill form but leave original date
+                #         booking.date = old_date
+                #         booking_form = BookingForm(instance=booking)
+                #         # render form again
+                #         return render(
+                #             request,
+                #             "dashboard/event_space_booking.html",
+                #             {
+                #                 "booking_form": booking_form,
+                #             }
+                #         )
+                #     # End if date changed and check for duplicate bookings conditional
 
-                # if Date has not changed:
-                else:
-                    # Start if event space has changed conditional
-                    if 'event_space' in changed_fields:
-                        # Start if event space has changed and check for duplicate bookings conditional
-                        if check_for_duplicate_bookings(booking, request):
-                            # Prefill form but leave original event space
-                            booking.event_space = old_event_space
-                            booking.date = convert_date(booking.date)
-                            booking_form = BookingForm(instance=booking)
-                            # render form again
-                            return render(
-                                request,
-                                "dashboard/event_space_booking.html",
-                                {
-                                    "booking_form": booking_form,
-                                }
-                            )
+                # # if Date has not changed:
+                # else:
+                #     # Start if event space has changed conditional
+                #     if 'event_space' in changed_fields:
+                #         # Start if event space has changed and check for duplicate bookings conditional
+                #         if check_for_duplicate_bookings(booking, request):
+                #             # Prefill form but leave original event space
+                #             booking.event_space = old_event_space
+                #             booking.date = convert_date(booking.date)
+                #             booking_form = BookingForm(instance=booking)
+                #             # render form again
+                #             return render(
+                #                 request,
+                #                 "dashboard/event_space_booking.html",
+                #                 {
+                #                     "booking_form": booking_form,
+                #                 }
+                #             )
                         # End if event space changed and check for duplicate bookings conditional
 
                 # Continue if date and event space not changed or no duplicate bookings on that date

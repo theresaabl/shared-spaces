@@ -1,4 +1,6 @@
 from django.db import models
+from django.core.exceptions import ValidationError
+from datetime import datetime, timedelta
 from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
 
@@ -54,6 +56,36 @@ class EventSpaceBooking(models.Model):
         choices=Status.choices,
         default=Status.PENDING
         )
+
+    def clean(self):
+        """Ensure start_time is before end_time and at least 1 hour apart."""
+        if self.start >= self.end:
+            raise ValidationError("End time must be later than start time.")
+
+        # Convert to datetime for proper time difference calculation
+        start_dt = datetime.combine(datetime.today(), self.start)
+        end_dt = datetime.combine(datetime.today(), self.end)
+
+        if end_dt - start_dt < timedelta(hours=1):
+            raise ValidationError("End time must be at least 1 hour after start time.")
+
+        duplicate_bookings = EventSpaceBooking.objects.filter(
+                            event_space=self.event_space,
+                            date=self.date
+                            ).exclude(id=self.id)
+        
+        for booking in duplicate_bookings:
+            # convert booking start and end time to datetime objects 
+            # and substract/add 1 hour to get a window between bookings
+            booking_start_dt = datetime.combine(datetime.today(), booking.start) - timedelta(hours=1)
+            booking_end_dt = datetime.combine(datetime.today(), booking.end) + timedelta(hours=1)
+            if start_dt < booking_end_dt and end_dt > booking_start_dt:
+                raise ValidationError("This event space is already booked for the selected day and time. There must be at least 1 hour between two bookings.")
+
+    def save(self, *args, **kwargs):
+        """Call clean() before saving to enforce validation at the model level."""
+        self.clean()
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return f"Booking by {self.resident} for '{self.event_space}' on {self.date} is {self.get_status_display()}"  # noqa
