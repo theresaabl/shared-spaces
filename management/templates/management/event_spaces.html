@@ -8,17 +8,19 @@
 <div class="container-fluid">
     
     <!-- Title Row -->
-    <div class="row">
+    <div class="row my-3 mb-2 mb-lg-3 mb-xl-4">
         <div class="col-12 text-center">
-            <h3>Event Spaces</h3>
-            <p>Here is a list of all available event spaces in the SharedSpaces community. You can add new event spaces, and edit or delete existing ones.</p>
+            <h2>Event Spaces</h2>
+            <p class="lead mt-3">A list of available event spaces in the <span class="sharedspaces">SharedSpaces</span> community.<br>
+                Add new event spaces or edit and delete existing ones.
+            </p>
         </div>
     </div>
 
     <!-- Add New Event Space -->
-    <div class="row justify-content-center">
+    <div class="row justify-content-center mb-4">
         <div class="col-auto">
-            <a href="{% url 'mgmt-add-event-space' %}" class="btn btn-lg btn-primary">Add New Event Space</a>
+            <a href="{% url 'mgmt-add-event-space' %}" class="btn btn-lg btn-join"><i class="fa-solid fa-plus me-2"></i> Add New Event Space</a>
         </div>
     </div>
 
@@ -26,17 +28,17 @@
     <div class="row justify-content-center">
 
         <!-- List of Event Spaces -->
-        <div class="col-10 col-sm-8 col-md-6 col-xl-5 col-xxl-4">
+        <div class="col-12 col-sm-10 col-md-8 col-xl-6 col-xxl-5 mx-2">
 
             <!-- Loop through all event spaces-->
             {% for space in event_spaces_values %}
 
             <!-- Row and Column for each event_space -->
-            <div class="row justify-content-center">
+            <div class="row justify-content-center my-4">
                 <div class="col">
 
                     <!-- Event Space Card -->
-                    <div class="card">
+                    <div class="card w-100 card-status-yellow">
                         {% if "placeholder" in space.image.url %}
                         <img class="card-img-top img-fluid event-space-image" src="{% static 'images/event_space_example.webp' %}" alt="placeholder image">
                         {% else %}
@@ -44,20 +46,20 @@
                         {% endif %}
                         <div class="card-body">
                             <div class="card-text"> 
-                                <h5>{{ space.name }}</h5>
-                                <ul>
-                                    <li>Type: {{ space.type }}</li>
-                                    <li>Building: {{ space.building }}</li>
-                                    <li>Capacity: {{ space.capacity }}</li>
-                                    <li>Number of Tables: {{ space.number_of_tables }} </li>
-                                    <li>Number of Chairs: {{ space.number_of_chairs }} </li>
-                                    <li>
+                                <h4 class="my-3 mx-2 fs-3">{{ space.name }}</h4>
+                                <ul class="list-unstyled mx-2 mb-3">
+                                    <li class="mb-2">Type: {{ space.type }}</li>
+                                    <li class="mb-2">Building: {{ space.building }}</li>
+                                    <li class="mb-2">Capacity: {{ space.capacity }}</li>
+                                    <li class="mb-2">Number of Tables: {{ space.number_of_tables }} </li>
+                                    <li class="mb-2">Number of Chairs: {{ space.number_of_chairs }} </li>
+                                    <li class="mb-2">
                                         Amenities:
                                         <!-- Loop through all Boolean Fields -->
-                                        <ul>
+                                        <ul class="list-unstyled my-2 ms-4">
                                             {% for key, value in space.items  %}
                                                 {% if value is True %}
-                                                <li class="replace-underscore">{{ key }}</li>
+                                                <li class="mb-2"><i class="fa-regular fa-circle-check text-success"></i> <span class="replace-underscore ms-1">{{ key }}</span></li>
                                                 {% endif %}
                                             {% endfor %}
                                         </ul>
@@ -65,7 +67,7 @@
                                     </li>
 
                                     {% if space.notes %}
-                                    <li>Notes: {{ space.notes }}</li>
+                                    <li class="mb-3 my-3">Notes: <span class="fst-italic">{{ space.notes }}</span></li>
                                     {% endif %}
 
                                 </ul>
@@ -73,8 +75,8 @@
                             </div>
 
                             <!-- Buttons -->
-                            <a href="{% url 'mgmt-edit-event-space' space.id %}" class="btn btn-sm btn-secondary">Edit</a>
-                            <button class="btn btn-danger btn-sm btn-delete-event-space" space_id="{{ space.id }}">Delete</button>
+                            <a href="{% url 'mgmt-edit-event-space' space.id %}" class="btn btn-blue mx-1 ms-sm-2 my-2">Edit</a>
+                            <button class="btn btn-danger btn-delete-event-space mx-1 ms-sm-2 my-2" space_id="{{ space.id }}">Delete</button>
 
                         </div>
 
@@ -95,7 +97,7 @@
 
                         <div class="card-body">
                             <div class="card-text"> 
-                                <h5>No Event Spaces found.</h5>
+                                <p class="pt-2">No event spaces found.</p>
                             </div>
 
                         </div>
@@ -118,7 +120,7 @@
     <!-- Return to Admin Space Button -->
     <div class="row">
         <div class="col-auto">
-            <a href="{% url 'management' %}" class="btn btn-primary">Return to Admin Space</a>
+            <a href="{% url 'management' %}" class="btn btn-lg btn-return-admin mx-2 my-3">Return to Admin Space</a>
         </div>
     </div>
     
