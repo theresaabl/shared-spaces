@@ -1,4 +1,4 @@
-from datetime import date, timedelta
+from datetime import date, timedelta, datetime
 from allauth.account.views import LoginView
 from django.shortcuts import render, get_object_or_404
 from django.contrib import messages
@@ -250,12 +250,18 @@ def booking_edit(request, booking_id):
 
                 booking = booking_form.save(commit=False)
 
-                # check that start time is before end time
-                if booking.start > booking.end:
+                # convert start and end times to datetime objects, so can add timedelta
+                start_dt = datetime.combine(datetime.today(), booking.start)
+                end_dt = datetime.combine(datetime.today(), booking.end)
+
+                print(start_dt, end_dt)
+
+                # check that start time is at least 1 hour before end time
+                if start_dt + timedelta(hours=1) > end_dt:
                     messages.add_message(
                         request,
                         messages.ERROR,
-                        'Please enter a valid start and end time!'
+                        'The end time must be at least one hour after the start time. Please enter a valid start and end time!'
                     )
                     booking.date = convert_date(booking.date)
                     booking.start = old_start_time
@@ -313,7 +319,6 @@ def booking_edit(request, booking_id):
                         # End if event space changed and check for duplicate bookings conditional
 
                 # Continue if date and event space not changed or no duplicate bookings on that date
-                print("booking not duplicate")
 
                 # if all you change is notes or occasion: status can stay, if change date, time or space: reset status and wait for approval again.
                 if 'event_space' in changed_fields or 'date' in changed_fields or 'start' in changed_fields or 'end' in changed_fields:
@@ -360,7 +365,6 @@ def booking_edit(request, booking_id):
                 messages.INFO,
                 'No changes were made to your booking.'
             )
-            print("message added")
 
             return HttpResponseRedirect(reverse('dashboard'))
         # End booking form changed conditional
