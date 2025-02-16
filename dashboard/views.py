@@ -132,50 +132,13 @@ def event_space_booking(request, space_id=None):
     if request.method == "POST":
         booking_form = BookingForm(data=request.POST)
 
+        # Booking form is valid
+        # validation for start and end time and duplicate bookings
+        # is done on model level
         if booking_form.is_valid():
             booking = booking_form.save(commit=False)
             booking.resident = request.user
 
-            # convert start and end times to datetime objects, so can add timedelta
-            start_dt = datetime.combine(datetime.today(), booking.start)
-            end_dt = datetime.combine(datetime.today(), booking.end)
-
-            # check that start time is at least 1 hour before end time
-            if start_dt + timedelta(hours=1) > end_dt:
-                messages.add_message(
-                    request,
-                    messages.ERROR,
-                    'The end time must be at least one hour after the start time. Please enter a valid start and end time!'
-                )
-                booking.date = convert_date(booking.date)
-                booking.end = ""
-
-                booking_form = BookingForm(instance=booking)
-
-                return render(
-                    request,
-                    "dashboard/event_space_booking.html",
-                    {
-                        "booking_form": booking_form,
-                    }
-                )
-            # End start time before end time conditional
-
-            # check whether room already booked on that day
-            # if check_for_duplicate_bookings(booking, request):
-            #     # Prefill form but leave date empty
-            #     booking.date = ""
-            #     booking_form = BookingForm(instance=booking)
-            #     # render form again
-            #     return render(
-            #         request,
-            #         "dashboard/event_space_booking.html",
-            #         {
-            #             "booking_form": booking_form,
-            #         }
-            #     )
-            # # no duplicate bookings
-            # else:
             booking.save()
 
             contact_url = reverse('contact')
@@ -195,7 +158,7 @@ def event_space_booking(request, space_id=None):
             messages.add_message(
                 request,
                 messages.ERROR,
-                'There was an error in your form. Please fill in again.'
+                'Error booking event space!'
             )
 
             return render(
@@ -329,8 +292,10 @@ def booking_edit(request, booking_id):
                         booking.end = old_end_time
 
                     if e.code == "duplicate_booking":
-                        booking.date = old_date
                         booking.event_space = old_event_space
+                        booking.date = old_date
+                        booking.start = old_start_time
+                        booking.end = old_end_time
 
                 booking_form = BookingForm(instance=booking)
 
