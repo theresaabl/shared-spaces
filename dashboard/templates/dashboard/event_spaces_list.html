@@ -4,15 +4,14 @@
 
 {% block content %}
 
-{% if user.is_authenticated %}
 <!-- event_spaces_list.html content starts here -->
 <div class="container-fluid">
 
     <!-- Title Row -->
-    <div class="row">
+    <div class="row my-3 mb-2 mb-lg-3 mb-xl-4">
         <div class="col-12 text-center">
-            <h2>SharedSpaces Event Spaces</h2>
-            <p>These event spaces are available <a href="{% url 'booking' %}">to book</a> for SharedSpaces residents.</p>
+            <h2><span class="sharedspaces">SharedSpaces</span> Event Spaces</h2>
+            <p class="lead mt-3">A list of event spaces available <a href="{% url 'booking' %}" class="link-style fs-4">to book</a> for <span class="sharedspaces">SharedSpaces</span> residents.</p>
         </div>
     </div>
 
@@ -20,38 +19,40 @@
     <div class="row justify-content-center">
 
         <!-- List of Event Spaces -->
-        <div class="col-10 col-sm-8 col-md-6 col-xl-5 col-xxl-4">
+        <div class="col-12 col-sm-10 col-md-8 col-xl-6 col-xxl-5 mx-2">
 
             <!-- Loop through all event spaces -->
             {% for space in event_spaces_values %}
 
             <!-- Row and Column for each space -->
-            <div class="row justify-content-center">
+            <div class="row justify-content-center my-4">
                 <div class="col">
 
                     <!-- Event Space Card -->
-                    <div class="card">
+                    <div class="card w-100 card-status-yellow">
                         {% if "placeholder" in space.image.url %}
                         <img class="card-img-top  img-fluid event-space-image" src="{% static 'images/event_space_example.webp' %}" alt="placeholder image">
                         {% else %}
                         <img class="card-img-top  img-fluid event-space-image" src=" {{ space.image.url }}" alt="{{ space.name }}">
                         {% endif %}
+
                         <div class="card-body">
                             <div class="card-text"> 
-                                <h4>{{ space.name }}</h4>
-                                <ul>
-                                    <li>Type: {{ space.type }}</li>
-                                    <li>Building: {{ space.building }}</li>
-                                    <li>Capacity: {{ space.capacity }}</li>
-                                    <li>Number of Tables: {{ space.number_of_tables }} </li>
-                                    <li>Number of Chairs: {{ space.number_of_chairs }} </li>
-                                    <li>
+                                <h4 class="my-3 mx-2">{{ space.name }}</h4>
+                                <ul class="list-unstyled mx-2 mb-3">
+                                    <li class="mb-2">Type: {{ space.type }}</li>
+                                    <li class="mb-2">Building: {{ space.building }}</li>
+                                    <li class="mb-2">Capacity: {{ space.capacity }}</li>
+                                    <li class="mb-2">Number of Tables: {{ space.number_of_tables }} </li>
+                                    <li class="mb-2">Number of Chairs: {{ space.number_of_chairs }} </li>
+                                    <li class="mb-2">
                                         Amenities:
                                         <!-- Loop through all Boolean Fields -->
-                                        <ul>
+                                        <ul class="list-unstyled my-2 ms-4">
                                             {% for key, value in space.items  %}
                                                 {% if value is True %}
-                                                <li class="replace-underscore">{{ key }}</li>
+                                                <li></li>
+                                                <li class="mb-2"><i class="fa-regular fa-circle-check"></i> <span class="replace-underscore ms-1">{{ key }}</span></li>
                                                 {% endif %}
                                             {% endfor %}
                                         </ul>
@@ -59,13 +60,13 @@
                                     </li>
 
                                     {% if space.notes %}
-                                    <li>Notes: {{ space.notes }}</li>
+                                    <li class="mb-3 my-3">Notes: <span class="fst-italic">{{ space.notes }}</span></li>
                                     {% endif %}
 
                                 </ul>    
                             </div>
                             <!-- Button to book this event space, include space.id -->
-                            <a class="btn btn-sm btn-secondary" href="{% url 'space_booking' space.id %}">Book this Space</a>
+                            <a class="btn btn-orange mx-1 my-1" href="{% url 'space_booking' space.id %}">Book this Space</a>
 
                         </div>
 
@@ -87,25 +88,11 @@
     <!-- Return to Resident Space Button -->
     <div class="row">
         <div class="col-auto">
-            <a href="{% url 'dashboard' %}" class="btn btn-primary">Return to Resident Space</a>
+            <a href="{% url 'dashboard' %}" class="btn btn-lg btn-return mx-2 my-3">Return to Resident Space</a>
         </div>
     </div>
 
 </div>
-
-{% else %}
-
-<div class="container-fluid">
-    <div class="row">
-
-        <div class="col-12 mt-3 left">
-            <h2>To access the Resident Space <a class="link" href="{{ login_url }}">sign in</a> first!</h2>
-        </div>
-            
-    </div>
-</div>
-
-{% endif %}
 
 <!-- event_spaces_list.html content ends here -->
 {% endblock content %}

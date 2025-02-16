@@ -5,7 +5,6 @@
 
 {% block content %}
 
-{% if user.is_authenticated %}
 <!-- submit_request.html content starts here -->
 <div class="container-fluid">
 
@@ -46,21 +45,6 @@
     </div>
 
 </div>
-
-
-{% else %}
-
-<div class="container-fluid">
-    <div class="row">
-
-        <div class="col-12 mt-3 left">
-            <h2>To access the Resident Space <a class="link" href="{{ login_url }}">sign in</a> first!</h2>
-        </div>
-            
-    </div>
-</div>
-
-{% endif %}
 
 <!-- submit_request.html content ends here -->
 {% endblock content %}

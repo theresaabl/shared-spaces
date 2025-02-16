@@ -43,17 +43,17 @@ main {
     font-size: 140%;
 }
 
-/* General .card styles */
-.card-body p a {
+.link-style {
     text-decoration: none;
     color: var(--my-blue);
 }
 
-.card-body p a:active, .card-body p a:hover {
+.link-style:active, .link-style:hover {
     text-decoration: underline;
     color: var(--my-blue-active);
 }
 
+/* General .card styles */
 .card-status-yellow {
     border: 3px solid var(--my-yellow);
 }

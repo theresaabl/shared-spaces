@@ -5,7 +5,6 @@
 
 {% block content %}
 
-{% if user.is_authenticated %}
 <!-- event_space_booking.html content starts here -->
 <div class="container-fluid">
 
@@ -23,7 +22,7 @@
             <!-- Booking Card -->
             <div class="card-body">
 
-                <p>Click to see <a href="{% url 'event_spaces' %}" class="fs-5">list of event spaces</a><p>
+                <p>Click to see <a href="{% url 'event_spaces' %}" class="link-style fs-5">list of event spaces</a><p>
 
                 <!-- Booking Form -->
                 <form id="booking-form" method="post">
@@ -48,21 +47,6 @@
     </div>
 
 </div>
-
-
-{% else %}
-
-<div class="container-fluid">
-    <div class="row">
-
-        <div class="col-12 mt-3 left">
-            <h2>To access the Resident Space <a class="link" href="{{ login_url }}">sign in</a> first!</h2>
-        </div>
-            
-    </div>
-</div>
-
-{% endif %}
 
 <!-- event_space_booking.html content ends here -->
 {% endblock content %}
