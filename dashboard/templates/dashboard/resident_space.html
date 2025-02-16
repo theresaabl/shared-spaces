@@ -89,14 +89,27 @@
 
 {% else %}
 
+<!-- For unauthenticated Users -->
 <div class="container-fluid">
-    <div class="row">
+    <div class="row justify-content-center my-4">
 
-        <div class="col-12 mt-3 left">
-            <h2>To access the Resident Space <a class="link" href="{% url 'account_login' %}">sign in</a> first!</h2>
+        <div class="col-10 col-md-6 col-lg-5 col-xxl-4">
+
+            <!-- Log In To Access Resident Space Card -->
+            <div class="card card-status-blue text-center">
+                
+                <img src="{% static 'images/error-404.webp' %}" class="card-img-top img-fluid dashboard-image" alt="A hole in a wall">
+
+                <div class="card-body">
+                    <h3 class=" my-4">You are not signed in !</h3>
+                    <p class="lead mb-3">To access the Resident Space <a class="btn btn-lg btn-join mb-2 p-2" href="{% url 'account_login' %}">sign in</a> first!</p>
+                </div>
+
+            </div>
+
         </div>
-            
     </div>
+
 </div>
 
 {% endif %}

@@ -1,27 +1,27 @@
-<h4>{{ title }}</h4>
+<h3 class="mt-5 mb-3 fw-bolder">{{ title }}</h3>
 
 <!-- Loop through all users (don't use user since this refers to the currently logged in user)-->
 {% for user_item in users_list %}
 
 <!-- Row and Column for each user -->
-<div class="row justify-content-center">
+<div class="row justify-content-center my-4">
     <div class="col">
 
         <!-- User Card -->
-        <div class="card">
+        <div class="card w-100 {% if user_item.is_active and user_item.is_staff %}card-status-blue{% elif user_item.is_active %}card-status-yellow{% endif %}">
 
             <div class="card-body">
-                <div class="card-text {% if not user_item.is_active %}text-muted{% endif %}"> 
-                    <h5>{{ user_item.username }}</h5>
-                    <ul>
+                <div class="card-text {% if not user_item.is_active %}text-muted{% endif %} mx-3"> 
+                    <h4 class="mb-3 mt-2 fs-3">{{ user_item.username }}</h4>
+                    <ul class="list-unstyled">
                         {% if user_item.first_name or user_item.last_name %}
-                        <li>Name:{% if user_item.first_name %} {{ user_item.first_name }}{% endif %}{% if user_item.last_name %} {{ user_item.last_name }}{% endif %}</li>
+                        <li class="mb-2">Name:{% if user_item.first_name %} {{ user_item.first_name }}{% endif %}{% if user_item.last_name %} {{ user_item.last_name }}{% endif %}</li>
                         {% endif %}
-                        <li>Email: {{ user_item.email }} </li>
-                        <li>Active: {% if user_item.is_active %}Yes{% endif %}{% if not user_item.is_active %}No{% endif %}</li>
-                        <li>Community administrator: {% if user_item.is_staff %}Yes{% endif %}{% if not user_item.is_staff %}No{% endif %}</li>
-                        <li>Last Login: {% if user_item.last_login %}{{ user_item.last_login }}{% else %}Never{% endif %} </li>
-                        <li>Date joined: {{ user_item.date_joined }} </li>
+                        <li class="mb-2">Email: {{ user_item.email }} </li>
+                        <li class="mb-2">Active: {% if user_item.is_active %}<i class="fa-solid fa-check text-success"></i> Yes{% endif %}{% if not user_item.is_active %} <i class="fa-solid fa-xmark text-danger"></i> No{% endif %}</li>
+                        <li class="mb-2">Admin: {% if user_item.is_staff %}<i class="fa-solid fa-check text-success"></i> Yes{% endif %}{% if not user_item.is_staff %} <i class="fa-solid fa-xmark text-danger"></i></i> No{% endif %}</li>
+                        <li class="mb-2">Date joined: {{ user_item.date_joined|date:"M d, Y" }} </li>
+                        <li class="mb-2">Last Login: {% if user_item.last_login %}{{ user_item.last_login|date:"M d, Y" }}{% else %}Never{% endif %} </li>
                     </ul>
 
                 </div>
@@ -29,11 +29,11 @@
                 <!-- Buttons -->
                 <!-- only show buttons for users not the current user, otherwise could accidentally delete or deactivate own account -->
                 {% if not user_item.id == user.id %}
-                <a href="{% url 'mgmt-user-activation' user_item.id %}" class="btn btn-sm {% if user_item.is_active %}btn-secondary{% else %}btn-success{%endif%}">{% if not user_item.is_active %}Activate{% else %}Deactivate{%endif%}</a> 
+                <a href="{% url 'mgmt-user-activation' user_item.id %}" class="btn {% if user_item.is_active %}btn-secondary{% else %}btn-yellow{%endif%} mx-1 ms-sm-2 my-2">{% if not user_item.is_active %}Activate{% else %}Deactivate{%endif%}</a> 
                 {% if user_item.is_active %} 
-                <a href="{% url 'mgmt-user-admin-status' user_item.id %}" class="btn btn-sm {% if user_item.is_staff %}btn-secondary{% else %}btn-primary{% endif %}">{% if not user_item.is_staff %}Give Admin Status{% else %}Remove Admin Status{% endif %}</a>
+                <a href="{% url 'mgmt-user-admin-status' user_item.id %}" class="btn {% if user_item.is_staff %}btn-secondary{% else %}btn-blue{% endif %} mx-1 ms-sm-2 my-2">{% if not user_item.is_staff %}Give Admin Status{% else %}Remove Admin Status{% endif %}</a>
                 {% endif %}
-                <button class="btn btn-danger btn-sm btn-delete-users" user_id="{{ user_item.id }}">Delete User</button>
+                <button class="btn btn-danger btn-delete-users mx-1 ms-sm-2 my-2" user_id="{{ user_item.id }}">Delete User</button>
                 {% endif %}
 
             </div>
@@ -47,7 +47,7 @@
 {% empty %}
 
 <!-- Row and Column for empty list -->
-<div class="row justify-content-center">
+<div class="row justify-content-center my-4">
     <div class="col">
 
         <!-- No User Card -->
@@ -55,7 +55,7 @@
 
             <div class="card-body">
                 <div class="card-text"> 
-                    <p>No users found.</p>
+                    <p class="pt-2">No users found.</p>
                 </div>
 
             </div>

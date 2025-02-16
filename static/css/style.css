@@ -456,29 +456,18 @@ input[type="checkbox"] + label {
     object-fit: cover;
 }
 
+/* Admin Space */
 
-
-/* Go to Resident Space Button */
-/* 
-#to-resident-space-button {
-    position: absolute;
-    right: 0;
+.btn-return-admin {
+    background-color: var(--my-yellow);
+    border: 5px solid var(--my-orange);
+    border-radius: 10px;
 }
 
-.btn-resident-space {
-    background-color: var(--my-blue);
-    border: 5px solid var(--my-yellow);
-    color: white;
+.btn-return-admin:hover, .btn-return-admin:active {
+    background-color: var(--my-yellow-active) !important;
+    border: 5px solid var(--my-orange) !important;
 }
-
-.btn-resident-space:hover, .btn-resident-space:active {
-    background-color: var(--my-blue-active) !important;
-    border: 5px solid var(--my-yellow) !important;
-    color: white !important;
-} */
-
-
-
 
 /* Media queries */
 

@@ -8,10 +8,10 @@
 <div class="container-fluid">
     
     <!-- Title Row -->
-    <div class="row">
-        <div class="col-12 text-center">
-            <h3>Users</h3>
-            <p>Here is a list of all registered users of the SharedSpaces website.</p>
+    <div class="row justify-content-center text-center mt-3">
+        <div class="col-auto">
+            <h2>User Accounts</h2>
+            <p class="lead mt-3">A list of all registered users of the SharedSpaces website sorted into community administrators, confirmed residents and inactive users.</p>
         </div>
     </div>
 
@@ -19,13 +19,12 @@
     <div class="row justify-content-center">
 
         <!-- List of Users -->
-        <div class="col-12 col-md-6 col-xl-5 col-xxl-4">
+        <div class="col-12 col-sm-10 col-md-8 col-xl-6 col-xxl-5 mx-2">
 
             <!-- Include partial templates -->
-            {% include "management/partials/user_list.html" with title="Community Administrators" users_list=staff_users %}
-            {% include "management/partials/user_list.html" with title="Confirmed SharedSpaces Residents" users_list=active_users %}
             {% include "management/partials/user_list.html" with title="Inactive Users" users_list=inactive_users %}
-
+            {% include "management/partials/user_list.html" with title="Confirmed Residents" users_list=active_users %}
+            {% include "management/partials/user_list.html" with title="Community Administrators" users_list=staff_users %}
         </div>
         <!-- End Users List -->
 
@@ -34,7 +33,7 @@
     <!-- Return to Admin Space Button -->
     <div class="row">
         <div class="col-auto">
-            <a href="{% url 'management' %}" class="btn btn-primary">Return to Admin Space</a>
+            <a href="{% url 'management' %}" class="btn btn-lg btn-return-admin mx-2 my-3">Return to Admin Space</a>
         </div>
     </div>
 
