@@ -135,6 +135,31 @@ def event_space_booking(request, space_id=None):
             booking = booking_form.save(commit=False)
             booking.resident = request.user
 
+            # convert start and end times to datetime objects, so can add timedelta
+            start_dt = datetime.combine(datetime.today(), booking.start)
+            end_dt = datetime.combine(datetime.today(), booking.end)
+
+            # check that start time is at least 1 hour before end time
+            if start_dt + timedelta(hours=1) > end_dt:
+                messages.add_message(
+                    request,
+                    messages.ERROR,
+                    'The end time must be at least one hour after the start time. Please enter a valid start and end time!'
+                )
+                booking.date = convert_date(booking.date)
+                booking.end = ""
+
+                booking_form = BookingForm(instance=booking)
+
+                return render(
+                    request,
+                    "dashboard/event_space_booking.html",
+                    {
+                        "booking_form": booking_form,
+                    }
+                )
+            # End start time before end time conditional
+
             # check whether room already booked on that day
             if check_for_duplicate_bookings(booking, request):
                 # Prefill form but leave date empty
@@ -253,8 +278,6 @@ def booking_edit(request, booking_id):
                 # convert start and end times to datetime objects, so can add timedelta
                 start_dt = datetime.combine(datetime.today(), booking.start)
                 end_dt = datetime.combine(datetime.today(), booking.end)
-
-                print(start_dt, end_dt)
 
                 # check that start time is at least 1 hour before end time
                 if start_dt + timedelta(hours=1) > end_dt:
