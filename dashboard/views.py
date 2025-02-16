@@ -249,7 +249,7 @@ def booking_edit(request, booking_id):
             if booking_form.is_valid():
 
                 booking = booking_form.save(commit=False)
-                
+
                 # check that start time is before end time
                 if booking.start > booking.end:
                     messages.add_message(
@@ -260,7 +260,7 @@ def booking_edit(request, booking_id):
                     booking.date = convert_date(booking.date)
                     booking.start = old_start_time
                     booking.end = old_end_time
-                    
+
                     booking_form = BookingForm(instance=booking)
 
                     return render(
