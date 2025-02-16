@@ -4,26 +4,26 @@
 
 <!-- management_page.html content starts here -->
 <div class="container-fluid">
-    <div class="row">
+    <div class="row my-3 mb-4">
 
-        <div class="col-12 mt-3 left">
-            <h2>This is the management page for administrators</h2>
+        <div class="col-12 mt-3 text-center">
+            <h2><span class="sharedspaces">SharedSpaces</span> Admin Space</h2>
         </div>
             
     </div>
 
-    <div class="row justify-content-center">
+    <div class="row justify-content-center mb-4">
 
-        <div class="col-10 col-sm-6 col-md-4 d-flex align-items-stretch text-center">
+        <div class="col-10 col-sm-6 col-md-4 d-flex align-items-stretch text-center my-3 px-2 px-lg-4">
 
             <!-- User Card -->
-            <div class="card w-100">
+            <div class="card w-100 card-status-orange">
 
                 <div class="card-body">
                     <div class="card-text"> 
-                        <h4>User Accounts</h4>
-                        <p>View and edit User accounts</p>
-                        <a href="{% url 'mgmt-users' %}" class="btn btn-primary">Go to User Accounts</a>
+                        <h3 class="my-2 mb-3">User Accounts</h3>
+                        <p class="lead my-2 mb-3">View and manage user accounts</p>
+                        <a href="{% url 'mgmt-users' %}" class="btn btn-lg btn-blue my-2">Go to User Accounts</a>
                     </div>
 
                 </div>
@@ -33,16 +33,16 @@
 
         </div>
 
-        <div class="col-10 col-sm-6 col-md-4 d-flex align-items-stretch text-center">
+        <div class="col-10 col-sm-6 col-md-4 d-flex align-items-stretch text-center my-3 px-2 px-lg-4">
 
             <!-- Event Spaces Card -->
-            <div class="card w-100">
+            <div class="card w-100 card-status-orange">
 
                 <div class="card-body">
                     <div class="card-text"> 
-                        <h4>Event Spaces</h4>
-                        <p>View and edit available shared event spaces in the SharedSpaces community</p>
-                        <a href="{% url 'mgmt-event-spaces' %}" class="btn btn-primary">Go to Event Spaces</a>
+                        <h3 class="my-2 mb-3">Event Spaces</h3>
+                        <p class="lead my-2 mb-3">View and manage shared event spaces</p>
+                        <a href="{% url 'mgmt-event-spaces' %}" class="btn btn-lg btn-blue my-2">Go to Event Spaces</a>
                     </div>
 
                 </div>
@@ -52,16 +52,16 @@
 
         </div>
 
-        <div class="col-10 col-sm-6 col-md-4 d-flex align-items-stretch text-center">
+        <div class="col-10 col-sm-6 col-md-4 d-flex align-items-stretch text-center my-3 px-2 px-lg-4">
 
             <!-- Event Space Bookings Card -->
-            <div class="card w-100">
+            <div class="card w-100 card-status-orange">
 
                 <div class="card-body">
                     <div class="card-text"> 
-                        <h4>Event Space Bookings</h4>
-                        <p>View and edit all event space bookings made by SharedSpaces residents.</p>
-                        <a href="{% url 'mgmt-event-space-bookings' %}" class="btn btn-primary">Go to Bookings</a>
+                        <h3 class="my-2 mb-3">Event Space Bookings</h3>
+                        <p class="lead my-2 mb-3">View and manage event space bookings</p>
+                        <a href="{% url 'mgmt-event-space-bookings' %}" class="btn btn-lg btn-blue my-2">Go to Bookings</a>
                     </div>
 
                 </div>
@@ -71,16 +71,16 @@
 
         </div>
 
-        <div class="col-10 col-sm-6 col-md-4 d-flex align-items-stretch text-center">
+        <div class="col-10 col-sm-6 col-md-4 d-flex align-items-stretch text-center my-3 px-2 px-lg-4">
 
             <!-- Resident Requests Card -->
-            <div class="card w-100">
+            <div class="card w-100 card-status-orange">
 
                 <div class="card-body">
                     <div class="card-text"> 
-                        <h4>Resident Requests</h4>
-                        <p>View and edit all maintenance requests made or messages sent by SharedSpaces residents.</p>
-                        <a href="{% url 'mgmt-resident-requests' %}" class="btn btn-primary">Go to Requests</a>
+                        <h3 class="my-2 mb-3">Resident Requests</h3>
+                        <p class="lead my-2 mb-3">View and manage maintenance requests and messages from residents</p>
+                        <a href="{% url 'mgmt-resident-requests' %}" class="btn btn-lg btn-blue my-2">Go to Requests</a>
                     </div>
 
                 </div>
@@ -90,16 +90,16 @@
 
         </div>
 
-        <div class="col-10 col-sm-6 col-md-4 d-flex align-items-stretch text-center">
+        <div class="col-10 col-sm-6 col-md-4 d-flex align-items-stretch text-center my-3 px-2 px-lg-4">
 
             <!-- Contact Messages Card -->
-            <div class="card w-100">
+            <div class="card w-100 card-status-orange">
 
                 <div class="card-body">
                     <div class="card-text"> 
-                        <h4>Contact Messages</h4>
-                        <p>View and edit all contact messages sent through the contact form.</p>
-                        <a href="{% url 'mgmt-contact-messages' %}" class="btn btn-primary">Go to Messages</a>
+                        <h3 class="my-2 mb-3">Contact Messages</h3>
+                        <p class="lead my-2 mb-3">View and manage contact messages from external users</p>
+                        <a href="{% url 'mgmt-contact-messages' %}" class="btn btn-lg btn-blue my-2">Go to Messages</a>
                     </div>
 
                 </div>
