@@ -10,19 +10,27 @@
 <!-- margin bottom of hero-section is dynamically set in home.js -->
 <section id="hero-section">
 
+    <!-- Hero Container -->
     <div class="container-fluid">
+        <!-- Hero Row -->
         <div class="row me-md-1">
+
             <!-- Hero image -->
             <div class="col-12">
                 <img src="{% static 'images/hero-image.webp' %}" alt="hero-image" id="hero-image" class="img-fluid">
             </div>
+
             <!-- Cover Text -->
             <div class="col-auto text-center" id="cover-text">
                 <h2 class="display-4"><span class="sharedspaces">SharedSpaces</span><br>
                     <small class="text-body-secondary">Community Living</small>
                 </h2>
             </div>
+
+        </div>
+        <!-- End Hero Row -->
     </div>
+    <!-- End Hero Container -->
 
 </section>
 <!-- End Hero Section -->
@@ -30,49 +38,65 @@
 <!--Highlights section-->
 <section>
 
+    <!-- Highlights Container -->
     <div class="container-fluid">
+        <!-- Highlights Row -->
         <div class="row justify-content-center">
 
             <!-- Columns To Describe Highlights of SharedSpaces -->
             <!-- Highlight One -->
             <div class="col-12 col-sm-6 col-md-4 col-xxl-3 text-center">
+
                 <div class="highlights-heading mb-auto">
                     <h3>A Space to Live</h3>
                 </div>
+
                 <div class="highlights-text">
                     <p class="lead">
                         A welcoming home where everyone is valued - built on care, shared responsibilities, and a commitment to each other's well-being.
                     </p>
                 </div>
+
             </div>
+            <!-- End Highlight One -->
 
             <!-- Highlight Two -->
             <div class="col-12 col-sm-6 col-md-4 col-xxl-3 text-center mb-auto">
+
                 <div class="highlights-heading">
                     <h3>A Space to Work</h3>
                 </div>
+
                 <div class="highlights-text">
                     <p class="lead">
                         An inspiring workspace where collaboration fuels success, everyone's contributions matter, and growth is supported every step of the way.
                     </p>
                 </div>
+
             </div>
+            <!-- End Highlight Two -->
 
             <!-- Highlight Three -->
             <div class="col-12 col-sm-6 col-md-4 col-xxl-3 text-center mb-auto">
+
                 <div class="highlights-heading">
                     <h3>A Space for Community</h3>
                 </div>
+
                 <div class="highlights-text">
                     <p class="lead">
                         A community built on mutual care, equality, and shared purpose - where looking out for one another is just a way of life.
                     </p>
                 </div>
+
             </div>
+            <!-- End Highlight Three -->
             
         </div>
+        <!-- End Highlights Row -->
                 
     </div>
+    <!-- End Highlights Container -->
 
 </section>
 <!-- End Highlights Section -->
@@ -87,45 +111,61 @@
 <!--About section-->
 <section id="about-section">
 
+    <!-- About Container -->
     <div class="container-fluid mt-5">
 
         <!-- Header for About Section -->
         <div class="row me-md-1">
+
             <!-- About header image -->
             <div class="col-12">
                 <img src="{% static 'images/about-header-image.webp' %}" alt="about-image" id="about-header-image" class="img-fluid section-header-image">
             </div>
+
             <!-- About Cover Text -->
             <div class="col-auto text-center section-cover-text" id="about-cover-text">
                 <h3 class="display-5">About <span class="sharedspaces">SharedSpaces</span></h3>
             </div>
+
         </div>
 
-        <!-- About Section Row 1 -->
+        <!-- About Row 1 -->
         <div class="row justify-content-end mx-lg-3 mb-3 mb-sm-5">
+
+            <!-- About Description 1 -->
             <div class="col-12 col-sm-8 col-md-6 text-center">
+
                 <div class="about-heading mb-auto">
                     <h3>Thoughtful Living Spaces for Everyone</h3>
                 </div>
+
                 <div class="about-text">
                     <p class="lead">
                         Our homes are designed for comfort, connection, and care. Whether you're living solo, with a partner, friends, or family, we offer accessible flats to suit all lifestyles. 
                         With shared kitchens, cozy lounges, and welcoming common areas, you'll always find a space that feels like home - where everyone belongs.
                     </p>
                 </div>
+
             </div>
+
             <!-- About image 1 -->
             <div class="col-12 col-sm-4 col-md-6 mb-3 mb-sm-0 order-sm-first">
                 <img src="{% static 'images/about-image-living.webp' %}" alt="building" class="img-fluid about-image">
             </div>
-        </div>
 
-        <!-- About Section Row 2 -->
+        </div>
+        <!-- End About Row 1 -->
+
+        <!-- About Row 2 -->
         <div class="row justify-content-start mx-lg-3 mb-3 mb-sm-5">
+
+            <!-- About Description 2 -->
             <div class="col-12 col-sm-8 col-md-6 text-center">
+
                 <div class="about-heading mb-auto">
                     <h3>Shared Event & Work Spaces</h3>
                 </div>
+
                 <div class="about-text">
                     <p class="lead">
                         From lively gatherings to focused work sessions, our shared event spaces bring the community together. 
@@ -133,19 +173,27 @@
                         both productivity and connection. Work, learn, create, and celebrate - all in an environment designed to inspire and support you.
                     </p>
                 </div>
+
             </div>
+
             <!-- About image 2 -->
             <div class="col-12 col-sm-4 col-md-6 mb-3 mb-sm-0">
                 <img src="{% static 'images/about-image-working.webp' %}" alt="building" class="img-fluid about-image">
             </div>
-        </div>
 
-        <!-- About Section Row 3 -->
+        </div>
+        <!-- End About Row 2 -->
+
+        <!-- About Row 3 -->
         <div class="row justify-content-end mx-lg-3 mb-3 mb-sm-5">
+
+            <!-- About Description 3 -->
             <div class="col-12 col-sm-8 col-md-6 text-center">
+
                 <div class="about-heading mb-auto">
                     <h3>Green Spaces & Well-Being</h3>
                 </div>
+
                 <div class="about-text">
                     <p class="lead">
                         Surrounded by lush parks and nature, our community offers a peaceful retreat in the midst of daily life. Families can enjoy safe, 
@@ -153,33 +201,45 @@
                         or simply unwinding outdoors, we believe well-being starts with access to green spaces.
                     </p>
                 </div>
+
             </div>
+
             <!-- About image 3 -->
             <div class="col-12 col-sm-4 col-md-6 mb-3 mb-sm-0 order-sm-first">
                 <img src="{% static 'images/about-image-green.webp' %}" alt="building" class="about-image img-fluid">
             </div>
-        </div>
 
-        <!-- About Section Row 4 -->
+        </div>
+        <!-- End About Row 3 -->
+
+        <!-- About Row 4 -->
         <div class="row justify-content-start mx-lg-3 mb-3 mb-sm-5">
+
+            <!-- About Description 4 -->
             <div class="col-12 col-sm-8 col-md-6 text-center">
+
                 <div class="about-heading mb-auto">
                     <h3>A Community That Cares</h3>
                 </div>
+
                 <div class="about-text">
                     <p class="lead">
                         More than just a place to live, we are a community built on care, equality, and shared responsibility. From supporting one another in daily life 
                         to creating an inclusive space where everyone belongs, we believe that strong communities are built on mutual respect and genuine human connection.
                     </p>
                 </div>
+                
             </div>
             <!-- About image 4 -->
             <div class="col-12 col-sm-4 col-md-6 mb-3 mb-sm-0">
                 <img src="{% static 'images/about-image-community.webp' %}" alt="building" class="img-fluid about-image">
             </div>
+
         </div>
+        <!-- End About Row 4 -->
                          
     </div>
+    <!-- End About Container -->
 
 </section>
 <!-- End About Section -->
