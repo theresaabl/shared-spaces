@@ -9,7 +9,7 @@
 {% block head_title %}{% trans "Sign In" %}{% endblock %}
 
 {% block content %}
-<!-- signup.html content starts here -->
+<!-- signin.html content starts here -->
 <div class="container-fluid">
 
     <div class="row justify-content-center my-4">
@@ -18,17 +18,17 @@
 
             <div class="card card-status-orange">
                 
-                <img src="{% static 'images/hero-image.webp' %}" class="card-img-top img-fluid dashboard-image" alt="A hole in a wall">
-                <!-- Signup Form Card -->
+                <img src="{% static 'images/hero-image.webp' %}" class="card-img-top img-fluid dashboard-image" alt="buildings with sunset">
+                <!-- Signin Form Card -->
                 <div class="card-body mx-2">
                     <h2 class="text-center my-2">{% trans "Sign In" %}</h2>
                     <p class="my-3 text-center lead">
                         {% blocktrans %}
-                        If you are a <span class="sharedspaces">SharedSpaces</span> resident and do not have an account yet, <a class="link link-style fs-5" href="{{ signup_url }}">sign up</a> for a user account first.<br>
+                        If you are a <span class="sharedspaces">SharedSpaces</span> resident and do not have an account yet, <a class="link link-style fs-4" href="{{ signup_url }}">sign up</a> for a user account first.<br>
                         {% endblocktrans %}
                     </p>
-                    <!-- Signup Form -->
-                    <form class="login form-style mt-5" method="POST" action="{% url 'account_login' %}">
+                    <!-- Signin Form -->
+                    <form class="login mt-5" method="POST" action="{% url 'account_login' %}">
                         {% csrf_token %}
                         {{ form|crispy }}
                         {% if redirect_field_value %}
@@ -47,5 +47,5 @@
     </div>
 
 </div>
-<!-- signup.html content starts here -->
+<!-- signin.html content starts here -->
 {% endblock %}
