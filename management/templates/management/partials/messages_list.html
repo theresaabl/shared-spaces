@@ -1,34 +1,33 @@
-<h5>{{ title }}</h5>
+<h4 class="mt-5 fw-bolder">{{ title }}</h4>
 
 <!-- Loop through all contact messages-->
 {% for message in contact_messages %}
 
 <!-- Row and Column for each message -->
-<div class="row justify-content-center">
+<div class="row justify-content-center my-4">
     <div class="col">
 
         <!-- Contact Message Card -->
-        <div class="card w-100">
+        <div class="card w-100 {% if not message.processed %}card-status-yellow{% endif %}">
 
             <div class="card-body">
                 <div class="card-text {% if message.processed %}text-muted{% endif %}">
-                    <h4>From: {{ message.name }}</h4>
-                    <ul>
-                        <li>Interest to join: {% if message.interest_to_join %}Yes{% else %}No{% endif %}</li>
-                        <li>Email: {{ message.email }}</li>
-                        <li>Message: {{ message.message }}</li>
-                        <li>Sent On: {{ message.sent_on }}</li>
-                        <li>Processed: {% if message.processed %}Yes{% else %}No{% endif %}</li>                        
-                        <li>For testing: Id: {{ message.id }}</li>
+                    <h4  class="mb-3">From: {{ message.name }}</h4>
+                    <ul class="list-unstyled">
+                        <li class="mb-2">Interest to join: {% if message.interest_to_join %}<i class="fa-solid fa-check text-success"></i> Yes{% else %}<i class="fa-solid fa-xmark text-danger"></i> No{% endif %}</li>
+                        <li class="mb-2">Email: {{ message.email }}</li>
+                        <li class="blockquote fst-italic mb-2"> {{ message.message }}</li>
+                        <li class="mb-2">Sent on: {{ message.sent_on|date:"M d, Y" }}</li>
+                
                     </ul>    
 
                 </div>
 
                 <!-- Buttons -->
                 {% if not message.processed %}
-                <a href="{% url 'mgmt-message-processed' message.id %}" class="btn btn-sm btn-success">Processed</a>
+                <a href="{% url 'mgmt-message-processed' message.id %}" class="btn btn-blue mx-1 ms-sm-2 my-2">Processed</a>
                 {% endif %}
-                <button class="btn btn-danger btn-sm btn-mgmt-delete-message" message_id="{{ message.id }}">Delete</button>
+                <button class="btn btn-danger btn-mgmt-delete-message mx-1 ms-sm-2 my-2" message_id="{{ message.id }}">Delete</button>
 
             </div>
 
@@ -41,7 +40,7 @@
 {% empty %}
 
 <!-- Row and Column for empty list -->
-<div class="row justify-content-center">
+<div class="row justify-content-center my-4">
     <div class="col">
 
         <!-- No Message Card -->
@@ -49,7 +48,7 @@
 
             <div class="card-body">
                 <div class="card-text"> 
-                    <p>No messages found.</p>
+                    <p class="pt-2">No messages found.</p>
                 </div>
 
             </div>
