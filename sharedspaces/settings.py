@@ -35,9 +35,6 @@ ALLOWED_HOSTS = [
     os.environ.get("HOST")
 ]
 
-# Send error report mail when DEBUG is false
-ADMINS = [("Teri", "theresaabl@gmx.at")]
-
 # Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',
