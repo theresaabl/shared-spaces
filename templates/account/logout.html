@@ -1,29 +1,41 @@
 {% extends "base.html" %}
 
+{% load static %}
+
 {% load i18n %}
 
 {% block head_title %}{% trans "Sign Out" %}{% endblock %}
 
 {% block content %}
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 mt-3 offset-md-2">
-            <h3>{% trans "Sign Out" %}</h3>
+<!-- logout.html content starts here -->
+<div class="container-fluid">
+    <div class="row justify-content-center my-4">
 
-            <p>{% trans 'Are you sure you want to sign out?' %}</p>
+        <div class="col-11 col-md-8 col-lg-6 col-xxl-5">
+
+            <!-- Signout Card -->
+            <div class="card card-status-blue text-center">
+                
+                <img src="{% static 'images/error-404.webp' %}" class="card-img-top img-fluid dashboard-image" alt="A hole in a wall">
+
+                <div class="card-body my-3">
+                    <h3>{% trans "Sign Out" %}</h3>
+        
+                    <p>{% trans 'Are you sure you want to sign out?' %}</p>
+                    <form method="post" action="{% url 'account_logout' %}">
+                        {% csrf_token %}
+                        {% if redirect_field_value %}
+                        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                        {% endif %}
+                        <button class="btn btn-lg btn-blue right mt-4" type="submit">{% trans 'Sign Out' %}</button>
+                    </form>
+                </div>
+
+            </div>
+
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-8 mt-3 offset-md-2">
 
-            <form method="post" action="{% url 'account_logout' %}">
-                {% csrf_token %}
-                {% if redirect_field_value %}
-                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-                {% endif %}
-                <button class="btn btn-primary right" type="submit">{% trans 'Sign Out' %}</button>
-            </form>
-        </div>
-    </div>
 </div>
+<!-- logout.html content ends here -->
 {% endblock %}
