@@ -10,12 +10,18 @@
         <!-- Resident Request Card -->
         <div class="card w-100 {% if resident_request.status == 0 %}card-status-yellow{% elif resident_request.status == 1 %}card-status-blue{% endif %}">
 
+            <!-- Card Body -->
             <div class="card-body">
+
+                <!-- Card Text -->
                 <div class="card-text {% if resident_request.status == 2 %}text-muted{% endif %}">
+
+                    <!-- Card Title -->
                     <h5 class="mb-3">
                         {% if resident_request.purpose == 0 %}Maintenance Request{% else %}Message{% endif %}{% if resident_request.urgent %}
                         <span class="urgent-request">Urgent!</span>{% endif %}
                     </h5>
+                    <!-- Card List -->
                     <ul class="list-unstyled">
                         <li class="blockquote fst-italic mb-2">{{ resident_request.content }}</li>
                         <li>Created on: {{ resident_request.created_on|date:"M d, Y" }}</li>
@@ -25,9 +31,10 @@
 
                 <!-- Buttons -->
                 <a class="btn btn-sm btn-blue btn-edit me-2 mb-1" href="{% url 'resident_request_edit' resident_request.id %}">Edit</a>
-                <button class="btn btn-sm btn-secondary btn-delete-requests btn-danger mb-1" resident_request_id="{{ resident_request.id }}">Delete</button>
+                <button class="btn btn-sm btn-secondary btn-delete-requests btn-danger mb-1" data-resident_request_id="{{ resident_request.id }}">Delete</button>
 
             </div>
+            <!-- End Card Body -->
 
         </div>
         <!-- End Request Card -->

@@ -27,7 +27,7 @@
                 {% if not message.processed %}
                 <a href="{% url 'mgmt-message-processed' message.id %}" class="btn btn-blue mx-1 ms-sm-2 my-2">Processed</a>
                 {% endif %}
-                <button class="btn btn-danger btn-mgmt-delete-message mx-1 ms-sm-2 my-2" message_id="{{ message.id }}">Delete</button>
+                <button class="btn btn-danger btn-mgmt-delete-message mx-1 ms-sm-2 my-2" data-message_id="{{ message.id }}">Delete</button>
 
             </div>
 

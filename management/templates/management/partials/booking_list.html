@@ -43,7 +43,7 @@
                 {% if booking.status != 2 and booking.date|date:"Y m d" >= today %}
                 <a href="{% url 'mgmt-booking-deny' booking.id %}" class="btn btn-secondary mx-1 ms-sm-2 my-2">Deny</a>
                 {% endif %}
-                <button class="btn btn-danger btn-mgmt-delete-booking mx-1 ms-sm-2 my-2" booking_id="{{ booking.id }}">Delete</button>
+                <button class="btn btn-danger btn-mgmt-delete-booking mx-1 ms-sm-2 my-2" data-booking_id="{{ booking.id }}">Delete</button>
 
             </div>
 

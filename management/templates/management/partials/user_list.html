@@ -19,7 +19,7 @@
                         {% endif %}
                         <li class="mb-2">Email: {{ user_item.email }} </li>
                         <li class="mb-2">Active: {% if user_item.is_active %}<i class="fa-solid fa-check text-success"></i> Yes{% endif %}{% if not user_item.is_active %} <i class="fa-solid fa-xmark text-danger"></i> No{% endif %}</li>
-                        <li class="mb-2">Admin: {% if user_item.is_staff %}<i class="fa-solid fa-check text-success"></i> Yes{% endif %}{% if not user_item.is_staff %} <i class="fa-solid fa-xmark text-danger"></i></i> No{% endif %}</li>
+                        <li class="mb-2">Admin: {% if user_item.is_staff %}<i class="fa-solid fa-check text-success"></i> Yes{% endif %}{% if not user_item.is_staff %} <i class="fa-solid fa-xmark text-danger"></i> No{% endif %}</li>
                         <li class="mb-2">Date joined: {{ user_item.date_joined|date:"M d, Y" }} </li>
                         <li class="mb-2">Last Login: {% if user_item.last_login %}{{ user_item.last_login|date:"M d, Y" }}{% else %}Never{% endif %} </li>
                     </ul>
@@ -33,7 +33,7 @@
                 {% if user_item.is_active %} 
                 <a href="{% url 'mgmt-user-admin-status' user_item.id %}" class="btn {% if user_item.is_staff %}btn-secondary{% else %}btn-blue{% endif %} mx-1 ms-sm-2 my-2">{% if not user_item.is_staff %}Give Admin Status{% else %}Remove Admin Status{% endif %}</a>
                 {% endif %}
-                <button class="btn btn-danger btn-delete-users mx-1 ms-sm-2 my-2" user_id="{{ user_item.id }}">Delete User</button>
+                <button class="btn btn-danger btn-delete-users mx-1 ms-sm-2 my-2" data-user_id="{{ user_item.id }}">Delete User</button>
                 {% endif %}
 
             </div>

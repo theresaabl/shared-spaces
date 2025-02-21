@@ -6,6 +6,7 @@
 
 {% if user.is_authenticated %}
 <!-- resident_space.html content starts here -->
+<!-- Container for authenticated User Content -->
 <div class="container-fluid">
 
     <!-- Title Row -->
@@ -18,6 +19,7 @@
     <!-- Card Row -->
     <div class="row justify-content-center">
 
+        <!-- Event Space Booking Column -->
         <div class="col-10 col-md-6 col-lg-5 col-xxl-4 mb-5 px-md-3 px-lg-0 me-lg-5 d-flex align-items-stretch">
 
             <!-- Event Space Booking Card -->
@@ -26,7 +28,7 @@
                 <img src="{% static 'images/event_space_example.webp' %}" class="card-img-top img-fluid dashboard-image" alt="Empty seminar room">
 
                 <div class="card-body">
-                    <h3 class="card-title mb-4">Event Space Bookings</h5>
+                    <h3 class="card-title mb-4">Event Space Bookings</h3>
                     <p class="card-text mb-3">Here you can view and book any of the available <a href="{% url 'event_spaces' %}" class="link-style fs-5">shared event spaces</a> in the living community.</p>
                     <a href="{% url 'booking' %}" class="btn btn-lg btn-orange mb-2">Book a Space</a>
                 </div>
@@ -34,15 +36,18 @@
             </div>
 
         </div>
+        <!-- End Event Space Booking Column -->
 
+        <!-- Resident Request Column -->
         <div class="col-10 col-md-6 col-lg-5 col-xxl-4 mb-5 px-md-3 px-lg-0 d-flex align-items-stretch">
 
             <!-- Maintenance Request Card -->
             <div class="card card-status-blue text-center">
+
                 <img src="{% static 'images/maintenance_example.webp' %}" class="card-img-top img-fluid dashboard-image" alt="Tools">
 
                 <div class="card-body">
-                    <h3 class="card-title mb-4">Maintenance Requests and Messages</h5>
+                    <h3 class="card-title mb-4">Maintenance Requests and Messages</h3>
                     <p class="card-text mb-3">Here you can send a maintenance request or any other request or suggestion to the community administrators.</p>
                     <a href="{% url 'resident_request' %}" class="btn btn-lg btn-orange mb-2">Submit a Request</a>
                 </div>
@@ -50,8 +55,10 @@
             </div>
 
         </div>
+        <!-- End Resident Request Column -->
             
     </div>
+    <!-- End Card Row -->
 
     <!-- Data Row -->
     <div class="row justify-content-center">
@@ -84,13 +91,16 @@
         <!-- End Resident Requests for this User -->
             
     </div>
+    <!-- End Data Row -->
 
 </div>
+<!-- End Container for authenticated User Content -->
 
 {% else %}
 
 <!-- For unauthenticated Users -->
 <div class="container-fluid">
+
     <div class="row justify-content-center my-4">
 
         <div class="col-10 col-md-6 col-lg-5 col-xxl-4">
@@ -108,9 +118,11 @@
             </div>
 
         </div>
+        
     </div>
 
 </div>
+<!-- End for unauthenticated Users -->
 
 {% endif %}
 

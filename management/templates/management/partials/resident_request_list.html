@@ -34,7 +34,7 @@
                 {% if resident_request.status != 2 %}
                 <a href="{% url 'mgmt-request-closed' resident_request.id %}" class="btn btn-blue mx-1 ms-sm-2 my-2">Close</a>
                 {% endif %}
-                <button class="btn btn-danger btn-mgmt-delete-request mx-1 ms-sm-2 my-2" resident_request_id="{{ resident_request.id }}">Delete</button>
+                <button class="btn btn-danger btn-mgmt-delete-request mx-1 ms-sm-2 my-2" data-resident_request_id="{{ resident_request.id }}">Delete</button>
 
             </div>
 

@@ -18,7 +18,7 @@ addEventListener("DOMContentLoaded", (e) => {
 
     for (let button of deleteBookingsButtons) {
         button.addEventListener("click", (e) => {
-            let bookingId = e.target.getAttribute("booking_id");
+            let bookingId = e.target.getAttribute("data-booking_id");
             deleteBookingsConfirm.href = `delete_booking/${bookingId}`;
             deleteBookingsModal.show();
         });
@@ -37,7 +37,7 @@ addEventListener("DOMContentLoaded", (e) => {
 
     for (let button of deleteRequestsButtons) {
         button.addEventListener("click", (e) => {
-            let residentRequestId = e.target.getAttribute("resident_request_id");
+            let residentRequestId = e.target.getAttribute("data-resident_request_id");
             deleteRequestsConfirm.href = `delete_resident_request/${residentRequestId}`;
             deleteRequestsModal.show();
         });

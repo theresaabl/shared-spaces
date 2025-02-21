@@ -16,9 +16,15 @@
         <div class="card w-100">
         {% endif %}
 
+            <!-- Booking Card Body -->
             <div class="card-body">
+
+                <!-- Card Text -->
                 <div class="card-text {% if booking.date|date:'Y m d' < today %}text-muted{% endif %}"> 
+
+                        <!-- Card Title -->
                         <h5 class="mb-3">{{ booking.event_space }}</h5>
+                        <!-- Card List -->
                         <ul class="list-unstyled">
                             <li class="mb-2">Occasion: {{ booking.occasion }}</li>
                             <li class="mb-2">Date: {{ booking.date|date:"M d, Y" }}</li>
@@ -38,10 +44,11 @@
                 <!-- Cannot edit past bookings and only Admin can delete past bookings in admin space -->
                 {% if booking.date|date:"Y m d" >= today %}
                 <a class="btn btn-sm btn-blue btn-edit me-2 mb-1" href="{% url 'booking_edit' booking.id %}">Edit</a>
-                <button class="btn btn-sm btn-delete-bookings btn-danger mb-1" booking_id="{{ booking.id }}">Delete</button>
+                <button class="btn btn-sm btn-delete-bookings btn-danger mb-1" data-booking_id="{{ booking.id }}">Delete</button>
                 {% endif %}
 
             </div>
+            <!-- End Booking Card Body -->
 
         </div>
         <!-- End Booking Card -->

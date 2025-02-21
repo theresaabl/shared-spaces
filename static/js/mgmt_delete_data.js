@@ -18,7 +18,7 @@ addEventListener("DOMContentLoaded", (e) => {
 
     for (let button of deleteUsersButtons) {
         button.addEventListener("click", (e) => {
-            let userId = e.target.getAttribute("user_id");
+            let userId = e.target.getAttribute("data-user_id");
             deleteUsersConfirm.href = `delete-user/${userId}`;
             deleteUsersModal.show();
         });
@@ -38,7 +38,7 @@ addEventListener("DOMContentLoaded", (e) => {
 
     for (let button of deleteSpacesButtons) {
         button.addEventListener("click", (e) => {
-            let spaceId = e.target.getAttribute("space_id");
+            let spaceId = e.target.getAttribute("data-space_id");
             deleteSpacesConfirm.href = `delete-event-space/${spaceId}`;
             deleteSpacesModal.show();
         });
@@ -58,7 +58,7 @@ addEventListener("DOMContentLoaded", (e) => {
 
     for (let button of deleteBookingsButtons) {
         button.addEventListener("click", (e) => {
-            let bookingId = e.target.getAttribute("booking_id");
+            let bookingId = e.target.getAttribute("data-booking_id");
             deleteBookingsConfirm.href = `delete-booking/${bookingId}`;
             deleteBookingsModal.show();
         });
@@ -78,7 +78,7 @@ addEventListener("DOMContentLoaded", (e) => {
 
     for (let button of deleteRequestsButtons) {
         button.addEventListener("click", (e) => {
-            let requestId = e.target.getAttribute("resident_request_id");
+            let requestId = e.target.getAttribute("data-resident_request_id");
             deleteRequestsConfirm.href = `delete-request/${requestId}`;
             deleteRequestsModal.show();
         });
@@ -98,7 +98,7 @@ addEventListener("DOMContentLoaded", (e) => {
 
     for (let button of deleteMessagesButtons) {
         button.addEventListener("click", (e) => {
-            let messageId = e.target.getAttribute("message_id");
+            let messageId = e.target.getAttribute("data-message_id");
             deleteMessagesConfirm.href = `delete-message/${messageId}`;
             deleteMessagesModal.show();
         });
