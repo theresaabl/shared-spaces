@@ -1,37 +1,40 @@
-<h5>{{ title }}</h5>
+<h4 class="mt-5 fw-bolder">{{ title }}</h4>
 
 <!-- Loop through all resident requests-->
 {% for resident_request in resident_requests %}
 
 <!-- Row and Column for each request -->
-<div class="row justify-content-center">
+<div class="row justify-content-center my-4">
     <div class="col">
 
         <!-- Resident Request Card -->
-        <div class="card w-100">
+        <div class="card w-100 {% if resident_request.status == 0 %}card-status-orange{% elif resident_request.status == 1 %}card-status-yellow{% endif %}">
 
             <div class="card-body">
                 <div class="card-text {% if resident_request.status == 2 %}text-muted{% endif %}">
-                    {% if resident_request.urgent %}
-                    <p class="fw-bold text-danger">Urgent!</p>
-                    {% endif %}
-                    <ul>
-                        <li>Resident: {{ resident_request.resident }}</li>
-                        <li>Content: {{ resident_request.content }}</li>
-                        <li>Status: {{ resident_request.get_status_display }}</li>
-                        <li>Created on: {{ resident_request.created_on }}</li>
+                    <h5  class="mb-3">
+                        From: {{ resident_request.resident }}
+                        {% if resident_request.urgent %}
+                            <span class="urgent-request fs-5">Urgent!</span>
+                        {% endif %}
+                    </h5>
+                    
+                    <ul class="list-unstyled">
+                        <li class="blockquote fst-italic mb-2"> {{ resident_request.content }}</li>
+                        
+                        <li class="mb-2">Created on: {{ resident_request.created_on|date:"M d, Y" }}</li>
                     </ul>    
 
                 </div>
 
                 <!-- Buttons -->
                 {% if resident_request.status != 1 %}
-                <a href="{% url 'mgmt-request-in-progress' resident_request.id %}" class="btn btn-sm btn-warning">{% if resident_request.status == 0 %}In Progress{% elif resident_request.status == 2 %}Reopen{% endif %}</a>
+                <a href="{% url 'mgmt-request-in-progress' resident_request.id %}" class="btn btn-yellow mx-1 ms-sm-2 my-2">{% if resident_request.status == 0 %}In Progress{% elif resident_request.status == 2 %}Reopen{% endif %}</a>
                 {% endif %}
                 {% if resident_request.status != 2 %}
-                <a href="{% url 'mgmt-request-closed' resident_request.id %}" class="btn btn-sm btn-success">Close</a>
+                <a href="{% url 'mgmt-request-closed' resident_request.id %}" class="btn btn-blue mx-1 ms-sm-2 my-2">Close</a>
                 {% endif %}
-                <button class="btn btn-danger btn-sm btn-mgmt-delete-request" resident_request_id="{{ resident_request.id }}">Delete</button>
+                <button class="btn btn-danger btn-mgmt-delete-request mx-1 ms-sm-2 my-2" resident_request_id="{{ resident_request.id }}">Delete</button>
 
             </div>
 
@@ -44,7 +47,7 @@
 {% empty %}
 
 <!-- Row and Column for empty list -->
-<div class="row justify-content-center">
+<div class="row justify-content-center my-4">
     <div class="col">
 
         <!-- No Request Card -->
@@ -52,7 +55,7 @@
 
             <div class="card-body">
                 <div class="card-text"> 
-                    <p>No {% if purpose == 0 %}maintenance request{% else %}messages{% endif %} found.</p>
+                    <p class="pt-2">No {% if purpose == 0 %}maintenance requests{% else %}messages{% endif %} found.</p>
                 </div>
 
             </div>
