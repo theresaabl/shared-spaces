@@ -68,13 +68,6 @@
                             Contact
                         </a>
                     </li>
-                    {% comment %}
-                    <!-- <li class="nav-item">
-                        <a class="nav-link" href="{% url 'error' %}">
-                            Test:error
-                        </a>
-                    </li> -->
-                    {% endcomment %}
                     <li class="nav-item">
                         <a class="nav-link {% if request.path == dashboard_url %} {% if user.is_authenticated %} resident-active {% else %} active{% endif %}" aria-current="page{% endif %} {% if user.is_authenticated %}resident-nav-link{% endif %}" href="{{ dashboard_url }}">
                             Resident Space
@@ -105,35 +98,6 @@
                         <a class="nav-link {% if request.path == login_url %}active{% endif %}" aria-current="page" href="{{ login_url }}">Login</a>
                     </li>
                     {% endif %}
-
-
-                    <!-- Dropdown with split button -->
-                    <!-- <li class="nav-item dropdown">
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-sm btn-secondary"><a class="nav-link {% if request.path == dashboard_url %}active" aria-current="page{% endif %}" href="{{ dashboard_url }}">Resident Space</a></button>
-                            <button type="button" class="btn btn-sm btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-                                <span class="visually-hidden">Toggle Dropdown</span>
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                
-                                {% if user.is_authenticated %}
-                                <li class="nav-item">
-                                    <a class="nav-link {% if request.path == logout_url %}active{% endif %}" aria-current="page" href="{% url 'account_logout' %}">Logout</a>
-                                </li>
-                                {% else %}
-                                <li class="nav-item">
-                                    <a class="nav-link {% if request.path == signup_url %}active{% endif %}" aria-current="page"
-                                        href="{% url 'account_signup' %}">Register</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link {% if request.path == login_url %}active{% endif %}" aria-current="page" href="{% url 'account_login' %}">Login</a>
-                                </li>
-                                {% endif %}
-
-                            </ul>
-                        </div>
-                    </li> -->
-                    <!-- End Dropdown with Split Button -->
 
                 </ul>
 
