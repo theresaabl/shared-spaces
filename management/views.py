@@ -172,7 +172,6 @@ def event_spaces(request):
 
     :template:`management/event_spaces.html`
     """
-
     spaces_values = EventSpace.objects.all().values().order_by('name')
 
     # if request.method is GET
