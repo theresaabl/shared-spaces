@@ -9,7 +9,7 @@
 <div class="container-fluid">
 
     <!-- Title Row -->
-    <div class="row">
+    <div class="row my-3 mb-4">
         <div class="col-12 text-center">
             <h2 id="manage-event-spaces-title">Add New Event Space</h2>
         </div>
@@ -17,7 +17,7 @@
 
     <!-- Event Space Form Container -->
     <div class="row justify-content-center">
-        <div class="col-10 col-sm-8 col-md-6 col-xxl-4 card mb-4 mt-3">
+        <div class="col-11 col-xs-10 col-sm-8 col-md-6 col-xl-4 mb-4 card form-card">
 
             <!-- Event Space Card -->
             <div class="card-body">
@@ -26,8 +26,8 @@
                 <form id="manage-event-spaces-form" method="post" enctype="multipart/form-data">
                     {{ event_space_form | crispy }}
                     {% csrf_token %}
-                    <button id="manage-event-spaces-reset-button" type="reset" class="btn btn-secondary btn-lg">Reset</button>
-                    <button id="manage-event-spaces-submit-button" type="submit" class="btn btn-secondary btn-lg">Submit</button>
+                    <button id="manage-event-spaces-reset-button" type="reset" class="btn btn-lg btn-blue me-2 mb-1">Reset</button>
+                    <button id="manage-event-spaces-submit-button" type="submit" class="btn btn-lg btn-yellow mb-1">Submit</button>
                     
                 </form>
 
@@ -40,7 +40,7 @@
     <!-- Return to EventSpaces Button -->
     <div class="row">
         <div class="col-auto">
-            <a href="{% url 'mgmt-event-spaces' %}" class="btn btn-primary">Return to Event Spaces</a>
+            <a href="{% url 'mgmt-event-spaces' %}" class="btn btn-lg btn-return-admin mx-2 my-3">Return to Event Spaces</a>
         </div>
     </div>
 
