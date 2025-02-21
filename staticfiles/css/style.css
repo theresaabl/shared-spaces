@@ -469,6 +469,13 @@ input[type="checkbox"] + label {
     border: 5px solid var(--my-orange) !important;
 }
 
+.edit-form-image {
+    width: 80%;
+    max-height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
 /* Media queries */
 
 /* When navbar collapses to dropdown menu */

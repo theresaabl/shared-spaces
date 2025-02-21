@@ -1,33 +1,36 @@
-<h4>{{ title }}</h4>
+<h3 class="mt-5 mb-3 fw-bolder">{{ title }}</h3>
 
 <!-- Loop through all bookings-->
 {% for booking in event_space_bookings %}
 
 <!-- Row and Column for each booking -->
-<div class="row justify-content-center">
+<div class="row justify-content-center my-4">
     <div class="col">
 
         <!-- Booking Card -->
+        <!-- get todays date -->
+        {% now "Y m d" as today %}
+        {% if not booking.date|date:'Y m d' < today %}
+        <div class="card w-100 {% if booking.status == 0 %}card-status-orange{% elif booking.status == 1 %}card-status-yellow{% else %}card-status-blue{% endif %}">
+        {% else %}
         <div class="card w-100">
+        {% endif %}
 
-            <!-- get todays date -->
-            {% now "Y m d" as today %}
             <div class="card-body">
                 <div class="card-text {% if booking.date|date:'Y m d' < today %}text-muted{% endif %}"> 
-                        <h5>{{ booking.event_space }}</h5>
-                        <ul>
-                            <li>Resident: {{ booking.resident }}</li>
-                            <li>Occasion: {{ booking.occasion }}</li>
-                            <li>Date: {{ booking.date }}</li>
-                            <li>Time: {{ booking.start }} - {{ booking.end }}</li>
+                        <h5 class="mb-3">{{ booking.event_space }}</h5>
+                        <ul class="list-unstyled">
+                            <li class="mb-2">Resident: {{ booking.resident }}</li>
+                            <li class="mb-2">Occasion: {{ booking.occasion }}</li>
+                            <li class="mb-2">Date: {{ booking.date }}</li>
+                            <li class="mb-2">Time: {{ booking.start }} - {{ booking.end }}</li>
 
                             {% if booking.notes %}
-                            <li>Notes: {{ booking.notes }}</li>
+                            <li class="mb-2">Notes: <span class="fst-italic">{{ booking.notes }}</span></li>
                             {% endif %}
                             
-                            <li>Created on: {{ booking.created_on }}</li>
-                            <li>Status: {{ booking.get_status_display }}  </li>
-                            <li>For testing: ID: {{ booking.id }} </li>
+                            <li class="mb-2">Created on: {{ booking.created_on|date:"M d, Y" }}</li>
+                            <!-- <li>For testing: ID: {{ booking.id }} </li> -->
                         </ul>    
 
                 </div>
@@ -35,12 +38,12 @@
                 <!-- Buttons -->
                 <!-- Can only approve or deny bookings in the future -->
                 {% if booking.status != 1 and booking.date|date:"Y m d" >= today %}
-                <a href="{% url 'mgmt-booking-approve' booking.id %}" class="btn btn-sm btn-success">Approve</a>
+                <a href="{% url 'mgmt-booking-approve' booking.id %}" class="btn btn-yellow mx-1 ms-sm-2 my-2">Approve</a>
                 {% endif %}
                 {% if booking.status != 2 and booking.date|date:"Y m d" >= today %}
-                <a href="{% url 'mgmt-booking-deny' booking.id %}" class="btn btn-sm btn-secondary">Deny</a>
+                <a href="{% url 'mgmt-booking-deny' booking.id %}" class="btn btn-secondary mx-1 ms-sm-2 my-2">Deny</a>
                 {% endif %}
-                <button class="btn btn-danger btn-sm btn-mgmt-delete-booking" booking_id="{{ booking.id }}">Delete</button>
+                <button class="btn btn-danger btn-mgmt-delete-booking mx-1 ms-sm-2 my-2" booking_id="{{ booking.id }}">Delete</button>
 
             </div>
 
@@ -53,7 +56,7 @@
 {% empty %}
 
 <!-- Row and Column for empty list -->
-<div class="row justify-content-center">
+<div class="row justify-content-center my-4">
     <div class="col">
 
         <!-- No Booking Card -->
@@ -61,7 +64,7 @@
 
             <div class="card-body">
                 <div class="card-text"> 
-                    <p>No event space bookings found.</p>
+                    <p class="pt-2">No bookings found.</p>
                 </div>
 
             </div>
