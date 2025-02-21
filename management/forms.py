@@ -21,3 +21,7 @@ class EventSpaceForm(forms.ModelForm):
             'piano',
             'notes',
             )
+        # Removes the "Currently" field when editing
+        widgets = {
+            'image': forms.FileInput(),
+        }
