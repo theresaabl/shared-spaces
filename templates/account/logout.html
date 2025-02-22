@@ -8,34 +8,57 @@
 
 {% block content %}
 <!-- logout.html content starts here -->
-<div class="container-fluid">
-    <div class="row justify-content-center my-4">
+<!-- Logout Section -->
+<section>
 
-        <div class="col-11 col-md-8 col-lg-6 col-xxl-5">
+    <!-- Logout Container -->
+    <div class="container-fluid">
 
-            <!-- Signout Card -->
-            <div class="card card-status-blue text-center">
-                
-                <img src="{% static 'images/error-404.webp' %}" class="card-img-top img-fluid dashboard-image" alt="A hole in a wall">
+        <!-- Logout Row and Column -->
+        <div class="row justify-content-center my-4">
+            <div class="col-11 col-md-8 col-lg-6 col-xxl-5">
 
-                <div class="card-body my-3">
-                    <h3>{% trans "Sign Out" %}</h3>
-        
-                    <p>{% trans 'Are you sure you want to sign out?' %}</p>
-                    <form method="post" action="{% url 'account_logout' %}">
-                        {% csrf_token %}
-                        {% if redirect_field_value %}
-                        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-                        {% endif %}
-                        <button class="btn btn-lg btn-blue right mt-4" type="submit">{% trans 'Sign Out' %}</button>
-                    </form>
+                <!-- Logout Card -->
+                <div class="card card-status-blue text-center">
+                    
+                    <!-- Image -->
+                    <img src="{% static 'images/error-404.webp' %}" class="card-img-top img-fluid dashboard-image" alt="A hole in a wall">
+
+                    <!-- Card Body -->
+                    <div class="card-body my-3">
+
+                        <!-- Title -->
+                        <h3>{% trans "Sign Out" %}</h3>
+            
+                        <!-- Description -->
+                        <p>{% trans 'Are you sure you want to sign out?' %}</p>
+
+                        <!-- Logout Form -->
+                        <form method="post" action="{% url 'account_logout' %}">
+
+                            {% csrf_token %}
+                            {% if redirect_field_value %}
+                            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                            {% endif %}
+
+                            <button class="btn btn-lg btn-blue right mt-4" type="submit">{% trans 'Sign Out' %}</button>
+
+                        </form>
+
+                    </div>
+                    <!-- End Card Body -->
+
                 </div>
+                <!-- End Logout Card -->
 
             </div>
-
         </div>
-    </div>
+        <!-- End Logout Row and Column -->
 
-</div>
+    </div>
+    <!-- End Logout Container -->
+
+</section>
+<!-- End Logout Section -->
 <!-- logout.html content ends here -->
 {% endblock %}

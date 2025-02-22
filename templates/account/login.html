@@ -10,42 +10,63 @@
 
 {% block content %}
 <!-- signin.html content starts here -->
-<div class="container-fluid">
 
-    <div class="row justify-content-center my-4">
+<!-- Signin Section -->
+<section>
 
-        <div class="col-11 col-md-8 col-lg-6 col-xxl-5">
+    <!-- Singin Container -->
+    <div class="container-fluid">
 
-            <div class="card card-status-orange">
-                
-                <img src="{% static 'images/hero-image.webp' %}" class="card-img-top img-fluid dashboard-image" alt="buildings with sunset">
-                <!-- Signin Form Card -->
-                <div class="card-body mx-2">
-                    <h2 class="text-center my-2">{% trans "Sign In" %}</h2>
-                    <p class="my-3 text-center lead">
-                        {% blocktrans %}
-                        If you are a <span class="sharedspaces">SharedSpaces</span> resident and do not have an account yet, <a class="link link-style fs-4" href="{{ signup_url }}">sign up</a> for a user account first.<br>
-                        {% endblocktrans %}
-                    </p>
-                    <!-- Signin Form -->
-                    <form class="login mt-5" method="POST" action="{% url 'account_login' %}">
-                        {% csrf_token %}
-                        {{ form|crispy }}
-                        {% if redirect_field_value %}
-                        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-                        {% endif %}
-                        <button class="btn btn-blue btn-lg right my-3" type="submit">{% trans "Sign In" %}</button>
-                    </form>
+        <!-- Signin Row and Column -->
+        <div class="row justify-content-center my-4">
+            <div class="col-11 col-md-8 col-lg-6 col-xxl-5">
+
+                <!-- Signin Card -->
+                <div class="card card-status-orange">
+                    
+                    <!-- Image -->
+                    <img src="{% static 'images/hero-image.webp' %}" class="card-img-top img-fluid dashboard-image" alt="buildings with sunset">
+
+                    <!-- Signin Card Body -->
+                    <div class="card-body mx-2">
+
+                        <!-- Title -->
+                        <h2 class="text-center my-2">{% trans "Sign In" %}</h2>
+
+                        <!-- Description -->
+                        <p class="my-3 text-center lead">
+                            {% blocktrans %}
+                            If you are a <span class="sharedspaces">SharedSpaces</span> resident and do not have an account yet, <a class="link link-style fs-4" href="{{ signup_url }}">sign up</a> for a user account first.<br>
+                            {% endblocktrans %}
+                        </p>
+
+                        <!-- Signin Form -->
+                        <form class="login mt-5" method="POST" action="{% url 'account_login' %}">
+
+                            {% csrf_token %}
+                            {{ form|crispy }}
+                            {% if redirect_field_value %}
+                            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                            {% endif %}
+
+                            <button class="btn btn-blue btn-lg right my-3" type="submit">{% trans "Sign In" %}</button>
+                            
+                        </form>
+
+                    </div>
+                    <!-- End Card Body -->
 
                 </div>
+                <!-- End Signin Card -->
 
             </div>
-
-
         </div>
+        <!-- Signin Row and Column -->
 
     </div>
+    <!-- Singin Container -->
 
-</div>
+</section>
+<!-- End Signin Section -->
 <!-- signin.html content starts here -->
 {% endblock %}

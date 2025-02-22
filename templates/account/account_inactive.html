@@ -9,36 +9,57 @@
 {% block content %}
 
 <!-- account_inactive.html content starts here -->
-<div class="container-fluid">
-    <div class="row justify-content-center my-4">
 
-        <div class="col-11 col-md-8 col-lg-6 col-xxl-5">
+<!-- Account Inactive Section -->
+<section>
 
-            <!-- Account Inactive Card -->
-            <div class="card card-status-orange text-center">
-                
-                <img src="{% static 'images/error-404.webp' %}" class="card-img-top img-fluid dashboard-image" alt="A hole in a wall">
+    <!-- Account Inactive Container -->
+    <div class="container-fluid">
 
-                <div class="card-body">
-                    <h2 class=" my-4">{% trans "Account Inactive" %}</h2>
-                    <p class="lead mb-3">
-                        Your account will be activated as soon as you are confirmed as a 
-                        resident of the <span class="sharedspaces">SharedSpaces</span> living community.
-                    </p>
-                    <p class="mb-4">
-                        If your account has not been activated within 3 working days, 
-                        please feel free to <a href="{% url 'contact' %}" class="link-style fs-5">contact us</a>.
-                    </p>
+        <!-- Account Inactive Row and Column -->
+        <div class="row justify-content-center my-4">
+            <div class="col-11 col-md-8 col-lg-6 col-xxl-5">
 
-                    <a href="{% url 'home' %}" class="btn btn-lg btn-return mx-2 my-3">Return to Home</a>
+                <!-- Account Inactive Card -->
+                <div class="card card-status-orange text-center">
+                    
+                    <!-- Image -->
+                    <img src="{% static 'images/error-404.webp' %}" class="card-img-top img-fluid dashboard-image" alt="A hole in a wall">
+
+                    <!-- Card Body -->
+                    <div class="card-body">
+
+                        <!-- Title -->
+                        <h2 class=" my-4">{% trans "Account Inactive" %}</h2>
+
+                        <!-- Description -->
+                        <p class="lead mb-3">
+                            Your account will be activated as soon as you are confirmed as a 
+                            resident of the <span class="sharedspaces">SharedSpaces</span> living community.
+                        </p>
+                        <p class="mb-4">
+                            If your account has not been activated within 3 working days, 
+                            please feel free to <a href="{% url 'contact' %}" class="link-style fs-5">contact us</a>.
+                        </p>
+
+                        <!-- Return to Home Link -->
+                        <a href="{% url 'home' %}" class="btn btn-lg btn-return mx-2 my-3">Return to Home</a>
+
+                    </div>
+                    <!-- End Card Body -->
+
                 </div>
+                <!-- End Account Inactive Card -->
 
             </div>
-
         </div>
+        <!-- End Account Inactive Row and Column -->
+
     </div>
+    <!-- End Inactive Container -->
 
-</div>
+</section>
+<!-- End Account Inactive Section -->
+
 <!-- account_inactive.html content ends here -->
-
 {% endblock content %}
