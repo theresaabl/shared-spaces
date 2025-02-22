@@ -6,6 +6,9 @@ from cloudinary.models import CloudinaryField
 
 
 class EventSpace(models.Model):
+    """
+    Represents a single event space available in the living community
+    """
     name = models.CharField(max_length=200, unique=True)
     type = models.CharField(max_length=200)
     image = CloudinaryField('image', default='placeholder')
@@ -27,6 +30,15 @@ class EventSpace(models.Model):
 
 class EventSpaceBooking(models.Model):
     """
+    Represents a single event space booking made by a resident
+    Related to :model:`auth.User` and :model:`dashboard.EventSpace`
+
+    Validation:
+        - start time is before end time
+        - end time is at least 1 hour after start time
+        - There are no bookings at the same time in the same room and
+            there is at least 1 hour between bookings
+
     Code inspiration to display integer choices labels:
     https://medium.com/@alex.kirkup/integerchoices-in-django-models-working-seamlessly-from-the-backend-and-the-frontend-using-labels-a3e77b86d419  # noqa
     """
@@ -68,6 +80,7 @@ class EventSpaceBooking(models.Model):
         """
         # check that start time is before end time
         if self.start >= self.end:
+            # raise ValidationError
             raise ValidationError(
                 "The end time must be later than the start time.",
                 code="end_time_invalid"
@@ -79,24 +92,29 @@ class EventSpaceBooking(models.Model):
         end_dt = datetime.combine(datetime.today(), self.end)
 
         if end_dt - start_dt < timedelta(hours=1):
+            # raise ValidationError
             raise ValidationError(
                 "The end time must be at least 1 hour after the start time.",
                 code="short_duration"
                 )
 
+        # calculate duplicate bookings
         duplicate_bookings = EventSpaceBooking.objects.filter(
                             event_space=self.event_space,
                             date=self.date
                             ).exclude(id=self.id)
-        
+
         for booking in duplicate_bookings:
-            # convert booking start and end time to datetime objects 
+            # convert booking start and end time to datetime objects
             # and substract/add 1 hour to get a window between bookings
-            booking_start_dt = datetime.combine(datetime.today(), booking.start) - timedelta(hours=1)
-            booking_end_dt = datetime.combine(datetime.today(), booking.end) + timedelta(hours=1)
+            booking_start_dt = datetime.combine(datetime.today(), booking.start) - timedelta(hours=1)  # noqa
+            booking_end_dt = datetime.combine(datetime.today(), booking.end) + timedelta(hours=1)  # noqa
             if start_dt < booking_end_dt and end_dt > booking_start_dt:
+                # raise ValidationError
                 raise ValidationError(
-                    "This event space is already booked for the selected date and time. There must be at least 1 hour between two bookings.",
+                    "This event space is already booked for the selected "
+                    "date and time. There must be at least 1 hour between "
+                    "two bookings.",
                     code="duplicate_booking"
                     )
 
@@ -113,6 +131,8 @@ class EventSpaceBooking(models.Model):
 
 class ResidentRequest(models.Model):
     """
+    Represents a single maintenance request or message sent by a resident
+    Related to :model:`auth.User`
     """
 
     class Purpose(models.IntegerChoices):

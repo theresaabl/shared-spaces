@@ -1,4 +1,4 @@
-from datetime import date, timedelta, datetime
+from datetime import date
 from allauth.account.views import LoginView
 from django.shortcuts import render, get_object_or_404
 from django.contrib import messages
@@ -14,7 +14,11 @@ from .utils import resident_request_type, convert_date
 
 
 class MyCustomLoginView(LoginView):
-
+    """
+    Custom Login view to display account inactive page
+    each time a user who has registered for an account
+    but whose account is inactive tries to login
+    """
     def post(self, request, *args, **kwargs):
         # Get the login credentials from the form
         username = request.POST.get('login')
@@ -37,7 +41,8 @@ class MyCustomLoginView(LoginView):
                     "../templates/account/account_inactive.html",
                     )
 
-        # call the original post method from the LoginView to continue normal login flow
+        # call the original post method from the LoginView to continue
+        # normal login flow
         return super().post(request, *args, **kwargs)
 
 
@@ -67,9 +72,12 @@ def resident_dashboard(request):
 
     :template:`dashboard/resident_space.html`
     """
-    # check whether user is logged in or not before database request of bookings and resident requests
-    # do not user login_required decorator here because want to display content from resident_space template
+    # check whether user is logged in or not before database request
+    # of bookings and resident requests
+    # do not use login_required decorator here because want to display
+    # customised content from resident_space template for unauthenticated users
     if request.user.is_authenticated:
+        # get bookings for this resident
         bookings = EventSpaceBooking.objects.filter(resident=request.user).order_by("date")  # noqa
 
         # sort into past and future bookings
@@ -81,6 +89,7 @@ def resident_dashboard(request):
         approved_bookings = future_bookings.filter(status=1)
         denied_bookings = future_bookings.filter(status=2)
 
+        # get resident requests for this resident
         res_requests = ResidentRequest.objects.filter(resident=request.user).order_by("created_on")  # noqa
 
         # requests by status
@@ -88,31 +97,29 @@ def resident_dashboard(request):
         progress_requests = res_requests.filter(status=1)
         closed_requests = res_requests.filter(status=2)
 
+        return render(
+            request,
+            "dashboard/resident_space.html",
+            {
+                "pending_bookings": pending_bookings,
+                "approved_bookings": approved_bookings,
+                "denied_bookings": denied_bookings,
+                "past_bookings": past_bookings,
+                "open_requests": open_requests,
+                "progress_requests": progress_requests,
+                "closed_requests": closed_requests,
+            }
+        )
+
     else:
-        # empty when user is not logged in, because still need to render template
-        pending_bookings = ""
-        approved_bookings = ""
-        denied_bookings = ""
-        past_bookings = ""
-        open_requests = ""
-        progress_requests = ""
-        closed_requests = ""
-
-    return render(
-        request,
-        "dashboard/resident_space.html",
-        {
-            "pending_bookings": pending_bookings,
-            "approved_bookings": approved_bookings,
-            "denied_bookings": denied_bookings,
-            "past_bookings": past_bookings,
-            "open_requests": open_requests,
-            "progress_requests": progress_requests,
-            "closed_requests": closed_requests,
-        }
-    )
+        # return without context
+        return render(
+            request,
+            "dashboard/resident_space.html"
+        )
 
 
+# from here on use login_required decorator
 @login_required
 def event_space_booking(request, space_id=None):
     """
@@ -147,8 +154,10 @@ def event_space_booking(request, space_id=None):
                 request,
                 messages.SUCCESS,
                 "You successfully sent a booking request. "
-                "The request is pending and requires approval by the community administrators. "
-                f"""If the status of your booking is still pending in 3 working days, please feel free to <a href="{contact_url}">contact us</a>."""
+                "The request is pending and requires approval by the "
+                "community administrators. If the status of your booking "
+                "is still pending in 3 working days, please feel free "
+                f"""to <a href="{contact_url}">contact us</a>."""
             )
 
             return HttpResponseRedirect(reverse('dashboard'))
@@ -172,7 +181,8 @@ def event_space_booking(request, space_id=None):
     # if request.method == GET
     booking_form = BookingForm()
 
-    # If user wants to book a specific room (when coming from event space list page)
+    # If user wants to book a specific room
+    # (when coming from event space list page)
     if space_id:
         # get instance of event space with given id
         event_space = get_object_or_404(EventSpace, id=space_id)
@@ -199,8 +209,10 @@ def booking_edit(request, booking_id):
     # get booking with requested id
     booking = get_object_or_404(EventSpaceBooking, pk=booking_id)
 
-    # save the original date and event space in case of duplicate booking after edit
+    # save the original date and event space in case of duplicate booking
+    # after edit, so can prefill again with old date and space
     # save old time in case of start and end time error
+    # convert_date is helper function from utils.py
     old_date = convert_date(booking.date)
     old_event_space = booking.event_space
     old_start_time = booking.start
@@ -242,15 +254,17 @@ def booking_edit(request, booking_id):
                 # Save which fields have changed
                 changed_fields = booking_form.changed_data
 
-                # if all you change is notes or occasion: status can stay, if change date, time or space: reset status and wait for approval again.
-                if 'event_space' in changed_fields or 'date' in changed_fields or 'start' in changed_fields or 'end' in changed_fields:
+                # if change date, time or space:
+                # reset status and wait for approval again.
+                if 'event_space' in changed_fields or 'date' in changed_fields or 'start' in changed_fields or 'end' in changed_fields:  # noqa
                     booking.status = 0
                     contact_url = reverse('contact')
-                    booking_edited_success_message = f"""Your booking was successfully updated!
+                    booking_edited_success_message = f"""Your booking was successfully updated!  
                     The request is pending again and requires approval by the community administrators.
-                    If the status of your booking is still pending in 3 working days, please feel free to <a href="{contact_url}">contact us</a>."""
+                    If the status of your booking is still pending in 3 working days, please feel free to <a href="{contact_url}">contact us</a>."""  # noqa
+                # if only change notes or occasion: status can stay
                 else:
-                    booking_edited_success_message = "Your booking was successfully updated!"
+                    booking_edited_success_message = "Your booking was successfully updated!"  # noqa
 
                 # save edited booking
                 booking.save()
@@ -273,11 +287,12 @@ def booking_edit(request, booking_id):
 
                 # get access to validation errors
                 try:
-                    booking.clean()
                     booking.save()
-                
-                # go through all different validation errors and display specific error message
-                # also render the form in a specific way, depending on which fields need to fill in again
+
+                # go through all different validation errors and
+                # display specific error message
+                # also render the form in a specific way,
+                # depending on which fields need to fill in again
                 except ValidationError as e:
                     # Add specific error message
                     messages.add_message(
@@ -286,7 +301,7 @@ def booking_edit(request, booking_id):
                         e.message
                     )
                     # depending on error code, prefill form in different way
-                    if e.code == "end_time_invalid" or e.code == "short_duration":
+                    if e.code == "end_time_invalid" or e.code == "short_duration":  # noqa
                         booking.date = convert_date(booking.date)
                         booking.start = old_start_time
                         booking.end = old_end_time
@@ -414,11 +429,13 @@ def submit_request(request):
     ``resident_request_form``
     An instance of :form:`dashboard.ResidentRequestForm`
     """
-
+    # if request method is POST conditional
     if request.method == "POST":
         resident_request_form = ResidentRequestForm(data=request.POST)
 
+        # if booking form is valid
         if resident_request_form.is_valid():
+
             resident_request = resident_request_form.save(commit=False)
             resident_request.resident = request.user
 
@@ -429,6 +446,7 @@ def submit_request(request):
             messages.add_message(
                 request,
                 messages.SUCCESS,
+                # resident_request_type is helper function from utils.py
                 'You successfully sent a '
                 f'{resident_request_type(resident_request.purpose).lower()}. '
                 'If you do not hear back within 3 working days, please '
@@ -452,6 +470,7 @@ def submit_request(request):
                     "resident_request_form": resident_request_form,
                 }
             )
+    # End request method is POST conditional
 
     # if request.method == GET
     resident_request_form = ResidentRequestForm()
@@ -500,6 +519,7 @@ def resident_request_edit(request, resident_request_id):
 
             # Start form is valid conditional
             if resident_request_form.is_valid():
+
                 resident_request = resident_request_form.save(commit=False)
 
                 resident_request.status = 0
@@ -510,7 +530,7 @@ def resident_request_edit(request, resident_request_id):
                     request,
                     messages.SUCCESS,
                     'You successfully updated your '
-                    f'{resident_request_type(resident_request.purpose).lower()}. '
+                    f'{resident_request_type(resident_request.purpose).lower()}. '  # noqa
                     'If you do not hear back within 3 working days, please '
                     f"""feel free to <a href="{contact_url}">contact us</a>."""
                 )
@@ -523,7 +543,7 @@ def resident_request_edit(request, resident_request_id):
                     request,
                     messages.ERROR,
                     'Error updating '
-                    f'{resident_request_type(resident_request.purpose).lower()}.'
+                    f'{resident_request_type(resident_request.purpose).lower()}.'  # noqa
                 )
 
                 return render(
