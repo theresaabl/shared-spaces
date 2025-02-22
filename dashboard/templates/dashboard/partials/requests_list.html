@@ -1,3 +1,4 @@
+<!-- Title -->
 <h4 class="mt-5 fw-bolder">{{ title }}</h4>
 
 <!-- Loop through all resident requests-->
@@ -8,6 +9,7 @@
     <div class="col">
 
         <!-- Resident Request Card -->
+         <!-- Add different style classes depending on status -->
         <div class="card w-100 {% if resident_request.status == 0 %}card-status-yellow{% elif resident_request.status == 1 %}card-status-blue{% endif %}">
 
             <!-- Card Body -->
@@ -21,6 +23,7 @@
                         {% if resident_request.purpose == 0 %}Maintenance Request{% else %}Message{% endif %}{% if resident_request.urgent %}
                         <span class="urgent-request">Urgent!</span>{% endif %}
                     </h5>
+                    
                     <!-- Card List -->
                     <ul class="list-unstyled">
                         <li class="blockquote fst-italic mb-2">{{ resident_request.content }}</li>
@@ -42,6 +45,7 @@
     </div>
 </div>
 <!-- End col and row for each request -->
+
 {% empty %}
 
 <!-- Row and Column for empty list -->
@@ -55,7 +59,6 @@
                 <div class="card-text"> 
                     <p class="pt-2">No requests found.</p>
                 </div>
-
             </div>
 
         </div>
@@ -63,6 +66,7 @@
 
     </div>
 </div>
+<!-- End Row and Column for empty list -->
 
 {% endfor %}
 <!-- End Loop -->

@@ -6,123 +6,127 @@
 
 {% if user.is_authenticated %}
 <!-- resident_space.html content starts here -->
-<!-- Container for authenticated User Content -->
-<div class="container-fluid">
+<!-- Section for authenticated User Content -->
+<section>
+    <div class="container-fluid">
 
-    <!-- Title Row -->
-    <div class="row my-3 mb-4">
-        <div class="col-12 text-center">
-            <h2>Welcome to Your Resident Space <span class="text-capitalize username-in-title">{{ user.username }}</span> !</h2>
+        <!-- Title Row -->
+        <div class="row my-3 mb-4">
+            <div class="col-12 text-center">
+                <h2>Welcome to Your Resident Space <span class="text-capitalize username-in-title">{{ user.username }}</span> !</h2>
+            </div>
         </div>
-    </div>
 
-    <!-- Card Row -->
-    <div class="row justify-content-center">
+        <!-- Card Row -->
+        <div class="row justify-content-center">
 
-        <!-- Event Space Booking Column -->
-        <div class="col-10 col-md-6 col-lg-5 col-xxl-4 mb-5 px-md-3 px-lg-0 me-lg-5 d-flex align-items-stretch">
+            <!-- Event Space Booking Column -->
+            <div class="col-10 col-md-6 col-lg-5 col-xxl-4 mb-5 px-md-3 px-lg-0 me-lg-5 d-flex align-items-stretch">
 
-            <!-- Event Space Booking Card -->
-            <div class="card card-status-blue text-center">
+                <!-- Event Space Booking Card -->
+                <div class="card card-status-blue text-center">
+                    
+                    <img src="{% static 'images/event_space_example.webp' %}" class="card-img-top img-fluid dashboard-image" alt="Empty seminar room">
+
+                    <div class="card-body">
+                        <h3 class="card-title mb-4">Event Space Bookings</h3>
+                        <p class="card-text mb-3">Here you can view and book any of the available <a href="{% url 'event_spaces' %}" class="link-style fs-5">shared event spaces</a> in the living community.</p>
+                        <a href="{% url 'booking' %}" class="btn btn-lg btn-orange mb-2">Book a Space</a>
+                    </div>
+
+                </div>
+
+            </div>
+            <!-- End Event Space Booking Column -->
+
+            <!-- Resident Request Column -->
+            <div class="col-10 col-md-6 col-lg-5 col-xxl-4 mb-5 px-md-3 px-lg-0 d-flex align-items-stretch">
+
+                <!-- Maintenance Request Card -->
+                <div class="card card-status-blue text-center">
+
+                    <img src="{% static 'images/maintenance_example.webp' %}" class="card-img-top img-fluid dashboard-image" alt="Tools">
+
+                    <div class="card-body">
+                        <h3 class="card-title mb-4">Maintenance Requests and Messages</h3>
+                        <p class="card-text mb-3">Here you can send a maintenance request or any other request or suggestion to the community administrators.</p>
+                        <a href="{% url 'resident_request' %}" class="btn btn-lg btn-orange mb-2">Submit a Request</a>
+                    </div>
+
+                </div>
+
+            </div>
+            <!-- End Resident Request Column -->
                 
-                <img src="{% static 'images/event_space_example.webp' %}" class="card-img-top img-fluid dashboard-image" alt="Empty seminar room">
+        </div>
+        <!-- End Card Row -->
 
-                <div class="card-body">
-                    <h3 class="card-title mb-4">Event Space Bookings</h3>
-                    <p class="card-text mb-3">Here you can view and book any of the available <a href="{% url 'event_spaces' %}" class="link-style fs-5">shared event spaces</a> in the living community.</p>
-                    <a href="{% url 'booking' %}" class="btn btn-lg btn-orange mb-2">Book a Space</a>
-                </div>
+        <!-- Data Row -->
+        <div class="row justify-content-center">
+
+            <!-- Bookings for this User -->
+            <div class="col-10 col-md-6 col-lg-5 col-xxl-4 mb-5 px-md-3 px-lg-0 me-lg-5">
+
+                <h3 class="display-6">Your Bookings:</h3>
+
+                <!-- Include partial templates -->
+                {% include "dashboard/partials/bookings_list.html" with title="Pending" event_space_bookings=pending_bookings %}
+                {% include "dashboard/partials/bookings_list.html" with title="Approved" event_space_bookings=approved_bookings %}
+                {% include "dashboard/partials/bookings_list.html" with title="Denied" event_space_bookings=denied_bookings %}
+                {% include "dashboard/partials/bookings_list.html" with title="Past Bookings" event_space_bookings=past_bookings %}
 
             </div>
+            <!-- End Bookings for this User -->
 
-        </div>
-        <!-- End Event Space Booking Column -->
 
-        <!-- Resident Request Column -->
-        <div class="col-10 col-md-6 col-lg-5 col-xxl-4 mb-5 px-md-3 px-lg-0 d-flex align-items-stretch">
+            <!-- Requests for this User -->
+            <div class="col-10 col-md-6 col-lg-5 col-xxl-4 mb-5 px-md-3 px-lg-0">
 
-            <!-- Maintenance Request Card -->
-            <div class="card card-status-blue text-center">
+                <h3 class="display-6">Your Requests:</h3>
 
-                <img src="{% static 'images/maintenance_example.webp' %}" class="card-img-top img-fluid dashboard-image" alt="Tools">
-
-                <div class="card-body">
-                    <h3 class="card-title mb-4">Maintenance Requests and Messages</h3>
-                    <p class="card-text mb-3">Here you can send a maintenance request or any other request or suggestion to the community administrators.</p>
-                    <a href="{% url 'resident_request' %}" class="btn btn-lg btn-orange mb-2">Submit a Request</a>
-                </div>
-
+                <!-- Include partial templates -->
+                {% include "dashboard/partials/requests_list.html" with title="Open" resident_requests=open_requests %}
+                {% include "dashboard/partials/requests_list.html" with title="In Progress" resident_requests=progress_requests %}
+                {% include "dashboard/partials/requests_list.html" with title="Closed" resident_requests=closed_requests %}
             </div>
-
+            <!-- End Resident Requests for this User -->
+                
         </div>
-        <!-- End Resident Request Column -->
-            
+        <!-- End Data Row -->
+
     </div>
-    <!-- End Card Row -->
-
-    <!-- Data Row -->
-    <div class="row justify-content-center">
-
-        <!-- Bookings for this User -->
-        <div class="col-10 col-md-6 col-lg-5 col-xxl-4 mb-5 px-md-3 px-lg-0 me-lg-5">
-
-            <h3 class="display-6">Your Bookings:</h3>
-
-            <!-- Include partial templates -->
-            {% include "dashboard/partials/bookings_list.html" with title="Pending" event_space_bookings=pending_bookings %}
-            {% include "dashboard/partials/bookings_list.html" with title="Approved" event_space_bookings=approved_bookings %}
-            {% include "dashboard/partials/bookings_list.html" with title="Denied" event_space_bookings=denied_bookings %}
-            {% include "dashboard/partials/bookings_list.html" with title="Past Bookings" event_space_bookings=past_bookings %}
-
-        </div>
-        <!-- End Bookings for this User -->
-
-
-        <!-- Requests for this User -->
-        <div class="col-10 col-md-6 col-lg-5 col-xxl-4 mb-5 px-md-3 px-lg-0">
-
-            <h3 class="display-6">Your Requests:</h3>
-
-            <!-- Include partial templates -->
-            {% include "dashboard/partials/requests_list.html" with title="Open" resident_requests=open_requests %}
-            {% include "dashboard/partials/requests_list.html" with title="In Progress" resident_requests=progress_requests %}
-            {% include "dashboard/partials/requests_list.html" with title="Closed" resident_requests=closed_requests %}
-        </div>
-        <!-- End Resident Requests for this User -->
-            
-    </div>
-    <!-- End Data Row -->
-
-</div>
-<!-- End Container for authenticated User Content -->
+</section>
+<!-- End Section for authenticated User Content -->
 
 {% else %}
 
-<!-- For unauthenticated Users -->
-<div class="container-fluid">
+<!-- Section for unauthenticated Users -->
+<section>
+    <div class="container-fluid">
 
-    <div class="row justify-content-center my-4">
+        <div class="row justify-content-center my-4">
 
-        <div class="col-10 col-md-6 col-lg-5 col-xxl-4">
+            <div class="col-10 col-md-6 col-lg-5 col-xxl-4">
 
-            <!-- Log In To Access Resident Space Card -->
-            <div class="card card-status-blue text-center">
-                
-                <img src="{% static 'images/error-404.webp' %}" class="card-img-top img-fluid dashboard-image" alt="A hole in a wall">
+                <!-- Log In To Access Resident Space Card -->
+                <div class="card card-status-blue text-center">
+                    
+                    <img src="{% static 'images/error-404.webp' %}" class="card-img-top img-fluid dashboard-image" alt="A hole in a wall">
 
-                <div class="card-body">
-                    <h3 class=" my-4">You are not signed in !</h3>
-                    <p class="lead mb-3">To access the Resident Space <a class="btn btn-lg btn-join mb-2 p-2" href="{% url 'account_login' %}">sign in</a> first!</p>
+                    <div class="card-body">
+                        <h3 class=" my-4">You are not signed in !</h3>
+                        <p class="lead mb-3">To access the Resident Space <a class="btn btn-lg btn-join mb-2 p-2" href="{% url 'account_login' %}">sign in</a> first!</p>
+                    </div>
+
                 </div>
 
             </div>
-
+            
         </div>
-        
-    </div>
 
-</div>
-<!-- End for unauthenticated Users -->
+    </div>
+</section>
+<!-- End Section for unauthenticated Users -->
 
 {% endif %}
 

@@ -6,45 +6,51 @@
 {% block content %}
 
 <!-- submit_request.html content starts here -->
-<div class="container-fluid">
+<!-- Send Resident Request Section -->
+<section>
+    <div class="container-fluid">
 
-    <!-- Title Row -->
-    <div class="row my-3 mb-4">
-        <div class="col-12 text-center">
-            <h2 id="resident-request-title">Submit Request</h2>
+        <!-- Title Row -->
+        <div class="row my-3 mb-4">
+            <div class="col-12 text-center">
+                <h2 id="resident-request-title">Submit Request</h2>
+            </div>
         </div>
-    </div>
 
-    <!-- Resident Request Form -->
-    <div class="row justify-content-center">
-        <div class="col-11 col-xs-10 col-sm-8 col-md-6 col-xl-4 mb-4 card form-card">
+        <!-- Resident Request Form Row and Column-->
+        <div class="row justify-content-center">
+            <div class="col-11 col-xs-10 col-sm-8 col-md-6 col-xl-4 mb-4 card form-card">
 
-            <!-- Request Card -->
-            <div class="card-body">
+                <!-- Request Card -->
+                <div class="card-body">
 
-                <!-- Resident Request Form -->
-                <form id="resident-request-form" method="post">
-                    {{ resident_request_form | crispy }}
-                    {% csrf_token %}
-                    <button id="resident-request-reset-button" type="reset" class="btn btn-lg btn-blue me-2 mb-1">Reset</button>
-                    <button id="resident-request-submit-button" type="submit" class="btn btn-lg btn-yellow mb-1">Submit</button>
-                    
-                </form>
+                    <!-- Resident Request Form -->
+                    <form id="resident-request-form" method="post">
+                        
+                        {{ resident_request_form | crispy }}
+                        {% csrf_token %}
+                        <button id="resident-request-reset-button" type="reset" class="btn btn-lg btn-blue me-2 mb-1">Reset</button>
+                        <button id="resident-request-submit-button" type="submit" class="btn btn-lg btn-yellow mb-1">Submit</button>
+                        
+                    </form>
+
+                </div>
+                <!-- End Request Card -->
 
             </div>
+        </div>
+        <!-- End Resident Request Form Row and Column-->
 
+        <!-- Return to Resident Space Button -->
+        <div class="row">
+            <div class="col-auto">
+                <a href="{% url 'dashboard' %}" class="btn btn-lg btn-return mx-2 my-3">Return to Resident Space</a>
+            </div>
         </div>
 
     </div>
-
-    <!-- Return to Resident Space Button -->
-    <div class="row">
-        <div class="col-auto">
-            <a href="{% url 'dashboard' %}" class="btn btn-lg btn-return mx-2 my-3">Return to Resident Space</a>
-        </div>
-    </div>
-
-</div>
+</section>
+<!-- End Send Resident Request Section -->
 
 <!-- submit_request.html content ends here -->
 {% endblock content %}

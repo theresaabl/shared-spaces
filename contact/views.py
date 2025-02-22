@@ -4,7 +4,6 @@ from django.contrib import messages
 from .forms import ContactForm
 
 
-# Create your views here.
 def contact_page(request):
     """
     Display the contact page
@@ -43,7 +42,6 @@ def contact_page(request):
                 'There was an error in your form. Please fill in again.'
             )
         # End contact form valid conditional
-
 
     # if request.method is GET
     contact_form = ContactForm()

@@ -1,3 +1,4 @@
+<!-- Title -->
 <h4 class="mt-5 fw-bolder">{{ title }}</h4>
 
 <!-- Loop through all bookings-->
@@ -10,6 +11,7 @@
         <!-- Booking Card -->
         <!-- get todays date -->
         {% now "Y m d" as today %}
+        <!-- add different style classes to card depending on date -->
         {% if not booking.date|date:'Y m d' < today %}
         <div class="card w-100 {% if booking.status == 0 %}card-status-yellow{% elif booking.status == 1 %}card-status-blue{% else %}card-status-orange{% endif %}">
         {% else %}
@@ -24,8 +26,10 @@
 
                         <!-- Card Title -->
                         <h5 class="mb-3">{{ booking.event_space }}</h5>
+
                         <!-- Card List -->
                         <ul class="list-unstyled">
+                            
                             <li class="mb-2">Occasion: {{ booking.occasion }}</li>
                             <li class="mb-2">Date: {{ booking.date|date:"M d, Y" }}</li>
                             <li class="mb-2">Time: {{ booking.start }} - {{ booking.end }}</li>
@@ -35,7 +39,7 @@
                             {% endif %}
                             
                             <li class="mb-2">Created on: {{ booking.created_on|date:"M d, Y" }}</li>
-                            <!-- <li> for testing: ID: {{ booking.id }} </li> -->
+
                         </ul>    
 
                 </div>
@@ -69,7 +73,6 @@
                 <div class="card-text"> 
                     <p class="pt-2">No bookings found.</p>
                 </div>
-
             </div>
 
         </div>
@@ -77,6 +80,7 @@
 
     </div>
 </div>
+<!-- End Row and Column for empty list -->
 
 {% endfor %}
 <!-- End Loop -->

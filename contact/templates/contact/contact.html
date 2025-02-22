@@ -7,45 +7,59 @@
 {% block content %}
 
 <!-- contact.html content starts here -->
-
-
 <!--Contact Header section-->
 <section>
 
+    <!-- Contact Header Container -->
     <div class="container-fluid">
 
-        <!-- Header for Contact Page -->
+        <!-- Contact Header Row -->
         <div class="row me-md-1">
+
             <!-- Contact header image -->
             <div class="col-12">
                 <img src="{% static 'images/contact-image.webp' %}" alt="contact-image" id="contact-header-image" class="img-fluid section-header-image">
             </div>
+
             <!-- Contact Cover Text -->
             <div class="col-auto text-center section-cover-text" id="contact-cover-text">
                 <h3 class="display-5">Contact Us</h3>
             </div>
-        </div>
-    </div>
-</section>
 
+        </div>
+        <!-- End Contact Header Row -->
+
+    </div>
+    <!-- End Contact Header Container -->
+
+</section>
+<!-- End Contact Header Section -->
 
 <!-- Contact Form Section -->
 <section id="contact-form-section">
+
+    <!-- Contact Form Container -->
     <div class="container-fluid">
 
+        <!-- Contact Form Title -->
         <div class="row justify-content-center mb-2">
             <div class="col-auto">
                 <h4>Your message: </h4>
             </div>
         </div>
         
+        <!-- Contact Form Row -->
         <div class="row justify-content-center">
 
+            <!-- Contact Form Column -->
             <div class="col-11 col-xs-10 col-sm-8 col-md-6 col-xl-4 mb-4 card form-card">
+
                 <!-- Contact Form Card -->
                 <div class="card-body">
+
                     <!-- Contact Form -->
                     <form id="contact-form" method="post">
+                        
                         {{ contact_form | crispy }}
                         {% csrf_token %}
                         <button id="contact-reset-button" type="reset" class="btn btn-blue btn-lg me-2 mb-1">Reset</button>
@@ -54,15 +68,19 @@
                     </form>
 
                 </div>
+                <!-- End Contact Form Card -->
 
             </div>
+            <!-- End Contact Form Column -->
 
         </div>
-        <!-- End Contact Form -->
+        <!-- End Contact Form Row-->
 
     </div>
+    <!-- End Contact Form Container -->
 
 </section>
+<!-- End Contact Form Section -->
 
 <!-- contact.html content ends here -->
 {% endblock content %}

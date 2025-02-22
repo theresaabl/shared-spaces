@@ -6,47 +6,53 @@
 {% block content %}
 
 <!-- event_space_booking.html content starts here -->
-<div class="container-fluid">
+<!-- Event Space Booking Section -->
+<section>
+    <div class="container-fluid">
 
-    <!-- Title Row -->
-    <div class="row my-3 mb-4">
-        <div class="col-12 text-center">
-            <h2 id="booking-title">Event Space Booking</h2>
+        <!-- Title Row -->
+        <div class="row my-3 mb-4">
+            <div class="col-12 text-center">
+                <h2 id="booking-title">Event Space Booking</h2>
+            </div>
         </div>
-    </div>
 
-    <!-- Event Space Booking Form -->
-    <div class="row justify-content-center">
-        <div class="col-11 col-xs-10 col-sm-8 col-md-6 col-xl-4 mb-4 card form-card">
+        <!-- Event Space Booking Row and Column -->
+        <div class="row justify-content-center">
+            <div class="col-11 col-xs-10 col-sm-8 col-md-6 col-xl-4 mb-4 card form-card">
 
-            <!-- Booking Card -->
-            <div class="card-body">
+                <!-- Booking Card -->
+                <div class="card-body">
 
-                <p>Click to see <a href="{% url 'event_spaces' %}" class="link-style fs-5">list of event spaces</a><p>
+                    <p>Click to see <a href="{% url 'event_spaces' %}" class="link-style fs-5">list of event spaces</a><p>
 
-                <!-- Booking Form -->
-                <form id="booking-form" method="post">
-                    {{ booking_form | crispy }}
-                    {% csrf_token %}
-                    <button id="booking-reset-button" type="reset" class="btn btn-lg btn-blue me-2 mb-1">Reset</button>
-                    <button id="booking-submit-button" type="submit" class="btn btn-lg btn-yellow mb-1">Submit</button>
-                    
-                </form>
+                    <!-- Booking Form -->
+                    <form id="booking-form" method="post">
+                        
+                        {{ booking_form | crispy }}
+                        {% csrf_token %}
+                        <button id="booking-reset-button" type="reset" class="btn btn-lg btn-blue me-2 mb-1">Reset</button>
+                        <button id="booking-submit-button" type="submit" class="btn btn-lg btn-yellow mb-1">Submit</button>
+                        
+                    </form>
+
+                </div>
+                <!-- End Booking Card -->
 
             </div>
+        </div>
+        <!-- End Event Space Booking Row and Column -->
 
+        <!-- Return to Resident Space Button -->
+        <div class="row">
+            <div class="col-auto">
+                <a href="{% url 'dashboard' %}" class="btn btn-lg btn-return mx-2 my-3">Return to Resident Space</a>
+            </div>
         </div>
 
     </div>
-
-    <!-- Return to Resident Space Button -->
-    <div class="row">
-        <div class="col-auto">
-            <a href="{% url 'dashboard' %}" class="btn btn-lg btn-return mx-2 my-3">Return to Resident Space</a>
-        </div>
-    </div>
-
-</div>
+</section>
+<!-- End Event Space Booking Section -->
 
 <!-- event_space_booking.html content ends here -->
 {% endblock content %}
