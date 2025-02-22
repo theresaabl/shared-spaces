@@ -8,7 +8,6 @@
     --my-orange-active: #d16023;
   }
 
-
 /* General styles */
 
 body {
@@ -21,6 +20,7 @@ main {
     padding-bottom: 1rem;
 }
 
+/* Messages */
 .messages-row {
     position: relative;
     top: 95px;
@@ -37,12 +37,14 @@ main {
     color: var(--my-blue-active);
 }
 
+/* SharedSpaces logo font for text */
 .sharedspaces {
     font-family: 'Alumni Sans Pinstripe', sans-serif;
     font-weight: 600;
     font-size: 140%;
 }
 
+/* Links */
 .link-style {
     text-decoration: none;
     color: var(--my-blue);
@@ -66,11 +68,7 @@ main {
     border: 3px solid var(--my-blue);
 }
 
-
 /* General form styles */
-/* .form-card {
-    border: 3px solid var(--my-orange);
-} */
 
 form {
     margin-top: 1rem;
@@ -113,6 +111,8 @@ form .alert-block li {
     background-color: var(--my-orange-active) !important;
     border-color: var(--my-orange-active) !important;
 }
+
+/* Form input  */
 
 input[type="checkbox"] {
     border-color: var(--my-blue) !important;
@@ -236,8 +236,6 @@ input[type="checkbox"] + label {
     border-radius: 40px;
 }
 
-
-
 /* Highlights section */
 
 .highlights-heading {
@@ -268,7 +266,6 @@ input[type="checkbox"] + label {
     margin-bottom: 1rem;
 }
 
-
 /* Join SharedSpaces Buttons */
 
 .btn-join {
@@ -276,16 +273,15 @@ input[type="checkbox"] + label {
     border: 5px solid var(--my-orange);
 }
 
-/* for button:active need to override default bootstrap styles */
 .btn-join:hover, .btn-join:active {
     background-color: var(--my-yellow-active) !important;
     border: 5px solid var(--my-orange) !important;
 }
 
-
 /* About Section */
 
 /* General section cover text and heading (also for Contact) */
+
 .section-header-image {
     width: 100%;
     height: 50vh;
@@ -311,6 +307,7 @@ input[type="checkbox"] + label {
 }
 
 /* About Section Specific */
+
 #about-header-image {
     border: 4px solid var(--my-orange);
 }
@@ -352,6 +349,7 @@ input[type="checkbox"] + label {
 }
 
 /* Contact Page */
+
 #contact-form-section {
     margin-top: -2rem;
 }
@@ -368,7 +366,6 @@ input[type="checkbox"] + label {
 #contact-cover-text h3 {
     background-color: var(--my-blue);
 }
-
 
 /* Error 404 Page */
 
@@ -409,7 +406,6 @@ input[type="checkbox"] + label {
     background-color: var(--my-blue-active) !important;
     border: 5px solid var(--my-yellow) !important;
 }
-
 
 /* For Authenticated Users Only */
 /* Resident Space */
@@ -476,6 +472,7 @@ input[type="checkbox"] + label {
     border-radius: 10px;
 }
 
+
 /* Media queries */
 
 /* When navbar collapses to dropdown menu */
@@ -490,11 +487,9 @@ input[type="checkbox"] + label {
         margin-bottom: .8rem;
         margin-right: 0;
     }
-
 }
 
 /* Media query: small mobile devices */
-/* To properly display hero section */
 @media screen and (max-width: 550px) {
     /* Hero Section */
     #hero-image {
@@ -585,8 +580,8 @@ input[type="checkbox"] + label {
     }
 }
 
-
 @media screen and (max-width: 310px) {
+    /* Hero section */
     #hero-image {
         padding: .3rem;
         border-radius: 10px;
@@ -641,7 +636,6 @@ input[type="checkbox"] + label {
     }
 }
 
-
 /* When dropdown toggler breaks into newline on very small screens */
 @media screen and (max-width: 260px) {
     /* Main */
@@ -653,9 +647,7 @@ input[type="checkbox"] + label {
     #cover-text {
         top: 60vh;
     }
-
 }
-
 
 @media screen and (max-width: 240px) {
     /* Hero Section */
@@ -676,7 +668,6 @@ input[type="checkbox"] + label {
         font-size: 90%;
     }
 }
-
 
 /* Very Large screens */
 @media screen and (min-width: 1200px) {

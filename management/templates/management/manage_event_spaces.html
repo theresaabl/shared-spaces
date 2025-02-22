@@ -6,70 +6,85 @@
 {% block content %}
 
 <!-- manage_event_spaces.html content starts here -->
-<div class="container-fluid">
+<!-- Manage Event Spaces Section -->
+<section>
 
-    <!-- Title Row -->
-    <div class="row my-3 mb-4">
-        <div class="col-12 text-center">
-            <h2 id="manage-event-spaces-title">Add New Event Space</h2>
-        </div>
-    </div>
+    <!-- Manage Event Spaces Container -->
+    <div class="container-fluid">
 
-    <!-- Event Space Form Container -->
-    <div class="row justify-content-center">
-        <div class="col-11 col-xs-10 col-sm-8 col-md-6 col-xl-4 mb-4 card form-card">
+        <!-- Title Row -->
+        <div class="row my-3 mb-4">
+            <div class="col-12 text-center">
 
-            <!-- Event Space Card -->
-            <div class="card-body">
-
-                <!-- Event Space Form -->
-                <form id="manage-event-spaces-form" method="post" enctype="multipart/form-data">
-                    {% csrf_token %}
-
-                    <!-- Include each form field seperately, to control the order when including the current image when editing the form -->
-
-                    {{ event_space_form.name|as_crispy_field }}
-                    {{ event_space_form.type|as_crispy_field }}
-                    
-                    {{ event_space_form.image|as_crispy_field }}
-                    {% if event_space_form.instance.image.url %}
-                        <div class="mb-3">
-                            <label class="mb-2">Current Image:</label><br>
-                            <img src="{{ event_space_form.instance.image.url }}" class="edit-form-image">
-                        </div>
-                    {% endif %}
-
-                    {{ event_space_form.building|as_crispy_field }}
-                    {{ event_space_form.capacity|as_crispy_field }}
-                    {{ event_space_form.number_of_tables|as_crispy_field }}
-                    {{ event_space_form.number_of_chairs|as_crispy_field }}
-                    {{ event_space_form.kitchen|as_crispy_field }}
-                    {{ event_space_form.tea_and_coffeemaker|as_crispy_field }}
-                    {{ event_space_form.projector|as_crispy_field }}
-                    {{ event_space_form.audio_equipment|as_crispy_field }}
-                    {{ event_space_form.childrens_play_area|as_crispy_field }}
-                    {{ event_space_form.piano|as_crispy_field }}
-                    {{ event_space_form.notes|as_crispy_field }}
-
-                    <button id="manage-event-spaces-reset-button" type="reset" class="btn btn-lg btn-blue me-2 mb-1">Reset</button>
-                    <button id="manage-event-spaces-submit-button" type="submit" class="btn btn-lg btn-yellow mb-1">Submit</button>
-                    
-                </form>
+                <h2 id="manage-event-spaces-title">Add New Event Space</h2>
 
             </div>
+        </div>
 
+        <!-- Event Space Form Row and Column -->
+        <div class="row justify-content-center">
+            <div class="col-11 col-xs-10 col-sm-8 col-md-6 col-xl-4 mb-4 card form-card">
+
+                <!-- Event Space Card Body-->
+                <div class="card-body">
+
+                    <!-- Event Space Form -->
+                    <form id="manage-event-spaces-form" method="post" enctype="multipart/form-data">
+
+                        {% csrf_token %}
+
+                        <!-- Include each form field seperately, to control the order while including the current image when editing event space -->
+
+                        {{ event_space_form.name|as_crispy_field }}
+                        {{ event_space_form.type|as_crispy_field }}
+                        
+                        {{ event_space_form.image|as_crispy_field }}
+                        <!-- If an image is already stored, display the current image -->
+                        {% if event_space_form.instance.image.url %}
+                            <div class="mb-3">
+                                <label class="mb-2">Current Image:</label><br>
+                                <img src="{{ event_space_form.instance.image.url }}" class="edit-form-image">
+                            </div>
+                        {% endif %}
+
+                        {{ event_space_form.building|as_crispy_field }}
+                        {{ event_space_form.capacity|as_crispy_field }}
+                        {{ event_space_form.number_of_tables|as_crispy_field }}
+                        {{ event_space_form.number_of_chairs|as_crispy_field }}
+                        {{ event_space_form.kitchen|as_crispy_field }}
+                        {{ event_space_form.tea_and_coffeemaker|as_crispy_field }}
+                        {{ event_space_form.projector|as_crispy_field }}
+                        {{ event_space_form.audio_equipment|as_crispy_field }}
+                        {{ event_space_form.childrens_play_area|as_crispy_field }}
+                        {{ event_space_form.piano|as_crispy_field }}
+                        {{ event_space_form.notes|as_crispy_field }}
+
+                        <!-- Buttons -->
+                        <button id="manage-event-spaces-reset-button" type="reset" class="btn btn-lg btn-blue me-2 mb-1">Reset</button>
+                        <button id="manage-event-spaces-submit-button" type="submit" class="btn btn-lg btn-yellow mb-1">Submit</button>
+                        
+                    </form>
+                    <!-- End Event Space Form -->
+
+                </div>
+                <!-- End Event Space Card Body -->
+
+            </div>
+        </div>
+        <!-- End Event Space Form Row and Column -->
+
+        <!-- Return to EventSpaces Button -->
+        <div class="row">
+            <div class="col-auto">
+                <a href="{% url 'mgmt-event-spaces' %}" class="btn btn-lg btn-return-admin mx-2 my-3">Return to Event Spaces</a>
+            </div>
         </div>
 
     </div>
+    <!-- End Manage Event Spaces Container -->
 
-    <!-- Return to EventSpaces Button -->
-    <div class="row">
-        <div class="col-auto">
-            <a href="{% url 'mgmt-event-spaces' %}" class="btn btn-lg btn-return-admin mx-2 my-3">Return to Event Spaces</a>
-        </div>
-    </div>
-
-</div>
+</section>
+<!-- End Manage Event Spaces Section -->
 
 <!-- manage_event_spaces.html content ends here -->
 {% endblock content %}

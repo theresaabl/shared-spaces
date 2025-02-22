@@ -5,127 +5,151 @@
 {% block content %}
 
 <!-- event_spaces.html content starts here -->
-<div class="container-fluid">
-    
-    <!-- Title Row -->
-    <div class="row my-3 mb-2 mb-lg-3 mb-xl-4">
-        <div class="col-12 text-center">
-            <h2>Event Spaces</h2>
-            <p class="lead mt-3">A list of available event spaces in the <span class="sharedspaces">SharedSpaces</span> community.<br>
-                Add new event spaces or edit and delete existing ones.
-            </p>
+<!-- Event Spaces Section -->
+<section>
+
+    <!-- Event Spaces Container -->
+    <div class="container-fluid">
+        
+        <!-- Title Row -->
+        <div class="row my-3 mb-2 mb-lg-3 mb-xl-4">
+            <div class="col-12 text-center">
+
+                <h2>Event Spaces</h2>
+                <p class="lead mt-3">A list of available event spaces in the <span class="sharedspaces">SharedSpaces</span> community.<br>
+                    Add new event spaces or edit and delete existing ones.
+                </p>
+
+            </div>
         </div>
-    </div>
 
-    <!-- Add New Event Space -->
-    <div class="row justify-content-center mb-4">
-        <div class="col-auto">
-            <a href="{% url 'mgmt-add-event-space' %}" class="btn btn-lg btn-join"><i class="fa-solid fa-plus me-2"></i> Add New Event Space</a>
+        <!-- Add New Event Space Button-->
+        <div class="row justify-content-center mb-4">
+            <div class="col-auto">
+                <a href="{% url 'mgmt-add-event-space' %}" class="btn btn-lg btn-join"><i class="fa-solid fa-plus me-2"></i> Add New Event Space</a>
+            </div>
         </div>
-    </div>
 
-    <!-- Data Row -->
-    <div class="row justify-content-center">
+        <!-- Data Row -->
+        <div class="row justify-content-center">
 
-        <!-- List of Event Spaces -->
-        <div class="col-12 col-sm-10 col-md-8 col-xl-6 col-xxl-5 mx-2">
+            <!-- List of Event Spaces Column -->
+            <div class="col-12 col-sm-10 col-md-8 col-xl-6 col-xxl-5 mx-2">
 
-            <!-- Loop through all event spaces-->
-            {% for space in event_spaces_values %}
+                <!-- Loop through all event spaces-->
+                {% for space in event_spaces_values %}
 
-            <!-- Row and Column for each event_space -->
-            <div class="row justify-content-center my-4">
-                <div class="col">
+                <!-- Row and Column for each event_space -->
+                <div class="row justify-content-center my-4">
+                    <div class="col">
 
-                    <!-- Event Space Card -->
-                    <div class="card w-100 card-status-yellow">
-                        {% if "placeholder" in space.image.url %}
-                        <img class="card-img-top img-fluid event-space-image" src="{% static 'images/event_space_example.webp' %}" alt="placeholder image">
-                        {% else %}
-                        <img class="card-img-top img-fluid event-space-image" src=" {{ space.image.url }}" alt="{{ space.name }}">
-                        {% endif %}
-                        <div class="card-body">
-                            <div class="card-text"> 
-                                <h4 class="my-3 mx-2 fs-3">{{ space.name }}</h4>
-                                <ul class="list-unstyled mx-2 mb-3">
-                                    <li class="mb-2">Type: {{ space.type }}</li>
-                                    <li class="mb-2">Building: {{ space.building }}</li>
-                                    <li class="mb-2">Capacity: {{ space.capacity }}</li>
-                                    <li class="mb-2">Number of Tables: {{ space.number_of_tables }} </li>
-                                    <li class="mb-2">Number of Chairs: {{ space.number_of_chairs }} </li>
-                                    <li class="mb-2">
-                                        Amenities:
-                                        <!-- Loop through all Boolean Fields -->
-                                        <ul class="list-unstyled my-2 ms-4">
-                                            {% for key, value in space.items  %}
-                                                {% if value is True %}
-                                                <li class="mb-2"><i class="fa-regular fa-circle-check text-success"></i> <span class="replace-underscore ms-1">{{ key }}</span></li>
-                                                {% endif %}
-                                            {% endfor %}
-                                        </ul>
+                        <!-- Event Space Card -->
+                        <div class="card w-100 card-status-yellow">
 
-                                    </li>
+                            <!-- Image -->
+                            {% if "placeholder" in space.image.url %}
+                            <img class="card-img-top img-fluid event-space-image" src="{% static 'images/event_space_example.webp' %}" alt="placeholder image">
+                            {% else %}
+                            <img class="card-img-top img-fluid event-space-image" src=" {{ space.image.url }}" alt="{{ space.name }}">
+                            {% endif %}
 
-                                    {% if space.notes %}
-                                    <li class="mb-3 my-3">Notes: <span class="fst-italic">{{ space.notes }}</span></li>
-                                    {% endif %}
+                            <!-- Card Body -->
+                            <div class="card-body">
 
-                                </ul>
+                                <!-- Card Text -->
+                                <div class="card-text">
+
+                                    <!-- Card Title -->
+                                    <h4 class="my-3 mx-2 fs-3">{{ space.name }}</h4>
+
+                                    <!-- List -->
+                                    <ul class="list-unstyled mx-2 mb-3">
+                                        
+                                        <li class="mb-2">Type: {{ space.type }}</li>
+                                        <li class="mb-2">Building: {{ space.building }}</li>
+                                        <li class="mb-2">Capacity: {{ space.capacity }}</li>
+                                        <li class="mb-2">Number of Tables: {{ space.number_of_tables }} </li>
+                                        <li class="mb-2">Number of Chairs: {{ space.number_of_chairs }} </li>
+                                        <li class="mb-2">
+                                            Amenities:
+                                            <!-- Loop through all Boolean Fields -->
+                                            <ul class="list-unstyled my-2 ms-4">
+                                                {% for key, value in space.items  %}
+                                                    {% if value is True %}
+                                                    <li class="mb-2"><i class="fa-regular fa-circle-check text-success"></i> <span class="replace-underscore ms-1">{{ key }}</span></li>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </ul>
+
+                                        </li>
+
+                                        {% if space.notes %}
+                                        <li class="mb-3 my-3">Notes: <span class="fst-italic">{{ space.notes }}</span></li>
+                                        {% endif %}
+
+                                    </ul>
+
+                                </div>
+                                <!-- End Card Text -->
+
+                                <!-- Buttons -->
+                                <a href="{% url 'mgmt-edit-event-space' space.id %}" class="btn btn-blue mx-1 ms-sm-2 my-2">Edit</a>
+                                <button class="btn btn-danger btn-delete-event-space mx-1 ms-sm-2 my-2" data-space_id="{{ space.id }}">Delete</button>
+
+                            </div>
+                            <!-- End Card Body -->
+
+                        </div>
+                        <!-- End Event Space Card -->
+
+                    </div>
+                </div>
+                <!-- End col and row for each space -->
+                {% empty %}
+
+                <!-- Row and Column for empty list -->
+                <div class="row justify-content-center">
+                    <div class="col">
+
+                        <!-- No Space Card -->
+                        <div class="card">
+
+                            <div class="card-body">
+                                <div class="card-text"> 
+                                    <p class="pt-2">No event spaces found.</p>
+                                </div>
 
                             </div>
 
-                            <!-- Buttons -->
-                            <a href="{% url 'mgmt-edit-event-space' space.id %}" class="btn btn-blue mx-1 ms-sm-2 my-2">Edit</a>
-                            <button class="btn btn-danger btn-delete-event-space mx-1 ms-sm-2 my-2" data-space_id="{{ space.id }}">Delete</button>
-
                         </div>
+                        <!-- End No Space Card -->
 
                     </div>
-                    <!-- End Event Space Card -->
-
                 </div>
+
+                {% endfor %}
+                <!-- End Loop -->
+
             </div>
-            <!-- End col and row for each space -->
-            {% empty %}
-
-            <!-- Row and Column for empty list -->
-            <div class="row justify-content-center">
-                <div class="col">
-
-                    <!-- No Space Card -->
-                    <div class="card">
-
-                        <div class="card-body">
-                            <div class="card-text"> 
-                                <p class="pt-2">No event spaces found.</p>
-                            </div>
-
-                        </div>
-
-                    </div>
-                    <!-- End No Space Card -->
-
-                </div>
-            </div>
-
-            {% endfor %}
-            <!-- End Loop -->
+            <!-- End Event Spaces List Column -->
 
         </div>
-        <!-- End Event Spaces List -->
-
-    </div>
+        <!-- End Data Row -->
 
 
-    <!-- Return to Admin Space Button -->
-    <div class="row">
-        <div class="col-auto">
-            <a href="{% url 'management' %}" class="btn btn-lg btn-return-admin mx-2 my-3">Return to Admin Space</a>
+        <!-- Return to Admin Space Button -->
+        <div class="row">
+            <div class="col-auto">
+                <a href="{% url 'management' %}" class="btn btn-lg btn-return-admin mx-2 my-3">Return to Admin Space</a>
+            </div>
         </div>
-    </div>
-    
+        
 
-</div>
+    </div>
+    <!-- End Event Spaces Container -->
+
+</section>
+<!-- End Event Spaces Section -->
 
 
 <!-- Delete Event Spaces confirmation modal -->

@@ -5,39 +5,51 @@
 {% block content %}
 
 <!-- users.html content starts here -->
-<div class="container-fluid">
-    
-    <!-- Title Row -->
-    <div class="row justify-content-center text-center mt-3">
-        <div class="col-auto">
-            <h2>User Accounts</h2>
-            <p class="lead mt-3">A list of all registered users of the SharedSpaces website sorted into community administrators, confirmed residents and inactive users.</p>
+<!-- Users Section -->
+<section>
+
+    <!-- Users Container -->
+    <div class="container-fluid">
+        
+        <!-- Title Row -->
+        <div class="row justify-content-center text-center mt-3">
+            <div class="col-auto">
+
+                <h2>User Accounts</h2>
+                <p class="lead mt-3">A list of all registered users of the SharedSpaces website sorted into community administrators, confirmed residents and inactive users.</p>
+
+            </div>
         </div>
-    </div>
 
-    <!-- Data Row -->
-    <div class="row justify-content-center">
+        <!-- Data Row -->
+        <div class="row justify-content-center">
 
-        <!-- List of Users -->
-        <div class="col-12 col-sm-10 col-md-8 col-xl-6 col-xxl-5 mx-2">
+            <!-- List of Users -->
+            <div class="col-12 col-sm-10 col-md-8 col-xl-6 col-xxl-5 mx-2">
 
-            <!-- Include partial templates -->
-            {% include "management/partials/user_list.html" with title="Inactive Users" users_list=inactive_users %}
-            {% include "management/partials/user_list.html" with title="Confirmed Residents" users_list=active_users %}
-            {% include "management/partials/user_list.html" with title="Community Administrators" users_list=staff_users %}
+                <!-- Include partial templates -->
+                {% include "management/partials/user_list.html" with title="Inactive Users" users_list=inactive_users %}
+                {% include "management/partials/user_list.html" with title="Confirmed Residents" users_list=active_users %}
+                {% include "management/partials/user_list.html" with title="Community Administrators" users_list=staff_users %}
+                
+            </div>
+            <!-- End Users List -->
+
         </div>
-        <!-- End Users List -->
+        <!-- End Data Row -->
 
-    </div>
-
-    <!-- Return to Admin Space Button -->
-    <div class="row">
-        <div class="col-auto">
-            <a href="{% url 'management' %}" class="btn btn-lg btn-return-admin mx-2 my-3">Return to Admin Space</a>
+        <!-- Return to Admin Space Button -->
+        <div class="row">
+            <div class="col-auto">
+                <a href="{% url 'management' %}" class="btn btn-lg btn-return-admin mx-2 my-3">Return to Admin Space</a>
+            </div>
         </div>
-    </div>
 
-</div>
+    </div>
+    <!-- End Users Container -->
+
+</section>
+<!-- End Users Section -->
 
 <!-- Delete Users confirmation modal -->
 <div class="modal fade" id="delete-users-modal" tabindex="-1" aria-labelledby="delete-users-modal-label" aria-hidden="true">

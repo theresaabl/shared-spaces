@@ -1,3 +1,4 @@
+<!-- Title -->
 <h4 class="mt-5 fw-bolder">{{ title }}</h4>
 
 <!-- Loop through all contact messages-->
@@ -10,10 +11,18 @@
         <!-- Contact Message Card -->
         <div class="card w-100 {% if not message.processed %}card-status-yellow{% endif %}">
 
+            <!-- Card Body -->
             <div class="card-body">
+
+                <!-- Card Text -->
                 <div class="card-text {% if message.processed %}text-muted{% endif %}">
+
+                    <!-- Card Title -->
                     <h4  class="mb-3">From: {{ message.name }}</h4>
+
+                    <!-- List -->
                     <ul class="list-unstyled">
+                        
                         <li class="mb-2">Interest to join: {% if message.interest_to_join %}<i class="fa-solid fa-check text-success"></i> Yes{% else %}<i class="fa-solid fa-xmark text-danger"></i> No{% endif %}</li>
                         <li class="mb-2">Email: {{ message.email }}</li>
                         <li class="blockquote fst-italic mb-2"> {{ message.message }}</li>
@@ -22,6 +31,7 @@
                     </ul>    
 
                 </div>
+                <!-- End Card Text -->
 
                 <!-- Buttons -->
                 {% if not message.processed %}
@@ -30,6 +40,7 @@
                 <button class="btn btn-danger btn-mgmt-delete-message mx-1 ms-sm-2 my-2" data-message_id="{{ message.id }}">Delete</button>
 
             </div>
+            <!-- End Card Body -->
 
         </div>
         <!-- End Message Card -->
@@ -37,8 +48,8 @@
     </div>
 </div>
 <!-- End col and row for each message -->
-{% empty %}
 
+{% empty %}
 <!-- Row and Column for empty list -->
 <div class="row justify-content-center my-4">
     <div class="col">
@@ -50,7 +61,6 @@
                 <div class="card-text"> 
                     <p class="pt-2">No messages found.</p>
                 </div>
-
             </div>
 
         </div>
@@ -58,6 +68,7 @@
 
     </div>
 </div>
+<!-- End Row and Column for empty list -->
 
 {% endfor %}
 <!-- End Loop -->

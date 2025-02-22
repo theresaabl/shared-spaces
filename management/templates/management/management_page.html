@@ -3,117 +3,142 @@
 {% block content %}
 
 <!-- management_page.html content starts here -->
-<div class="container-fluid">
-    <div class="row my-3 mb-4">
+<!-- Management Section -->
+<section>
 
-        <div class="col-12 mt-3 text-center">
-            <h2><span class="sharedspaces">SharedSpaces</span> Admin Space</h2>
+    <!-- Management Container -->
+    <div class="container-fluid">
+
+        <!-- Title Row -->
+        <div class="row my-3 mb-4">
+            <div class="col-12 mt-3 text-center">
+
+                <h2><span class="sharedspaces">SharedSpaces</span> Admin Space</h2>
+
+            </div>
         </div>
-            
+
+        <!-- Data Row -->
+        <div class="row justify-content-center mb-4">
+
+            <!-- User Column -->
+            <div class="col-10 col-sm-6 col-md-4 d-flex align-items-stretch text-center my-3 px-2 px-lg-4">
+
+                <!-- User Card -->
+                <div class="card w-100 card-status-orange">
+
+                    <div class="card-body">
+                        <div class="card-text"> 
+
+                            <h3 class="my-2 mb-3">User Accounts</h3>
+                            <p class="lead my-2 mb-3">View and manage user accounts</p>
+                            <a href="{% url 'mgmt-users' %}" class="btn btn-lg btn-blue my-2">Go to User Accounts</a>
+
+                        </div>
+                    </div>
+
+                </div>
+                <!-- End User Card -->
+
+            </div>
+            <!-- End User Column -->
+
+            <!-- Event Space Column -->
+            <div class="col-10 col-sm-6 col-md-4 d-flex align-items-stretch text-center my-3 px-2 px-lg-4">
+
+                <!-- Event Spaces Card -->
+                <div class="card w-100 card-status-orange">
+
+                    <div class="card-body">
+                        <div class="card-text"> 
+
+                            <h3 class="my-2 mb-3">Event Spaces</h3>
+                            <p class="lead my-2 mb-3">View and manage shared event spaces</p>
+                            <a href="{% url 'mgmt-event-spaces' %}" class="btn btn-lg btn-blue my-2">Go to Event Spaces</a>
+
+                        </div>
+                    </div>
+
+                </div>
+                <!-- End Event Spaces Card -->
+
+            </div>
+            <!-- End Event Space Column -->
+
+            <!-- Event Space Booking Column -->
+            <div class="col-10 col-sm-6 col-md-4 d-flex align-items-stretch text-center my-3 px-2 px-lg-4">
+
+                <!-- Event Space Bookings Card -->
+                <div class="card w-100 card-status-orange">
+
+                    <div class="card-body">
+                        <div class="card-text"> 
+
+                            <h3 class="my-2 mb-3">Event Space Bookings</h3>
+                            <p class="lead my-2 mb-3">View and manage event space bookings</p>
+                            <a href="{% url 'mgmt-event-space-bookings' %}" class="btn btn-lg btn-blue my-2">Go to Bookings</a>
+
+                        </div>
+                    </div>
+
+                </div>
+                <!-- End Event Space Bookings Card -->
+
+            </div>
+            <!-- End Event Space Booking Column -->
+
+            <!-- Resident Request Column -->
+            <div class="col-10 col-sm-6 col-md-4 d-flex align-items-stretch text-center my-3 px-2 px-lg-4">
+
+                <!-- Resident Requests Card -->
+                <div class="card w-100 card-status-orange">
+
+                    <div class="card-body">
+                        <div class="card-text"> 
+
+                            <h3 class="my-2 mb-3">Resident Requests</h3>
+                            <p class="lead my-2 mb-3">View and manage maintenance requests and messages from residents</p>
+                            <a href="{% url 'mgmt-resident-requests' %}" class="btn btn-lg btn-blue my-2">Go to Requests</a>
+
+                        </div>
+                    </div>
+
+                </div>
+                <!-- End Resident Requests Card -->
+
+            </div>
+            <!-- End Resident Request Column -->
+
+            <!-- Contact Messages Column -->
+            <div class="col-10 col-sm-6 col-md-4 d-flex align-items-stretch text-center my-3 px-2 px-lg-4">
+
+                <!-- Contact Messages Card -->
+                <div class="card w-100 card-status-orange">
+
+                    <div class="card-body">
+                        <div class="card-text">
+
+                            <h3 class="my-2 mb-3">Contact Messages</h3>
+                            <p class="lead my-2 mb-3">View and manage contact messages from external users</p>
+                            <a href="{% url 'mgmt-contact-messages' %}" class="btn btn-lg btn-blue my-2">Go to Messages</a>
+                            
+                        </div>
+                    </div>
+
+                </div>
+                <!-- End Contact Messages Card -->
+
+            </div>
+            <!-- End Contact Messages Column -->
+
+        </div>
+        <!-- End Data Row -->
+
     </div>
+    <!-- End Management Container -->
 
-    <div class="row justify-content-center mb-4">
-
-        <div class="col-10 col-sm-6 col-md-4 d-flex align-items-stretch text-center my-3 px-2 px-lg-4">
-
-            <!-- User Card -->
-            <div class="card w-100 card-status-orange">
-
-                <div class="card-body">
-                    <div class="card-text"> 
-                        <h3 class="my-2 mb-3">User Accounts</h3>
-                        <p class="lead my-2 mb-3">View and manage user accounts</p>
-                        <a href="{% url 'mgmt-users' %}" class="btn btn-lg btn-blue my-2">Go to User Accounts</a>
-                    </div>
-
-                </div>
-
-            </div>
-            <!-- End User Card -->
-
-        </div>
-
-        <div class="col-10 col-sm-6 col-md-4 d-flex align-items-stretch text-center my-3 px-2 px-lg-4">
-
-            <!-- Event Spaces Card -->
-            <div class="card w-100 card-status-orange">
-
-                <div class="card-body">
-                    <div class="card-text"> 
-                        <h3 class="my-2 mb-3">Event Spaces</h3>
-                        <p class="lead my-2 mb-3">View and manage shared event spaces</p>
-                        <a href="{% url 'mgmt-event-spaces' %}" class="btn btn-lg btn-blue my-2">Go to Event Spaces</a>
-                    </div>
-
-                </div>
-
-            </div>
-            <!-- End Event Spaces Card -->
-
-        </div>
-
-        <div class="col-10 col-sm-6 col-md-4 d-flex align-items-stretch text-center my-3 px-2 px-lg-4">
-
-            <!-- Event Space Bookings Card -->
-            <div class="card w-100 card-status-orange">
-
-                <div class="card-body">
-                    <div class="card-text"> 
-                        <h3 class="my-2 mb-3">Event Space Bookings</h3>
-                        <p class="lead my-2 mb-3">View and manage event space bookings</p>
-                        <a href="{% url 'mgmt-event-space-bookings' %}" class="btn btn-lg btn-blue my-2">Go to Bookings</a>
-                    </div>
-
-                </div>
-
-            </div>
-            <!-- End Event Space Bookings Card -->
-
-        </div>
-
-        <div class="col-10 col-sm-6 col-md-4 d-flex align-items-stretch text-center my-3 px-2 px-lg-4">
-
-            <!-- Resident Requests Card -->
-            <div class="card w-100 card-status-orange">
-
-                <div class="card-body">
-                    <div class="card-text"> 
-                        <h3 class="my-2 mb-3">Resident Requests</h3>
-                        <p class="lead my-2 mb-3">View and manage maintenance requests and messages from residents</p>
-                        <a href="{% url 'mgmt-resident-requests' %}" class="btn btn-lg btn-blue my-2">Go to Requests</a>
-                    </div>
-
-                </div>
-
-            </div>
-            <!-- End Resident Requests Card -->
-
-        </div>
-
-        <div class="col-10 col-sm-6 col-md-4 d-flex align-items-stretch text-center my-3 px-2 px-lg-4">
-
-            <!-- Contact Messages Card -->
-            <div class="card w-100 card-status-orange">
-
-                <div class="card-body">
-                    <div class="card-text"> 
-                        <h3 class="my-2 mb-3">Contact Messages</h3>
-                        <p class="lead my-2 mb-3">View and manage contact messages from external users</p>
-                        <a href="{% url 'mgmt-contact-messages' %}" class="btn btn-lg btn-blue my-2">Go to Messages</a>
-                    </div>
-
-                </div>
-
-            </div>
-            <!-- End Contact Messages Card -->
-
-        </div>
-
-
-    </div>
-
-
-</div>
+</section>
+<!-- End Management Section -->
 
 <!-- management_page.html content ends here -->
 {% endblock content %}

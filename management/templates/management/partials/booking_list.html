@@ -1,3 +1,4 @@
+<!-- Title -->
 <h3 class="mt-5 mb-3 fw-bolder">{{ title }}</h3>
 
 <!-- Loop through all bookings-->
@@ -16,10 +17,18 @@
         <div class="card w-100">
         {% endif %}
 
+            <!-- Card Body -->
             <div class="card-body">
+
+                <!-- Card Text -->
                 <div class="card-text {% if booking.date|date:'Y m d' < today %}text-muted{% endif %}"> 
+
+                        <!-- Card Title -->
                         <h5 class="mb-3">{{ booking.event_space }}</h5>
+
+                        <!-- List -->
                         <ul class="list-unstyled">
+
                             <li class="mb-2">Resident: {{ booking.resident }}</li>
                             <li class="mb-2">Occasion: {{ booking.occasion }}</li>
                             <li class="mb-2">Date: {{ booking.date }}</li>
@@ -30,10 +39,11 @@
                             {% endif %}
                             
                             <li class="mb-2">Created on: {{ booking.created_on|date:"M d, Y" }}</li>
-                            <!-- <li>For testing: ID: {{ booking.id }} </li> -->
+
                         </ul>    
 
                 </div>
+                <!-- End Card Text -->
 
                 <!-- Buttons -->
                 <!-- Can only approve or deny bookings in the future -->
@@ -46,6 +56,7 @@
                 <button class="btn btn-danger btn-mgmt-delete-booking mx-1 ms-sm-2 my-2" data-booking_id="{{ booking.id }}">Delete</button>
 
             </div>
+            <!-- End Card Body -->
 
         </div>
         <!-- End Booking Card -->
@@ -53,8 +64,8 @@
     </div>
 </div>
 <!-- End col and row for each booking -->
-{% empty %}
 
+{% empty %}
 <!-- Row and Column for empty list -->
 <div class="row justify-content-center my-4">
     <div class="col">
@@ -66,7 +77,6 @@
                 <div class="card-text"> 
                     <p class="pt-2">No bookings found.</p>
                 </div>
-
             </div>
 
         </div>
@@ -74,6 +84,7 @@
 
     </div>
 </div>
+<!-- End Row and Column for empty list -->
 
 {% endfor %}
 <!-- End Loop -->

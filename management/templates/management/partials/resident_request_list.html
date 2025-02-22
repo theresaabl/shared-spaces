@@ -1,3 +1,4 @@
+<!-- Title -->
 <h4 class="mt-5 fw-bolder">{{ title }}</h4>
 
 <!-- Loop through all resident requests-->
@@ -10,8 +11,13 @@
         <!-- Resident Request Card -->
         <div class="card w-100 {% if resident_request.status == 0 %}card-status-orange{% elif resident_request.status == 1 %}card-status-yellow{% endif %}">
 
+            <!-- Card Body -->
             <div class="card-body">
+
+                <!-- Card Text -->
                 <div class="card-text {% if resident_request.status == 2 %}text-muted{% endif %}">
+
+                    <!-- Title -->
                     <h5  class="mb-3">
                         From: {{ resident_request.resident }}
                         {% if resident_request.urgent %}
@@ -19,13 +25,16 @@
                         {% endif %}
                     </h5>
                     
+                    <!-- List -->
                     <ul class="list-unstyled">
+
                         <li class="blockquote fst-italic mb-2"> {{ resident_request.content }}</li>
-                        
                         <li class="mb-2">Created on: {{ resident_request.created_on|date:"M d, Y" }}</li>
+                        
                     </ul>    
 
                 </div>
+                <!-- End Card Text -->
 
                 <!-- Buttons -->
                 {% if resident_request.status != 1 %}
@@ -37,6 +46,7 @@
                 <button class="btn btn-danger btn-mgmt-delete-request mx-1 ms-sm-2 my-2" data-resident_request_id="{{ resident_request.id }}">Delete</button>
 
             </div>
+            <!-- End Card Body -->
 
         </div>
         <!-- End Request Card -->
@@ -44,8 +54,8 @@
     </div>
 </div>
 <!-- End col and row for each request -->
-{% empty %}
 
+{% empty %}
 <!-- Row and Column for empty list -->
 <div class="row justify-content-center my-4">
     <div class="col">
@@ -57,7 +67,6 @@
                 <div class="card-text"> 
                     <p class="pt-2">No {% if purpose == 0 %}maintenance requests{% else %}messages{% endif %} found.</p>
                 </div>
-
             </div>
 
         </div>
@@ -65,6 +74,7 @@
 
     </div>
 </div>
+<!-- End Row and Column for empty list -->
 
 {% endfor %}
 <!-- End Loop -->

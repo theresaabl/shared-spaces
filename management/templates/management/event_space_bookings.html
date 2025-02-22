@@ -5,41 +5,50 @@
 {% block content %}
 
 <!-- event_space_bookings.html content starts here -->
-<div class="container-fluid">
-    
-    <!-- Title Row -->
-    <div class="row justify-content-center text-center mt-3">
-        <div class="col-auto">
-            <h2>Event Space Bookings</h2>
-            <p class="lead mt-3">A list of all event space bookings.</p>
+<!-- Event Space Bookings section -->
+<section>
+
+    <!-- Event Space Bookings Container -->
+    <div class="container-fluid">
+        
+        <!-- Title Row -->
+        <div class="row justify-content-center text-center mt-3">
+            <div class="col-auto">
+                <h2>Event Space Bookings</h2>
+                <p class="lead mt-3">A list of all event space bookings.</p>
+            </div>
         </div>
-    </div>
 
-    <!-- Data Row -->
-    <div class="row justify-content-center">
+        <!-- Data Row -->
+        <div class="row justify-content-center">
 
-        <!-- List of Event Space Bookings -->
-        <div class="col-12 col-sm-10 col-md-8 col-xl-6 col-xxl-5 mx-2">
+            <!-- List of Event Space Bookings -->
+            <div class="col-12 col-sm-10 col-md-8 col-xl-6 col-xxl-5 mx-2">
 
-            <!-- Include partial templates -->
-            {% include "management/partials/booking_list.html" with title="Pending" event_space_bookings=pending_bookings %}
-            {% include "management/partials/booking_list.html" with title="Approved" event_space_bookings=approved_bookings %}
-            {% include "management/partials/booking_list.html" with title="Denied" event_space_bookings=denied_bookings %}
-            {% include "management/partials/booking_list.html" with title="Past Bookings" event_space_bookings=past_bookings %}
+                <!-- Include partial templates -->
+                {% include "management/partials/booking_list.html" with title="Pending" event_space_bookings=pending_bookings %}
+                {% include "management/partials/booking_list.html" with title="Approved" event_space_bookings=approved_bookings %}
+                {% include "management/partials/booking_list.html" with title="Denied" event_space_bookings=denied_bookings %}
+                {% include "management/partials/booking_list.html" with title="Past Bookings" event_space_bookings=past_bookings %}
+
+            </div>
+            <!-- End Event Space Bookings List -->
 
         </div>
-        <!-- End Event Space Bookings List -->
+        <!-- End Data Row -->
 
-    </div>
-
-    <!-- Return to Admin Space Button -->
-    <div class="row">
-        <div class="col-auto">
-            <a href="{% url 'management' %}" class="btn btn-lg btn-return-admin mx-2 my-3">Return to Admin Space</a>
+        <!-- Return to Admin Space Button -->
+        <div class="row">
+            <div class="col-auto">
+                <a href="{% url 'management' %}" class="btn btn-lg btn-return-admin mx-2 my-3">Return to Admin Space</a>
+            </div>
         </div>
-    </div>
 
-</div>
+    </div>
+    <!-- End Event Space Bookings Container -->
+
+</section>
+<!-- End Event Space Bookings section -->
 
 
 <!-- Delete Bookings confirmation modal -->

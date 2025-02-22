@@ -5,39 +5,48 @@
 {% block content %}
 
 <!-- contact_messages.html content starts here -->
-<div class="container-fluid">
-    
-    <!-- Title Row -->
-    <div class="row justify-content-center text-center mt-3">
-        <div class="col-auto">
-            <h2>Contact Messages</h2>
-            <p class="lead mt-3">A list of all contact messages sent through the contact form.</p>
+<!-- Contact Messages Section -->
+<section>
+
+    <!-- Contact Messages Container -->
+    <div class="container-fluid">
+        
+        <!-- Title Row -->
+        <div class="row justify-content-center text-center mt-3">
+            <div class="col-auto">
+                <h2>Contact Messages</h2>
+                <p class="lead mt-3">A list of all contact messages sent through the contact form.</p>
+            </div>
         </div>
-    </div>
 
-    <!-- Data Row -->
-    <div class="row justify-content-center">
+        <!-- Data Row -->
+        <div class="row justify-content-center">
 
-        <!-- List of Messages -->
-        <div class="col-12 col-sm-10 col-md-8 col-xl-6 col-xxl-5 mx-2">
+            <!-- List of Messages -->
+            <div class="col-12 col-sm-10 col-md-8 col-xl-6 col-xxl-5 mx-2">
 
-            <!-- Include partial templates -->
-            {% include "management/partials/messages_list.html" with title="Open" contact_messages=open_contact_messages %}
-            {% include "management/partials/messages_list.html" with title="Processed" contact_messages=processed_contact_messages %}
+                <!-- Include partial templates -->
+                {% include "management/partials/messages_list.html" with title="Open" contact_messages=open_contact_messages %}
+                {% include "management/partials/messages_list.html" with title="Processed" contact_messages=processed_contact_messages %}
+
+            </div>
+            <!-- End Messages List -->
 
         </div>
-        <!-- End Messages List -->
+        <!-- End Data Row -->
 
-    </div>
-
-    <!-- Return to Admin Space Button -->
-    <div class="row">
-        <div class="col-auto">
-            <a href="{% url 'management' %}" class="btn btn-lg btn-return-admin mx-2 my-3">Return to Admin Space</a>
+        <!-- Return to Admin Space Button -->
+        <div class="row">
+            <div class="col-auto">
+                <a href="{% url 'management' %}" class="btn btn-lg btn-return-admin mx-2 my-3">Return to Admin Space</a>
+            </div>
         </div>
-    </div>
 
-</div>
+    </div>
+    <!-- End Contact Messages Container -->
+
+</section>
+<!-- End Contact Messages Section -->
 
 
 <!-- Delete Messages confirmation modal -->

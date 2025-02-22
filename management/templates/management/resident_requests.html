@@ -5,57 +5,67 @@
 {% block content %}
 
 <!-- resident_requests.html content starts here -->
-<div class="container-fluid">
-    
-    <!-- Title Row -->
-    <div class="row justify-content-center text-center mt-3">
-        <div class="col-auto">
-            <h2>Resident Requests</h2>
-            <p class="lead mt-3">A list of all maintenance requests and messages by <span class="sharedspaces">SharedSpaces</span> residents.</p>
+<!-- Resident Requests Section -->
+<section>
+
+    <!-- Resident Requests Container -->
+    <div class="container-fluid">
+        
+        <!-- Title Row -->
+        <div class="row justify-content-center text-center mt-3">
+            <div class="col-auto">
+
+                <h2>Resident Requests</h2>
+                <p class="lead mt-3">A list of all maintenance requests and messages by <span class="sharedspaces">SharedSpaces</span> residents.</p>
+
+            </div>
         </div>
+
+        <!-- Data Row -->
+        <div class="row justify-content-around">
+
+            <!-- List of Maintenance Requests Column -->
+            <div class="col-12 col-md-6 col-xxl-5">
+
+                <h3 class="mt-5">Maintenance Requests</h3>
+
+                <!-- Include partial templates -->
+                <!-- Include purpose 0 or 1 for the text displayed if no requests are found -->
+                {% include "management/partials/resident_request_list.html" with title="Open" resident_requests=open_maintenance_requests purpose=0 %}
+                {% include "management/partials/resident_request_list.html" with title="In Progress" resident_requests=progress_maintenance_requests purpose=0 %}
+                {% include "management/partials/resident_request_list.html" with title="Closed" resident_requests=closed_maintenance_requests purpose=0 %}
+
+            </div>
+            <!-- End Maintenance Requests List Column -->
+
+            <!-- List of Messages Column -->
+            <div class="col-12 col-md-6 col-xxl-5">
+
+                <h3 class="mt-5">Messages</h3>
+
+                <!-- Include partial templates -->
+                {% include "management/partials/resident_request_list.html" with title="Open" resident_requests=open_messages purpose=1 %}
+                {% include "management/partials/resident_request_list.html" with title="In Progress" resident_requests=progress_messages purpose=1 %}
+                {% include "management/partials/resident_request_list.html" with title="Closed" resident_requests=closed_messages purpose=1 %}
+
+            </div>
+            <!-- End Messages List Column-->
+
+        </div>
+        <!-- End Data Row -->
+
+        <!-- Return to Admin Space Button -->
+        <div class="row">
+            <div class="col-auto">
+                <a href="{% url 'management' %}" class="btn btn-lg btn-return-admin mx-2 my-3">Return to Admin Space</a>
+            </div>
+        </div>
+
     </div>
+    <!-- End Resident Requests Container -->
 
-    <!-- Data Row -->
-    <div class="row justify-content-around">
-
-        <!-- List of Maintenance Requests Column -->
-        <div class="col-12 col-md-6 col-xxl-5">
-
-            <h3 class="mt-5">Maintenance Requests</h3>
-
-            <!-- Include partial templates -->
-            <!-- Include purpose 0 or 1 for the text displayed if no requests are found -->
-            {% include "management/partials/resident_request_list.html" with title="Open" resident_requests=open_maintenance_requests purpose=0 %}
-            {% include "management/partials/resident_request_list.html" with title="In Progress" resident_requests=progress_maintenance_requests purpose=0 %}
-            {% include "management/partials/resident_request_list.html" with title="Closed" resident_requests=closed_maintenance_requests purpose=0 %}
-
-        </div>
-        <!-- End Maintenance Requests List Column -->
-
-        <!-- List of Messages Column -->
-        <div class="col-12 col-md-6 col-xxl-5">
-
-            <h3 class="mt-5">Messages</h3>
-
-            <!-- Include partial templates -->
-            {% include "management/partials/resident_request_list.html" with title="Open" resident_requests=open_messages purpose=1 %}
-            {% include "management/partials/resident_request_list.html" with title="In Progress" resident_requests=progress_messages purpose=1 %}
-            {% include "management/partials/resident_request_list.html" with title="Closed" resident_requests=closed_messages purpose=1 %}
-
-        </div>
-        <!-- End Messages List Column-->
-
-    </div>
-    <!-- End Data Row -->
-
-    <!-- Return to Admin Space Button -->
-    <div class="row">
-        <div class="col-auto">
-            <a href="{% url 'management' %}" class="btn btn-lg btn-return-admin mx-2 my-3">Return to Admin Space</a>
-        </div>
-    </div>
-
-</div>
+</section>
+<!-- End Resident Requests Section -->
 
 
 <!-- Delete Requests confirmation modal -->
