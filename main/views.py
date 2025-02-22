@@ -11,7 +11,6 @@ def home_page(request):
 
     :template:`main/index.html`
     """
-
     return render(
         request,
         "main/index.html",
@@ -26,5 +25,4 @@ def about_page(request):
 
     :template:`main/index.html`
     """
-
     return HttpResponseRedirect('/#about-section')

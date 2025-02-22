@@ -8,6 +8,7 @@ class TestContactViews(TestCase):
     Test contact views
     There is no mock data to set up
     Test that contact form is rendered
+    Test submission of valid and invalid contact form
     """
     def test_render_contact_page_with_contact_form(self):
         """Verifies get request for contact page containing a contact form"""
