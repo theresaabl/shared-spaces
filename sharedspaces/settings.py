@@ -61,6 +61,7 @@ SITE_ID = 1
 LOGIN_REDIRECT_URL = '/dashboard'
 LOGOUT_REDIRECT_URL = '/'
 ACCOUNT_EMAIL_REQUIRED = True
+# custom account signup form
 ACCOUNT_FORMS = {'signup': 'dashboard.forms.MyCustomSignupForm'}
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
@@ -101,13 +102,6 @@ WSGI_APPLICATION = 'sharedspaces.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
 
 DATABASES = {
     'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))

@@ -20,11 +20,11 @@ def home_page(request):
 
 def about_page(request):
     """
-    Display the about page
+    Display the about section
 
     **Template:**
 
-    :template:`main/about.html`
+    :template:`main/index.html`
     """
 
     return HttpResponseRedirect('/#about-section')

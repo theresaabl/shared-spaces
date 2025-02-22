@@ -21,8 +21,6 @@ def management_page(request):
 
     :template:`management/management_page.html`
     """
-
-    # if request.method is GET
     return render(
         request,
         "management/management_page.html",
@@ -35,10 +33,9 @@ def user_accounts(request):
     Display the user accounts page
 
     **Context**
-    ``staff_users``
-    ``active_users``
-    ``inactive_users``
-    An instance of :model:`User`.
+    ``staff_users``: An instance of :model:`User` with is_staff True
+    ``active_users``: An instance of :model:`User` with is_active True
+    ``inactive_users``: An instance of :model:`User` with is_Active False
 
     **Template:**
 
@@ -49,15 +46,9 @@ def user_accounts(request):
 
     # filter by status
     staff_users = users_list.filter(is_staff=True).order_by('username')
-    active_users = users_list.filter(is_active=True, is_staff=False).order_by('username')
+    active_users = users_list.filter(is_active=True, is_staff=False).order_by('username')  # noqa
     inactive_users = users_list.filter(is_active=False).order_by('username')
 
-    # Debugging output in the terminal
-    print("Staff Users:", staff_users)
-    print("Active Users:", active_users)
-    print("Inactive Users:", inactive_users)
-
-    # if request.method is GET
     return render(
         request,
         "management/users.html",
@@ -89,12 +80,10 @@ def user_activation(request, user_id):
     else:
         user = get_object_or_404(User, pk=user_id)
 
-        print("user id:", user.id, user_id)
+        # activate or deactivate
         if user.is_active:
-            print("User is active, deactivate")
             user.is_active = False
         else:
-            print("User is inavtive, activate")
             user.is_active = True
 
         user.save()
@@ -121,12 +110,10 @@ def user_admin_status(request, user_id):
     else:
         user = get_object_or_404(User, pk=user_id)
 
-        print("user id:", user.id, user_id)
+        # give or remove admin status
         if user.is_staff:
-            print("User is staff, remove")
             user.is_staff = False
         else:
-            print("User is not staff, give admin")
             user.is_staff = True
 
         user.save()
@@ -174,7 +161,6 @@ def event_spaces(request):
     """
     spaces_values = EventSpace.objects.all().values().order_by('name')
 
-    # if request.method is GET
     return render(
         request,
         "management/event_spaces.html",
@@ -212,7 +198,7 @@ def add_event_space(request):
             messages.add_message(
                 request,
                 messages.SUCCESS,
-                "You successfully added a new event space. "
+                "You successfully added a new event space."
             )
 
             return HttpResponseRedirect(reverse('mgmt-event-spaces'))
@@ -256,12 +242,12 @@ def event_space_edit(request, space_id):
     # Start if request method POST conditional
     if request.method == "POST":
 
-        event_space_form = EventSpaceForm(request.POST, request.FILES, instance=space)
+        event_space_form = EventSpaceForm(request.POST, request.FILES, instance=space)  # noqa
 
         # Start if booking has changed conditional
         if event_space_form.has_changed():
 
-            # Start if booking form is valid conditional
+            # Start if event space form is valid conditional
             if event_space_form.is_valid():
 
                 event_space_form.save()
@@ -365,7 +351,6 @@ def event_space_bookings(request):
     approved_bookings = future_bookings.filter(status=1)
     denied_bookings = future_bookings.filter(status=2)
 
-    # if request.method is GET
     return render(
         request,
         "management/event_space_bookings.html",
@@ -517,7 +502,6 @@ def resident_requests(request):
     progress_messages = res_requests.filter(purpose=1, status=1)
     closed_messages = res_requests.filter(purpose=1, status=2)
 
-    # if request.method is GET
     return render(
         request,
         "management/resident_requests.html",
@@ -649,7 +633,6 @@ def contact_messages(request):
     open_messages = messages.filter(processed=False)
     processed_messages = messages.filter(processed=True)
 
-    # if request.method is GET
     return render(
         request,
         "management/contact_messages.html",
@@ -669,8 +652,6 @@ def message_processed(request, message_id):
 
     :template:`management/contact_messages.html`
     """
-    print("processed")
-
     message = get_object_or_404(ContactMessage, pk=message_id)
 
     # check whether message is not already processed
@@ -678,7 +659,7 @@ def message_processed(request, message_id):
         messages.add_message(
                     request,
                     messages.INFO,
-                    f"This message was already processed!"  # noqa
+                    "This message was already processed!"
                 )
     else:
         message.processed = True
