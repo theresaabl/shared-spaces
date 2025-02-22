@@ -1,6 +1,8 @@
+/* jshint esversion: 11 */
+
 const submitButton = document.getElementById("booking-submit-button");
 const title = document.getElementById("booking-title");
-const URL = window.location.href
+const currentURL = window.location.href;
 
 /**
 * Edit Bookings 
@@ -8,9 +10,9 @@ const URL = window.location.href
 * - Updates the submit button's text to "Update".
 */
 // check whether booking form is accessed through edit button
-if (URL.includes('edit_booking')){
+if (currentURL.includes('edit_booking')){
     addEventListener("DOMContentLoaded", (e) => {
-        title.innerText = "Edit Event Space Booking"
+        title.innerText = "Edit Event Space Booking";
         submitButton.innerText = "Update";
     });
 }

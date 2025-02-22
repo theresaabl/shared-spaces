@@ -1,3 +1,5 @@
+/* jshint esversion: 11 */
+
 /**
 * Dynamically set margin-bottom of hero section, depending on height of cover text
 */

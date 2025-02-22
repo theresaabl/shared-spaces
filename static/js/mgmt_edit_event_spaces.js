@@ -1,6 +1,8 @@
+/* jshint esversion: 11 */
+
 const submitButton = document.getElementById("manage-event-spaces-submit-button");
 const title = document.getElementById("manage-event-spaces-title");
-const URL = window.location.href
+const currentURL = window.location.href;
 
 /**
 * Edit Event Spaces from Admin Space 
@@ -8,9 +10,9 @@ const URL = window.location.href
 * - Updates the submit button's text to "Update".
 */
 // check whether event spaces form is accessed through edit button
-if (URL.includes('edit-event-space')){
+if (currentURL.includes('edit-event-space')){
     addEventListener("DOMContentLoaded", (e) => {
-        title.innerText = "Edit Event Space"
+        title.innerText = "Edit Event Space";
         submitButton.innerText = "Update";
     });
 }

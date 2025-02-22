@@ -1,3 +1,6 @@
+/* jshint esversion: 11 */
+/* global bootstrap */
+
 /**
 * Delete Bookings 
 * Initializes deletion functionality for the provided delete buttons.

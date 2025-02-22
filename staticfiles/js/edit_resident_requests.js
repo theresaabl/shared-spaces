@@ -1,6 +1,8 @@
+/* jshint esversion: 11 */
+
 const submitButton = document.getElementById("resident-request-submit-button");
 const title = document.getElementById("resident-request-title");
-const URL = window.location.href
+const currentURL = window.location.href;
 
 /**
 * Edit Resident Requests
@@ -8,9 +10,9 @@ const URL = window.location.href
 * - Updates the submit button's text to "Update".
 */
 // check whether booking form is accessed through edit button
-if (URL.includes('edit_resident_request')){
+if (currentURL.includes('edit_resident_request')){
     addEventListener("DOMContentLoaded", (e) => {
-        title.innerText = "Edit Request"
+        title.innerText = "Edit Request";
         submitButton.innerText = "Update";
     });
 }
