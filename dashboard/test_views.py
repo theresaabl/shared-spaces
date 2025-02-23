@@ -406,6 +406,8 @@ class TestEditEventSpaceBookingViews(TestCase):
     Test edit event space booking view
     Render page with prefilled booking form
     Test successful and unsuccessful submission
+    Test that user does not have access to other users bookings
+    Test that user does not have access to past bookings
     """
     def setUp(self):
         # Create two Users
@@ -719,4 +721,236 @@ class TestEditEventSpaceBookingViews(TestCase):
         self.assertIn(
             b"This event space is already booked",
             response.content
+            )
+
+
+class TestDeleteEventSpaceBookingViews(TestCase):
+    """
+    Test delete event space booking view
+    Test successful and unsuccessful submission
+    Test that user does not have access to other users bookings
+    Test that user does not have access to past bookings
+    """
+    def setUp(self):
+        # Create two Users
+        self.user_1 = User.objects.create_user(
+            username="testusername_1",
+            email="name1@test.com",
+            password="testpassword",
+            is_active=True
+        )
+
+        self.user_2 = User.objects.create_user(
+            username="testusername_2",
+            email="name2@test.com",
+            password="testpassword",
+            is_active=True
+        )
+
+        # Create example event space
+        self.event_space = EventSpace.objects.create(
+            name="test space",
+            type="test type",
+            image="test image",
+            building="test building",
+            capacity="10",
+            number_of_tables="10",
+            number_of_chairs="10",
+            kitchen=False,
+            tea_and_coffeemaker=False,
+            projector=False,
+            audio_equipment=False,
+            childrens_play_area=False,
+            piano=False,
+            notes="test notes"
+            )
+
+        # Create event space bookings, one per user
+        # User 1
+        self.booking_1 = EventSpaceBooking(
+            resident=self.user_1,
+            event_space=self.event_space,
+            occasion="test occasion 1",
+            date="2025-10-18",
+            start=datetime.datetime.strptime('19:00', '%H:%M').time(),
+            end=datetime.datetime.strptime('22:00', '%H:%M').time(),
+            notes="test notes",
+            created_on=datetime.datetime.today(),
+            status="0"
+            )
+        self.booking_1.save()
+
+        # User 2
+        self.booking_2 = EventSpaceBooking(
+            resident=self.user_2,
+            event_space=self.event_space,
+            occasion="test occasion 2",
+            date="2025-10-20",
+            start=datetime.datetime.strptime('19:00', '%H:%M').time(),
+            end=datetime.datetime.strptime('22:00', '%H:%M').time(),
+            notes="test notes",
+            created_on=datetime.datetime.today(),
+            status="0"
+            )
+        self.booking_2.save()
+
+        # Past Booking from User 1
+        self.booking_3 = EventSpaceBooking(
+            resident=self.user_1,
+            event_space=self.event_space,
+            occasion="test occasion 3",
+            date="2024-10-20",
+            start=datetime.datetime.strptime('19:00', '%H:%M').time(),
+            end=datetime.datetime.strptime('22:00', '%H:%M').time(),
+            notes="test notes",
+            created_on=datetime.datetime.today(),
+            status="0"
+            )
+        self.booking_3.save()
+
+    def test_no_access_unauthenticated_user(self):
+        """
+        Verifies that unauthenticated users don't have access to bookings
+        """
+        # Send GET request and store response
+        response = self.client.get(
+            reverse('booking_delete', args=(self.booking_1.id,))
+            )
+        # Redirects correctly
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(
+            response,
+            '/accounts/login/?next=/dashboard/delete_booking/1'
+            )
+
+    def test_no_access_for_wrong_booking(self):
+        """
+        Verifies that user cannot delete bookings from other users
+        """
+        # note specifiy which user!
+        self.client.login(username="testusername_1", password="testpassword")
+        # Send GET request and store response
+        response = self.client.get(
+            # booking_2 is booking from other user
+            reverse('booking_delete', args=(self.booking_2.id,)),
+            follow=True
+            )
+        # Check message
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(
+            b"You do not have access to this booking.",
+            response.content
+        )
+
+    def test_no_access_for_past_booking(self):
+        """
+        Verifies that user cannot delete past bookings
+        """
+        # note specifiy which user!
+        self.client.login(username="testusername_1", password="testpassword")
+        # Send GET request and store response
+        response = self.client.get(
+            # booking_3 is booking in past from this user
+            reverse('booking_delete', args=(self.booking_3.id,)),
+            follow=True
+            )
+        # Check message
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(
+            b"You cannot delete past bookings.",
+            response.content
+        )
+
+    def test_successful_delete_booking(self):
+        """
+        Verifies that user successfully delete booking
+        """
+        # note specifiy which user!
+        self.client.login(username="testusername_1", password="testpassword")
+        # Send GET request and store response
+        response = self.client.get(
+            reverse('booking_delete', args=(self.booking_1.id,)),
+            follow=True
+            )
+        # Check message
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(
+            b"Event Space Booking successfully deleted!",
+            response.content
+        )
+
+
+class TestEventSpacesListView(TestCase):
+    """
+    Test event spaces list view
+    Test that content rendered correctly
+    """
+    def setUp(self):
+        # Create User
+        self.user = User.objects.create_user(
+            username="testusername",
+            email="name1@test.com",
+            password="testpassword",
+            is_active=True
+        )
+
+        # Create example event spaces
+        self.event_space_1 = EventSpace.objects.create(
+            name="test space 1",
+            type="test type 1",
+            image="test image",
+            building="test building 1",
+            capacity="10",
+            number_of_tables="10",
+            number_of_chairs="10",
+            kitchen=False,
+            tea_and_coffeemaker=False,
+            projector=False,
+            audio_equipment=False,
+            childrens_play_area=False,
+            piano=False,
+            notes="test notes"
+            )
+
+        self.event_space_2 = EventSpace.objects.create(
+            name="test space 2",
+            type="test type 2",
+            image="test image",
+            building="test building 2",
+            capacity="10",
+            number_of_tables="10",
+            number_of_chairs="10",
+            kitchen=False,
+            tea_and_coffeemaker=False,
+            projector=False,
+            audio_equipment=False,
+            childrens_play_area=False,
+            piano=False,
+            notes="test notes"
+            )
+
+    def test_render_content_for_authenticated_users(self):
+        self.client.login(username="testusername", password="testpassword")
+        response = self.client.get(reverse('event_spaces'))
+        # Page is rendered correctly
+        self.assertEqual(response.status_code, 200)
+        # Check content for logged in users
+        self.assertIn(b"Event Spaces", response.content)
+
+        # Check that event spaces are displayed (check several fields)
+        self.assertIn(b"test space 1", response.content)
+        self.assertIn(b"test type 1", response.content)
+        self.assertIn(b"test building 1", response.content)
+        self.assertIn(b"test space 2", response.content)
+        self.assertIn(b"test type 2", response.content)
+        self.assertIn(b"test building 2", response.content)
+        self.assertIn(b"Book this Space", response.content)
+
+    def test_render_content_for_unauthenticated_users(self):
+        response = self.client.get(reverse('event_spaces'))
+        # Check redirect
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(
+            response,
+            '/accounts/login/?next=/dashboard/event_spaces/'
             )
