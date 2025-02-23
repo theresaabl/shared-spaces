@@ -10,7 +10,7 @@ class TestContactForm(TestCase):
         contact_form = ContactForm({
             'name': 'test name',
             'email': 'name@text.com',
-            'interest_to_join': 'True',
+            'interest_to_join': True,
             'message': 'This is a nice message.'
             })
         self.assertTrue(contact_form.is_valid(), msg="Form is invalid")
@@ -19,7 +19,7 @@ class TestContactForm(TestCase):
         contact_form = ContactForm({
             'name': '',
             'email': 'name@text.com',
-            'interest_to_join': 'True',
+            'interest_to_join': True,
             'message': 'This is a nice message.'
             })
         self.assertFalse(
@@ -31,7 +31,7 @@ class TestContactForm(TestCase):
         contact_form = ContactForm({
             'name': 'test name',
             'email': '',
-            'interest_to_join': 'True',
+            'interest_to_join': True,
             'message': 'This is a nice message.'
             })
         self.assertFalse(
@@ -43,7 +43,7 @@ class TestContactForm(TestCase):
         contact_form = ContactForm({
             'name': 'test name',
             'email': 'test email',
-            'interest_to_join': 'True',
+            'interest_to_join': True,
             'message': 'This is a nice message.'
             })
         self.assertFalse(
@@ -55,7 +55,7 @@ class TestContactForm(TestCase):
         contact_form = ContactForm({
             'name': 'test name',
             'email': 'name@test',
-            'interest_to_join': 'True',
+            'interest_to_join': True,
             'message': 'This is a nice message.'
             })
         self.assertFalse(
@@ -67,7 +67,7 @@ class TestContactForm(TestCase):
         contact_form = ContactForm({
             'name': 'test name',
             'email': 'test.com',
-            'interest_to_join': 'True',
+            'interest_to_join': True,
             'message': 'This is a nice message.'
             })
         self.assertFalse(
@@ -79,7 +79,7 @@ class TestContactForm(TestCase):
         contact_form = ContactForm({
             'name': 'test name',
             'email': 'name@test.com',
-            'interest_to_join': 'False',
+            'interest_to_join': False,
             'message': ''
             })
         self.assertFalse(

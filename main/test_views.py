@@ -22,4 +22,3 @@ class TestMainViews(TestCase):
         self.assertEqual(response.status_code, 302)
         # Redirected to correct url
         self.assertRedirects(response, "/#about-section")
-

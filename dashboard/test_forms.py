@@ -190,12 +190,12 @@ class TestBookingForm(TestCase):
             capacity="10",
             number_of_tables="10",
             number_of_chairs="10",
-            kitchen="False",
-            tea_and_coffeemaker="False",
-            projector="False",
-            audio_equipment="False",
-            childrens_play_area="False",
-            piano="False",
+            kitchen=False,
+            tea_and_coffeemaker=False,
+            projector=False,
+            audio_equipment=False,
+            childrens_play_area=False,
+            piano=False,
             notes="test notes"
             )
         # Create a user
@@ -395,7 +395,7 @@ class TestResidentRequestForm(TestCase):
     def test_form_is_valid(self):
         res_request_form = ResidentRequestForm({
             'purpose': '0',
-            'urgent': 'True',
+            'urgent': True,
             'content': 'test content',
             })
         self.assertTrue(res_request_form.is_valid(), msg="Form is invalid")
@@ -404,7 +404,7 @@ class TestResidentRequestForm(TestCase):
     def test_form_is_invalid_missing_purpose(self):
         res_request_form = ResidentRequestForm({
             'purpose': '',
-            'urgent': 'True',
+            'urgent': True,
             'content': 'test content',
             })
         self.assertFalse(
@@ -415,7 +415,7 @@ class TestResidentRequestForm(TestCase):
     def test_form_is_invalid_missing_content(self):
         res_request_form = ResidentRequestForm({
             'purpose': '0',
-            'urgent': 'False',
+            'urgent': True,
             'content': '',
             })
         self.assertFalse(
@@ -424,13 +424,13 @@ class TestResidentRequestForm(TestCase):
             )
 
     # Check that form is invalid with invalid purpose
-    def test_form_is_invalid_invalid_purpose(self):
+    def test_form_is_invalid_purpose(self):
         """
         Purpose is IntegerChoiceField
         """
         res_request_form = ResidentRequestForm({
             'purpose': 'test purpose',
-            'urgent': 'False',
+            'urgent': True,
             'content': 'test content',
             })
         self.assertFalse(
@@ -438,13 +438,13 @@ class TestResidentRequestForm(TestCase):
             msg="Invalid purpose provided, but form is valid"
             )
 
-    def test_form_is_invalid_invalid_purpose_int(self):
+    def test_form_is_invalid_purpose_int(self):
         """
         Purpose is IntegerChoiceField 0, 1, 2
         """
         res_request_form = ResidentRequestForm({
             'purpose': '3',
-            'urgent': 'False',
+            'urgent': True,
             'content': 'test content',
             })
         self.assertFalse(
