@@ -492,7 +492,8 @@ class TestEditEventSpaceBookingViews(TestCase):
 
     def test_not_render_edit_booking_page_unauthenticated_user(self):
         """
-        Verifies that unauthenticated users don't have access to edit booking page
+        Verifies that unauthenticated users don't have access to
+        edit booking page
         """
         # Send GET request and store response
         response = self.client.get(
@@ -1227,104 +1228,65 @@ class TestEditResidentRequestView(TestCase):
             )
 
 
-# class TestDeleteEventSpaceBookingViews(TestCase):
-#     """
-#     Test delete event space booking view
-#     Test successful and unsuccessful submission
-#     Test that user does not have access to other users bookings
-#     Test that user does not have access to past bookings
-#     """
-#     def setUp(self):
-#         # Create two Users
-#         self.user_1 = User.objects.create_user(
-#             username="testusername_1",
-#             email="name1@test.com",
-#             password="testpassword",
-#             is_active=True
-#         )
+class TestDeleteResidentRequestView(TestCase):
+    """
+    Test delete resident request view
+    Test successful and unsuccessful submission
+    Test that user does not have access to other users requests
+    """
+    def setUp(self):
+        # Create two Users
+        self.user_1 = User.objects.create_user(
+            username="testusername_1",
+            email="name1@test.com",
+            password="testpassword",
+            is_active=True
+        )
 
-#         self.user_2 = User.objects.create_user(
-#             username="testusername_2",
-#             email="name2@test.com",
-#             password="testpassword",
-#             is_active=True
-#         )
+        self.user_2 = User.objects.create_user(
+            username="testusername_2",
+            email="name2@test.com",
+            password="testpassword",
+            is_active=True
+        )
 
-#         # Create example event space
-#         self.event_space = EventSpace.objects.create(
-#             name="test space",
-#             type="test type",
-#             image="test image",
-#             building="test building",
-#             capacity="10",
-#             number_of_tables="10",
-#             number_of_chairs="10",
-#             kitchen=False,
-#             tea_and_coffeemaker=False,
-#             projector=False,
-#             audio_equipment=False,
-#             childrens_play_area=False,
-#             piano=False,
-#             notes="test notes"
-#             )
+        # Create resident requests, one per user
+        # maint request from user 1
+        self.res_request_1 = ResidentRequest(
+            resident=self.user_1,
+            purpose="0",
+            urgent=True,
+            content="test maintenance request 1",
+            created_on=datetime.datetime.today(),
+            status="0"
+            )
+        self.res_request_1.save()
 
-#         # Create event space bookings, one per user
-#         # User 1
-#         self.booking_1 = EventSpaceBooking(
-#             resident=self.user_1,
-#             event_space=self.event_space,
-#             occasion="test occasion 1",
-#             date="2025-10-18",
-#             start=datetime.datetime.strptime('19:00', '%H:%M').time(),
-#             end=datetime.datetime.strptime('22:00', '%H:%M').time(),
-#             notes="test notes",
-#             created_on=datetime.datetime.today(),
-#             status="0"
-#             )
-#         self.booking_1.save()
+        # message from user 2
+        self.res_request_2 = ResidentRequest(
+            resident=self.user_2,
+            purpose="1",
+            urgent=False,
+            content="test message 2",
+            created_on=datetime.datetime.today(),
+            status="1"
+            )
+        self.res_request_2.save()
 
-#         # User 2
-#         self.booking_2 = EventSpaceBooking(
-#             resident=self.user_2,
-#             event_space=self.event_space,
-#             occasion="test occasion 2",
-#             date="2025-10-20",
-#             start=datetime.datetime.strptime('19:00', '%H:%M').time(),
-#             end=datetime.datetime.strptime('22:00', '%H:%M').time(),
-#             notes="test notes",
-#             created_on=datetime.datetime.today(),
-#             status="0"
-#             )
-#         self.booking_2.save()
-
-#         # Past Booking from User 1
-#         self.booking_3 = EventSpaceBooking(
-#             resident=self.user_1,
-#             event_space=self.event_space,
-#             occasion="test occasion 3",
-#             date="2024-10-20",
-#             start=datetime.datetime.strptime('19:00', '%H:%M').time(),
-#             end=datetime.datetime.strptime('22:00', '%H:%M').time(),
-#             notes="test notes",
-#             created_on=datetime.datetime.today(),
-#             status="0"
-#             )
-#         self.booking_3.save()
-
-#     def test_no_access_unauthenticated_user(self):
-#         """
-#         Verifies that unauthenticated users don't have access to bookings
-#         """
-#         # Send GET request and store response
-#         response = self.client.get(
-#             reverse('booking_delete', args=(self.booking_1.id,))
-#             )
-#         # Redirects correctly
-#         self.assertEqual(response.status_code, 302)
-#         self.assertRedirects(
-#             response,
-#             '/accounts/login/?next=/dashboard/delete_booking/1'
-#             )
+    def test_no_access_unauthenticated_user(self):
+        """
+        Verifies that unauthenticated users don't have access to requests
+        """
+        # Send GET request and store response
+        response = self.client.get(
+            reverse('resident_request_delete', args=(self.res_request_1.id,))
+            )
+        # Redirects correctly
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(
+            response,
+            '/accounts/login/?next=/dashboard/delete_resident_request/1'
+            )
 
 #     def test_no_access_for_wrong_booking(self):
 #         """
@@ -1342,25 +1304,6 @@ class TestEditResidentRequestView(TestCase):
 #         self.assertEqual(response.status_code, 200)
 #         self.assertIn(
 #             b"You do not have access to this booking.",
-#             response.content
-#         )
-
-#     def test_no_access_for_past_booking(self):
-#         """
-#         Verifies that user cannot delete past bookings
-#         """
-#         # note specifiy which user!
-#         self.client.login(username="testusername_1", password="testpassword")
-#         # Send GET request and store response
-#         response = self.client.get(
-#             # booking_3 is booking in past from this user
-#             reverse('booking_delete', args=(self.booking_3.id,)),
-#             follow=True
-#             )
-#         # Check message
-#         self.assertEqual(response.status_code, 200)
-#         self.assertIn(
-#             b"You cannot delete past bookings.",
 #             response.content
 #         )
 
