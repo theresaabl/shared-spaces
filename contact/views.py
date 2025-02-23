@@ -41,6 +41,14 @@ def contact_page(request):
                 messages.ERROR,
                 'There was an error in your form. Please fill in again.'
             )
+
+            return render(
+                request,
+                "contact/contact.html",
+                {
+                    "contact_form": contact_form,
+                }
+            )
         # End contact form valid conditional
 
     # if request.method is GET
