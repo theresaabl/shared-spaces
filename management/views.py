@@ -83,8 +83,18 @@ def user_activation(request, user_id):
         # activate or deactivate
         if user.is_active:
             user.is_active = False
+            messages.add_message(
+                request,
+                messages.SUCCESS,
+                'User account successfully deactivated!'
+            )
         else:
             user.is_active = True
+            messages.add_message(
+                request,
+                messages.SUCCESS,
+                'User account successfully activated!'
+            )
 
         user.save()
 
@@ -113,8 +123,18 @@ def user_admin_status(request, user_id):
         # give or remove admin status
         if user.is_staff:
             user.is_staff = False
+            messages.add_message(
+                request,
+                messages.SUCCESS,
+                'Successfully removed admin status!'
+            )
         else:
             user.is_staff = True
+            messages.add_message(
+                request,
+                messages.SUCCESS,
+                'Successfully added admin status!'
+            )
 
         user.save()
 
