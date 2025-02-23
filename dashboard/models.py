@@ -71,12 +71,17 @@ class EventSpaceBooking(models.Model):
 
     def clean(self):
         """
-        Ensure that no invalid data is entered into the database
+        Check that all data entered into database is valid (Code inspiration from https://stackoverflow.com/a/46182411)  # noqa
+        Define some custom validations
         Check for:
         - start time is before end time
         - end time is at least 1 hour after start time
         - There are no bookings at the same time in the same room and
             there is at least 1 hour between bookings
+        Code inspiration to add timedelta to Timefield:
+        https://saturncloud.io/blog/python-pandas-typeerror-unsupported-operand-types-for-datetimetime-and-timedelta/#solution-1-convert-datetimetime-objects-to-datetimedatetime-objects
+        Convert time object to datetime object first:
+        Inspiration from https://stackoverflow.com/a/9579000
         """
         # check that start time is before end time
         if self.start >= self.end:
@@ -120,10 +125,12 @@ class EventSpaceBooking(models.Model):
 
     def save(self, *args, **kwargs):
         """
-        Call clean() before saving to enforce validation at the model level.
+        Customize save() method to call clean() before saving model instance
+        So model is validated each time
+        Code Inspiration from: https://stackoverflow.com/a/46182411
         """
         self.clean()
-        super().save(*args, **kwargs)
+        return super().save(*args, **kwargs)
 
     def __str__(self):
         return f"Booking by {self.resident} for '{self.event_space}' on {self.date} is {self.get_status_display()}"  # noqa

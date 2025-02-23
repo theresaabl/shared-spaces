@@ -9,6 +9,7 @@ class MyCustomSignupForm(SignupForm):
     Add custom fields to the allauth Sign Up form
     Add full name
     Set all users to inactive when first signing up (admin can activate)
+    Credits:
     Code inspiration from: https://stackoverflow.com/a/25797705
     adapted with: https://docs.allauth.org/en/dev/account/forms.html
     """
@@ -37,11 +38,14 @@ class MyCustomSignupForm(SignupForm):
     field_order = ["username", "full_name", "email"]
 
     def save(self, request):
-
-        # Ensure you call the parent class's save.
+        """
+        See https://docs.allauth.org/en/dev/account/forms.html
+        """
+        # Call the parent class's save.
         # .save() returns a User object.
         user = super(MyCustomSignupForm, self).save(request)
 
+        # Custom code start
         # correctly save first and last name
         full_name_list = self.cleaned_data['full_name'].rsplit(" ", 1)
         user.first_name = full_name_list[0]
@@ -51,8 +55,9 @@ class MyCustomSignupForm(SignupForm):
         user.is_active = False
 
         user.save()
+        # Custom code end
 
-        # You must return the original result.
+        # Return the original result.
         return user
 
 
@@ -70,6 +75,10 @@ class BookingForm(forms.ModelForm):
         - notes (TextField, optional)
     """
     class Meta:
+        """
+        Code inspiration for setting min attribute in widget:
+        https://stackoverflow.com/a/73085167
+        """
         model = EventSpaceBooking
         fields = ('event_space', 'occasion', 'date', 'start', 'end', 'notes',)
         # choose how input fields are rendered in html, date and time pickers
@@ -80,7 +89,7 @@ class BookingForm(forms.ModelForm):
                     'type': 'date',
                     'min': (datetime.date.today() + datetime.timedelta(days=1))
                     },
-                format="%d/%m/%Y"  # This is how date is rendered
+                format="%d/%m/%Y"  # format in which is rendered in template
                 ),
             'start': forms.TimeInput(attrs={'type': 'time'}),
             'end': forms.TimeInput(attrs={'type': 'time'}),
