@@ -40,6 +40,7 @@
                         
                         {{ event_space_form.image|as_crispy_field }}
                         <!-- If an image is already stored, display the current image -->
+                        <!-- Code Inspiration to get image url: https://stackoverflow.com/a/34614101  -->
                         {% if event_space_form.instance.image.url %}
                             <div class="mb-3">
                                 <label class="mb-2">Current Image:</label><br>

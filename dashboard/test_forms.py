@@ -386,3 +386,68 @@ class TestBookingForm(TestCase):
             booking_form.is_valid(),
             msg="There is more than one hour between same day bookings, form is invalid"  # noqa
             )
+
+
+class TestResidentRequestForm(TestCase):
+    """
+    Test Resident Request Form
+    """
+    def test_form_is_valid(self):
+        res_request_form = ResidentRequestForm({
+            'purpose': '0',
+            'urgent': 'True',
+            'content': 'test content',
+            })
+        self.assertTrue(res_request_form.is_valid(), msg="Form is invalid")
+
+    # Check that form is invalid with empty fields
+    def test_form_is_invalid_missing_purpose(self):
+        res_request_form = ResidentRequestForm({
+            'purpose': '',
+            'urgent': 'True',
+            'content': 'test content',
+            })
+        self.assertFalse(
+            res_request_form.is_valid(),
+            msg="Purpose not provided, but form is valid"
+            )
+
+    def test_form_is_invalid_missing_content(self):
+        res_request_form = ResidentRequestForm({
+            'purpose': '0',
+            'urgent': 'False',
+            'content': '',
+            })
+        self.assertFalse(
+            res_request_form.is_valid(),
+            msg="Content not provided, but form is valid"
+            )
+
+    # Check that form is invalid with invalid purpose
+    def test_form_is_invalid_invalid_purpose(self):
+        """
+        Purpose is IntegerChoiceField
+        """
+        res_request_form = ResidentRequestForm({
+            'purpose': 'test purpose',
+            'urgent': 'False',
+            'content': 'test content',
+            })
+        self.assertFalse(
+            res_request_form.is_valid(),
+            msg="Invalid purpose provided, but form is valid"
+            )
+
+    def test_form_is_invalid_invalid_purpose_int(self):
+        """
+        Purpose is IntegerChoiceField 0, 1, 2
+        """
+        res_request_form = ResidentRequestForm({
+            'purpose': '3',
+            'urgent': 'False',
+            'content': 'test content',
+            })
+        self.assertFalse(
+            res_request_form.is_valid(),
+            msg="Invalid purpose provided, but form is valid"
+            )
