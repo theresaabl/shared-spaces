@@ -104,13 +104,10 @@ class EventSpaceBooking(models.Model):
                 )
 
         # calculate duplicate bookings
-        # (exclude denied bookings, as they do not matter)
         duplicate_bookings = EventSpaceBooking.objects.filter(
                             event_space=self.event_space,
                             date=self.date
-                            ).exclude(id=self.id).exclude(
-                                status=EventSpaceBooking.Status.DENIED
-                                )
+                            ).exclude(id=self.id)
 
         for booking in duplicate_bookings:
             # convert booking start and end time to datetime objects
