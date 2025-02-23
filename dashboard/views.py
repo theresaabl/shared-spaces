@@ -1,8 +1,9 @@
 from datetime import date
 from allauth.account.views import LoginView
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from django.core.exceptions import ValidationError
+from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import check_password
@@ -19,6 +20,10 @@ class MyCustomLoginView(LoginView):
     each time a user who has registered for an account
     but whose account is inactive tries to login
     """
+    # override post method, since need to intercept at a point where form is
+    # not validated and returned invalid yet, inactive users would lead to
+    # form invalid, so intercept at post method to redirect inactive but
+    # existing users to account inactive page
     def post(self, request, *args, **kwargs):
         # Get the login credentials from the form
         username = request.POST.get('login')
@@ -28,10 +33,12 @@ class MyCustomLoginView(LoginView):
         try:
             # Try to get user by username
             user = User.objects.get(username=username)
+        # if user does not exist
         except User.DoesNotExist:
             user = None
 
-        # if username exists and the input password matches the stored hash
+        # if username exists and the input password matches the stored one
+        # check password
         if user and check_password(password, user.password):
             # if user is not active (yet)
             if not user.is_active:
@@ -212,7 +219,8 @@ def booking_edit(request, booking_id):
     # save the original date and event space in case of duplicate booking
     # after edit, so can prefill again with old date and space
     # save old time in case of start and end time error
-    # convert_date is helper function from utils.py
+    # convert_date is helper function from utils.py, 
+    # necessary for html date field to be displayed correctly
     old_date = convert_date(booking.date)
     old_event_space = booking.event_space
     old_start_time = booking.start

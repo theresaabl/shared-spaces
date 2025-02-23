@@ -18,7 +18,8 @@ class TestMainViews(TestCase):
         """Verifies get request for about section"""
         # Send GET request and store response
         response = self.client.get(reverse('about'))
-        # Section is redirected to correctly, 302 = Redirect
+        # Section is redirected correctly, 302 = Redirect
         self.assertEqual(response.status_code, 302)
-        # Ensure section anchor is included in url
-        self.assertIn("#about-section", response.url)
+        # Redirected to correct url
+        self.assertRedirects(response, "/#about-section")
+

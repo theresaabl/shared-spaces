@@ -24,8 +24,8 @@ class MyCustomSignupFormTest(TestCase):
             'username': 'testusername',
             'full_name': 'test_firstname test_lastname',
             'email': 'name@test.com',
-            "password1": "securepassword123",
-            "password2": "securepassword123",
+            "password1": "testpassword",
+            "password2": "testpassword",
         }
         form = MyCustomSignupForm(data=form_data)
         self.assertTrue(form.is_valid(), msg='Form is invalid.')
@@ -35,8 +35,8 @@ class MyCustomSignupFormTest(TestCase):
             'username': '',
             'full_name': 'test_firstname test_lastname',
             'email': 'name@test.com',
-            "password1": "securepassword123",
-            "password2": "securepassword123",
+            "password1": "testpassword",
+            "password2": "testpassword",
         }
         form = MyCustomSignupForm(data=form_data)
         self.assertFalse(
@@ -49,8 +49,8 @@ class MyCustomSignupFormTest(TestCase):
             'username': 'test username',
             'full_name': 'test_firstname test_lastname',
             'email': 'name@test.com',
-            "password1": "securepassword123",
-            "password2": "securepassword123",
+            "password1": "testpassword",
+            "password2": "testpassword",
         }
         form = MyCustomSignupForm(data=form_data)
         self.assertFalse(
@@ -63,8 +63,8 @@ class MyCustomSignupFormTest(TestCase):
             'username': 'testusername',
             'full_name': '',
             'email': 'name@test.com',
-            "password1": "securepassword123",
-            "password2": "securepassword123",
+            "password1": "testpassword",
+            "password2": "testpassword",
         }
         form = MyCustomSignupForm(data=form_data)
         self.assertFalse(
@@ -77,8 +77,8 @@ class MyCustomSignupFormTest(TestCase):
             'username': 'testusername',
             'full_name': 'test_firstname test_lastname',
             'email': '',
-            "password1": "securepassword123",
-            "password2": "securepassword123",
+            "password1": "testpassword",
+            "password2": "testpassword",
         }
         form = MyCustomSignupForm(data=form_data)
         self.assertFalse(
@@ -91,8 +91,8 @@ class MyCustomSignupFormTest(TestCase):
             'username': 'test username',
             'full_name': 'test_firstname test_lastname',
             'email': 'name email',
-            "password1": "securepassword123",
-            "password2": "securepassword123",
+            "password1": "testpassword",
+            "password2": "testpassword",
         }
         form = MyCustomSignupForm(data=form_data)
         self.assertFalse(
@@ -105,8 +105,8 @@ class MyCustomSignupFormTest(TestCase):
             'username': 'test username',
             'full_name': 'test_firstname test_lastname',
             'email': 'name@test',
-            "password1": "securepassword123",
-            "password2": "securepassword123",
+            "password1": "testpassword",
+            "password2": "testpassword",
         }
         form = MyCustomSignupForm(data=form_data)
         self.assertFalse(
@@ -119,8 +119,8 @@ class MyCustomSignupFormTest(TestCase):
             'username': 'test username',
             'full_name': 'test_firstname test_lastname',
             'email': 'test.com',
-            "password1": "securepassword123",
-            "password2": "securepassword123",
+            "password1": "testpassword",
+            "password2": "testpassword",
         }
         form = MyCustomSignupForm(data=form_data)
         self.assertFalse(
@@ -140,8 +140,8 @@ class MyCustomSignupFormTest(TestCase):
             'username': 'testusername',
             'full_name': 'test_firstname test_lastname',
             'email': 'name@test.com',
-            "password1": "securepassword123",
-            "password2": "securepassword123",
+            "password1": "testpassword",
+            "password2": "testpassword",
         }
         form = MyCustomSignupForm(data=form_data)
 

@@ -9,5 +9,7 @@ def resident_request_type(purpose):
 def convert_date(booking_date):
     """
     Convert date to 'YYYY-MM-DD' for proper display in date picker
+    This is the standard html date field format
+    see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date
     """
     return booking_date.strftime("%Y-%m-%d")
