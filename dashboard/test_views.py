@@ -1288,39 +1288,39 @@ class TestDeleteResidentRequestView(TestCase):
             '/accounts/login/?next=/dashboard/delete_resident_request/1'
             )
 
-#     def test_no_access_for_wrong_booking(self):
-#         """
-#         Verifies that user cannot delete bookings from other users
-#         """
-#         # note specifiy which user!
-#         self.client.login(username="testusername_1", password="testpassword")
-#         # Send GET request and store response
-#         response = self.client.get(
-#             # booking_2 is booking from other user
-#             reverse('booking_delete', args=(self.booking_2.id,)),
-#             follow=True
-#             )
-#         # Check message
-#         self.assertEqual(response.status_code, 200)
-#         self.assertIn(
-#             b"You do not have access to this booking.",
-#             response.content
-#         )
+    def test_no_access_for_wrong_request(self):
+        """
+        Verifies that user cannot delete requests from other users
+        """
+        # note specifiy which user!
+        self.client.login(username="testusername_1", password="testpassword")
+        # Send GET request and store response
+        response = self.client.get(
+            # res_request_2 is message from other user
+            reverse('resident_request_delete', args=(self.res_request_2.id,)),
+            follow=True
+            )
+        # Check message
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(
+            b"You do not have access to this message.",
+            response.content
+        )
 
-#     def test_successful_delete_booking(self):
-#         """
-#         Verifies that user successfully delete booking
-#         """
-#         # note specifiy which user!
-#         self.client.login(username="testusername_1", password="testpassword")
-#         # Send GET request and store response
-#         response = self.client.get(
-#             reverse('booking_delete', args=(self.booking_1.id,)),
-#             follow=True
-#             )
-#         # Check message
-#         self.assertEqual(response.status_code, 200)
-#         self.assertIn(
-#             b"Event Space Booking successfully deleted!",
-#             response.content
-#         )
+    def test_successful_delete_request(self):
+        """
+        Verifies that user successfully delete resident request
+        """
+        # note specifiy which user!
+        self.client.login(username="testusername_1", password="testpassword")
+        # Send GET request and store response
+        response = self.client.get(
+            reverse('resident_request_delete', args=(self.res_request_1.id,)),
+            follow=True
+            )
+        # Check message
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(
+            b"Maintenance request successfully deleted!",
+            response.content
+        )
