@@ -15,6 +15,7 @@ import os
 import sys
 from django.contrib.messages import constants as messages
 import dj_database_url
+import cloudinary
 if os.path.isfile("env.py"):
     import env
 
@@ -67,6 +68,9 @@ ACCOUNT_FORMS = {'signup': 'dashboard.forms.MyCustomSignupForm'}
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+# Ensure cloudinary uses https paths
+cloudinary.config(secure=True,)
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
