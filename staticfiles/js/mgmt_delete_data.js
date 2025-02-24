@@ -14,17 +14,18 @@
 */
 
 addEventListener("DOMContentLoaded", (e) => {
+    if (document.getElementById("delete-users-modal")){
+        const deleteUsersButtons = document.getElementsByClassName("btn-delete-users");
+        const deleteUsersModal = new bootstrap.Modal(document.getElementById("delete-users-modal"));
+        const deleteUsersConfirm = document.getElementById("delete-users-confirm");
 
-    const deleteUsersButtons = document.getElementsByClassName("btn-delete-users");
-    const deleteUsersModal = new bootstrap.Modal(document.getElementById("delete-users-modal"));
-    const deleteUsersConfirm = document.getElementById("delete-users-confirm");
-
-    for (let button of deleteUsersButtons) {
-        button.addEventListener("click", (e) => {
-            let userId = e.target.getAttribute("data-user_id");
-            deleteUsersConfirm.href = `delete-user/${userId}`;
-            deleteUsersModal.show();
-        });
+        for (let button of deleteUsersButtons) {
+            button.addEventListener("click", (e) => {
+                let userId = e.target.getAttribute("data-user_id");
+                deleteUsersConfirm.href = `delete-user/${userId}`;
+                deleteUsersModal.show();
+            });
+        }
     }
 });
 
@@ -34,17 +35,18 @@ addEventListener("DOMContentLoaded", (e) => {
 */
 
 addEventListener("DOMContentLoaded", (e) => {
+    if (document.getElementById("delete-event-space-modal")){
+        const deleteSpacesButtons = document.getElementsByClassName("btn-delete-event-space");
+        const deleteSpacesModal = new bootstrap.Modal(document.getElementById("delete-event-space-modal"));
+        const deleteSpacesConfirm = document.getElementById("delete-event-space-confirm");
 
-    const deleteSpacesButtons = document.getElementsByClassName("btn-delete-event-space");
-    const deleteSpacesModal = new bootstrap.Modal(document.getElementById("delete-event-space-modal"));
-    const deleteSpacesConfirm = document.getElementById("delete-event-space-confirm");
-
-    for (let button of deleteSpacesButtons) {
-        button.addEventListener("click", (e) => {
-            let spaceId = e.target.getAttribute("data-space_id");
-            deleteSpacesConfirm.href = `delete-event-space/${spaceId}`;
-            deleteSpacesModal.show();
-        });
+        for (let button of deleteSpacesButtons) {
+            button.addEventListener("click", (e) => {
+                let spaceId = e.target.getAttribute("data-space_id");
+                deleteSpacesConfirm.href = `delete-event-space/${spaceId}`;
+                deleteSpacesModal.show();
+            });
+        }
     }
 });
 
@@ -54,17 +56,19 @@ addEventListener("DOMContentLoaded", (e) => {
 */
 
 addEventListener("DOMContentLoaded", (e) => {
+    if (document.getElementById("mgmt-delete-booking-modal")){
 
-    const deleteBookingsButtons = document.getElementsByClassName("btn-mgmt-delete-booking");
-    const deleteBookingsModal = new bootstrap.Modal(document.getElementById("mgmt-delete-booking-modal"));
-    const deleteBookingsConfirm = document.getElementById("mgmt-delete-booking-confirm");
+        const deleteBookingsButtons = document.getElementsByClassName("btn-mgmt-delete-booking");
+        const deleteBookingsModal = new bootstrap.Modal(document.getElementById("mgmt-delete-booking-modal"));
+        const deleteBookingsConfirm = document.getElementById("mgmt-delete-booking-confirm");
 
-    for (let button of deleteBookingsButtons) {
-        button.addEventListener("click", (e) => {
-            let bookingId = e.target.getAttribute("data-booking_id");
-            deleteBookingsConfirm.href = `delete-booking/${bookingId}`;
-            deleteBookingsModal.show();
-        });
+        for (let button of deleteBookingsButtons) {
+            button.addEventListener("click", (e) => {
+                let bookingId = e.target.getAttribute("data-booking_id");
+                deleteBookingsConfirm.href = `delete-booking/${bookingId}`;
+                deleteBookingsModal.show();
+            });
+        }
     }
 });
 
@@ -74,17 +78,19 @@ addEventListener("DOMContentLoaded", (e) => {
 */
 
 addEventListener("DOMContentLoaded", (e) => {
+    if (document.getElementById("mgmt-delete-request-modal")){
 
-    const deleteRequestsButtons = document.getElementsByClassName("btn-mgmt-delete-request");
-    const deleteRequestsModal = new bootstrap.Modal(document.getElementById("mgmt-delete-request-modal"));
-    const deleteRequestsConfirm = document.getElementById("mgmt-delete-request-confirm");
+        const deleteRequestsButtons = document.getElementsByClassName("btn-mgmt-delete-request");
+        const deleteRequestsModal = new bootstrap.Modal(document.getElementById("mgmt-delete-request-modal"));
+        const deleteRequestsConfirm = document.getElementById("mgmt-delete-request-confirm");
 
-    for (let button of deleteRequestsButtons) {
-        button.addEventListener("click", (e) => {
-            let requestId = e.target.getAttribute("data-resident_request_id");
-            deleteRequestsConfirm.href = `delete-request/${requestId}`;
-            deleteRequestsModal.show();
-        });
+        for (let button of deleteRequestsButtons) {
+            button.addEventListener("click", (e) => {
+                let requestId = e.target.getAttribute("data-resident_request_id");
+                deleteRequestsConfirm.href = `delete-request/${requestId}`;
+                deleteRequestsModal.show();
+            });
+        }
     }
 });
 
@@ -94,16 +100,18 @@ addEventListener("DOMContentLoaded", (e) => {
 */
 
 addEventListener("DOMContentLoaded", (e) => {
+    if (document.getElementById("mgmt-delete-message-modal")){
 
-    const deleteMessagesButtons = document.getElementsByClassName("btn-mgmt-delete-message");
-    const deleteMessagesModal = new bootstrap.Modal(document.getElementById("mgmt-delete-message-modal"));
-    const deleteMessagesConfirm = document.getElementById("mgmt-delete-message-confirm");
+        const deleteMessagesButtons = document.getElementsByClassName("btn-mgmt-delete-message");
+        const deleteMessagesModal = new bootstrap.Modal(document.getElementById("mgmt-delete-message-modal"));
+        const deleteMessagesConfirm = document.getElementById("mgmt-delete-message-confirm");
 
-    for (let button of deleteMessagesButtons) {
-        button.addEventListener("click", (e) => {
-            let messageId = e.target.getAttribute("data-message_id");
-            deleteMessagesConfirm.href = `delete-message/${messageId}`;
-            deleteMessagesModal.show();
-        });
+        for (let button of deleteMessagesButtons) {
+            button.addEventListener("click", (e) => {
+                let messageId = e.target.getAttribute("data-message_id");
+                deleteMessagesConfirm.href = `delete-message/${messageId}`;
+                deleteMessagesModal.show();
+            });
+        }
     }
 });

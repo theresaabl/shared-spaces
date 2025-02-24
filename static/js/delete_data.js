@@ -12,7 +12,6 @@
 * - Displays a confirmation modal (`deleteModal`) to prompt 
 * the user for confirmation before deletion.
 */
-
 addEventListener("DOMContentLoaded", (e) => {
 
     const deleteBookingsButtons = document.getElementsByClassName("btn-delete-bookings");
