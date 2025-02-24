@@ -39,12 +39,13 @@
                         {{ event_space_form.type|as_crispy_field }}
                         
                         {{ event_space_form.image|as_crispy_field }}
-                        <!-- If an image is already stored, display the current image -->
+                        <!-- If an image is already stored (when editing), display the current image, for new event space: no image is displayed -->
                         <!-- Code Inspiration to get image url: https://stackoverflow.com/a/34614101  -->
                         {% if event_space_form.instance.image.url %}
                             <div class="mb-3">
                                 <label class="mb-2">Current Image:</label><br>
-                                <img src="{{ event_space_form.instance.image.url }}" class="edit-form-image">
+                                <!-- Code inspiration for onError event: https://stackoverflow.com/a/8125327, in case a placeholder image is used -->
+                                <img src="{{ event_space_form.instance.image.url }}" class="edit-form-image" onError='this.onerror=null; this.src="{% static "images/event_space_example.webp" %}";'>
                             </div>
                         {% endif %}
 

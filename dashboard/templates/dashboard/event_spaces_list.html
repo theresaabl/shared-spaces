@@ -40,7 +40,7 @@
                             {% if "placeholder" in space.image.url %}
                             <img class="card-img-top  img-fluid event-space-image" src="{% static 'images/event_space_example.webp' %}" alt="placeholder image">
                             {% else %}
-                            <img class="card-img-top  img-fluid event-space-image" src=" {{ space.image.url }}" alt="{{ space.name }}">
+                            <img class="card-img-top  img-fluid event-space-image" src="{{ space.image.url }}" alt="{{ space.name }}">
                             {% endif %}
 
                             <!-- Card Body -->
