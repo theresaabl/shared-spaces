@@ -1043,35 +1043,411 @@ class TestDenyBookingView(TestCase):
             response.content
             )
 
-#     def test_successfully_deactivate_user(self):
-#         # login as super user
-#         self.client.login(username="superusername", password="testpassword")
-#         # check that active user is indeed active
-#         self.assertTrue(self.user.is_active)
-#         response = self.client.get(
-#             reverse('mgmt-user-activation', args=(self.user.id,)),
-#             follow=True
-#             )
-#         # Follow Redirect to check page is rendered and messages displayed
-#         self.assertEqual(response.status_code, 200)
-#         self.assertIn(
-#             b"User account successfully deactivated!",
-#             response.content
-#             )
 
-#     def test_not_deactivate_own_user(self):
-#         # login as super user
-#         self.client.login(username="superusername", password="testpassword")
-#         # check that active user is indeed active
-#         self.assertTrue(self.superuser.is_active)
-#         response = self.client.get(
-#             reverse('mgmt-user-activation', args=(self.superuser.id,)),
-#             follow=True
-#             )
-#         # Follow Redirect to check page is rendered and messages displayed
-#         self.assertEqual(response.status_code, 200)
-#         self.assertIn(
-#             b"You cannot deactivate your own account!",
-#             response.content
-#             )
+class TestDeleteBookingView(TestCase):
+    """
+    Test delete booking view
+    """
+    def setUp(self):
+        # Create Superuser
+        self.superuser = User.objects.create_superuser(
+            username="superusername",
+            password="testpassword",
+        )
 
+        # Create example event space
+        self.event_space = EventSpace.objects.create(
+            name="test space",
+            type="test type",
+            image="test image",
+            building="test building",
+            capacity="10",
+            number_of_tables="10",
+            number_of_chairs="10",
+            kitchen=False,
+            tea_and_coffeemaker=False,
+            projector=False,
+            audio_equipment=False,
+            childrens_play_area=False,
+            piano=False,
+            notes="test notes"
+            )
+
+        # Create event space booking
+        self.booking = EventSpaceBooking(
+            resident=self.superuser,
+            event_space=self.event_space,
+            occasion="test occasion",
+            date="2025-10-18",
+            start=datetime.datetime.strptime('19:00', '%H:%M').time(),
+            end=datetime.datetime.strptime('22:00', '%H:%M').time(),
+            notes="test notes",
+            created_on=datetime.datetime.today(),
+            status="0"
+            )
+        self.booking.save()
+
+    def test_successfully_delete_booking(self):
+        # login as super user
+        self.client.login(username="superusername", password="testpassword")
+        response = self.client.get(
+            reverse('mgmt-booking-delete', args=(self.booking.id,)),
+            follow=True
+            )
+        # Follow Redirect to check page is rendered and messages displayed
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(
+            b"Booking successfully deleted!",
+            response.content
+            )
+
+
+class TestResidentRequestsView(TestCase):
+    """
+    Test resident requests page view
+    Test that requests are displayed correctly
+    """
+    def setUp(self):
+        # Create Superuser
+        self.superuser = User.objects.create_superuser(
+            username="superusername",
+            password="testpassword",
+        )
+
+        # Create resident requests
+        self.res_request = ResidentRequest(
+            resident=self.superuser,
+            purpose="0",
+            urgent=True,
+            content="test maintenance request",
+            created_on=datetime.datetime.today(),
+            status="0"
+            )
+        self.res_request.save()
+
+    def test_render_res_reqeust_page_for_staff_with_content(self):
+        # login as superuser
+        self.client.login(username="superusername", password="testpassword")
+        response = self.client.get(reverse('mgmt-resident-requests'))
+        # Page is rendered correctly
+        self.assertEqual(response.status_code, 200)
+        # Check content for staff users
+        self.assertIn(b"From: superusername", response.content)
+        self.assertIn(b"test maintenance request", response.content)
+
+    def test_not_render_resident_request_page_for_non_staff(self):
+        # login as normal user
+        self.client.login(username="testusername", password="testpassword")
+        response = self.client.get(reverse('mgmt-resident-requests'))
+        # Check Redirect
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(
+            response,
+            '/admin/login/?next=/management/resident-requests/'
+            )
+
+
+class TestRequestInProgressView(TestCase):
+    """
+    Test request in progress view
+    Check that can change status to in progress
+    Check that cannot put in progress what is in progress
+    """
+    def setUp(self):
+        # Create Superuser
+        self.superuser = User.objects.create_superuser(
+            username="superusername",
+            password="testpassword",
+        )
+
+        # Create resident requests
+        self.res_request = ResidentRequest(
+            resident=self.superuser,
+            purpose="0",
+            urgent=True,
+            content="test maintenance request",
+            created_on=datetime.datetime.today(),
+            status="0"
+            )
+        self.res_request.save()
+
+        # Create resident requests in progress
+        self.res_request_prog = ResidentRequest(
+            resident=self.superuser,
+            purpose="0",
+            urgent=True,
+            content="test maintenance request",
+            created_on=datetime.datetime.today(),
+            status="1"
+            )
+        self.res_request_prog.save()
+
+    def test_successfully_progress_request(self):
+        # login as super user
+        self.client.login(username="superusername", password="testpassword")
+        response = self.client.get(
+            reverse('mgmt-request-in-progress', args=(self.res_request.id,)),
+            follow=True
+            )
+        # Follow Redirect to check page is rendered and messages displayed
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(
+            b"successfully set to 'In Progress'!",
+            response.content
+            )
+
+    def test_not_progress_progressed_request(self):
+        # login as super user
+        self.client.login(username="superusername", password="testpassword")
+        response = self.client.get(
+            reverse('mgmt-request-in-progress', args=(self.res_request_prog.id,)),  # noqa
+            follow=True
+            )
+        # Follow Redirect to check page is rendered and messages displayed
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(
+            b"This maintenance request is already in progress!",
+            response.content
+            )
+
+
+class TestRequestCloseView(TestCase):
+    """
+    Test request close view
+    Check that can change status to closed
+    Check that cannot close already closed request
+    """
+    def setUp(self):
+        # Create Superuser
+        self.superuser = User.objects.create_superuser(
+            username="superusername",
+            password="testpassword",
+        )
+
+        # Create resident requests
+        self.res_request = ResidentRequest(
+            resident=self.superuser,
+            purpose="0",
+            urgent=True,
+            content="test maintenance request",
+            created_on=datetime.datetime.today(),
+            status="0"
+            )
+        self.res_request.save()
+
+        # Create closed resident requests
+        self.res_request_close = ResidentRequest(
+            resident=self.superuser,
+            purpose="0",
+            urgent=True,
+            content="test maintenance request",
+            created_on=datetime.datetime.today(),
+            status="2"
+            )
+        self.res_request_close.save()
+
+    def test_successfully_close_request(self):
+        # login as super user
+        self.client.login(username="superusername", password="testpassword")
+        response = self.client.get(
+            reverse('mgmt-request-closed', args=(self.res_request.id,)),
+            follow=True
+            )
+        # Follow Redirect to check page is rendered and messages displayed
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(
+            b"successfully closed!",
+            response.content
+            )
+
+    def test_not_close_closed_request(self):
+        # login as super user
+        self.client.login(username="superusername", password="testpassword")
+        response = self.client.get(
+            reverse('mgmt-request-closed', args=(self.res_request_close.id,)),  # noqa
+            follow=True
+            )
+        # Follow Redirect to check page is rendered and messages displayed
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(
+            b"This maintenance request was already closed!",
+            response.content
+            )
+
+
+class TestDeleteRequestView(TestCase):
+    """
+    Test delete resident request view
+    """
+    def setUp(self):
+        # Create Superuser
+        self.superuser = User.objects.create_superuser(
+            username="superusername",
+            password="testpassword",
+        )
+
+        # Create resident requests
+        self.res_request = ResidentRequest(
+            resident=self.superuser,
+            purpose="0",
+            urgent=True,
+            content="test maintenance request",
+            created_on=datetime.datetime.today(),
+            status="0"
+            )
+        self.res_request.save()
+
+    def test_successfully_delete_request(self):
+        # login as super user
+        self.client.login(username="superusername", password="testpassword")
+        response = self.client.get(
+            reverse('mgmt-request-delete', args=(self.res_request.id,)),
+            follow=True
+            )
+        # Follow Redirect to check page is rendered and messages displayed
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(
+            b"Maintenance request successfully deleted!",
+            response.content
+            )
+
+
+class TestContactMessagesView(TestCase):
+    """
+    Test contact messages page view
+    Test that messages are displayed correctly
+    """
+    def setUp(self):
+        # Create Superuser
+        self.superuser = User.objects.create_superuser(
+            username="superusername",
+            password="testpassword",
+        )
+
+        # Create contact message
+        self.message = ContactMessage(
+            name="test name",
+            email="name@test.com",
+            interest_to_join=True,
+            message="test message"
+            )
+        self.message.save()
+
+    def test_render_contact_message_page_for_staff_with_content(self):
+        # login as superuser
+        self.client.login(username="superusername", password="testpassword")
+        response = self.client.get(reverse('mgmt-contact-messages'))
+        # Page is rendered correctly
+        self.assertEqual(response.status_code, 200)
+        # Check content for staff users
+        self.assertIn(b"From: test name", response.content)
+        self.assertIn(b"test message", response.content)
+
+    def test_not_render_contact_message_page_for_non_staff(self):
+        # login as normal user
+        self.client.login(username="testusername", password="testpassword")
+        response = self.client.get(reverse('mgmt-contact-messages'))
+        # Check Redirect
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(
+            response,
+            '/admin/login/?next=/management/contact-messages/'
+            )
+
+
+class TestContactMessageProcessedView(TestCase):
+    """
+    Test contact message processed view
+    Check that can change status to processed
+    Check that cannot process already processed messages
+    """
+    def setUp(self):
+        # Create Superuser
+        self.superuser = User.objects.create_superuser(
+            username="superusername",
+            password="testpassword",
+        )
+
+        # Create contact message
+        self.message = ContactMessage(
+            name="test name",
+            email="name@test.com",
+            interest_to_join=True,
+            message="test message",
+            processed=False
+            )
+        self.message.save()
+
+        # Create processed contact message
+        self.message_proc = ContactMessage(
+            name="test name 2",
+            email="name@test.com",
+            interest_to_join=True,
+            message="test message 2",
+            processed=True
+            )
+        self.message_proc.save()
+
+    def test_successfully_process_message(self):
+        # login as super user
+        self.client.login(username="superusername", password="testpassword")
+        response = self.client.get(
+            reverse('mgmt-message-processed', args=(self.message.id,)),
+            follow=True
+            )
+        # Follow Redirect to check page is rendered and messages displayed
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(
+            b"The message was successfully set to 'Processed'!",
+            response.content
+            )
+
+    def test_not_process_processed_message(self):
+        # login as super user
+        self.client.login(username="superusername", password="testpassword")
+        response = self.client.get(
+            reverse('mgmt-message-processed', args=(self.message_proc.id,)),
+            follow=True
+            )
+        # Follow Redirect to check page is rendered and messages displayed
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(
+            b"This message was already processed!",
+            response.content
+            )
+
+
+class TestDeleteContactMessageView(TestCase):
+    """
+    Test delete contact message view
+    """
+    def setUp(self):
+        # Create Superuser
+        self.superuser = User.objects.create_superuser(
+            username="superusername",
+            password="testpassword",
+        )
+
+        # Create contact message
+        self.message = ContactMessage(
+            name="test name",
+            email="name@test.com",
+            interest_to_join=True,
+            message="test message",
+            processed=False
+            )
+        self.message.save()
+
+    def test_successfully_delete_message(self):
+        # login as super user
+        self.client.login(username="superusername", password="testpassword")
+        response = self.client.get(
+            reverse('mgmt-message-delete', args=(self.message.id,)),
+            follow=True
+            )
+        # Follow Redirect to check page is rendered and messages displayed
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(
+            b"The message was successfully deleted!",
+            response.content
+            )
