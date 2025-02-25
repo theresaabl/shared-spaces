@@ -4,16 +4,19 @@
 [![GitHub last commit](https://img.shields.io/github/last-commit/TheresaAbl/shared-spaces)](https://www.github.com/TheresaAbl/shared-spaces/commits/main)
 [![GitHub repo size](https://img.shields.io/github/repo-size/TheresaAbl/shared-spaces)](https://www.github.com/TheresaAbl/shared-spaces)
 
-A website for a community living space called SharedSpaces. 
+A website for a community living space called SharedSpaces. SharedSpaces is a living community providing a space to live, a space to work and a space for community. The website shows concise and inviting information about the living community and provides a contact form for users who would like to join the community. Residents of the SharedSpaces community can register for an account and book event spaces available in the community, as well as send maintenance requests and messages to the administrators. SharedSpaces administrators have access to a front end admin site where they can manage user accounts, event spaces, event space bookings and maintenance requests as well as messages from residents, and contact messages sent through the contact form.
+
+This is a site where everyone in the SharedSpaces community (or interested to join) can find what they need in one place and in a simple and pleasant way, whether they are general users, registered residents or administrators.
 
 Live Site - [SharedSpaces](https://shared-spaces-f588831ae867.herokuapp.com/)
 
-![screenshot](documentation/mockup.png)
+![screenshot](documentation/responsiveness/amiresponsive.png)
 
 source: [shared-spaces amiresponsive](https://ui.dev/amiresponsive?url=https://shared-spaces-f588831ae867.herokuapp.com)
 
 > [!IMPORTANT]
-> The examples in these templates are strongly influenced by the Code Institute walkthrough project called "I Think Therefore I Blog".
+> - Any User signing up on this site is automatically set to inactive and will need to be approved by the admins!
+> - This site has an Admin Front End Page.
 
 ## UX
 
@@ -21,44 +24,58 @@ source: [shared-spaces amiresponsive](https://ui.dev/amiresponsive?url=https://s
 
 #### 1. Strategy Plane
 ##### Purpose
-- Provide blog owners with tools to create, manage, and moderate engaging blog content and user interactions.
-- Offer users and guests an intuitive platform to explore, engage, and contribute to blog discussions.
+- Provide SharedSpaces residents a place to participate in the community, use shared event spaces and interact with the admins to make them feel like they belong to something bigger
+- Provide SharedSpaces administrators a place to manage all the data they need to manage in a very user friendly and quick and simple way
+- Offer guest users a friendly and well organised space to get information about the community and contact the administrators or send a request to join the community
 
 ##### Primary User Needs
-- Blog owners need seamless tools for publishing and managing posts and comments.
-- Registered users need the ability to engage with blog content through comments and account features.
-- Guests need the ability to browse and enjoy blog content without registration.
+- SharedSpaces residents need a seamless tool to book event spaces and manage the bookings, as well as send maintenance requests and messages and manage those
+- SharedSpaces administrators need a seamless tool to manage user accounts, event spaces, event space bookings, resident maintenance requests and messages, as well as contact messages from general users
+- Guests need the ability to browse the site, get information and contact administrators without registration.
 
 ##### Business Goals
-- Foster a dynamic blogging platform with active user participation.
-- Build a sense of community through discussions and user engagement.
-- Ensure easy blog content management for owners.
+- Build a sense of community within the residents by keeping them happy with the possibilities to interact and use shared event spaces in the community.
+- Ensure easy data management for admins.
+- Show off the advantages of the living community in an inviting way to the general public
 
 #### 2. Scope Plane
 ##### Features
 - A full list of [Features](#features) can be viewed in detail below.
 
 ##### Content Requirements
-- Blog post management (create, update, delete, and preview).
-- Comment moderation and management tools.
-- User account features (register, log in, edit/delete comments).
-- Notification system for comment approval status.
+- User account management (Users: create, Admins: preview, update (activate, deactivate, give and remove admin status) and delete).
+- Event Space management (Registered users: preview, Admins: create, update, delete and preview).
+- Event space booking management (Registered users: create, update, delete, preview, Admins: approve, deny, delete and preview).
+- Maintenance requests and other messages management (Registered users: create, update, delete, preview, Admins: update (change status - open, in progress, closed), delete and preview).
+- Contact messages (from contact form) management (Users: create, Admins: preview, update (change status - processed) and delete).
+- User account features (register, log in, logout, account inactive page).
+- Notification system for when any data is changed.
 - 404 error page for lost users.
 
 #### 3. Structure Plane
 ##### Information Architecture
 - **Navigation Menu**:
-  - Links to Home, Blog Posts, Login/Register, and Dashboard (for blog owners).
+  - Links to Home, About (section on home page), Contact, Resident Space (dashboard accessible for registered and activated users), Admin Space (only visible for admins), Login/Register (or Logout)
 - **Hierarchy**:
-  - Blog content displayed prominently for easy browsing.
-  - Clear call-to-action buttons for account creation and engagement (e.g., commenting).
+  - Hero Section and highlights about the community prominently displayed for easy browsing.
+  - Easily visible about section
+  - Clear call-to-action buttons to request to join the SharedSpaces community leading to the contact page
+  - Clear and simple contact form
+  - Resident Space available for confirmed residents, anyone who uses it knows that it is there. Within the resident space:
+      - Prominently displayed calls to action to book event space or send a request
+      - Display of all bookings and requests available for that user
+  - Admin space only visible for admins and they will know what they are looking for
+    - Access to manage all data needed
 
 ##### User Flow
-1. Guest users browse blog content → read posts and see commenter names.
-2. Guest users register for an account → log in to leave comments.
-3. Registered users leave comments → receive a pending approval notification.
-4. Blog owners create, update, and manage posts → moderate comments.
-5. Blog owners approve or reject comments → manage user interactions.
+1. Guest users browse home and about page content → see 'join' buttons and get to contact page → send a contact message.
+2. Guest users register for an account → wait for admins to approve them (if they are confirmed residents of the living community).
+3. Registered but not activated users try to log in → see the account inactive page.
+4. Registered users submit a booking or request or message → receive a pending approval notification.
+5. Registered users edit a booking or request or message → receive a pending approval notification.
+6. Admins create, update, and manage event spaces → registered users can see that and book accordingly.
+7. Admins manage user accounts → registered users can log in or not.
+8. Admins manage event space bookings and resident requests → registered users can see the result and react accordingly.
 
 #### 4. Skeleton Plane
 ##### Wireframe Suggestions
@@ -66,6 +83,9 @@ source: [shared-spaces amiresponsive](https://ui.dev/amiresponsive?url=https://s
 
 #### 5. Surface Plane
 ##### Visual Design Elements
+
+The goal of the design was to make a very friendly, vibrant and inviting website that has a clean and modern look and is very intuitive to navigate. To achieve this goal the following colour scheme and typography was used:
+
 - **[Colours](#colour-scheme)**: see below.
 - **[Typography](#typography)**: see below.
 
@@ -73,6 +93,7 @@ source: [shared-spaces amiresponsive](https://ui.dev/amiresponsive?url=https://s
 
 I used [coolors.co](https://coolors.co/324495-f6ae2d-f26419-ffffff-212529) to generate my color palette. The goal was a very clean and simple, but still vibrant and inviting look. I used shades of yellow, orange and blue to style the highlights throughout the site (e.g. headings, borders, buttons etc.) which gives a bright and vibrant look, the rest is kept very simple with white background and dark-grey text, where the dark grey is the standard bootstrap body text color.
 
+![screenshot](documentation/coolors.png)
 
 - `#f6ae2d` Yellow: highlights and buttons
 - `#f26419` Orange: highlights and buttons
@@ -94,9 +115,6 @@ I defined my color variables in my [CSS file](static/css/style.css) as follows:
 ```
 
 where I also included slightly darker shades for active buttons and links.
-
-
-![screenshot](documentation/coolors.png)
 
 ### Typography
 
@@ -172,7 +190,6 @@ Any differences between the wireframes and the final website are due to creative
 | Admin Page | ![Sreenshot](documentation/wireframes/admin_page.png) |   
 
 
-
 ## Features
 
 ⚠️ INSTRUCTIONS ⚠️
@@ -182,6 +199,10 @@ In this section, you should go over the different parts of your project, and des
 **IMPORTANT**: Remember to always include a screenshot of each individual feature!
 
 ⚠️ --- END --- ⚠️
+
+> [!IMPORTANT]
+> - Any User signing up on this site is automatically set to inactive and will need to be approved by the admins!
+> - This site has an Admin Front End Page.
 
 ### Existing Features
 
