@@ -247,30 +247,19 @@ Any differences between the wireframes and the final website are due to creative
 
 ### Future Features
 
-⚠️ INSTRUCTIONS ⚠️
+[![GitHub issues](https://img.shields.io/github/issues/theresaabl/shared-spaces)](https://www.github.com/theresaabl/shared-spaces/issues) 
 
-Do you have additional ideas that you'd like to include on your project in the future? Fantastic, list them here! It's always great to have plans for future improvements. Consider adding any helpful links or notes to help remind you in the future, if you revisit the project in a couple years.
+Some interesting future features are documented in the open github issues as epics and user stories.
 
-A few examples are listed below to align with possible ways to improve on the sample walkthrough project, to give you some inspiration.
+There are many potential interesting future features for this project, some examples are:
 
-⚠️ --- END ---⚠️
+- **Residents Message Board and User Profiles**: A message board available in the resident space where resident can see other residents' messages, comment and post on their own. This would also include user profiles similar to a private small social media platform for the community.
+- **Manage maintenance requests and messages within the Site**: It would be great if the admin could answer to requests from residents directly in the admin space and this could be displayed in the users resident space.
+- **Send email notification**: It would be a great future feature to send email notifications once the admins have approved and activated a users account. Further, email notifications would be useful whenever the status of a booking or request changes, e.g. is confirmed or denied etc.
+- **Show availability in calender when booking event spaces**: It would be very useful if users can see the availability of an event space in the date picker and time picker in real time when booking an event space.
+- **Option to filter data in resident space and admin space**: It would be very useful if users could filter data displayed in the resident space or admin space by status or user or date etc. Currently admins can do that in the django admin panel. In the front end the data is sorted into categories but all it displayed.
+- **Search functionality**: Implement search functionality for resident space and admin space data.
 
-- **Post Categories/Tags**: Allow users to categorize and tag blog posts, making it easier for visitors to filter content based on their interests.
-- **Post Search Functionality**: Add a search bar for users to quickly find posts by keywords or phrases.
-- **Post Likes/Dislikes or Upvotes**: Implement a "like" or "upvote" system for blog posts to encourage user engagement and give feedback to the author.
-- **User Profiles**: Create personalized user profiles where authenticated users can view their comments, liked posts, and account information.
-- **Comment Replies & Threads**: Enable users to reply to comments, creating nested comment threads for better discussions.
-- **Post Sharing**: Add social media sharing buttons (e.g., Twitter, Facebook, LinkedIn) for users to share blog posts.
-- **Notifications**: Implement a notification system that alerts users when their comments are approved, when new comments are made on a post they've commented on, or when new posts are published.
-- **Email Subscriptions**: Allow users to subscribe to receive email notifications for new posts, updates, or newsletters.
-- **Post Analytics**: Provide post authors with analytics such as views, time spent reading, and engagement rates.
-- **Multilingual Support**: Add the ability to write and view blog posts in multiple languages, broadening the audience.
-- **Related Posts Recommendations**: Show related posts at the bottom of a blog post to encourage further reading and keep users engaged.
-- **Content Flagging/Reporting**: Allow users to flag or report inappropriate content (comments or posts) for moderation.
-- **SEO Optimization**: Implement features for SEO, such as meta tags, custom URLs, and keywords for better search engine ranking.
-- **User Dashboard**: Provide users with a dashboard to track their activity, such as comments made, likes received, and blog posts they’ve interacted with.
-- **Admin Dashboard Analytics**: Provide site admins with an analytics dashboard showing user activity, popular posts, most commented articles, etc.
-- **Custom Themes for Users**: Allow users to customize the visual theme of the site (colors, fonts, etc.) to suit their preferences.
 
 ## Tools & Technologies
 
@@ -292,18 +281,11 @@ A few examples are listed below to align with possible ways to improve on the sa
 | [![badge](https://img.shields.io/badge/WhiteNoise-grey?logo=python&logoColor=FFFFFF)](https://whitenoise.readthedocs.io) | Serving static files with Heroku. |
 | [![badge](https://img.shields.io/badge/Balsamiq-grey?logo=barmenia&logoColor=CE0908)](https://balsamiq.com/wireframes) | Creating wireframes. |
 | [![badge](https://img.shields.io/badge/Font_Awesome-grey?logo=fontawesome&logoColor=528DD7)](https://fontawesome.com) | Icons. |
-| [![badge](https://img.shields.io/badge/ChatGPT-grey?logo=openai&logoColor=75A99C)](https://chat.openai.com) | Help debug, troubleshoot, and explain things. |
-| [![badge](https://img.shields.io/badge/Mermaid-grey?logo=mermaid&logoColor=FF3670)](https://mermaid.live) | Generate an interactive diagram for the data/schema. |
+| [![badge](https://img.shields.io/badge/ChatGPT-grey?logo=openai&logoColor=75A99C)](https://chat.openai.com) | Help debug, troubleshoot, and explain things. Help write the home and about text. |
+| [![Cloudconvert](https://img.shields.io/badge/Cloudconvert-grey?logo=adobecreativecloud&logoColor=B53836)](https://cloudconvert.com/webp-converter) | Convert all images to webp for faster website. |
+| [![Tinypng](https://img.shields.io/badge/Tinypng-grey?logo=foodpanda&logoColor=7EB631)](https://tinypng.com) | Compress images for faster website. |
+| [![Favicon](https://img.shields.io/badge/Favicon-grey?logo=fi&logoColor=209CEE)](https://favicon.io/emoji-favicons/atom-symbol) | Generate favicon for the website. |
 
-⚠️ NOTE ⚠️
-
-Want to add more?
-
-- Tutorial: https://shields.io/badges/static-badge
-- Icons/Logos: https://simpleicons.org
-  - FYI: not all logos are available to use
-
-🛑 --- END --- 🛑
 
 ## Database Design
 
@@ -374,18 +356,14 @@ Deployment steps are as follows, after account setup:
 > [!IMPORTANT]
 > This is a sample only; you would replace the values with your own if cloning/forking my repository.
 
-🛑 !!! ATTENTION TheresaAbl !!! 🛑
-
-⚠️ DO NOT update the environment variables to your own! These should never be public; only use the demo values below! ⚠️
-
-🛑 --- END --- 🛑
-
 | Key | Value |
 | --- | --- |
 | `CLOUDINARY_URL` | user-inserts-own-cloudinary-url |
 | `DATABASE_URL` | user-inserts-own-postgres-database-url |
 | `DISABLE_COLLECTSTATIC` | 1 (*this is temporary, and can be removed for the final deployment*) |
 | `SECRET_KEY` | any-random-secret-key |
+| `HOST` | .herokuapp.com |
+| `CSRF_TRUSTED_ORIGIN` | https://*.herokuapp.com |
 
 Heroku needs some additional files in order to deploy properly.
 
@@ -473,7 +451,6 @@ MIDDLEWARE = [
 ]
 ```
 
-
 ### Local Development
 
 This project can be cloned or forked in order to make a local copy on your own system.
@@ -487,12 +464,6 @@ You will need to create a new file called `env.py` at the root-level, and includ
 > [!IMPORTANT]
 > This is a sample only; you would replace the values with your own if cloning/forking my repository.
 
-🛑 !!! ATTENTION TheresaAbl !!! 🛑
-
-⚠️ DO NOT update the environment variables to your own! These should never be public; only use the demo values below! ⚠️
-
-🛑 --- END --- 🛑
-
 Sample `env.py` file:
 
 ```python
@@ -501,8 +472,11 @@ import os
 os.environ.setdefault("SECRET_KEY", "any-random-secret-key")
 os.environ.setdefault("DATABASE_URL", "user-inserts-own-postgres-database-url")
 os.environ.setdefault("CLOUDINARY_URL", "user-inserts-own-cloudinary-url")  # only if using Cloudinary
+os.environ.setdefault("HOST", "user-inserts-own-host")
+os.environ.setdefault("CSRF_TRUSTED_ORIGIN", "https://localhost")
 
 # local environment only (do not include these in production/deployment!)
+# (in settings I made sure that DEBUG = False in heroku if you do not add DEBUG to your config vars there)
 os.environ.setdefault("DEBUG", "True")
 ```
 
@@ -526,117 +500,82 @@ If you'd like to backup your database models, use the following command for each
 
 You can clone the repository by following these steps:
 
-1. Go to the [GitHub repository](https://www.github.com/TheresaAbl/shared-spaces).
+1. Go to the [GitHub repository](https://www.github.com/theresaabl/shared-spaces).
 2. Locate and click on the green "Code" button at the very top, above the commits and files.
 3. Select whether you prefer to clone using "HTTPS", "SSH", or "GitHub CLI", and click the "copy" button to copy the URL to your clipboard.
 4. Open "Git Bash" or "Terminal".
 5. Change the current working directory to the location where you want the cloned directory.
 6. In your IDE Terminal, type the following command to clone the repository:
-	- `git clone https://www.github.com/TheresaAbl/shared-spaces.git`
+	- `git clone https://www.github.com/theresaabl/shared-spaces.git`
 7. Press "Enter" to create your local clone.
 
-Alternatively, if using Gitpod, you can click below to create your own workspace using this repository.
-
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://www.github.com/TheresaAbl/shared-spaces)
-
-**Please Note**: in order to directly open the project in Gitpod, you should have the browser extension installed. A tutorial on how to do that can be found [here](https://www.gitpod.io/docs/configure/user-settings/browser-extension).
 
 #### Forking
 
 By forking the GitHub Repository, you make a copy of the original repository on our GitHub account to view and/or make changes without affecting the original owner's repository. You can fork this repository by using the following steps:
 
-1. Log in to GitHub and locate the [GitHub Repository](https://www.github.com/TheresaAbl/shared-spaces).
+1. Log in to GitHub and locate the [GitHub Repository](https://www.github.com/theresaabl/shared-spaces).
 2. At the top of the Repository, just below the "Settings" button on the menu, locate and click the "Fork" Button.
 3. Once clicked, you should now have a copy of the original repository in your own GitHub account!
 
 ### Local VS Deployment
 
-⚠️ INSTRUCTIONS ⚠️
-
-Use this space to discuss any differences between the local version you've developed, and the live deployment site. Generally, there shouldn't be [m]any major differences, so if you honestly cannot find any differences, feel free to use the following example:
-
-⚠️ --- END --- ⚠️
-
 There are no remaining major differences between the local version when compared to the deployed version online.
 
 ## Credits
 
-⚠️ INSTRUCTIONS ⚠️
-
-In the following sections, you need to reference where you got your content, media, and any extra help. It is common practice to use code from other repositories and tutorials (which is totally acceptable), however, it is important to be very specific about these sources to avoid potential plagiarism.
-
-⚠️ --- END ---⚠️
-
 ### Content
-
-⚠️ INSTRUCTIONS ⚠️
-
-Use this space to provide attribution links for any borrowed code snippets, elements, and resources. Ideally, you should provide an actual link to every resource used, not just a generic link to the main site. If you've used multiple components from the same source (such as Bootstrap), then you only need to list it once, but if it's multiple Codepen samples, then you should list each example individually. If you've used AI for some assistance (such as ChatGPT or Perplexity), be sure to mention that as well. A few examples have been provided below to give you some ideas.
-
-⚠️ --- END ---⚠️
 
 | Source | Notes |
 | --- | --- |
 | [Markdown Builder](https://markdown.2bn.dev) | Help generating Markdown files |
-| [Chris Beams](https://chris.beams.io/posts/git-commit) | "How to Write a Git Commit Message" |
 | [I Think Therefore I Blog](https://codeinstitute.net) | Code Institute walkthrough project inspiration |
 | [Bootstrap](https://getbootstrap.com) | Various components / responsive front-end framework |
 | [Cloudinary API](https://cloudinary.com) | Cloud storage for static/media files |
 | [Whitenoise](https://whitenoise.readthedocs.io) | Static file service |
-| [Python Tutor](https://pythontutor.com) | Additional Python help |
-| [ChatGPT](https://chatgpt.com) | Help with code logic and explanations |
+| [ChatGPT](https://chatgpt.com) | Help with debugging and explanations, also help write the home and about pages text |
+| [mdn web docs](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/upgrade-insecure-requests) | Convert all insecure requests to secure https ones in base.html |
+| [Stackoverflow](https://stackoverflow.com/a/25797705) | Inspiration on how to set all users to inactive |
+| [Stackoverflow](https://stackoverflow.com/a/73085167) | Inspiration on how to set min attribute in calendar to only allow future dates |
+| [Medium](https://medium.com/@alex.kirkup/integerchoices-in-django-models-working-seamlessly-from-the-backend-and-the-frontend-using-labels-a3e77b86d419) | Display integer choices label in models |
+| [Saturncloud](https://saturncloud.io/blog/python-pandas-typeerror-unsupported-operand-types-for-datetimetime-and-timedelta/) | Inspiration on how to solve a datetime.time + timedelta typeerror |
+| [Stackoverflow](https://stackoverflow.com/a/9579000) | Convert time object to datetime object |
+| [Stackoverflow](https://stackoverflow.com/a/46182411) | Inspiration on how to write a custom clean and save method for EventSpaceBooking model |
+| [Stackoverflow](https://stackoverflow.com/a/14295709) | Convert string to time object |
+| [Stackoverflow](https://stackoverflow.com/a/6076245) | Remove currently tag from image field when editing event space |
+| [Stackoverflow](https://stackoverflow.com/a/34614101) | Inspiration on how to get image url |
+| [mdn web docs](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date) | Convert date to 'YYYY-MM-DD' for proper display in date picker |
+| [Tim Nelson](https://www.github.com/TravelTimN) and [Stackoverflow](https://stackoverflow.com/a/8125327) | Inspiration to implement onError event when displaying current image in edit event space form |
+
 
 ### Media
-
-⚠️ INSTRUCTIONS ⚠️
-
-Use this space to provide attribution links to any media files borrowed from elsewhere (images, videos, audio, etc.). If you're the owner (or a close acquaintance) of some/all media files, then make sure to specify this information. Let the assessors know that you have explicit rights to use the media files within your project. Ideally, you should provide an actual link to every media file used, not just a generic link to the main site, unless it's AI-generated artwork.
-
-Looking for some media files? Here are some popular sites to use. The list of examples below is by no means exhaustive. Within the Code Institute Slack community, you can find more "free media" links by sending yourself (or Slackbot) the following command: `!freemedia`.
-
-- Images
-    - [Pexels](https://www.pexels.com)
-    - [Unsplash](https://unsplash.com)
-    - [Pixabay](https://pixabay.com)
-    - [Lorem Picsum](https://picsum.photos) (placeholder images)
-    - [Wallhere](https://wallhere.com) (wallpaper / backgrounds)
-    - [This Person Does Not Exist](https://thispersondoesnotexist.com) (reload to get a new person)
-- Audio
-    - [Audio Micro](https://www.audiomicro.com/free-sound-effects)
-- Video
-    - [Videvo](https://www.videvo.net)
-- Image Compression
-    - [TinyPNG](https://tinypng.com) (for images <5MB)
-    - [CompressPNG](https://compresspng.com) (for images >5MB)
-
-A few examples have been provided below to give you some ideas on how to do your own Media credits.
-
-⚠️ --- END ---⚠️
 
 | Source | Notes |
 | --- | --- |
 | [favicon.io](https://favicon.io) | Generating the favicon |
-| [I Think Therefore I Blog](https://codeinstitute.net) | Sample images provided from the walkthrough projects |
 | [Font Awesome](https://fontawesome.com) | Icons used throughout the site |
-| [Pexels](https://images.pexels.com/photos/416160/pexels-photo-416160.jpeg) | Hero image |
-| [Wallhere](https://c.wallhere.com/images/9c/c8/da4b4009f070c8e1dfee43d25f99-2318808.jpg!d) | Background wallpaper |
-| [Pixabay](https://cdn.pixabay.com/photo/2017/09/04/16/58/passport-2714675_1280.jpg) | Background wallpaper |
-| [DALL-E 3](https://openai.com/index/dall-e-3) | AI generated artwork |
+| [Pexels](https://www.pexels.com/photo/aerial-view-of-white-concrete-buildings-during-golden-hours-681368/) | Hero image, sign in image |
+| [Pexels](https://www.pexels.com/photo/black-metal-fence-near-person-walking-during-daytime-162024/) | About section header image |
+| [Pexels](https://www.pexels.com/photo/two-chairs-with-glass-table-on-living-room-near-window-1571453/) | About section image |
+| [Pexels](https://www.pexels.com/photo/two-chairs-with-glass-table-on-living-room-near-window-1571453/) | About section image |
+| [Pexels](https://www.pexels.com/photo/a-woman-playing-with-her-daughters-4543704/) | About section image |
+| [Pexels](https://www.pexels.com/photo/positive-diverse-people-making-faces-at-camera-3856033/) | About section image |
+| [Pexels](https://www.pexels.com/photo/aerial-photo-of-buildings-and-roads-681335/) | Contact page image |
+| [Pexels](https://www.pexels.com/photo/water-bottles-on-desks-in-a-conference-room-7648510/) | Event Space Booking image in Resident Space, placeholder image for event spaces |
+| [Pexels](https://www.pexels.com/photo/stainless-steel-close-wrench-on-spanner-210881/) | Submit a request image in Resident Space |
+| [Pexels](https://www.pexels.com/photo/red-theater-chair-lot-near-white-concrete-pillars-269140/) | Event Spaces Image: Large conference room |
+| [Pexels](https://www.pexels.com/photo/people-doing-yoga-in-the-room-8436625/) | Event Spaces Image: Yoga room |
+| [Pexels](https://www.pexels.com/photo/family-and-group-of-friends-celebrating-a-child-s-birthday-7180617/) | Event Spaces Image: Large party room |
+| [Pexels](https://www.pexels.com/photo/square-beige-wooden-table-with-chairs-260928/) | Event Spaces Image: Small meeting room |
+| [Pexels](https://www.pexels.com/photo/sharing-food-3184177/) | Event Spaces Image: Family room |
+| [Pexels](https://www.pexels.com/photo/woman-in-blue-denim-jacket-using-macbook-pro-4099099/) | Event Spaces Image: Video call rooms |
+| [Pexels](https://www.pexels.com/photo/woman-making-choice-of-dumbbell-4854260/) | Event Spaces Image: Weights room |
+| [Pexels](https://www.pexels.com/photo/view-from-broken-brick-wall-into-lake-in-nature-10645596/) | Error 404 image, sign out image, account inactive image, resident space unauthenticated users image |
 | [TinyPNG](https://tinypng.com) | Compressing images < 5MB |
-| [CompressPNG](https://compresspng.com) | Compressing images > 5MB |
 | [CloudConvert](https://cloudconvert.com/webp-converter) | Converting images to `.webp` |
 
 ### Acknowledgements
 
-⚠️ INSTRUCTIONS ⚠️
-
-Use this space to provide attribution and acknowledgement to any supports that helped, encouraged, or supported you throughout the development stages of this project. It's always lovely to appreciate those that help us grow and improve our developer skills. A few examples have been provided below to give you some ideas.
-
-⚠️ --- END ---⚠️
-
 - I would like to thank my Code Institute mentor, [Tim Nelson](https://www.github.com/TravelTimN) for the support throughout the development of this project.
-- I would like to thank the [Code Institute](https://codeinstitute.net) Tutor Team for their assistance with troubleshooting and debugging some project issues.
-- I would like to thank the [Code Institute Slack community](https://code-institute-room.slack.com) for the moral support; it kept me going during periods of self doubt and impostor syndrome.
-- I would like to thank my partner, for believing in me, and allowing me to make this transition into software development.
-- I would like to thank my employer, for supporting me in my career development change towards becoming a software developer.
-
+- I would like to thank the [Code Institute Slack community](https://code-institute-room.slack.com) for ideas on how to fix some issues.
+- I would like to thank my family, for believing in me and supporting me, especially in the weeks before the deadline.
