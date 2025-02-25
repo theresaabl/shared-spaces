@@ -150,14 +150,53 @@ Explain any fonts and icon libraries used, like **Google Fonts**, **Font Awesome
 
 ## User Stories
 
-- As a Site User I can sign up for an account so that I can request to get access to a resident dashboard.
-- As a Site Administrator I can see all requests for a new user account so that I can confirm accounts for SharedSpaces residents only.
-- As a Confirmed Resident I can login and logout of my account so that I can access a resident dashboard.
-- As a Site User I can see a message when login does not work (yet) so that I can know whether my account has been approved yet or not.
-- As a Confirmed Resident I can get an email notification once my account is confirmed so that I can know immediately when I get access to the resident dashboard.
+### [EPIC: User Authentication](https://github.com/theresaabl/shared-spaces/issues/1)
 
--
-- 
+As a Confirmed Resident I can register an account so that I can access a resident dashboard.
+
+User Stories:
+- [As a Site User I can sign up for an account](https://github.com/theresaabl/shared-spaces/issues/2) so that I can request to get access to a resident dashboard.
+- [As a Site Administrator I can see all requests for a new user account](https://github.com/theresaabl/shared-spaces/issues/3) so that I can confirm accounts for SharedSpaces residents only.
+- [As a Confirmed Resident I can login and logout of my account](https://github.com/theresaabl/shared-spaces/issues/4) so that I can access a resident dashboard.
+- [As a Site User I can see a message when login does not work (yet)](https://github.com/theresaabl/shared-spaces/issues/5) so that I can know whether my account has been approved yet or not.
+
+### [EPIC: Resident Dashboard](https://github.com/theresaabl/shared-spaces/issues/7)
+
+As a Confirmed Resident I can get an email notification once my account is confirmed so that I can know immediately when I get access to the resident dashboard.
+
+User Stories:
+
+- [As a Confirmed Resident I can book an event space](https://github.com/theresaabl/shared-spaces/issues/11) so that I can make use of the shared spaces in my community.
+- [As a Confirmed Resident I can see my event space bookings on the dashboard](https://github.com/theresaabl/shared-spaces/issues/12) so that I can manage them.
+- [As a Confirmed Resident I can see my sent requests and messages on the dashboard](https://github.com/theresaabl/shared-spaces/issues/13)  so that I can manage them.
+- [As a Confirmed Resident I can see a page with a list of all available event spaces](https://github.com/theresaabl/shared-spaces/issues/14)  so that I can decide which one I want to book.
+- [As a Confirmed Resident I can access a calender which allows me to pick dates in the future when booking event spaces](https://github.com/theresaabl/shared-spaces/issues/17) so that I can easily pick a date.
+- [As a Confirmed Resident I can send a maintenance request or other message to the admins](https://github.com/theresaabl/shared-spaces/issues/27) so that I can get in touch in case I have any issues or suggestions.
+
+### [EPIC: Main Site](https://github.com/theresaabl/shared-spaces/issues/8)
+
+As a Site User I can see the main SharedSpaces site so that I can read information about the community living space and contact someone.
+
+User Stories:
+- [As a Site User I can see the home page](https://github.com/theresaabl/shared-spaces/issues/18) so that I know what this site is about.
+- [As a Site User I can see the about section](https://github.com/theresaabl/shared-spaces/issues/19) so that I can read more about the shared spaces community living.
+- [As a Site User I can see the contact page](https://github.com/theresaabl/shared-spaces/issues/20) so that I can contact the community admins.
+- [As a Site User I can fill in a contact form](https://github.com/theresaabl/shared-spaces/issues/21) so that I can contact the community administrators.
+- [As a Site User I can see an error 404 page](https://github.com/theresaabl/shared-spaces/issues/40) so that I know when a page does not exist.
+ 
+
+### [EPIC: Admin Frontend Page](https://github.com/theresaabl/shared-spaces/issues/9)
+
+As a Site Administrator I can access data from a frontend page so that I can create, read, edit and delete data from the database in a simple and pleasant way.
+
+User Stories:
+- [As a Site Administrator I can access a front-end admin page](https://github.com/theresaabl/shared-spaces/issues/26) so that I can manage all data from a user friendly front-end page instead of the admin panel.
+- [As a Site Administrator I can manage user accounts](https://github.com/theresaabl/shared-spaces/issues/35) so that I can approve or deny new users depending on whether they are confirmed residents of the SharedSpaces community or not.
+- [As a Site Administrator I can read all contact form submissions](https://github.com/theresaabl/shared-spaces/issues/22) so that I can process them.
+- [As a Site Administrator I can manage event space booking requests from confirmed residents](https://github.com/theresaabl/shared-spaces/issues/23) so that I can confirm or deny bookings.
+- [As a Site Administrator I can manage maintanance or other requests from confirmed residents](https://github.com/theresaabl/shared-spaces/issues/24) so that I can read their requests and take further action.
+- [As a Site Administrator I can manage the list of event spaces available as well as the details about them](https://github.com/theresaabl/shared-spaces/issues/25) so that I can show up to date information on the website.
+
 
 ## Wireframes
 
