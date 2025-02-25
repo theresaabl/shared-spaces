@@ -420,18 +420,18 @@ Adjust the code below (file names, function names, etc.) to match your own proje
 
 ⚠️ SAMPLE ⚠️
 
-I have used Django's built-in unit testing framework to test the application functionality. In order to run the tests, I ran the following command in the terminal each time:
+I have used Django's built-in unit testing framework to test the application functionality. In order to run the tests, I ran the following command in the terminal:
 
-- `python3 manage.py test name-of-app`
+- `python3 manage.py test`
 
 To create the coverage report, I would then run the following commands:
 
 - `pip3 install coverage`
 - `pip3 freeze --local > requirements.txt`
-- `coverage run --omit=*/site-packages/*,*/migrations/*,*/__init__.py,env.py,manage.py test`
+- `coverage run --omit=*/site-packages/*,*/migrations/*,*/__init__.py,env.py,manage.py manage.py test`
 - `coverage report`
 
-To see the HTML version of the reports, and find out whether some pieces of code were missing, I ran the following commands:
+To see the HTML version of the report, and find out whether some pieces of code were missing, I ran the following commands:
 
 - `coverage html`
 - `python3 -m http.server`
