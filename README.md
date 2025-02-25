@@ -10,22 +10,6 @@ First Draft for ERD:
 
 ![ERD](/documentation/diagrams/models.webp)
 
-## Wireframes
-
-Basic desktop wireframes (design can be adapted to mobile in a very straightforward way):
-
-| Page | Wireframe |
-|---|---|
-| Home | ![Sreenshot](documentation/wireframes/home.png) |   
-| About | ![Sreenshot](documentation/wireframes/about.png) |   
-| Contact | ![Sreenshot](documentation/wireframes/contact.png) |
-| Resident Space | ![Sreenshot](documentation/wireframes/resident_dashboard.png) |   
-| Event Spaces | ![Sreenshot](documentation/wireframes/event_spaces.png) |   
-| Event Space Booking | ![Sreenshot](documentation/wireframes/event_space_booking.png) |   
-| Request Submission | ![Sreenshot](documentation/wireframes/request_submission.png) |   
-| Admin Page | ![Sreenshot](documentation/wireframes/admin_page.png) |   
-
-
 
 # [shared-spaces](https://shared-spaces-f588831ae867.herokuapp.com)
 
@@ -119,34 +103,38 @@ source: [shared-spaces amiresponsive](https://ui.dev/amiresponsive?url=https://s
 
 ### Colour Scheme
 
-⚠️INSTRUCTIONS ⚠️
+I used [coolors.co](https://coolors.co/324495-f6ae2d-f26419-ffffff-212529) to generate my color palette. The goal was a very clean and simple, but still vibrant and inviting look. I used shades of yellow, orange and blue to style the highlights throughout the site (e.g. headings, borders, buttons etc.) which gives a bright and vibrant look, the rest is kept very simple with white background and dark-grey text, where the dark grey is the standard bootstrap body text color.
 
-Explain your colors and color scheme. Consider adding a link and screenshot for your color scheme using [coolors](https://coolors.co/generate).
 
-When you add a color to the palette, the URL is dynamically updated, making it easier for you to return back to your color palette later if needed. See example below:
+- `#f6ae2d` Yellow: highlights and buttons
+- `#f26419` Orange: highlights and buttons
+- `#324495` Blue: highlights, buttons and links
+- `#212529` Dark-grey: all text (except links or text on darker backgrounds is white)
+- `#ffffff` White: background color.
 
-⚠️ --- END --- ⚠️
+I defined my color variables in my [CSS file](static/css/style.css) as follows:
 
-I used [coolors.co](https://coolors.co/080708-3772ff-df2935-fdca40-e6e8e6) to generate my color palette.
+```
+:root {
+    --my-blue: #324495;
+    --my-blue-active: #24316b;
+    --my-yellow: #f6ae2d;
+    --my-yellow-active: #cd9326;
+    --my-orange: #f26419;
+    --my-orange-active: #d16023;
+  }
+```
 
-- `#000000` primary text.
-- `#3772FF` primary highlights.
-- `#DF2935` secondary text.
-- `#FDCA40` secondary highlights.
+where I also included slightly darker shades for active buttons and links.
+
 
 ![screenshot](documentation/coolors.png)
 
 ### Typography
 
-⚠️ INSTRUCTIONS ⚠️
-
-Explain any fonts and icon libraries used, like **Google Fonts**, **Font Awesome**, etc. Consider adding a link to each font used, the Font Awesome site (if used), or similar icon library.
-
-⚠️ --- END --- ⚠️
-
-- [Montserrat](https://fonts.google.com/specimen/Montserrat) was used for the primary headers and titles.
-- [Lato](https://fonts.google.com/specimen/Lato) was used for all other secondary text.
-- [Font Awesome](https://fontawesome.com) icons were used throughout the site, such as the social media icons in the footer.
+- [Alumni Sans Pinstripe](https://fonts.google.com/specimen/Alumni+Sans+Pinstripe) was used for the logo and the word SharedSpaces in general, this font looks geometrical and modern as well as light, which fits with the building theme.
+- [Quicksand](https://fonts.google.com/specimen/Quicksand) was used for all other text, it is fitting with a modern but friendly style.
+- [Font Awesome](https://fontawesome.com) icons were used to help visualize some of the data displayed, such as on the event spaces list pages in the resident and admin spaces or the user accounts page in the admin space.
 
 ## User Stories
 
@@ -200,24 +188,22 @@ User Stories:
 
 ## Wireframes
 
-⚠️ INSTRUCTIONS ⚠️
+I have used [Balsamiq](https://balsamiq.com/wireframes) to design my site wireframes. Note that even though the site was designed mobile first, I chose to create the wireframes for desktop devices, since the design very naturally generalises to other devices. The site was designed in a way that made the adaptations for mobile devices almost obvious.
 
-If you've created wireframes or mock-ups, use this section to display screenshots of your wireframes. The example table below uses sample pages from the walkthrough project to give you some inspiration for your own project, so please adjust accordingly.
+Any differences between the wireframes and the final website are due to creative decisions in the development process. For example, I decided to omit the map on the contact page to keep the page cleaner and focus on the most important content which is the contact form. External users do not need to go to the living community unless they first request to join it. Further, I omitted the social media icons for a cleaner look and because the living community would be more likely to have internal communications instead of social media, instead I added an external link to GitHub in the footer. 
 
-⚠️ --- END --- ⚠️
+| Page | Wireframe |
+|---|---|
+| Home | ![Sreenshot](documentation/wireframes/home.png) |   
+| About | ![Sreenshot](documentation/wireframes/about.png) |   
+| Contact | ![Sreenshot](documentation/wireframes/contact.png) |
+| Resident Space | ![Sreenshot](documentation/wireframes/resident_dashboard.png) |   
+| Event Spaces | ![Sreenshot](documentation/wireframes/event_spaces.png) |   
+| Event Space Booking | ![Sreenshot](documentation/wireframes/event_space_booking.png) |   
+| Request Submission | ![Sreenshot](documentation/wireframes/request_submission.png) |   
+| Admin Page | ![Sreenshot](documentation/wireframes/admin_page.png) |   
 
-To follow best practice, wireframes were developed for mobile, tablet, and desktop sizes.
-I've used [Balsamiq](https://balsamiq.com/wireframes) to design my site wireframes.
 
-| Page | Mobile | Tablet | Desktop |
-| --- | --- | --- | --- |
-| Register | ![screenshot](documentation/wireframes/mobile-register.png) | ![screenshot](documentation/wireframes/tablet-register.png) | ![screenshot](documentation/wireframes/desktop-register.png) |
-| Login | ![screenshot](documentation/wireframes/mobile-login.png) | ![screenshot](documentation/wireframes/tablet-login.png) | ![screenshot](documentation/wireframes/desktop-login.png) |
-| Home | ![screenshot](documentation/wireframes/mobile-home.png) | ![screenshot](documentation/wireframes/tablet-home.png) | ![screenshot](documentation/wireframes/desktop-home.png) |
-| Add Blog | ![screenshot](documentation/wireframes/mobile-add-blog.png) | ![screenshot](documentation/wireframes/tablet-add-blog.png) | ![screenshot](documentation/wireframes/desktop-add-blog.png) |
-| Edit Blog | ![screenshot](documentation/wireframes/mobile-edit-blog.png) | ![screenshot](documentation/wireframes/tablet-edit-blog.png) | ![screenshot](documentation/wireframes/desktop-edit-blog.png) |
-| Blog Post | ![screenshot](documentation/wireframes/mobile-blog-post.png) | ![screenshot](documentation/wireframes/tablet-blog-post.png) | ![screenshot](documentation/wireframes/desktop-blog-post.png) |
-| 404 | ![screenshot](documentation/wireframes/mobile-404.png) | ![screenshot](documentation/wireframes/tablet-404.png) | ![screenshot](documentation/wireframes/desktop-404.png) |
 
 ## Features
 
