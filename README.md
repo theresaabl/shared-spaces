@@ -208,8 +208,8 @@ Any differences between the wireframes and the final website are due to creative
 | Home | The homepage displays a hero section with a hero image as well as the highlights of the community. | ![screenshot](documentation/features/hero-section.png)![screenshot](documentation/features/highlights-section.png) |
 | About | The about section on the homepage gives some more information about the community and includes pictures. | ![screenshot](documentation/features/about-header.png)![screenshot](documentation/features/about-section-1.png)![screenshot](documentation/features/about-section-2.png) |
 | 'Requet to Join SharedSpaces Community here' buttons | Below the highlights secton and the about section is a button for general users to request to join the community, this is an inviting and prominent button that leads to the contact form. | ![screenshot](documentation/features/request-to-join-button.png) |
-| Contact Page | The contact page contains a header image and a contact form. | ![screenshot](documentation/features/edit-comment.png) |
-| Send Contact Message | On the contact page users can send a contact message to the admins without authentication. They can check a box to indicate whether they want to join the SharedSpaces community or not. | ![screenshot](documentation/features/contact-header.png)![screenshot](documentation/features/contact-form.png)![screenshot](documentation/features/success-contact-message-submitted.png) |
+| Contact Page | The contact page contains a header image and a contact form. | ![screenshot](documentation/features/contact-header.png)![screenshot](documentation/features/contact-form.png) |
+| Send Contact Message | On the contact page users can send a contact message to the admins without authentication. They can check a box to indicate whether they want to join the SharedSpaces community or not. | ![screenshot](documentation/features/success-contact-message-submitted.png) |
 | Footer | The footer displays the copyright and the sharedspaces logo link to my GitHub page. | ![screenshot](documentation/features/footer.png) |
 | Resident Space | Authenticated visitors can can access a personal resident dashboard. Where they can see event spaces, their own event space bookings and resident requests. They can also make new bookings and requests and edit and delete them. The bookings are sorted into pending, approved, denied and past bookings and the maintenance requests and messages are sorted into open, in progress and closed requests. | ![screenshot](documentation/features/dashboard.png)![screenshot](documentation/features/dashboard-bookings-requests-lenovo.png) |
 | Resident Space for unauthenticated Users | Unauthenticated users who click on the resident space link get a screen that tells them to sign in. | ![screenshot](documentation/features/resident-space-not-signed-in.png) |
@@ -239,7 +239,7 @@ Any differences between the wireframes and the final website are due to creative
 | Set status to open/in progress/closed for Resident Request | Open requests can be set to in progress or closed, in progress requests can be set to closed and closed requests can be set to in progress by clicking reopen. All with one button click. Success messages are shown. | ![screenshot](documentation/features/message-request-closed.png)![screenshot](documentation/features/message-in-progress.png) |
 | Delete Resident Request | Admins can delete resident requests. Again a confirmation modal is shown before a success message. | ![screenshot](documentation/features/delete-request-confirmation.png)![screenshot](documentation/features/request-delete-message.png) |
 | Manage Contact Messages | On the resident requests page all contact messages sent from external users through the contact form are shown and sorted into open and processed (similar to unread and read in emails). | ![screenshot](documentation/features/contact-messages-open.png)![screenshot](documentation/features/contact-messages-processed.png) |
-| Set status to Processed for Contact Message | Open messages can be set to processed to indicate that they have been dealt with. | ![screenshot](documentation/features/message-request-closed.png)![screenshot](documentation/features/success-contact-message-processed.png) |
+| Set status to Processed for Contact Message | Open messages can be set to processed to indicate that they have been dealt with. | ![screenshot](documentation/features/success-contact-message-processed.png) |
 | Delete Contact Message | Admins can delete contact messages. Again a confirmation modal is shown before a success message. | ![screenshot](documentation/features/delete-contact-message-confirmation.png)![screenshot](documentation/features/delete-contact-message.png) |
 | Return to Admin Space Button | Each of the admin space pages has a 'return to admin space' button that link back to the main admin space page. | ![screenshot](documentation/features/back-to-admin-button.png) |
 | Heroku Deployment | The site is fully deployed to Heroku, making it accessible online and easy to manage. |  |
@@ -534,16 +534,16 @@ There are no remaining major differences between the local version when compared
 | [Cloudinary API](https://cloudinary.com) | Cloud storage for static/media files |
 | [Whitenoise](https://whitenoise.readthedocs.io) | Static file service |
 | [ChatGPT](https://chatgpt.com) | Help with debugging and explanations, also help write the home and about pages text |
-| [mdn web docs](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/upgrade-insecure-requests) | Convert all insecure requests to secure https ones in base.html |
 | [Stackoverflow](https://stackoverflow.com/a/25797705) | Inspiration on how to set all users to inactive |
 | [Stackoverflow](https://stackoverflow.com/a/73085167) | Inspiration on how to set min attribute in calendar to only allow future dates |
-| [Medium](https://medium.com/@alex.kirkup/integerchoices-in-django-models-working-seamlessly-from-the-backend-and-the-frontend-using-labels-a3e77b86d419) | Display integer choices label in models |
 | [Saturncloud](https://saturncloud.io/blog/python-pandas-typeerror-unsupported-operand-types-for-datetimetime-and-timedelta/) | Inspiration on how to solve a datetime.time + timedelta typeerror |
 | [Stackoverflow](https://stackoverflow.com/a/9579000) | Convert time object to datetime object |
 | [Stackoverflow](https://stackoverflow.com/a/46182411) | Inspiration on how to write a custom clean and save method for EventSpaceBooking model |
 | [Stackoverflow](https://stackoverflow.com/a/14295709) | Convert string to time object |
 | [Stackoverflow](https://stackoverflow.com/a/6076245) | Remove currently tag from image field when editing event space |
 | [Stackoverflow](https://stackoverflow.com/a/34614101) | Inspiration on how to get image url |
+| [Medium](https://medium.com/@alex.kirkup/integerchoices-in-django-models-working-seamlessly-from-the-backend-and-the-frontend-using-labels-a3e77b86d419) | Display integer choices label in models |
+| [mdn web docs](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/upgrade-insecure-requests) | Convert all insecure requests to secure https ones in base.html |
 | [mdn web docs](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date) | Convert date to 'YYYY-MM-DD' for proper display in date picker |
 | [Tim Nelson](https://www.github.com/TravelTimN) and [Stackoverflow](https://stackoverflow.com/a/8125327) | Inspiration to implement onError event when displaying current image in edit event space form |
 
