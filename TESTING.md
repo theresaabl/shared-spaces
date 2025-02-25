@@ -56,94 +56,38 @@ I have used the recommended [JShint Validator](https://jshint.com) to validate a
 | static | [mgmt_delete_data.js](https://github.com/theresaabl/shared-spaces/blob/main/static/js/mgmt_delete_data.js)  | ![screenshot](documentation/validation/jshint_mgmt_delete_data.png) | 
 
 
-
 ### Python
-
-⚠️ INSTRUCTIONS ⚠️
-
-The [CI Python Linter](https://pep8ci.herokuapp.com) can be used two different ways.
-
-- Copy/Paste your Python code directly into the linter.
-- As an API, using the "raw" URL appended to the linter URL.
-    - To find the "raw" URL, navigate to your file directly on the GitHub repo.
-    - On that page, GitHub provides a button on the right called "Raw" that you can click.
-    - From that new page, copy the full URL, and paste it after the CI Python Linter URL (with a `/` separator).
-
-It's recommended to validate each file using the API URL. This will give you a custom URL which you can use on your testing documentation. It makes it easier to return back to a file for validating it again in the future. Use the steps above to generate your own custom URLs for each Python file.
-
-**IMPORTANT**: `E501 line too long` errors
-
-You must strive to fix all Python lines that are too long (>80 characters). In rare cases where you cannot break the lines [*without breaking the functionality*], adding "`  # noqa`" (*NO Quality Assurance*) to the end of those lines will ignore linting validation. Do not use "`  # noqa`" all over your project just to clear down validation errors! This can still cause a project to fail, for failing to fix actual PEP8 validation errors.
-
-Sometimes variables can get too long, or excessive `if/else` conditional statements. These are acceptable instances to use the "`  # noqa`" comment.
-
-When trying to fix "line too long" errors, try to avoid using `/` to split lines. A better approach would be to use any type of opening bracket, and hit `<Enter>` just after that. Any opening bracket type will work: `(`, `[`, `{`. By using an opening bracket, Python knows where to appropriately indent the next line of code, without having to *guess* for yourself and attempt to "tab" to the correct indentation level.
-
-⚠️ --- END --- ⚠️
-
-🛑 IMPORTANT 🛑
-
-**IMPORTANT**: Django settings
-
-The Django `settings.py` file comes with 4 lines that are quite long, and will throw the `E501 line too long` error. This is default behavior, but can be fixed by adding the "`  # noqa`" comment at the end of those lines.
-
-```python
-AUTH_PASSWORD_VALIDATORS = [
-    {
-        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",  # noqa
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",  # noqa
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",  # noqa
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",  # noqa
-    },
-]
-```
-
-**IMPORTANT**: *migration* and *pycache* files
-
-You do not have to validate files from the `migrations/` or `pycache/` folders! Ignore these `.py` files, and validate just the files that you've created or modified.
-
-🛑 --- END --- 🛑
 
 I have used the recommended [PEP8 CI Python Linter](https://pep8ci.herokuapp.com) to validate all of my Python files.
 
-| Directory | File | URL | Screenshot | Notes |
-| --- | --- | --- | --- | --- |
-| contact | [admin.py](https://github.com/theresaabl/shared-spaces/blob/main/contact/admin.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/theresaabl/shared-spaces/main/contact/admin.py) | ![screenshot](documentation/validation/py-contact-admin.png) | Notes (if applicable) |
-| contact | [forms.py](https://github.com/theresaabl/shared-spaces/blob/main/contact/forms.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/theresaabl/shared-spaces/main/contact/forms.py) | ![screenshot](documentation/validation/py-contact-forms.png) | Notes (if applicable) |
-| contact | [models.py](https://github.com/theresaabl/shared-spaces/blob/main/contact/models.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/theresaabl/shared-spaces/main/contact/models.py) | ![screenshot](documentation/validation/py-contact-models.png) | Notes (if applicable) |
-| contact | [test_forms.py](https://github.com/theresaabl/shared-spaces/blob/main/contact/test_forms.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/theresaabl/shared-spaces/main/contact/test_forms.py) | ![screenshot](documentation/validation/py-contact-test_forms.png) | Notes (if applicable) |
-| contact | [test_views.py](https://github.com/theresaabl/shared-spaces/blob/main/contact/test_views.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/theresaabl/shared-spaces/main/contact/test_views.py) | ![screenshot](documentation/validation/py-contact-test_views.png) | Notes (if applicable) |
-| contact | [urls.py](https://github.com/theresaabl/shared-spaces/blob/main/contact/urls.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/theresaabl/shared-spaces/main/contact/urls.py) | ![screenshot](documentation/validation/py-contact-urls.png) | Notes (if applicable) |
-| contact | [views.py](https://github.com/theresaabl/shared-spaces/blob/main/contact/views.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/theresaabl/shared-spaces/main/contact/views.py) | ![screenshot](documentation/validation/py-contact-views.png) | Notes (if applicable) |
-| dashboard | [admin.py](https://github.com/theresaabl/shared-spaces/blob/main/dashboard/admin.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/theresaabl/shared-spaces/main/dashboard/admin.py) | ![screenshot](documentation/validation/py-dashboard-admin.png) | Notes (if applicable) |
-| dashboard | [forms.py](https://github.com/theresaabl/shared-spaces/blob/main/dashboard/forms.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/theresaabl/shared-spaces/main/dashboard/forms.py) | ![screenshot](documentation/validation/py-dashboard-forms.png) | Notes (if applicable) |
-| dashboard | [models.py](https://github.com/theresaabl/shared-spaces/blob/main/dashboard/models.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/theresaabl/shared-spaces/main/dashboard/models.py) | ![screenshot](documentation/validation/py-dashboard-models.png) | Notes (if applicable) |
-| dashboard | [test_forms.py](https://github.com/theresaabl/shared-spaces/blob/main/dashboard/test_forms.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/theresaabl/shared-spaces/main/dashboard/test_forms.py) | ![screenshot](documentation/validation/py-dashboard-test_forms.png) | Notes (if applicable) |
-| dashboard | [test_views.py](https://github.com/theresaabl/shared-spaces/blob/main/dashboard/test_views.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/theresaabl/shared-spaces/main/dashboard/test_views.py) | ![screenshot](documentation/validation/py-dashboard-test_views.png) | Notes (if applicable) |
-| dashboard | [urls.py](https://github.com/theresaabl/shared-spaces/blob/main/dashboard/urls.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/theresaabl/shared-spaces/main/dashboard/urls.py) | ![screenshot](documentation/validation/py-dashboard-urls.png) | Notes (if applicable) |
-| dashboard | [utils.py](https://github.com/theresaabl/shared-spaces/blob/main/dashboard/utils.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/theresaabl/shared-spaces/main/dashboard/utils.py) | ![screenshot](documentation/validation/py-dashboard-utils.png) | Notes (if applicable) |
-| dashboard | [views.py](https://github.com/theresaabl/shared-spaces/blob/main/dashboard/views.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/theresaabl/shared-spaces/main/dashboard/views.py) | ![screenshot](documentation/validation/py-dashboard-views.png) | Notes (if applicable) |
-| main | [admin.py](https://github.com/theresaabl/shared-spaces/blob/main/main/admin.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/theresaabl/shared-spaces/main/main/admin.py) | ![screenshot](documentation/validation/py-main-admin.png) | Notes (if applicable) |
-| main | [models.py](https://github.com/theresaabl/shared-spaces/blob/main/main/models.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/theresaabl/shared-spaces/main/main/models.py) | ![screenshot](documentation/validation/py-main-models.png) | Notes (if applicable) |
-| main | [test_views.py](https://github.com/theresaabl/shared-spaces/blob/main/main/test_views.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/theresaabl/shared-spaces/main/main/test_views.py) | ![screenshot](documentation/validation/py-main-test_views.png) | Notes (if applicable) |
-| main | [urls.py](https://github.com/theresaabl/shared-spaces/blob/main/main/urls.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/theresaabl/shared-spaces/main/main/urls.py) | ![screenshot](documentation/validation/py-main-urls.png) | Notes (if applicable) |
-| main | [views.py](https://github.com/theresaabl/shared-spaces/blob/main/main/views.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/theresaabl/shared-spaces/main/main/views.py) | ![screenshot](documentation/validation/py-main-views.png) | Notes (if applicable) |
-|  | [manage.py](https://github.com/theresaabl/shared-spaces/blob/main/manage.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/theresaabl/shared-spaces/main/manage.py) | ![screenshot](documentation/validation/py--manage.png) | Notes (if applicable) |
-| management | [admin.py](https://github.com/theresaabl/shared-spaces/blob/main/management/admin.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/theresaabl/shared-spaces/main/management/admin.py) | ![screenshot](documentation/validation/py-management-admin.png) | Notes (if applicable) |
-| management | [forms.py](https://github.com/theresaabl/shared-spaces/blob/main/management/forms.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/theresaabl/shared-spaces/main/management/forms.py) | ![screenshot](documentation/validation/py-management-forms.png) | Notes (if applicable) |
-| management | [models.py](https://github.com/theresaabl/shared-spaces/blob/main/management/models.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/theresaabl/shared-spaces/main/management/models.py) | ![screenshot](documentation/validation/py-management-models.png) | Notes (if applicable) |
-| management | [test_forms.py](https://github.com/theresaabl/shared-spaces/blob/main/management/test_forms.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/theresaabl/shared-spaces/main/management/test_forms.py) | ![screenshot](documentation/validation/py-management-test_forms.png) | Notes (if applicable) |
-| management | [test_views.py](https://github.com/theresaabl/shared-spaces/blob/main/management/test_views.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/theresaabl/shared-spaces/main/management/test_views.py) | ![screenshot](documentation/validation/py-management-test_views.png) | Notes (if applicable) |
-| management | [urls.py](https://github.com/theresaabl/shared-spaces/blob/main/management/urls.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/theresaabl/shared-spaces/main/management/urls.py) | ![screenshot](documentation/validation/py-management-urls.png) | Notes (if applicable) |
-| management | [views.py](https://github.com/theresaabl/shared-spaces/blob/main/management/views.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/theresaabl/shared-spaces/main/management/views.py) | ![screenshot](documentation/validation/py-management-views.png) | Notes (if applicable) |
-| sharedspaces | [settings.py](https://github.com/theresaabl/shared-spaces/blob/main/sharedspaces/settings.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/theresaabl/shared-spaces/main/sharedspaces/settings.py) | ![screenshot](documentation/validation/py-sharedspaces-settings.png) | Notes (if applicable) |
-| sharedspaces | [urls.py](https://github.com/theresaabl/shared-spaces/blob/main/sharedspaces/urls.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/theresaabl/shared-spaces/main/sharedspaces/urls.py) | ![screenshot](documentation/validation/py-sharedspaces-urls.png) | Notes (if applicable) |
+| Directory | File | URL | Screenshot |
+| --- | --- | --- | --- |
+| contact | [admin.py](https://github.com/theresaabl/shared-spaces/blob/main/contact/admin.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/theresaabl/shared-spaces/main/contact/admin.py) | ![screenshot](documentation/validation/python_contact_admin.png) | 
+| contact | [forms.py](https://github.com/theresaabl/shared-spaces/blob/main/contact/forms.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/theresaabl/shared-spaces/main/contact/forms.py) | ![screenshot](documentation/validation/python_contact_forms.png) | 
+| contact | [models.py](https://github.com/theresaabl/shared-spaces/blob/main/contact/models.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/theresaabl/shared-spaces/main/contact/models.py) | ![screenshot](documentation/validation/python_contact_models.png) | 
+| contact | [test_forms.py](https://github.com/theresaabl/shared-spaces/blob/main/contact/test_forms.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/theresaabl/shared-spaces/main/contact/test_forms.py) | ![screenshot](documentation/validation/python_contact_test_forms.png) |
+| contact | [test_views.py](https://github.com/theresaabl/shared-spaces/blob/main/contact/test_views.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/theresaabl/shared-spaces/main/contact/test_views.py) | ![screenshot](documentation/validation/python_contact_test_views.png) | 
+| contact | [urls.py](https://github.com/theresaabl/shared-spaces/blob/main/contact/urls.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/theresaabl/shared-spaces/main/contact/urls.py) | ![screenshot](documentation/validation/python_contact_urls.png) | 
+| contact | [views.py](https://github.com/theresaabl/shared-spaces/blob/main/contact/views.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/theresaabl/shared-spaces/main/contact/views.py) | ![screenshot](documentation/validation/python_contact_views.png) | 
+| dashboard | [admin.py](https://github.com/theresaabl/shared-spaces/blob/main/dashboard/admin.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/theresaabl/shared-spaces/main/dashboard/admin.py) | ![screenshot](documentation/validation/python_dashboard_admin.png) |
+| dashboard | [forms.py](https://github.com/theresaabl/shared-spaces/blob/main/dashboard/forms.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/theresaabl/shared-spaces/main/dashboard/forms.py) | ![screenshot](documentation/validation/python_dashboard_forms.png) | 
+| dashboard | [models.py](https://github.com/theresaabl/shared-spaces/blob/main/dashboard/models.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/theresaabl/shared-spaces/main/dashboard/models.py) | ![screenshot](documentation/validation/python_dashboard_models.png) | 
+| dashboard | [test_forms.py](https://github.com/theresaabl/shared-spaces/blob/main/dashboard/test_forms.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/theresaabl/shared-spaces/main/dashboard/test_forms.py) | ![screenshot](documentation/validation/python_dashboard_test_forms.png) | 
+| dashboard | [test_views.py](https://github.com/theresaabl/shared-spaces/blob/main/dashboard/test_views.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/theresaabl/shared-spaces/main/dashboard/test_views.py) | ![screenshot](documentation/validation/python_dashboard_test_views.png) |
+| dashboard | [urls.py](https://github.com/theresaabl/shared-spaces/blob/main/dashboard/urls.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/theresaabl/shared-spaces/main/dashboard/urls.py) | ![screenshot](documentation/validation/python_dashboard_urls.png) | 
+| dashboard | [utils.py](https://github.com/theresaabl/shared-spaces/blob/main/dashboard/utils.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/theresaabl/shared-spaces/main/dashboard/utils.py) | ![screenshot](documentation/validation/python_dashboard_utils.png) | 
+| dashboard | [views.py](https://github.com/theresaabl/shared-spaces/blob/main/dashboard/views.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/theresaabl/shared-spaces/main/dashboard/views.py) | ![screenshot](documentation/validation/python_dashboard_views.png) | 
+| main | [test_views.py](https://github.com/theresaabl/shared-spaces/blob/main/main/test_views.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/theresaabl/shared-spaces/main/main/test_views.py) | ![screenshot](documentation/validation/python_main_test_views.png) | 
+| main | [urls.py](https://github.com/theresaabl/shared-spaces/blob/main/main/urls.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/theresaabl/shared-spaces/main/main/urls.py) | ![screenshot](documentation/validation/python_main_urls.png) |
+| main | [views.py](https://github.com/theresaabl/shared-spaces/blob/main/main/views.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/theresaabl/shared-spaces/main/main/views.py) | ![screenshot](documentation/validation/python_main_views.png) | 
+|  | [manage.py](https://github.com/theresaabl/shared-spaces/blob/main/manage.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/theresaabl/shared-spaces/main/manage.py) | ![screenshot](documentation/validation/python_manage.png) | 
+| management | [forms.py](https://github.com/theresaabl/shared-spaces/blob/main/management/forms.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/theresaabl/shared-spaces/main/management/forms.py) | ![screenshot](documentation/validation/python_mgmt_forms.png) | 
+| management | [test_forms.py](https://github.com/theresaabl/shared-spaces/blob/main/management/test_forms.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/theresaabl/shared-spaces/main/management/test_forms.py) | ![screenshot](documentation/validation/python_mgmt_test_forms.png) |
+| management | [test_views.py](https://github.com/theresaabl/shared-spaces/blob/main/management/test_views.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/theresaabl/shared-spaces/main/management/test_views.py) | ![screenshot](documentation/validation/python_mgmt_test_views.png) | 
+| management | [urls.py](https://github.com/theresaabl/shared-spaces/blob/main/management/urls.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/theresaabl/shared-spaces/main/management/urls.py) | ![screenshot](documentation/validation/python_mgmt_urls.png) | 
+| management | [views.py](https://github.com/theresaabl/shared-spaces/blob/main/management/views.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/theresaabl/shared-spaces/main/management/views.py) | ![screenshot](documentation/validation/python_mgmt_views.png) | 
+| sharedspaces | [settings.py](https://github.com/theresaabl/shared-spaces/blob/main/sharedspaces/settings.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/theresaabl/shared-spaces/main/sharedspaces/settings.py) | ![screenshot](documentation/validation/python_sharedspaces_settings.png) | 
+| sharedspaces | [urls.py](https://github.com/theresaabl/shared-spaces/blob/main/sharedspaces/urls.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/theresaabl/shared-spaces/main/sharedspaces/urls.py) | ![screenshot](documentation/validation/python_sharedspaces_urls.png) | 
 
 
 ## Responsiveness
