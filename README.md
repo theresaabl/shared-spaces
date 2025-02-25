@@ -192,14 +192,6 @@ Any differences between the wireframes and the final website are due to creative
 
 ## Features
 
-⚠️ INSTRUCTIONS ⚠️
-
-In this section, you should go over the different parts of your project, and describe each feature. You should explain what value each of the features provides for the user, focusing on your target audience, what they want to achieve, and how your project can help them achieve these things.
-
-**IMPORTANT**: Remember to always include a screenshot of each individual feature!
-
-⚠️ --- END --- ⚠️
-
 > [!IMPORTANT]
 > - Any User signing up on this site is automatically set to inactive and will need to be approved by the admins!
 > - This site has an Admin Front End Page.
@@ -208,22 +200,51 @@ In this section, you should go over the different parts of your project, and des
 
 | Feature | Notes | Screenshot |
 | --- | --- | --- |
-| Register | Authentication is handled by allauth, allowing users to register accounts. | ![screenshot](documentation/features/register.png) |
-| Login | Authentication is handled by allauth, allowing users to log in to their existing accounts. | ![screenshot](documentation/features/login.png) |
-| Logout | Authentication is handled by allauth, allowing users to log out of their accounts. | ![screenshot](documentation/features/logout.png) |
-| Blog List | The homepage displays basic information about blog posts, including image, title, author, date, and a brief excerpt. | ![screenshot](documentation/features/blog-list.png) |
-| View Post | Users can view the full blog post details, including any comments. | ![screenshot](documentation/features/view-post.png) |
-| Pagination | Blog posts are displayed in pages, with six posts per page. This provides better navigation for users through the post list. | ![screenshot](documentation/features/pagination.png) |
-| Add Comments | Authenticated visitors can comment on blog posts; comments require approval before being published. | ![screenshot](documentation/features/add-comment.png) |
-| Edit Comments | Authenticated visitors can edit their own comments. | ![screenshot](documentation/features/edit-comment.png) |
-| Delete Comments | Authenticated visitors can delete their own comments. | ![screenshot](documentation/features/delete-comment.png) |
-| Comment Approvals | Admins can approve or disapprove comments submitted by users before they are visible on the blog post. | ![screenshot](documentation/features/comment-approval.png) |
-| Create Post | Site owners can create/publish blog posts, including setting a featured image using Cloudinary, all from the Django admin dashboard. | ![screenshot](documentation/features/create-post.png) |
-| Update Post | Site owners can update/manage blog posts from the Django admin dashboard. | ![screenshot](documentation/features/update-post.png) |
-| Delete Post | Site owners can delete blog posts from the Django admin dashboard. | ![screenshot](documentation/features/delete-post.png) |
-| About Page | The About page displays the latest information about the site author, along with the option for visitors to send collaboration requests. | ![screenshot](documentation/features/about.png) |
-| Collaboration Requests | Visitors can submit collaboration requests from the *About* page, which are later reviewed by the admin. | ![screenshot](documentation/features/collaboration.png) |
-| User Feedback | Clear and obvious Django messages are used to provide feedback to user actions. | ![screenshot](documentation/features/messages.png) |
+| Register | Authentication is handled by allauth, allowing users to register accounts. The registration is customized so that users are automatically set to inactive upon signup, they are then redirected to the account inactive page (see below) until the admin has approved the account (see below). This is necessary so that only residents of the community can get a user account. The form is also customized to include the full name and make the email required, so that residents can be identified by the admins. | ![screenshot](documentation/features/signup.png)![screenshot](documentation/features/signup-2.png) |
+| Login | Authentication is handled by allauth, allowing users to log in to their existing accounts if they are approved. | ![screenshot](documentation/features/sign-in.png) |
+| Account Inactive Page | The login process is customized such that users who have registered for an account but have not yet been activated by the admins are redirected to the account inactive page upon signup and when trying to login. | ![screenshot](documentation/features/account-inactive.png) |
+| Logout | Authentication is handled by allauth, allowing users to log out of their accounts. | ![screenshot](documentation/features/signout.png) |
+| Home | The homepage displays basic information about blog posts, including image, title, author, date, and a brief excerpt. | ![screenshot](documentation/features/blog-list.png) |
+| About | Users can view the full blog post details, including any comments. | ![screenshot](documentation/features/view-post.png) |
+| 'Requet to Join SharedSpaces Community here' buttons | Blog posts are displayed in pages, with six posts per page. This provides better navigation for users through the post list. | ![screenshot](documentation/features/pagination.png) |
+| Footer | Authenticated visitors can comment on blog posts; comments require approval before being published. | ![screenshot](documentation/features/add-comment.png) |
+| Contact Page | Authenticated visitors can edit their own comments. | ![screenshot](documentation/features/edit-comment.png) |
+| Send Contact Message | Authenticated visitors can edit their own comments. | ![screenshot](documentation/features/edit-comment.png) |
+| Resident Space | Authenticated visitors can edit their own comments. | ![screenshot](documentation/features/edit-comment.png) |
+| Resident Space for unauthenticated Users | Authenticated visitors can edit their own comments. | ![screenshot](documentation/features/edit-comment.png) |
+| Event Spaces List | Authenticated visitors can edit their own comments. | ![screenshot](documentation/features/edit-comment.png) |
+| Back to Resident Space Button | Authenticated visitors can edit their own comments. | ![screenshot](documentation/features/edit-comment.png) |
+| Event Space Booking | Authenticated visitors can edit their own comments. | ![screenshot](documentation/features/edit-comment.png) |
+| Event Space Booking for a specific event space | Authenticated visitors can edit their own comments. | ![screenshot](documentation/features/edit-comment.png) |
+| Submit a Request | Authenticated visitors can edit their own comments. | ![screenshot](documentation/features/edit-comment.png) |
+| Edit Event Space Booking | Authenticated visitors can edit their own comments. | ![screenshot](documentation/features/edit-comment.png) |
+| Delete Event Space Booking | Authenticated visitors can edit their own comments. | ![screenshot](documentation/features/edit-comment.png) |
+| Edit a Request | Authenticated visitors can edit their own comments. | ![screenshot](documentation/features/edit-comment.png) |
+| Delete a Request | Authenticated visitors can edit their own comments. | ![screenshot](documentation/features/edit-comment.png) |
+| Admin Space | Authenticated visitors can edit their own comments. | ![screenshot](documentation/features/edit-comment.png) |
+| Manage User Accounts | Authenticated visitors can edit their own comments. | ![screenshot](documentation/features/edit-comment.png) |
+| Activate/Deactivate User Accounts | Authenticated visitors can edit their own comments. | ![screenshot](documentation/features/edit-comment.png) |
+| Give/Remove Admin Status to User | Authenticated visitors can edit their own comments. | ![screenshot](documentation/features/edit-comment.png) |
+| Delete User Account | Authenticated visitors can edit their own comments. | ![screenshot](documentation/features/edit-comment.png) |
+| Manage Event Spaces | Authenticated visitors can edit their own comments. | ![screenshot](documentation/features/edit-comment.png) |
+| Add an Event Space | Authenticated visitors can edit their own comments. | ![screenshot](documentation/features/edit-comment.png) |
+| Edit Event Space | Authenticated visitors can edit their own comments. | ![screenshot](documentation/features/edit-comment.png) |
+| Delete Event Space | Authenticated visitors can edit their own comments. | ![screenshot](documentation/features/edit-comment.png) |
+| Manage Event Space Bookings | Authenticated visitors can edit their own comments. | ![screenshot](documentation/features/edit-comment.png) |
+| Approve/Deny Event Space Booking | Authenticated visitors can edit their own comments. | ![screenshot](documentation/features/edit-comment.png) |
+| Delete Event Space Booking | Authenticated visitors can edit their own comments. | ![screenshot](documentation/features/edit-comment.png) |
+| Manage Resident Requests | Authenticated visitors can edit their own comments. | ![screenshot](documentation/features/edit-comment.png) |
+| Set status to open/in progress/closed for Resident Request | Authenticated visitors can edit their own comments. | ![screenshot](documentation/features/edit-comment.png) |
+| Delete Resident Request | Authenticated visitors can edit their own comments. | ![screenshot](documentation/features/edit-comment.png) |
+| Manage Contact Messages | Authenticated visitors can edit their own comments. | ![screenshot](documentation/features/edit-comment.png) |
+| Set status to Processed for Contact Message | Authenticated visitors can edit their own comments. | ![screenshot](documentation/features/edit-comment.png) |
+| Delete Contact Message | Authenticated visitors can edit their own comments. | ![screenshot](documentation/features/edit-comment.png) |
+| Back to Admin Space Button | Authenticated visitors can edit their own comments. | ![screenshot](documentation/features/edit-comment.png) |
+
+
+
+
+
 | Heroku Deployment | The site is fully deployed to Heroku, making it accessible online and easy to manage. | ![screenshot](documentation/features/heroku.png) |
 | 404 | The 404 error page will indicate when a user has navigated to a page that doesn't exist, replacing the default Heroku 404 page with one that ties into the site's look and feel. | ![screenshot](documentation/features/404.png) |
 
