@@ -1,44 +1,12 @@
-# SharedSpaces
-
-A website for a community living space called SharedSpaces. 
-
-Live Site - [SharedSpaces](https://shared-spaces-f588831ae867.herokuapp.com/)
-
-## Models
-
-First Draft for ERD:
-
-![ERD](/documentation/diagrams/models.webp)
-
-
-# [shared-spaces](https://shared-spaces-f588831ae867.herokuapp.com)
+# [SharedSpaces](https://shared-spaces-f588831ae867.herokuapp.com)
 
 [![GitHub commit activity](https://img.shields.io/github/commit-activity/t/TheresaAbl/shared-spaces)](https://www.github.com/TheresaAbl/shared-spaces/commits/main)
 [![GitHub last commit](https://img.shields.io/github/last-commit/TheresaAbl/shared-spaces)](https://www.github.com/TheresaAbl/shared-spaces/commits/main)
 [![GitHub repo size](https://img.shields.io/github/repo-size/TheresaAbl/shared-spaces)](https://www.github.com/TheresaAbl/shared-spaces)
 
-⚠️ INSTRUCTIONS ⚠️
+A website for a community living space called SharedSpaces. 
 
-In this section, include a few paragraphs providing an overview of your project. Essentially, this part is your "sales pitch". Describe what the project hopes to accomplish, who it is intended to target, and how it will be useful to the target audience.
-
-⚠️ --- END --- ⚠️
-
-🛑 NOTES 🛑
-
-Do not add a **Table of Contents** to your Markdown files. GitHub has these built-in automatically using the headers/hashtags.
-
-Don't add screenshots for the README/TESTING into your `assets` or `static` folders. Create a new folder at the root-level called `documentation`. Consider creating sub-directories within `documentation` to handle things like `wireframes`, `features`, `validation`, `responsiveness`, etc.
-
-**Site Mockups**
-*([amiresponsive](https://ui.dev/amiresponsive?url=https://shared-spaces-f588831ae867.herokuapp.com), [techsini](https://techsini.com/multi-mockup), etc.)*
-Having issues generating site mockups? This is likely due to security policies with your deployed site.
-If you open up your DevTools, there may be an error referencing `X-Frame-Options`.
-
-For Chrome users, head over to http://bit.ly/3iRPn4u and install the extension within your browser. Once installed, navigate back to the mockup site of your choice. You should find your site rendering in the various devices now.
-
-Alternatively, open your project in Gitpod and run the server. Once the site is running, click the `Ports` tab from your Gitpod Terminal. Click the padlock on the appropriate port for your project (`Flask: 5000`, `Django: 8000`). This will make your local page public temporarily. Now, copy the URL of your live-preview page into the responsive tool above. You should find your site rendering in the various devices.
-
-🛑 --- END ---- 🛑
+Live Site - [SharedSpaces](https://shared-spaces-f588831ae867.herokuapp.com/)
 
 ![screenshot](documentation/mockup.png)
 
@@ -303,117 +271,36 @@ Want to add more?
 ### Data Model
 
 Entity Relationship Diagrams (ERD) help to visualize database architecture before creating models. Understanding the relationships between different tables can save time later in the project.
+I used [Draw.io](https://draw.io) to create my ERDs:
 
-![screenshot](documentation/erd.png)
+![screenshot](documentation/diagrams/models.webp)
 
-⚠️ INSTRUCTIONS ⚠️
-
-Using your defined models, create an ERD with the relationships identified. A couple of recommendations for building your own free ERDs:
-- [Lucidchart](https://www.lucidchart.com/pages/ER-diagram-symbols-and-meaning)
-- [Draw.io](https://draw.io)
-
-Looking for an interactive version of your ERD? Consider using a [`Mermaid flowchart`](https://mermaid.live). To simplify the process, you can ask ChatGPT (or similar) the following prompt:
-
-> ChatGPT Prompt:
-> "Generate a Markdown syntax Mermaid ERD using my Django models"
-> [paste-your-django-models-into-ChatGPT]
-
-The "I Think Therefore I Blog" sample ERD in Markdown syntax using Mermaid can be seen below as an example.
-
-**NOTE**: A Markdown Preview tool doesn't show the interactive ERD; you must first commit/push the code to your GitHub repository in order to see it live in action.
-
-⚠️ --- END --- ⚠️
-
-I have used `Mermaid` to generate an interactive ERD of my project.
-
-```mermaid
-erDiagram
-    USER ||--o{ POST : "authors"
-    USER ||--o{ COMMENT : "commenters"
-    POST ||--o{ COMMENT : "has"
-    POST {
-        string title
-        string slug
-        cloudinary featured_image
-        text content
-        text excerpt
-        datetime created_on
-        datetime updated_on
-        int status
-    }
-    COMMENT {
-        text body
-        datetime created_on
-        bool approved
-    }
-    ABOUT {
-        string title
-        cloudinary profile_image
-        text content
-        datetime updated_on
-    }
-    COLLABORATEREQUEST {
-        string name
-        string email
-        text message
-        bool read
-    }
-```
-
-source: [Mermaid](https://mermaid.live/edit#pako:eNqNUstuwjAQ_BVrz6EiVIiSG21zg9LyuFSRkImXxGpsR45TkQb-vU4C5REq4Yut2dnZnfWWECqG4AHqV04jTUUgiT3LuT8ju12no0ryPp0viEcCoLmJlc4CaHNeppOJ_9bQQiUESoMnZq1wgxnTS0rZvKuTGc1lRAw3CbbQLMmjExgmKmdcUl2QDVKTa2QrLmh0lmdwa0iobFPSXKG4DVGnZyijBg0XSEJt1ayWkjeCecpaQS6N7dB2kDXYvrmOjsurymvFijvLrpVKCE1Trb6RXYiPnqfLOwZ3NiMrsuEJ3jeif_3-eRuPbQuz0cKf-R9L_-YnSiraf4iC8uSqvMAsu2iq9m3ncfQMDgjUNpPZla0LBWBitPJQ7ROj-qtaqIpnl1XNCxmCZ3SODjQGDksO3oYmmUVTKsErYQue-zR8cN2B2-t3h73BY2_Qd6AAr7t34Ecpm-HW7M_63UhqlUfxQWr_C_zI_7I)
-
-⚠️ RECOMMENDED ⚠️
-
-Alternatively, or in addition to, a more comprehensive ERD can be auto-generated once you're at the end of your development stages, just before you submit. Follow the steps below to obtain a thorough ERD that you can include. Feel free to leave the steps below in the README for future use to yourself.
-
-⚠️ --- END --- ⚠️
-
-I have used `pygraphviz` and `django-extensions` to auto-generate an ERD.
-
-The steps taken were as follows:
-- In the terminal: `sudo apt update`
-- then: `sudo apt-get install python3-dev graphviz libgraphviz-dev pkg-config`
-- then type `Y` to proceed
-- then: `pip3 install django-extensions pygraphviz`
-- in my `settings.py` file, I added the following to my `INSTALLED_APPS`:
-```python
-INSTALLED_APPS = [
-    ...
-    'django_extensions',
-    ...
-]
-```
-- back in the terminal: `python3 manage.py graph_models -a -o erd.png`
-- drag the new `erd.png` file into my `documentation/` folder
-- removed `'django_extensions',` from my `INSTALLED_APPS`
-- finally, in the terminal: `pip3 uninstall django-extensions pygraphviz -y`
-
-![screenshot](documentation/advanced-erd.png)
-
-source: [medium.com](https://medium.com/@yathomasi1/1-using-django-extensions-to-visualize-the-database-diagram-in-django-application-c5fa7e710e16)
+I created four custom models, on for event spaces (EventSpace), one for event space bookings (EventSpaceBooking), one for resident requests (ResidentRequest) and one for contact messages (ContactMessage). The EventSpaceBooking model has a customized clean method to make sure that only valid data is entered to the database, it checks that there are no two bookings at the same time in the same space and that at least one hour is between different bookings. It also checks that the end time of the booking is after the start time and that there is at least 1 hour between start and end time.
 
 ## Agile Development Process
 
 ### GitHub Projects
 
-⚠️ TIP ⚠️
+[GitHub Projects](https://www.github.com/theresaabl/shared-spaces/projects) served as an Agile tool for this project. Through it, EPICs, User Stories (with acceptance criteria, tasks, MoSCoW prioritisation and story points), issues/bugs, and Milestone tasks were planned, then subsequently tracked on a regular basis using the Kanban project board. I planned my project in five milestones (iteration 1 - 5) with one iteration per week (1.5 for iteration 5) and created one project board per milestone. Note that I left the projects open for the purpose of the assessment for better visibility. I am aware that usually I would close them when they are done.
 
-Consider adding screenshots of your Projects Board(s), Issues (open and closed), and Milestone tasks.
+Here are screenshots of the project boards, note that I took them once the iteration was done and all the tasks where finished.
 
-⚠️ --- END ---⚠️
-
-[GitHub Projects](https://www.github.com/TheresaAbl/shared-spaces/projects) served as an Agile tool for this project. Through it, EPICs, User Stories, issues/bugs, and Milestone tasks were planned, then subsequently tracked on a regular basis using the Kanban project board.
-
-![screenshot](documentation/gh-projects.png)
+| Project | Screenshot |
+|---|---|
+| Iteration 1 | ![Sreenshot](documentation/agile/project-iteration1.png) |   
+| Iteration 2 | ![Sreenshot](documentation/agile/project-iteration2.png) |   
+| Iteration 3 | ![Sreenshot](documentation/agile/project-iteration3.png) |
+| Iteration 4 | ![Sreenshot](documentation/agile/project-iteration4.png) |   
+| Iteration 5 | ![Sreenshot](documentation/agile/project-iteration5.png) |     
 
 ### GitHub Issues
 
-[GitHub Issues](https://www.github.com/TheresaAbl/shared-spaces/issues) served as an another Agile tool. There, I managed my User Stories and Milestone tasks, and tracked any issues/bugs.
+[GitHub Issues](https://www.github.com/theresaabl/shared-spaces/issues) served as an another Agile tool. There, I managed my User Stories and Milestone tasks, and tracked any issues/bugs. For each user story I created acceptance criteria and tasks, I attached labels for the Epic they belong to and at the beginning of each Iteration I assigned labels with MoSCoW prioritization and story points to each user story assigned to the milestone.
 
-| Link | Screenshot |
-| --- | --- |
-| [![GitHub issues](https://img.shields.io/github/issues/TheresaAbl/shared-spaces)](https://www.github.com/TheresaAbl/shared-spaces/issues) | ![screenshot](documentation/gh-issues-open.png) |
-| [![GitHub closed issues](https://img.shields.io/github/issues-closed/TheresaAbl/shared-spaces)](https://www.github.com/TheresaAbl/shared-spaces/issues?q=is%3Aissue+is%3Aclosed) | ![screenshot](documentation/gh-issues-closed.png) |
+| Link | Notes | Screenshot |
+| --- | --- | --- |
+| [![GitHub issues](https://img.shields.io/github/issues/theresaabl/shared-spaces)](https://www.github.com/theresaabl/shared-spaces/issues) | The open issues contain future features | ![screenshot](documentation/agile/issues-open.png) |
+| [![GitHub closed issues](https://img.shields.io/github/issues-closed/theresaabl/shared-spaces)](https://www.github.com/theresaabl/shared-spaces/issues?q=is%3Aissue+is%3Aclosed) | The closed issues contain all finished Epics, User Stories and Bugs. In the screenshot are a few examples. | ![screenshot](documentation/agile/issues-closed-userstories.png)![screenshot](documentation/agile/issues-closed-bugs.png) |
 
 ### MoSCoW Prioritization
 
@@ -423,6 +310,8 @@ I've decomposed my Epics into User Stories for prioritizing and implementing the
 - **Should Have**: adds significant value, but not vital (*~20% of stories*)
 - **Could Have**: has small impact if left out (*the rest ~20% of stories*)
 - **Won't Have**: not a priority for this iteration - future features
+
+I also used Won't have for future features that were never planned for this release but would be interesting to implement in the future.
 
 ## Testing
 
