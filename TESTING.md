@@ -3,73 +3,33 @@
 > [!NOTE]
 > Return back to the [README.md](README.md) file.
 
-⚠️ INSTRUCTIONS ⚠️
-
-In the following sections, you need to convince the assessors that you have conducted enough manual testing to legitimately believe that the site works well. Essentially, in this part, you should go over all of your project's features, and ensure that they all work as intended, with the project providing an easy and straightforward way for the users to achieve their goals.
-
-⚠️ --- END --- ⚠️
 
 ## Code Validation
 
-⚠️ INSTRUCTIONS ⚠️
-
-Use the space below to discuss code validation for all of your own code files (*where applicable*). You are not required to validate external libraries/frameworks.
-
-**MANDATORY**: You must provide a screenshot for each file you validate.
-
-**PRO TIP**: Where possible, always validate the live URL pages/files, not your local code using copy/paste. There could be subtle/hidden differences.
-
-⚠️ --- END --- ⚠️
 
 ### HTML
-
-⚠️ INSTRUCTIONS ⚠️
-
-1. [*recommended*] If you are using the live deployed site URLs, validate using this link: https://validator.w3.org/#validate_by_uri
-2. Otherwise, if you are copying/pasting your HTML code manually, use this link: https://validator.w3.org/#validate_by_input
-
-It's recommended to validate the live pages (all of them) using the deployed URL. This will give you a custom URL as well, which you can use below on your testing documentation. It makes it easier to return back to a page for validating it again in the future. The URL will look something like this:
-
-- https://validator.w3.org/nu/?doc=https://TheresaAbl.github.io/shared-spaces/index.html
-
-⚠️ --- END --- ⚠️
-
-🛑 IMPORTANT 🛑
-
-RE: Python/Jinja syntax in HTML
-
-Python projects that use Jinja syntax, such as `{% for loops %}`, `{% url 'home' %}`, and `{{ variable|filter }}` will not validate properly if you're copying/pasting into the HTML validator.
-
-In order to properly validate these types of files, it's recommended to [validate by uri](https://validator.w3.org/#validate_by_uri) from the deployed Heroku pages.
-
-Unfortunately, pages that require a user to be "logged-in" and authenticated (CRUD functionality) will not work using this method, due to the fact that the HTML Validator (W3C) doesn't have access to login to an account on your project. In order to properly validate HTML pages with Jinja syntax for authenticated pages, follow these steps:
-
-- Navigate to the deployed pages which require authentication.
-- Right-click anywhere on the page, and select **View Page Source** (usually `CTRL+U` or `⌘+U` on Mac).
-- This will display the entire "compiled" code, without any Jinja syntax.
-- Copy everything, and use the [validate by input](https://validator.w3.org/#validate_by_input) method.
-- Repeat this process for every page that requires a user to be logged-in/authenticated (e.g.: CRUD functionality).
-
-🛑 ---- END --- 🛑
 
 I have used the recommended [HTML W3C Validator](https://validator.w3.org) to validate all of my HTML files.
 
 | Directory | File | URL | Screenshot | Notes |
 | --- | --- | --- | --- | --- |
-| contact | [contact.html](https://github.com/theresaabl/shared-spaces/blob/main/contact/templates/contact/contact.html) | Link (if applicable) | ![screenshot](documentation/validation/html-contact-contact.png) | Notes (if applicable) |
-| dashboard | [event_space_booking.html](https://github.com/theresaabl/shared-spaces/blob/main/dashboard/templates/dashboard/event_space_booking.html) | Link (if applicable) | ![screenshot](documentation/validation/html-dashboard-event_space_booking.png) | Notes (if applicable) |
-| dashboard | [event_spaces_list.html](https://github.com/theresaabl/shared-spaces/blob/main/dashboard/templates/dashboard/event_spaces_list.html) | Link (if applicable) | ![screenshot](documentation/validation/html-dashboard-event_spaces_list.png) | Notes (if applicable) |
-| dashboard | [resident_space.html](https://github.com/theresaabl/shared-spaces/blob/main/dashboard/templates/dashboard/resident_space.html) | Link (if applicable) | ![screenshot](documentation/validation/html-dashboard-resident_space.png) | Notes (if applicable) |
-| dashboard | [submit_request.html](https://github.com/theresaabl/shared-spaces/blob/main/dashboard/templates/dashboard/submit_request.html) | Link (if applicable) | ![screenshot](documentation/validation/html-dashboard-submit_request.png) | Notes (if applicable) |
-| main | [index.html](https://github.com/theresaabl/shared-spaces/blob/main/main/templates/main/index.html) | Link (if applicable) | ![screenshot](documentation/validation/html-main-index.png) | Notes (if applicable) |
-| management | [contact_messages.html](https://github.com/theresaabl/shared-spaces/blob/main/management/templates/management/contact_messages.html) | Link (if applicable) | ![screenshot](documentation/validation/html-management-contact_messages.png) | Notes (if applicable) |
-| management | [event_space_bookings.html](https://github.com/theresaabl/shared-spaces/blob/main/management/templates/management/event_space_bookings.html) | Link (if applicable) | ![screenshot](documentation/validation/html-management-event_space_bookings.png) | Notes (if applicable) |
-| management | [event_spaces.html](https://github.com/theresaabl/shared-spaces/blob/main/management/templates/management/event_spaces.html) | Link (if applicable) | ![screenshot](documentation/validation/html-management-event_spaces.png) | Notes (if applicable) |
-| management | [manage_event_spaces.html](https://github.com/theresaabl/shared-spaces/blob/main/management/templates/management/manage_event_spaces.html) | Link (if applicable) | ![screenshot](documentation/validation/html-management-manage_event_spaces.png) | Notes (if applicable) |
-| management | [management_page.html](https://github.com/theresaabl/shared-spaces/blob/main/management/templates/management/management_page.html) | Link (if applicable) | ![screenshot](documentation/validation/html-management-management_page.png) | Notes (if applicable) |
-| management | [resident_requests.html](https://github.com/theresaabl/shared-spaces/blob/main/management/templates/management/resident_requests.html) | Link (if applicable) | ![screenshot](documentation/validation/html-management-resident_requests.png) | Notes (if applicable) |
-| management | [users.html](https://github.com/theresaabl/shared-spaces/blob/main/management/templates/management/users.html) | Link (if applicable) | ![screenshot](documentation/validation/html-management-users.png) | Notes (if applicable) |
-| templates | [404.html](https://github.com/theresaabl/shared-spaces/blob/main/templates/404.html) | Link (if applicable) | ![screenshot](documentation/validation/html-templates-404.png) | Notes (if applicable) |
+| main | [index.html](https://github.com/theresaabl/shared-spaces/blob/main/main/templates/main/index.html) | [Link](https://validator.w3.org/nu/?doc=https%3A%2F%2Fshared-spaces-f588831ae867.herokuapp.com%2F) | ![screenshot](documentation/validation/html_index.png) | Notes (if applicable) |
+| contact | [contact.html](https://github.com/theresaabl/shared-spaces/blob/main/contact/templates/contact/contact.html) | [Link](https://validator.w3.org/nu/?doc=https%3A%2F%2Fshared-spaces-f588831ae867.herokuapp.com%2Fcontact%2F) | ![screenshot](documentation/validation/html_contact.png) | Notes (if applicable) |
+| dashboard | [resident_space.html](https://github.com/theresaabl/shared-spaces/blob/main/dashboard/templates/dashboard/resident_space.html) |  | ![screenshot](documentation/validation/html_dashboard.png) | Notes (if applicable) |
+| dashboard | [event_space_booking.html](https://github.com/theresaabl/shared-spaces/blob/main/dashboard/templates/dashboard/event_space_booking.html) |  | ![screenshot](documentation/validation/html_dashboard_event_space_booking_form.png) | Notes (if applicable) |
+| dashboard | [event_spaces_list.html](https://github.com/theresaabl/shared-spaces/blob/main/dashboard/templates/dashboard/event_spaces_list.html) |  | ![screenshot](documentation/validation/html_dashboard_event_spaces_list.png) | Notes (if applicable) |
+| dashboard | [submit_request.html](https://github.com/theresaabl/shared-spaces/blob/main/dashboard/templates/dashboard/submit_request.html) | | ![screenshot](documentation/validation/html_dashboard_resident_request_form.png) | Notes (if applicable) |
+| management | [management_page.html](https://github.com/theresaabl/shared-spaces/blob/main/management/templates/management/management_page.html) | | ![screenshot](documentation/validation/html_admin_space.png) | Notes (if applicable) |
+| management | [users.html](https://github.com/theresaabl/shared-spaces/blob/main/management/templates/management/users.html) | | ![screenshot](documentation/validation/html_admin_space_users.png) | Notes (if applicable) |
+| management | [event_spaces.html](https://github.com/theresaabl/shared-spaces/blob/main/management/templates/management/event_spaces.html) | | ![screenshot](documentation/validation/html_admin_space_event_spaces.png) | Notes (if applicable) |
+| management | [manage_event_spaces.html](https://github.com/theresaabl/shared-spaces/blob/main/management/templates/management/manage_event_spaces.html) | | ![screenshot](documentation/validation/html_admin_space_new_event_space_form.png) | Notes (if applicable) |
+| management | [event_space_bookings.html](https://github.com/theresaabl/shared-spaces/blob/main/management/templates/management/event_space_bookings.html) | | ![screenshot](documentation/validation/html_admin_space_bookings.png) | Notes (if applicable) |
+| management | [resident_requests.html](https://github.com/theresaabl/shared-spaces/blob/main/management/templates/management/resident_requests.html) | | ![screenshot](documentation/validation/html_admin_space_resident_requests.png) | Notes (if applicable) |
+| management | [contact_messages.html](https://github.com/theresaabl/shared-spaces/blob/main/management/templates/management/contact_messages.html) | | ![screenshot](documentation/validation/html_admin_space_contact_messages.png) | Notes (if applicable) |
+| templates | [404.html](https://github.com/theresaabl/shared-spaces/blob/main/templates/404.html) | Link (if applicable) | ![screenshot](documentation/validation/html_error_page.png) | Notes (if applicable) |
+| templates/account/ | [signup.html](https://github.com/theresaabl/shared-spaces/blob/main/templates/account/signup.html) | [Link](https://validator.w3.org/nu/?doc=https%3A%2F%2Fshared-spaces-f588831ae867.herokuapp.com%2Faccounts%2Fsignup%2F) | ![screenshot](documentation/validation/html_signup.png) | Notes (if applicable) |
+| templates/account/ | [login.html](https://github.com/theresaabl/shared-spaces/blob/main/templates/account/login.html) | [Link](https://validator.w3.org/nu/?doc=https%3A%2F%2Fshared-spaces-f588831ae867.herokuapp.com%2Fdashboard%2Faccounts%2Flogin%2F) | ![screenshot](documentation/validation/html_signin.png) | Notes (if applicable) |
+| templates/account/ | [logout.html](https://github.com/theresaabl/shared-spaces/blob/main/templates/account/logout.html) |  | ![screenshot](documentation/validation/html_logout.png) | Notes (if applicable) |
 
 
 ### CSS
