@@ -157,17 +157,30 @@ Unless your project is a single-page application (SPA), you should test Lighthou
 
 ⚠️ --- END --- ⚠️
 
-I've tested my deployed project using the Lighthouse Audit tool to check for any major issues. Some warnings are outside of my control, and mobile results tend to be lower than desktop.
+I've tested my deployed project using the Lighthouse Audit tool to check for any major issues. Some warnings are outside of my control, and mobile results tend to be lower than desktop. For a future release it would make sense to improve the performance score by optimizing the image sizes, for this release the performance score is fast enough and more importantly the most important pages where data is manipulated do have a good score.
 
 | Page | Mobile | Desktop |
 | --- | --- | --- |
-| Register | ![screenshot](documentation/lighthouse/mobile-register.png) | ![screenshot](documentation/lighthouse/desktop-register.png) |
-| Login | ![screenshot](documentation/lighthouse/mobile-login.png) | ![screenshot](documentation/lighthouse/desktop-login.png) |
-| Home | ![screenshot](documentation/lighthouse/mobile-home.png) | ![screenshot](documentation/lighthouse/desktop-home.png) |
-| Add Blog | ![screenshot](documentation/lighthouse/mobile-add-blog.png) | ![screenshot](documentation/lighthouse/desktop-add-blog.png) |
-| Edit Blog | ![screenshot](documentation/lighthouse/mobile-edit-blog.png) | ![screenshot](documentation/lighthouse/desktop-edit-blog.png) |
-| Blog Post | ![screenshot](documentation/lighthouse/mobile-blog-post.png) | ![screenshot](documentation/lighthouse/desktop-blog-post.png) |
-| 404 | ![screenshot](documentation/lighthouse/mobile-404.png) | ![screenshot](documentation/lighthouse/desktop-404.png) |
+| Register | ![screenshot](documentation/lighthouse/lighthouse-signup-mobile.png) | ![screenshot](documentation/lighthouse/lighthouse-signup-desktop.png)   |
+| Login | ![screenshot](documentation/lighthouse/lighthouse-signin-mobile.png) | ![screenshot](documentation/lighthouse/lighthouse-signin-desktop.png) | 
+| Logout | ![screenshot](documentation/lighthouse/lighthouse-signout-mobile.png) | ![screenshot](documentation/lighthouse/lighthouse-signout-desktop.png) | 
+| Account Inactive | ![screenshot](documentation/lighthouse/lighthouse-account-inactive-mobile.png) | ![screenshot](documentation/lighthouse/lighthouse-account-inactive-desktop.png) | 
+| Home | ![screenshot](documentation/lighthouse/lighthouse-home-mobile.png) | ![screenshot](documentation/lighthouse/lighthouse-home-desktop.png) |  
+| About | ![screenshot](documentation/lighthouse/lighthouse-about-mobile.png) | ![screenshot](documentation/lighthouse/lighthouse-about-desktop.png) |  
+| Contact | ![screenshot](documentation/lighthouse/lighthouse-contact-mobile.png) | ![screenshot](documentation/lighthouse/lighthouse-contact-desktop.png) |  
+| Resident Space | ![screenshot](documentation/lighthouse/lighthouse-resident-space-mobile.png) | ![screenshot](documentation/lighthouse/lighthouse-resident-space-desktop.png) |  
+| Resident Space unauthenticated users | ![screenshot](documentation/lighthouse/lighthouse-resident-space-not-signedin-mobile.png) | ![screenshot](documentation/lighthouse/lighthouse-resident-space-not-signedin-desktop.png) |   | 
+| Event Space Booking | ![screenshot](documentation/lighthouse/lighthouse-event-space-booking-mobile.png) | ![screenshot](documentation/lighthouse/lighthouse-event-space-booking-desktop.png) |  
+| Submit a Request | ![screenshot](documentation/lighthouse/lighthouse-submit-request-mobile.png) | ![screenshot](documentation/lighthouse/lighthouse-submit-request-desktop.png) | 
+| Event Spaces List | ![screenshot](documentation/lighthouse/lighthouse-event-spaces-mobile.png) | ![screenshot](documentation/lighthouse/lighthouse-event-spaces-desktop.png) |
+| Admin Space | ![screenshot](documentation/lighthouse/lighthouse-admin-space-mobile.png) | ![screenshot](documentation/lighthouse/lighthouse-admin-space-desktop.png) | 
+| Manage User Accounts | ![screenshot](documentation/lighthouse/lighthouse-admin-user-accounts-mobile.png) | ![screenshot](documentation/lighthouse/lighthouse-admin-user-accounts-desktop.png) | 
+| Manage Event Spaces | ![screenshot](documentation/lighthouse/lighthouse-admin-event-spaces-mobile.png) | ![screenshot](documentation/lighthouse/lighthouse-admin-event-spaces-desktop.png) |  
+| Add New Event Space | ![screenshot](documentation/lighthouse/lighthouse-admin-add-event-space-mobile.png) | ![screenshot](documentation/lighthouse/lighthouse-admin-add-event-space-desktop.png) | 
+| Manage Event Space Bookings | ![screenshot](documentation/lighthouse/lighthouse-admin-bookings-mobile.png) | ![screenshot](documentation/lighthouse/lighthouse-admin-bookings-desktop.png) |
+| Manage Resident Requests | ![screenshot](documentation/lighthouse/lighthouse-admin-requests-mobile.png) | ![screenshot](documentation/lighthouse/lighthouse-admin-requests-desktop.png) | 
+| Manage Contact Messages | ![screenshot](documentation/lighthouse/lighthouse-admin-contact-messages-mobile.png) | ![screenshot](documentation/lighthouse/lighthouse-admin-contact-messages-desktop.png) | 
+
 
 ## Defensive Programming
 
