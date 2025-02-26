@@ -26,7 +26,7 @@ I have used the recommended [HTML W3C Validator](https://validator.w3.org) to va
 | management | [event_space_bookings.html](https://github.com/theresaabl/shared-spaces/blob/main/management/templates/management/event_space_bookings.html) | | ![screenshot](documentation/validation/html_admin_space_bookings.png) | 
 | management | [resident_requests.html](https://github.com/theresaabl/shared-spaces/blob/main/management/templates/management/resident_requests.html) | | ![screenshot](documentation/validation/html_admin_space_resident_requests.png) | 
 | management | [contact_messages.html](https://github.com/theresaabl/shared-spaces/blob/main/management/templates/management/contact_messages.html) | | ![screenshot](documentation/validation/html_admin_space_contact_messages.png) | 
-| templates | [404.html](https://github.com/theresaabl/shared-spaces/blob/main/templates/404.html) | Link (if applicable) | ![screenshot](documentation/validation/html_error_page.png) | 
+| templates | [404.html](https://github.com/theresaabl/shared-spaces/blob/main/templates/404.html) |  | ![screenshot](documentation/validation/html_error_page.png) | 
 | templates/account/ | [signup.html](https://github.com/theresaabl/shared-spaces/blob/main/templates/account/signup.html) | [Link](https://validator.w3.org/nu/?doc=https%3A%2F%2Fshared-spaces-f588831ae867.herokuapp.com%2Faccounts%2Fsignup%2F) | ![screenshot](documentation/validation/html_signup.png) | 
 | templates/account/ | [login.html](https://github.com/theresaabl/shared-spaces/blob/main/templates/account/login.html) | [Link](https://validator.w3.org/nu/?doc=https%3A%2F%2Fshared-spaces-f588831ae867.herokuapp.com%2Fdashboard%2Faccounts%2Flogin%2F) | ![screenshot](documentation/validation/html_signin.png) | 
 | templates/account/ | [logout.html](https://github.com/theresaabl/shared-spaces/blob/main/templates/account/logout.html) |  | ![screenshot](documentation/validation/html_logout.png) | 
@@ -92,67 +92,58 @@ I have used the recommended [PEP8 CI Python Linter](https://pep8ci.herokuapp.com
 
 ## Responsiveness
 
-⚠️ INSTRUCTIONS ⚠️
+I've tested my deployed project to check for responsiveness issues. I have tested on the following real devices: Mobile (Samsung Galaxy A41), Tablet (Samsung Galaxy Tab S6 Lite), Laptop (Lenovo X1 Extreme), Monitor (Lenovo ThinkVision P24h-10).
+| Page | Mobile | Tablet | Desktop | Monitor | Notes |
+| --- | --- | --- | --- | --- | -- |
+| Register | ![screenshot](documentation/responsiveness/signup-galaxy.jpg) | ![screenshot](documentation/responsiveness/signup-tab.jpg) | ![screenshot](documentation/responsiveness/signup-lenovo.png) | ![screenshot](documentation/responsiveness/signup-monitor.png) | Works as expected |
+| Login | ![screenshot](documentation/responsiveness/signin-galaxy.jpg) | ![screenshot](documentation/responsiveness/signin-tab.jpg) | ![screenshot](documentation/responsiveness/signin-lenovo.png) | ![screenshot](documentation/responsiveness/signin-monitor.png) | Works as expected |
+| Logout | ![screenshot](documentation/responsiveness/signout-galaxy.jpg) | ![screenshot](documentation/responsiveness/signout-tab.jpg) | ![screenshot](documentation/responsiveness/signout-lenovo.png) | ![screenshot](documentation/responsiveness/signout-monitor.png) | Works as expected |
+| Account Inactive | | ![screenshot](documentation/responsiveness/account-inactive-tab.jpg) | ![screenshot](documentation/responsiveness/account-inactive-lenovo.png) | ![screenshot](documentation/responsiveness/account-inactive-monitor.png) | Works as expected |
+| Home | ![screenshot](documentation/responsiveness/home-galaxy.jpg) | ![screenshot](documentation/responsiveness/home-tab.jpg) | ![screenshot](documentation/responsiveness/home-lenovo.png) | ![screenshot](documentation/responsiveness/home-monitor.png) | Works as expected |
+| About | ![screenshot](documentation/responsiveness/about-galaxy.jpg) | ![screenshot](documentation/responsiveness/about-tab.jpg) | ![screenshot](documentation/responsiveness/about-lenovo.png) | ![screenshot](documentation/responsiveness/about-monitor.png) | Works as expected |
+| Contact | ![screenshot](documentation/responsiveness/contact-galaxy.jpg) | ![screenshot](documentation/responsiveness/contact-tab.jpg) | ![screenshot](documentation/responsiveness/contact-lenovo.png) | ![screenshot](documentation/responsiveness/contact-monitor.png) | Works as expected |
+| Resident Space | ![screenshot](documentation/responsiveness/resident-space-galaxy.jpg) | ![screenshot](documentation/responsiveness/resident-space-tab.jpg) | ![screenshot](documentation/responsiveness/resident-space-lenovo.png) | ![screenshot](documentation/responsiveness/resident-space-monitor.png) | Works as expected |
+| Resident Space unauthenticated users | ![screenshot](documentation/responsiveness/resident-space-not-signedin-galaxy.jpg) | ![screenshot](documentation/responsiveness/resident-space-not-signedin-tab.jpg) | ![screenshot](documentation/responsiveness/resident-space-not-signedin-lenovo.png) | ![screenshot](documentation/responsiveness/resident-space-not-signedin-monitor.png) | Works as expected |
+| Event Space Booking | ![screenshot](documentation/responsiveness/event-space-booking-galaxy.jpg) | ![screenshot](documentation/responsiveness/event-space-booking-tab.jpg) | ![screenshot](documentation/responsiveness/event-space-booking-lenovo.png) | ![screenshot](documentation/responsiveness/event-space-booking-monitor.png) | Works as expected |
+| Submit a Request | ![screenshot](documentation/responsiveness/submit-request-galaxy.jpg) | ![screenshot](documentation/responsiveness/submit-request-tab.jpg) | ![screenshot](documentation/responsiveness/submit-request-lenovo.png) | ![screenshot](documentation/responsiveness/submit-request-monitor.png) | Works as expected |
+| Event Spaces List | ![screenshot](documentation/responsiveness/event-spaces-galaxy.jpg) | ![screenshot](documentation/responsiveness/event-spaces-tab.jpg) | ![screenshot](documentation/responsiveness/event-spaces-lenovo.png) | ![screenshot](documentation/responsiveness/event-spaces-monitor.png) | Works as expected |
+| Admin Space | ![screenshot](documentation/responsiveness/admin-space-galaxy.jpg) | ![screenshot](documentation/responsiveness/admin-space-tab.jpg) | ![screenshot](documentation/responsiveness/admin-space-lenovo.png) | ![screenshot](documentation/responsiveness/admin-space-monitor.png) | Works as expected |
+| Manage User Accounts | ![screenshot](documentation/responsiveness/admin-users-galaxy.jpg) | ![screenshot](documentation/responsiveness/admin-user-accounts-tab.jpg) | ![screenshot](documentation/responsiveness/admin-user-accounts-lenovo.png) | ![screenshot](documentation/responsiveness/admin-user-accounts-monitor.png) | Works as expected |
+| Manage Event Spaces | ![screenshot](documentation/responsiveness/admin-event-spaces-galaxy.jpg) | ![screenshot](documentation/responsiveness/admin-event-spaces-tab.jpg) | ![screenshot](documentation/responsiveness/admin-event-spaces-lenovo.png) | ![screenshot](documentation/responsiveness/admin-event-spaces-monitor.png) | Works as expected |
+| Add New Event Space | ![screenshot](documentation/responsiveness/admin-add-event-space-galaxy.jpg) | ![screenshot](documentation/responsiveness/admin-add-event-space-tab.jpg) | ![screenshot](documentation/responsiveness/admin-add-event-space-lenovo.png) | ![screenshot](documentation/responsiveness/admin-add-event-space-monitor.png) | Works as expected |
+| Manage Event Space Bookings | ![screenshot](documentation/responsiveness/admin-event-space-booking-galaxy.jpg) | ![screenshot](documentation/responsiveness/admin-event-space-booking-tab.jpg) | ![screenshot](documentation/responsiveness/admin-event-space-booking-lenovo.png) | ![screenshot](documentation/responsiveness/admin-event-space-booking-monitor.png) | Works as expected |
+| Manage Resident Requests | ![screenshot](documentation/responsiveness/admin-resident-requests-galaxy.jpg) | ![screenshot](documentation/responsiveness/admin-resident-requests-tab.jpg) | ![screenshot](documentation/responsiveness/admin-resident-request-lenovo.png) | ![screenshot](documentation/responsiveness/admin-resident-request-monitor.png) | Works as expected |
+| Manage Contact Messages | ![screenshot](documentation/responsiveness/admin-contact-messages-galaxy.jpg) | ![screenshot](documentation/responsiveness/admin-contact-messages-tab.jpg) | ![screenshot](documentation/responsiveness/admin-contact-messages-lenovo.png) | ![screenshot](documentation/responsiveness/admin-contact-messages-monitor.png) | Works as expected |
+| Error 404 Page | ![screenshot](documentation/responsiveness/error-404-galaxy.jpg) | | ![screenshot](documentation/responsiveness/error-404-lenovo.png) | ![screenshot](documentation/responsiveness/error-404-monitor.png) | Works as expected |
 
-Use this space to discuss testing the live/deployed site on various device sizes.
 
-The minimum requirement is to test the following 3 sizes:
-
-- Mobile
-- Tablet
-- Desktop
-
-**IMPORTANT**: You must provide screenshots of your results, to "prove" that you've actually tested them.
-
-Using the [amiresponsive](http://ami.responsivedesign.is) mockup images (*or similar*) does not meet the requirements. Consider using some of the built-in device sizes from the Developer Tools.
-
-If you have tested the project on your actual mobile phone or tablet, consider also including screenshots of these as well. It showcases a higher level of manual tests, and can be seen as a positive inclusion!
-
-⚠️ --- END --- ⚠️
-
-I've tested my deployed project to check for responsiveness issues.
-
-| Page | Mobile | Tablet | Desktop | Notes |
-| --- | --- | --- | --- | --- |
-| Register | ![screenshot](documentation/responsiveness/mobile-register.png) | ![screenshot](documentation/responsiveness/tablet-register.png) | ![screenshot](documentation/responsiveness/desktop-register.png) | Works as expected |
-| Login | ![screenshot](documentation/responsiveness/mobile-login.png) | ![screenshot](documentation/responsiveness/tablet-login.png) | ![screenshot](documentation/responsiveness/desktop-login.png) | Works as expected |
-| Home | ![screenshot](documentation/responsiveness/mobile-home.png) | ![screenshot](documentation/responsiveness/tablet-home.png) | ![screenshot](documentation/responsiveness/desktop-home.png) | Works as expected |
-| Add Blog | ![screenshot](documentation/responsiveness/mobile-add-blog.png) | ![screenshot](documentation/responsiveness/tablet-add-blog.png) | ![screenshot](documentation/responsiveness/desktop-add-blog.png) | Works as expected |
-| Edit Blog | ![screenshot](documentation/responsiveness/mobile-edit-blog.png) | ![screenshot](documentation/responsiveness/tablet-edit-blog.png) | ![screenshot](documentation/responsiveness/desktop-edit-blog.png) | Works as expected |
-| Blog Post | ![screenshot](documentation/responsiveness/mobile-blog-post.png) | ![screenshot](documentation/responsiveness/tablet-blog-post.png) | ![screenshot](documentation/responsiveness/desktop-blog-post.png) | Works as expected |
-| 404 | ![screenshot](documentation/responsiveness/mobile-404.png) | ![screenshot](documentation/responsiveness/tablet-404.png) | ![screenshot](documentation/responsiveness/desktop-404.png) | Works as expected |
 
 ## Browser Compatibility
 
-⚠️ INSTRUCTIONS ⚠️
+I've tested my deployed project on multiple browsers to check for compatibility issues. Everything worked as expected, there are only slight differences in the appearance of font weight and look of the logo in Firefox.
 
-Use this space to discuss testing the live/deployed site on various browsers. Consider testing at least 3 different browsers, if available on your system. You DO NOT need to use all of the browsers below, just pick any 3 (minimum).
-
-Recommended browsers to consider:
-- [Chrome](https://www.google.com/chrome)
-- [Firefox (Developer Edition)](https://www.mozilla.org/firefox/developer)
-- [Edge](https://www.microsoft.com/edge)
-- [Safari](https://support.apple.com/downloads/safari)
-- [Brave](https://brave.com/download)
-- [Opera](https://www.opera.com/download)
-
-**IMPORTANT**: You must provide screenshots of the browsers you've tested, to "prove" that you've actually tested them.
-
-Please note, there are services out there that can test multiple browser compatibilities at the same time. Some of these are paid services, but some are free. If you use these, you must provide a link to the source used for attribution, and multiple screenshots of the results.
-
-⚠️ --- END --- ⚠️
-
-I've tested my deployed project on multiple browsers to check for compatibility issues.
-
-| Page | Chrome | Firefox | Safari | Notes |
+| Page | [Chrome](https://www.google.com/chrome) |  [Firefox](https://www.mozilla.org/firefox) | [Edge](https://www.microsoft.com/edge) | Notes |
 | --- | --- | --- | --- | --- |
-| Register | ![screenshot](documentation/browsers/chrome-register.png) | ![screenshot](documentation/browsers/firefox-register.png) | ![screenshot](documentation/browsers/safari-register.png) | Works as expected |
-| Login | ![screenshot](documentation/browsers/chrome-login.png) | ![screenshot](documentation/browsers/firefox-login.png) | ![screenshot](documentation/browsers/safari-login.png) | Works as expected |
-| Home | ![screenshot](documentation/browsers/chrome-home.png) | ![screenshot](documentation/browsers/firefox-home.png) | ![screenshot](documentation/browsers/safari-home.png) | Works as expected |
-| Add Blog | ![screenshot](documentation/browsers/chrome-add-blog.png) | ![screenshot](documentation/browsers/firefox-add-blog.png) | ![screenshot](documentation/browsers/safari-add-blog.png) | Works as expected |
-| Edit Blog | ![screenshot](documentation/browsers/chrome-edit-blog.png) | ![screenshot](documentation/browsers/firefox-edit-blog.png) | ![screenshot](documentation/browsers/safari-edit-blog.png) | Works as expected |
-| Blog Post | ![screenshot](documentation/browsers/chrome-blog-post.png) | ![screenshot](documentation/browsers/firefox-blog-post.png) | ![screenshot](documentation/browsers/safari-blog-post.png) | Works as expected |
-| 404 | ![screenshot](documentation/browsers/chrome-404.png) | ![screenshot](documentation/browsers/firefox-404.png) | ![screenshot](documentation/browsers/safari-404.png) | Works as expected |
+| Register | ![screenshot](documentation/browsers/signup-lenovo.png) | ![screenshot](documentation/browsers/signup-firefox.png) | ![screenshot](documentation/browsers/signup-edge.png)  | Works as expected |
+| Login | ![screenshot](documentation/browsers/signin-lenovo.png) | ![screenshot](documentation/browsers/signin-firefox.png) | ![screenshot](documentation/browsers/signin-edge.png)  | Works as expected |
+| Logout | ![screenshot](documentation/browsers/signout-lenovo.png) | ![screenshot](documentation/browsers/signout-firefox.png) | ![screenshot](documentation/browsers/signout-edge.png) |  Works as expected |
+| Account Inactive | ![screenshot](documentation/browsers/account-inactive-lenovo.png) | ![screenshot](documentation/browsers/account-inactive-firefox.png) | ![screenshot](documentation/browsers/account-inactive-edge.png) | Works as expected |
+| Home | ![screenshot](documentation/browsers/home-lenovo.png) | ![screenshot](documentation/browsers/home-firefox.png) | ![screenshot](documentation/browsers/home-edge.png) | Works as expected |
+| About | ![screenshot](documentation/browsers/about-lenovo.png) | ![screenshot](documentation/browsers/about-firefox.png) | ![screenshot](documentation/browsers/about-edge.png)  | Works as expected |
+| Contact | ![screenshot](documentation/browsers/contact-lenovo.png) | ![screenshot](documentation/browsers/contact-firefox.png) | ![screenshot](documentation/browsers/contact-edge.png)  | Works as expected |
+| Resident Space | ![screenshot](documentation/browsers/resident-space-lenovo.png) | ![screenshot](documentation/browsers/resident-space-firefox.png) | ![screenshot](documentation/browsers/resident-space-edge.png)  | Works as expected |
+| Resident Space unauthenticated users | ![screenshot](documentation/browsers/resident-space-not-signedin-lenovo.png) | ![screenshot](documentation/browsers/resident-space-not-signedin-firefox.png) | ![screenshot](documentation/browsers/resident-space-not-signedin-edge.png) |  | Works as expected |
+| Event Space Booking | ![screenshot](documentation/browsers/event-space-booking-lenovo.png) | ![screenshot](documentation/browsers/event-space-booking-firefox.png) | ![screenshot](documentation/browsers/event-space-booking-edge.png)  | Works as expected |
+| Submit a Request | ![screenshot](documentation/browsers/submit-request-lenovo.png) | ![screenshot](documentation/browsers/submit-request-firefox.png) | ![screenshot](documentation/browsers/submit-request-edge.png)  | Works as expected |
+| Event Spaces List | ![screenshot](documentation/browsers/event-spaces-lenovo.png) | ![screenshot](documentation/browsers/event-spaces-firefox.png) | ![screenshot](documentation/browsers/event-spaces-edge.png) | Works as expected |
+| Admin Space | ![screenshot](documentation/browsers/admin-space-lenovo.png) | ![screenshot](documentation/browsers/admin-space-firefox.png) | ![screenshot](documentation/browsers/admin-space-edge.png) |  Works as expected |
+| Manage User Accounts | ![screenshot](documentation/browsers/admin-user-accounts-lenovo.png) | ![screenshot](documentation/browsers/admin-user-accounts-firefox.png) | ![screenshot](documentation/browsers/admin-user-accounts-edge.png)  | Works as expected |
+| Manage Event Spaces | ![screenshot](documentation/browsers/admin-event-spaces-lenovo.png) | ![screenshot](documentation/browsers/admin-event-spaces-firefox.png) | ![screenshot](documentation/browsers/admin-event-spaces-edge.png)  | Works as expected |
+| Add New Event Space | ![screenshot](documentation/browsers/admin-add-event-space-lenovo.png) | ![screenshot](documentation/browsers/admin-add-event-space-firefox.png) | ![screenshot](documentation/browsers/admin-add-event-space-edge.png)  | Works as expected |
+| Manage Event Space Bookings | ![screenshot](documentation/browsers/admin-event-space-booking-lenovo.png) | ![screenshot](documentation/browsers/admin-event-space-booking-firefox.png) | ![screenshot](documentation/browsers/admin-event-space-booking-edge.png)  | Works as expected |
+| Manage Resident Requests | ![screenshot](documentation/browsers/admin-resident-request-lenovo.png) | ![screenshot](documentation/browsers/admin-resident-request-firefox.png) | ![screenshot](documentation/browsers/admin-resident-request-edge.png) | Works as expected |
+| Manage Contact Messages | ![screenshot](documentation/browsers/admin-contact-messages-lenovo.png) | ![screenshot](documentation/browsers/admin-contact-messages-firefox.png) | ![screenshot](documentation/browsers/admin-contact-messages-edge.png)  | Works as expected |
+| Error 404 Page | ![screenshot](documentation/browsers/error-404-lenovo.png) | ![screenshot](documentation/browsers/error-404-firefox.png) | ![screenshot](documentation/browsers/error-404-edge.png) | Works as expected |
 
 ## Lighthouse Audit
 
