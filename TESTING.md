@@ -172,7 +172,7 @@ I've tested my deployed project using the Lighthouse Audit tool to check for any
 
 ## Defensive Programming
 
-Defensive programming was manually tested with the below user acceptance testing. Note that the majority of the functionality was also covered in the automated tests below (see #automated-testing).
+Defensive programming was manually tested with the below user acceptance testing. Note that the majority of the functionality was also covered in the automated tests below (see [Automated Testing](#automated-testing) section).
 
 | Feature | Expectation | Test | Result | Screenshot |
 | --- | --- | --- | --- | --- |
