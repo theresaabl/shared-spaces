@@ -40,7 +40,7 @@ source: [shared-spaces amiresponsive](https://ui.dev/amiresponsive?url=https://s
 
 #### 2. Scope Plane
 ##### Features
-- A full list of [Features](#features) can be viewed in detail below.
+- A full list of [Features](#existing-features) can be viewed in detail below.
 
 ##### Content Requirements
 - User account management (Users: create, Admins: preview, update (activate, deactivate, give and remove admin status) and delete).
